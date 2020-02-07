@@ -1,4 +1,4 @@
-package com.devmasterteam.tasklist.constants
+package com.lucasprojects.mytask.constants
 
 class TaskConstants {
 
