@@ -1,7 +1,8 @@
-package com.lucasprojects.mytask
+package com.lucasprojects.mytask.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.lucasprojects.mytask.R
 
 class MainActivity : AppCompatActivity() {
 
