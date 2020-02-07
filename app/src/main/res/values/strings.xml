@@ -4,6 +4,14 @@
     <string name="tasks_todo">Tarefas Pendentes</string>
     <string name="app_logout">Sair</string>
 
+    <!-- Login Activity -->
+    <string name="enter">Entrar</string>
+    <string name="register">Cadastrar-se</string>
+    <string name="login_descriptionOne">Bem vindo(a)\nMy Task</string>
+    <string name="login_descriptionTwo">Melhore sua produtividade como você nunca viu, seja no trabalho ou nas tarefas em casa.</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
