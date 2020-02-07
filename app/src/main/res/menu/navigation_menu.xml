@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_Done"
+        android:icon="@drawable/done"
+        android:title="@string/tasks_done" />
+
+    <item
+        android:id="@+id/nav_Todo"
+        android:icon="@drawable/todo"
+        android:title="@string/tasks_todo" />
+
+    <item
+        android:id="@+id/nav_Logout"
+        android:icon="@drawable/logout"
+        android:title="@string/app_logout" />
+
+</menu>

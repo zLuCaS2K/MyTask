@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">My Task</string>
+    <string name="tasks_done">Tarefas Completas</string>
+    <string name="tasks_todo">Tarefas Pendentes</string>
+    <string name="app_logout">Sair</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
