@@ -56,13 +56,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textOne"
+        android:id="@+id/textTwo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:layout_marginEnd="45dp"
         android:layout_marginBottom="15dp"
-        android:text="@string/login_descriptionTwo"
+        android:text="@string/opening_descriptionTwo"
         android:textColor="@color/colorWhite"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/btnEnter"
@@ -70,16 +70,16 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textTwo"
+        android:id="@+id/textOne"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:layout_marginEnd="45dp"
         android:layout_marginBottom="15dp"
-        android:text="@string/login_descriptionOne"
+        android:text="@string/opening_descriptionOne"
         android:textColor="@color/colorWhite"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@id/textOne"
+        app:layout_constraintBottom_toTopOf="@id/textTwo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_goneMarginBottom="6dp" />
