@@ -12,6 +12,7 @@
     <string name="login_slogan">Faça Login em sua Conta</string>
     <string name="register_slogan">Cadastre-se sua Conta</string>
     <string name="user">Usuário</string>
-
+    <string name="slide_welcome">Bem-Vindo(a) ao My Task</string>
+    <string name="slide_welcome_description">Bem-Vindo(a) ao My Task</string>
 
 </resources>
