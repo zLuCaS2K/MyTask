@@ -14,7 +14,6 @@
     <string name="user">Usuário</string>
     <string name="slide_welcome">Bem-Vindo(a) ao My Task</string>
     <string name="slide_welcome_description">Bem-Vindo(a) ao My Task</string>
-
     <string name="task_description">Insira a Tarefa</string>
     <string name="save_task">Salvar Tarefa</string>
     <string name="select_date">Selecionar Data</string>
@@ -23,6 +22,13 @@
     <string name="task_remove_message">Deseja Remover a Tarefa</string>
     <string name="cancel">Cancelar</string>
     <string name="remove">Remover</string>
+    <string name="all_camps">Preencha Todos os Campos!</string>
+    <string name="email_in_use">Email em Uso!</string>
+    <string name="data_error">Email ou Senha Inválidos!</string>
+    <string name="remove_task_sucess">Tarefa Removida com Sucesso!</string>
+    <string name="add_task_sucess">Tarefa Adicionada com Sucesso!</string>
+    <string name="update_task_sucess">Tarefa Atualizada com Sucesso!</string>
+    <string name="update_task_button">Atualizar Tarefa!</string>
 
 
 </resources>
