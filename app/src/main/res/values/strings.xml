@@ -15,4 +15,14 @@
     <string name="slide_welcome">Bem-Vindo(a) ao My Task</string>
     <string name="slide_welcome_description">Bem-Vindo(a) ao My Task</string>
 
+    <string name="task_description">Insira a Tarefa</string>
+    <string name="save_task">Salvar Tarefa</string>
+    <string name="select_date">Selecionar Data</string>
+    <string name="complete">Completo</string>
+    <string name="task_remove_confirm">Remoção de Tarefa</string>
+    <string name="task_remove_message">Deseja Remover a Tarefa</string>
+    <string name="cancel">Cancelar</string>
+    <string name="remove">Remover</string>
+
+
 </resources>
