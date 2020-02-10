@@ -57,30 +57,35 @@ class TaskListFragment : Fragment(), View.OnClickListener {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_task_list, container, false)
 
-        // Incializa as variáveis
+        /** Inicialização das variáveis */
         mContext = rootView.context
         mTaskBusiness = TaskBusiness(mContext)
 
-        // Necessário buscar os elementos de interface através do findViewById. Não funciona Kotlin-Extensions
+        /**
+         * Buscando os elementos de interface através do findViewById. Por que o Kotlin-Extensions
+         * n ão funciona nesse contexto.
+         */
         rootView.findViewById<FloatingActionButton>(R.id.fabAddTask).setOnClickListener(this)
 
-        // Inicializa listener
+        /** Inicialização do listener */
         createInteractionListener()
 
-        // 1 - Obter a recyclerView
+        /** Passo 1 - Obter a RecyclerView */
         mRecyclerTaskList = rootView.findViewById(R.id.recyclerTaskList)
 
-        // 2 - Definir adapter passando listagem de itens
+        /** Passo 2 - Definindo o adapter passando listagem de itens */
         val taskListAdapter =
             TaskListAdapter(mutableListOf(), mOnTaskListFragmentInteractionListenner)
         mRecyclerTaskList.adapter = taskListAdapter
 
-        // 3 - Definir um layout
+        /** Passo 3 - Definindo o layout do RecyclerView */
         mRecyclerTaskList.layoutManager = LinearLayoutManager(mContext)
 
+        /** Retornando a View do Fragment */
         return rootView
     }
 
+    /** Metodo de onResume */
     override fun onResume() {
         super.onResume()
         loadTasks()
@@ -97,11 +102,10 @@ class TaskListFragment : Fragment(), View.OnClickListener {
 
     /** Carregamento de tarefas */
     private fun loadTasks() {
-
-        // Carrega lista de tarefas
+        /** Carrega lista de tarefas */
         val listTaskEntity: MutableList<TaskEntity> = mTaskBusiness.getList(mFilter)
 
-        // Inicializa o adapter com registros atualizados
+        /** Inicializa o adapter com registros atualizados */
         mRecyclerTaskList.adapter = TaskListAdapter(listTaskEntity, mOnTaskListFragmentInteractionListenner)
     }
 

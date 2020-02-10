@@ -9,5 +9,21 @@
     <fragment
         android:id="@+id/nav_Done"
         android:name="com.lucasprojects.mytask.fragments.TaskListFragment"
-        tools:layout="@layout/fragment_task_list" />
+        tools:layout="@layout/fragment_task_list" >
+        <argument
+            android:name="filterKey"
+            app:argType="integer"
+            android:defaultValue="1" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_Todo"
+        android:name="com.lucasprojects.mytask.fragments.TaskListFragment"
+        tools:layout="@layout/fragment_task_list" >
+        <argument
+            android:name="filterKey"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+
 </navigation>

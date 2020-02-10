@@ -7,12 +7,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.lucasprojects.mytask.R
 import com.lucasprojects.mytask.business.UserBusiness
-import com.lucasprojects.mytask.constants.TaskConstants
-import com.lucasprojects.mytask.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_login.*
+
+/**
+ * A LoginActivity é a activity responsável por efetuar o login de um usuário, essa tela só será,
+ * chamada caso não possua usuários no cadastrados app ou se o usuário encerrar a sessão.
+ * */
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
+    /** Váriaveis da Camada Business */
     private lateinit var mUserBusiness: UserBusiness
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,8 +26,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         mUserBusiness = UserBusiness(this)
         /** Definindo os listenners do itens */
         setListenner()
-        /** Verifica se tem usuário com sessão ativa */
-        verifyLoggedUser()
     }
 
     /** Eventos de click */
@@ -48,18 +50,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             finish()
         } else {
             Toast.makeText(this, R.string.data_error, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    /** Verificação de usuário logado */
-    private fun verifyLoggedUser() {
-        val securityPreferences = SecurityPreferences(this)
-        val userId = securityPreferences.getSharedStored(TaskConstants.KEY.USER_ID)
-        val userEmail = securityPreferences.getSharedStored(TaskConstants.KEY.USER_EMAIL)
-
-        if ("" != userId || "" != userEmail) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
         }
     }
 }
