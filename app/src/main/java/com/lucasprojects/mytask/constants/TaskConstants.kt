@@ -3,19 +3,19 @@ package com.lucasprojects.mytask.constants
 class TaskConstants {
 
     object KEY {
-        val USER_EMAIL = "useremail"
-        val USER_ID = "userid"
-        val USER_NAME = "username"
+        const val USER_EMAIL = "userEmail"
+        const val USER_ID = "userId"
+        const val USER_NAME = "userName"
     }
 
     object TASKFILTER {
-        val TODO = 0
-        val DONE = 1
-        val FILTERKEY = "filterKey"
+        const val TODO = 0
+        const val DONE = 1
+        const val FILTERKEY = "filterKey"
     }
 
     object BUNDLE {
-        val TASKID = "taskid"
+        val TASKID = "taskId"
     }
 
 }
