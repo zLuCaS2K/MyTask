@@ -6,8 +6,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.lucasprojects.mytask.R
+import com.lucasprojects.mytask.constants.TaskConstants
 import com.lucasprojects.mytask.entities.TaskEntity
 import com.lucasprojects.mytask.entities.listenner.OnTaskListFragmentInteractionListenner
 import com.lucasprojects.mytask.repository.cache.PriorityCacheConstants
@@ -18,6 +20,7 @@ class TaskViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHo
     private val mTextPriority = itemView.findViewById<TextView>(R.id.textPriority)
     private val mTextDueDate = itemView.findViewById<TextView>(R.id.textDueDate)
     private val mImageView = itemView.findViewById<ImageView>(R.id.imageTask)
+    private val mConstraintLayout = itemView.findViewById<ConstraintLayout>(R.id.layoutContraintOne)
 
     fun bindData(
         taskEntity: TaskEntity,
@@ -28,12 +31,12 @@ class TaskViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHo
         mTextDueDate.text = taskEntity.dueDate
 
         /** Evento de click para cada task */
-        mTextDescription.setOnClickListener {
+        mConstraintLayout.setOnClickListener {
             listenner.onListClick(taskEntity.id)
         }
 
         /** Evento de remoção de task */
-        mTextDescription.setOnLongClickListener {
+        mConstraintLayout.setOnLongClickListener {
             showConfirmDialog(taskEntity, listenner)
             true
         }
@@ -50,6 +53,14 @@ class TaskViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHo
         /** Tratamento de tasks completas */
         if (taskEntity.complete) {
             mTextDescription.setTextColor(Color.GREEN)
+        }
+
+        /** Definindo cor da prioridade de acordo com sua prioridade */
+        when (mTextPriority.text) {
+            TaskConstants.PRIORITIES.LOW  -> mTextPriority.setTextColor(Color.GREEN)
+            TaskConstants.PRIORITIES.MEDIUM -> mTextPriority.setTextColor(Color.YELLOW)
+            TaskConstants.PRIORITIES.HIGH -> mTextPriority.setTextColor(Color.rgb(255, 165, 0))
+            TaskConstants.PRIORITIES.CRITICAL -> mTextPriority.setTextColor(Color.RED)
         }
     }
 

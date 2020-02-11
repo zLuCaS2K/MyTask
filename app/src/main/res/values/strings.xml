@@ -29,6 +29,7 @@
     <string name="add_task_sucess">Tarefa Adicionada com Sucesso!</string>
     <string name="update_task_sucess">Tarefa Atualizada com Sucesso!</string>
     <string name="update_task_button">Atualizar Tarefa!</string>
+    <string name="priority">Prioridade:</string>
 
 
 </resources>

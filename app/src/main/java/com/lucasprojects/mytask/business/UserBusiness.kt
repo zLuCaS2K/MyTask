@@ -10,6 +10,7 @@ import com.lucasprojects.mytask.util.ValidationException
 
 class UserBusiness(val context: Context) {
 
+    /** Instância do UserRepository */
     private val mUserRepository: UserRepository = UserRepository.getInstance(context)
     private val mSecurityPreferences: SecurityPreferences = SecurityPreferences(context)
 
@@ -22,18 +23,16 @@ class UserBusiness(val context: Context) {
         val user: UserEntity? = mUserRepository.get(email, password)
         return if (user != null) {
 
-            // Salva os dados no SharedPreferences
+            /** Salva os dados no SharedPreferences */
             mSecurityPreferences.setSharedStored(TaskConstants.KEY.USER_ID, user.id.toString())
             mSecurityPreferences.setSharedStored(TaskConstants.KEY.USER_NAME, user.name)
             mSecurityPreferences.setSharedStored(TaskConstants.KEY.USER_EMAIL, user.email)
 
-            // Retorna usuário válido
+            /** Retorna usuário válido */
             true
-
         } else {
             false
         }
-
     }
 
     /**
@@ -43,19 +42,20 @@ class UserBusiness(val context: Context) {
 
     fun save(name: String, email: String, password: String) {
         try {
+            /** Verificando se os campos possuem dados */
             if (name == "" || email == "" || password == "") {
                 throw ValidationException(context.getString(R.string.all_camps))
             }
 
-            // Verifica se email já existe no banco de dados
+            /** Verifica se email já existe no banco de dados */
             if (mUserRepository.isEmailExistent(email)) {
                 throw ValidationException(context.getString(R.string.email_in_use))
             }
 
-            // Salva novo usuário, retornando o ID inserido
+            /** Salva novo usuário, retornando o ID inserido */
             val userId = mUserRepository.insert(name, email, password)
 
-            // Salva os dados no SharedPreferences
+            /** Salva os dados no SharedPreferences */
             mSecurityPreferences.setSharedStored(TaskConstants.KEY.USER_ID, userId.toString())
             mSecurityPreferences.setSharedStored(TaskConstants.KEY.USER_NAME, name)
             mSecurityPreferences.setSharedStored(TaskConstants.KEY.USER_EMAIL, email)

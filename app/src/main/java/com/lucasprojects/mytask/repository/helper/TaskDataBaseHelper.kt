@@ -4,6 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.lucasprojects.mytask.constants.DataBaseConstants
+import com.lucasprojects.mytask.constants.TaskConstants
 
 /**
  * Classe para acesso ao banco de dados, deve ser feito a herança uma vez que SQLiteOpenHelper é abstrata.
@@ -49,7 +50,10 @@ class TaskDataBaseHelper(context: Context) :
 
     // Populando dados de prioridades
     private val inserPriorities = ("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME}"
-            + " VALUES (1, 'Baixa'), (2, 'Média'), (3, 'Alta'), (4, 'Crítica')")
+            + " VALUES (1, '${TaskConstants.PRIORITIES.LOW}')" +
+            ", (2, '${TaskConstants.PRIORITIES.MEDIUM}')" +
+            ", (3, '${TaskConstants.PRIORITIES.HIGH}')" +
+            ", (4, '${TaskConstants.PRIORITIES.CRITICAL}')")
 
     // Remoção de tabelas
     private val dropTableUser = "DROP TABLE IF EXISTS " + DataBaseConstants.USER.TABLE_NAME

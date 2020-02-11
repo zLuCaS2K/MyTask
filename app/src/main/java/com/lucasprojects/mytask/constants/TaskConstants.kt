@@ -15,7 +15,14 @@ class TaskConstants {
     }
 
     object BUNDLE {
-        val TASKID = "taskId"
+        const val TASKID = "taskId"
+    }
+
+    object PRIORITIES {
+        const val LOW = "Baixa"
+        const val MEDIUM = "Média"
+        const val HIGH = "Alta"
+        const val CRITICAL = "Crítica"
     }
 
 }

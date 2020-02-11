@@ -2,7 +2,7 @@ package com.lucasprojects.mytask.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation
@@ -13,6 +13,7 @@ import com.lucasprojects.mytask.constants.TaskConstants
 import com.lucasprojects.mytask.repository.cache.PriorityCacheConstants
 import com.lucasprojects.mytask.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_navigation_header.view.*
 
 /**
  * A MainActivity principal do app, ela é reponsável pela navegação, e é onde o carregamento das
@@ -45,6 +46,8 @@ class MainActivity : AppCompatActivity() {
             handleLogout()
             true
         }
+        /** Definindo texto da Header da NavigationView */
+        setDateUserHeader()
         /** Removendo a cor default da NavigationDrawer */
         navigationView.itemIconTintList = null
         /** Localizando o NavController */
@@ -53,13 +56,6 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(navigationView, navController)
         /** Execução com a navegação baseada no destino */
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            if (destination.id == R.id.nav_Done) {
-                /*
-                 val fragment: Fragment = TaskListFragment.newInstance(TaskConstants.TASKFILTER.TODO)
-                 val fragmentManager = supportFragmentManager
-                 fragmentManager.beginTransaction().replace(R.id.navHostFragment, fragment).commit()*/
-            }
-            Toast.makeText(this, destination.label, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -77,5 +73,15 @@ class MainActivity : AppCompatActivity() {
         /** Chamando a LoginActivity */
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
+    }
+
+    /** Metodo responsável por difinir o texto da Header da NavigationView com os dados do usuário */
+    private fun setDateUserHeader(){
+        /** Recuperando views do Header da NavigationView */
+        val textUserName = navigationView.layoutContraintHeader.findViewById<TextView>(R.id.textUserName)
+        val textUserEmail = navigationView.layoutContraintHeader.findViewById<TextView>(R.id.textUserEmail)
+        /** Definindo o texto com os dados do usuário logado */
+        textUserName.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_NAME)
+        textUserEmail.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_EMAIL)
     }
 }
