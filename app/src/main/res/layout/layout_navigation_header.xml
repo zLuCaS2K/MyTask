@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:textColor="@color/colorBlack"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/viewSupport"
         app:layout_constraintStart_toEndOf="@id/imageApp" />
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:textColor="@color/colorGreenLight"
-        android:textSize="16sp"
+        android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@id/imageApp"
         app:layout_constraintTop_toBottomOf="@id/viewSupport" />
 

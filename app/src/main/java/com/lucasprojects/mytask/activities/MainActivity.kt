@@ -13,7 +13,6 @@ import com.lucasprojects.mytask.constants.TaskConstants
 import com.lucasprojects.mytask.repository.cache.PriorityCacheConstants
 import com.lucasprojects.mytask.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_navigation_header.view.*
 
 /**
  * A MainActivity principal do app, ela é reponsável pela navegação, e é onde o carregamento das
@@ -77,9 +76,11 @@ class MainActivity : AppCompatActivity() {
 
     /** Metodo responsável por difinir o texto da Header da NavigationView com os dados do usuário */
     private fun setDateUserHeader(){
+        /** Obtendo o HeaderView */
+        val headerView = navigationView.getHeaderView(0)
         /** Recuperando views do Header da NavigationView */
-        val textUserName = navigationView.layoutContraintHeader.findViewById<TextView>(R.id.textUserName)
-        val textUserEmail = navigationView.layoutContraintHeader.findViewById<TextView>(R.id.textUserEmail)
+        val textUserName = headerView.findViewById<TextView>(R.id.textUserName)
+        val textUserEmail = headerView.findViewById<TextView>(R.id.textUserEmail)
         /** Definindo o texto com os dados do usuário logado */
         textUserName.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_NAME)
         textUserEmail.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_EMAIL)
