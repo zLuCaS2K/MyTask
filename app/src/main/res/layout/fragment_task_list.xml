@@ -22,14 +22,16 @@
         android:id="@+id/fabAddTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/model_button_register"
+        android:backgroundTint="@color/colorOrangeDark"
         android:src="@drawable/ic_add"
+        android:tint="@color/colorWhite"
+        app:elevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.90"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerTaskList"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95"
+        app:rippleColor="@color/colorWhite" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,15 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:background="@drawable/gradient_background_fab"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background_fab"
     tools:context=".activities.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutToolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
@@ -28,23 +28,68 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageMenu"
+                android:id="@+id/imageMenuOne"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="6dp"
-                android:src="@drawable/ic_menu" />
+                android:src="@drawable/ic_menu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guidelineOne"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textTitle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:textAlignment="center"
+                android:textColor="@color/colorGray"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guidelineTwo"
+                app:layout_constraintStart_toEndOf="@id/guidelineOne"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageMenuTwo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_menu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guidelineTwo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.2" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.8" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/titleListTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@id/navHostFragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutToolbar" />
 
         <fragment
             android:id="@+id/navHostFragment"
@@ -53,7 +98,9 @@
             android:layout_height="0dp"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layoutToolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleListTask"
             app:navGraph="@navigation/navigation" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

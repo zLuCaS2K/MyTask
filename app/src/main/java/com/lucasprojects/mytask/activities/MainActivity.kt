@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         /** Inicializa o Cache de Priority */
         loadCachePriority()
         /** Abrir NavigationDrawer */
-        imageMenu.setOnClickListener {
+        imageMenuOne.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
         /** Evento de logout do app */
@@ -47,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         }
         /** Definindo texto da Header da NavigationView */
         setDateUserHeader()
+        /** Definindo texto da Title da Toolbar */
+        setDateUserTitle()
         /** Removendo a cor default da NavigationDrawer */
         navigationView.itemIconTintList = null
         /** Localizando o NavController */
@@ -55,6 +57,10 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(navigationView, navController)
         /** Execução com a navegação baseada no destino */
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                R.id.nav_Done -> titleListTask.text = getString(R.string.tasks_done)
+                R.id.nav_Todo -> titleListTask.text = getString(R.string.tasks_todo)
+            }
         }
     }
 
@@ -75,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /** Metodo responsável por difinir o texto da Header da NavigationView com os dados do usuário */
-    private fun setDateUserHeader(){
+    private fun setDateUserHeader() {
         /** Obtendo o HeaderView */
         val headerView = navigationView.getHeaderView(0)
         /** Recuperando views do Header da NavigationView */
@@ -84,5 +90,11 @@ class MainActivity : AppCompatActivity() {
         /** Definindo o texto com os dados do usuário logado */
         textUserName.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_NAME)
         textUserEmail.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_EMAIL)
+    }
+
+    /** Metodo responsável por difinir o texto da toolbar com o nome do usuário logado */
+    private fun setDateUserTitle() {
+        /** Definindo o texto com os dados do usuário logado */
+        textTitle.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_NAME)
     }
 }
