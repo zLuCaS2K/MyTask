@@ -47,7 +47,6 @@ class OpeningActivity : AppCompatActivity(), View.OnClickListener {
 
         if ("" != userId || "" != userEmail) {
             startActivity(Intent(this, MainActivity::class.java))
-            finish()
         }
     }
 }

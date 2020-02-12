@@ -39,7 +39,11 @@ class MainActivity : AppCompatActivity() {
         imageMenuOne.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
-        /** Evento de logout do app */
+        /** Evento de logout do app pela ToolBar */
+        imageMenuTwo.setOnClickListener {
+            handleLogout()
+        }
+        /** Evento de logout do app pela Navigation View*/
         val itemLogout = navigationView.menu.findItem(R.id.nav_Logout)
         itemLogout.setOnMenuItemClickListener {
             handleLogout()

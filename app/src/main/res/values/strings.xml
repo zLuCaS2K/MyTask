@@ -13,7 +13,11 @@
     <string name="register_slogan">Cadastre-se sua Conta</string>
     <string name="user">Usuário</string>
     <string name="slide_welcome">Bem-Vindo(a) ao My Task</string>
-    <string name="slide_welcome_description">Bem-Vindo(a) ao My Task</string>
+    <string name="slide_welcomeTwo">Melhore sua Produtividade</string>
+    <string name="slide_welcomeThree">Interface Atraente</string>
+    <string name="slide_welcome_descriptionOne">O My Task está aqui, para auxiliar sua vida, agende sua tarefas, defina datas e prioridades!</string>
+    <string name="slide_welcome_descriptionTwo">Com o uso do My Task sua produtividade ira alcançar nivéis altissímos!</string>
+    <string name="slide_welcome_descriptionThree">Com uma interface atraente e fluída o My Task ira auxiliar você no seu dia-a-dia!</string>
     <string name="task_description">Insira a Tarefa</string>
     <string name="save_task">Salvar Tarefa</string>
     <string name="select_date">Selecionar Data</string>

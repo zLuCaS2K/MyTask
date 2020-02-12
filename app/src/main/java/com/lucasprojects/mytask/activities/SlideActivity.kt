@@ -34,22 +34,32 @@ class SlideActivity : AppIntro2() {
     /** Metodo responsável por mostrar os slides de apresentação */
     private fun showIntroSlides() {
         mPreferenceManager.setFirstRun()
+
         val pageOne = SliderPagerBuilder()
             .title(getString(R.string.slide_welcome))
-            .description(getString(R.string.slide_welcome_description))
+            .description(getString(R.string.opening_descriptionTwo))
             .imageDrawable(R.mipmap.ic_launcher)
-            .bgColor(R.color.colorBlack)
+            .bgColor(R.color.colorWhite)
             .build()
+
         val pageTwo = SliderPagerBuilder()
-            .title(getString(R.string.slide_welcome))
-            .description(getString(R.string.slide_welcome_description))
-            .imageDrawable(R.mipmap.ic_launcher)
-            .bgColor(R.color.colorBlack)
+            .title(getString(R.string.slide_welcomeTwo))
+            .description(getString(R.string.slide_welcome_descriptionTwo))
+            .imageDrawable(R.drawable.ic_productivity)
+            .bgColor(R.color.colorWhite)
+            .build()
+
+        val pageTree = SliderPagerBuilder()
+            .title(getString(R.string.slide_welcomeThree))
+            .description(getString(R.string.slide_welcome_descriptionThree))
+            .imageDrawable(R.drawable.ic_ux)
+            .bgColor(R.color.colorWhite)
             .build()
 
         /** Adicionando Slides ao App */
         addSlide(AppIntro2Fragment.newInstance(pageOne))
         addSlide(AppIntro2Fragment.newInstance(pageTwo))
+        addSlide(AppIntro2Fragment.newInstance(pageTree))
     }
 
     /** Metodo que chama a OpeningAcitivity */

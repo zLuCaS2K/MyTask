@@ -52,12 +52,15 @@ class TaskViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHo
 
         /** Tratamento de tasks completas */
         if (taskEntity.complete) {
+            mImageView.setImageResource(R.drawable.sucess)
             mTextDescription.setTextColor(Color.GREEN)
+        } else {
+            mImageView.setImageResource(R.drawable.pedding)
         }
 
         /** Definindo cor da prioridade de acordo com sua prioridade */
         when (mTextPriority.text) {
-            TaskConstants.PRIORITIES.LOW  -> mTextPriority.setTextColor(Color.GREEN)
+            TaskConstants.PRIORITIES.LOW -> mTextPriority.setTextColor(Color.GREEN)
             TaskConstants.PRIORITIES.MEDIUM -> mTextPriority.setTextColor(Color.YELLOW)
             TaskConstants.PRIORITIES.HIGH -> mTextPriority.setTextColor(Color.rgb(255, 165, 0))
             TaskConstants.PRIORITIES.CRITICAL -> mTextPriority.setTextColor(Color.RED)
