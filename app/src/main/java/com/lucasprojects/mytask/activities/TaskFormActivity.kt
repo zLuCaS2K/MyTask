@@ -21,36 +21,38 @@ import java.text.SimpleDateFormat
 class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
     DatePickerDialog.OnDateSetListener {
 
+    /** Inicialização do SimpleDateFormat */
     private var SIMPLE_DATE_FORMAT = SimpleDateFormat("dd/MM/yyyy")
+    /** Lista de PriorityEntity */
     private var mPriorityEntityList: MutableList<PriorityEntity> = mutableListOf()
+    /** Lista de IDs de prioridades */
     private var mPriorityEntityListId: MutableList<Int> = mutableListOf()
+    /** Váriavel global do ID de uma prioridade */
     private var mTaskId: Int = 0
+    /** Váriaveis da Camada Business */
     private lateinit var mTaskBusiness: TaskBusiness
     private lateinit var mPriorityBusiness: PriorityBusiness
+    /** Váriaveis do SharedPreferences */
     private lateinit var mSecurityPreferences: SecurityPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_form)
 
-        // Inicialização de variáveis
+        /** Instancia das Classes Business */
         mTaskBusiness = TaskBusiness(this)
         mPriorityBusiness = PriorityBusiness(this)
+        /** Instancia da Classe Security Preferences */
         mSecurityPreferences = SecurityPreferences(this)
-
-        // Incializa eventos dos elementos
+        /** Definindo os listenners do itens */
         setListeners()
-
-        // Carrega valores de prioridades
+        /** Carregamento dos valores de prioridades */
         loadPriorities()
-
-        // Carrega dados passados para a activity
+        /** Carregamento dos dados passados para a activity */
         loadDataFromActivity()
     }
 
-    /**
-     * Trata eventos
-     * */
+    /** Eventos de click */
     override fun onClick(view: View) {
         when (view.id) {
             R.id.btnSaveTask -> {
@@ -62,9 +64,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
         }
     }
 
-    /**
-     * Trata evento de seleção de data
-     * */
+    /** Tratamento do evento de seleção de data */
     override fun onDateSet(datePicker: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         val calendar = java.util.Calendar.getInstance()
         calendar.set(year, month, dayOfMonth)
@@ -73,47 +73,41 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
         btnPickerDate.text = stringDate
     }
 
-    /**
-     * Carrega prioridades
-     */
+    /** Carregamento das prioridades */
     private fun loadPriorities() {
 
-        // Lista de prioridades do banco de dados local
+        /** Lista de prioridades do banco de dados local */
         mPriorityEntityList = mPriorityBusiness.getList()
 
-        // Cria uma lista de strings para preenchimento do spinner
+        /** Cria uma lista de strings para preenchimento do spinner */
         val listPriorities = mPriorityEntityList.map { it.description }
 
-        // Mapeia a lista de Ids das prioridades
+        /** Mapeia a lista de IDs das prioridades */
         mPriorityEntityListId = mPriorityEntityList.map { it.id }.toMutableList()
 
-        // Cria adapter e usa no elemento
+        /** Criando adapter e usando no elemento */
         val adapter = ArrayAdapter<String>(
             this,
             android.R.layout.simple_spinner_dropdown_item,
             listPriorities
         )
         spinnerPriority.adapter = adapter
-
     }
 
-    /**
-     * Salva tarefa
-     * */
+    /** Salvando tarefa */
     private fun handleSave() {
 
         try {
-            val userId: Int =
-                mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_ID).toInt()
+            val userId: Int = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_ID).toInt()
             val description: String = editDescription.text.toString()
             val priorityId = mPriorityEntityListId[spinnerPriority.selectedItemPosition]
             val dueDate: String = btnPickerDate.text.toString()
             val complete: Boolean = checkboxComplete.isChecked
 
-            // Inicializa entidade
+            /** Inicializa entidade TaskEntity */
             val task = TaskEntity(mTaskId, userId, priorityId, description, dueDate, complete)
 
-            // Inserção de tarefa
+            /** Inserção de tarefa */
             if (mTaskId == 0) {
                 mTaskBusiness.insert(task)
                 Toast.makeText(this, R.string.add_task_sucess, Toast.LENGTH_LONG).show()
@@ -122,18 +116,15 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
                 Toast.makeText(this, R.string.update_task_sucess, Toast.LENGTH_LONG).show()
             }
 
-            // Finaliza formulário
+            /** Finaliza formulário */
             finish()
 
         } catch (e: ValidationException) {
             Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
         }
-
     }
 
-    /**
-     * Obtém o indexo do valor carregado
-     */
+    /** Obtendo o valor do index de prioridade */
     private fun getIndex(priorityId: Int): Int {
         var index = 0
         for (i in 0..mPriorityEntityList.size) {
@@ -145,22 +136,20 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
         return index
     }
 
-    /**
-     * Carrega dados de edição
-     */
+    /** Carregamento dos dados para a edição */
     private fun loadDataFromActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             this.mTaskId = bundle.getInt(TaskConstants.BUNDLE.TASKID, 0)
 
-            // Carrega tarefa
+            /** Carrega tarefa */
             if (mTaskId != 0) {
                 btnSaveTask.setText(R.string.update_task_button)
 
-                // Carrega tarefa
+                /** Carrega tarefa */
                 val task = mTaskBusiness.get(mTaskId)
 
-                // Atribui valores as propriedades
+                /** Atribui valores as propriedades */
                 editDescription.setText(task?.description)
                 btnPickerDate.text = task?.dueDate
                 if (task != null) {
@@ -168,13 +157,10 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
                     spinnerPriority.setSelection(getIndex(task.priorityId))
                 }
             }
-
         }
     }
 
-    /**
-     * Mostra datepicker de seleção
-     */
+    /** Exibindo o datepicker de seleção de data */
     private fun showDateDialog() {
         val c = java.util.Calendar.getInstance()
         val year = c.get(java.util.Calendar.YEAR)
@@ -184,9 +170,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
         DatePickerDialog(this, this, year, month, day).show()
     }
 
-    /**
-     * Atribui eventos aos elementos
-     * */
+    /** Eventos de click */
     private fun setListeners() {
         btnSaveTask.setOnClickListener(this)
         btnPickerDate.setOnClickListener(this)

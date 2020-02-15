@@ -35,5 +35,6 @@
     <string name="update_task_button">Atualizar Tarefa!</string>
     <string name="priority">Prioridade:</string>
     <string name="hello">Olá</string>
+    <string name="name_error">"Insira apenas letras e números!"</string>
 
 </resources>

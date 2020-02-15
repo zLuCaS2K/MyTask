@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-    /** Metodo responsável por difinir o texto da Header da NavigationView com os dados do usuário */
+    /** Metodo responsável por definir o texto da Header da NavigationView com os dados do usuário */
     private fun setDateUserHeader() {
         /** Obtendo o HeaderView */
         val headerView = navigationView.getHeaderView(0)
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         textUserEmail.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_EMAIL)
     }
 
-    /** Metodo responsável por difinir o texto da toolbar com o nome do usuário logado */
+    /** Metodo responsável por definir o texto da toolbar com o nome do usuário logado */
     private fun setDateUserTitle() {
         /** Definindo o texto com os dados do usuário logado */
         textTitle.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_NAME)

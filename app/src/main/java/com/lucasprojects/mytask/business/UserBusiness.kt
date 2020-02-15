@@ -12,7 +12,10 @@ class UserBusiness(val context: Context) {
 
     /** Instância do UserRepository */
     private val mUserRepository: UserRepository = UserRepository.getInstance(context)
+    /** Instância do Shared Preferences */
     private val mSecurityPreferences: SecurityPreferences = SecurityPreferences(context)
+    /** MutableListOf de caracteres especiais para a validação de nome de usuário */
+    private val mMutableListOf = mutableListOf(",", ".", "?", "#")
 
     /**
      * Responsável por verificar se usuário existe e se os dados estão corretos
@@ -50,6 +53,11 @@ class UserBusiness(val context: Context) {
             /** Verifica se email já existe no banco de dados */
             if (mUserRepository.isEmailExistent(email)) {
                 throw ValidationException(context.getString(R.string.email_in_use))
+            }
+
+            /** Verifica se o nome possuí algum caractere especial */
+            if (mMutableListOf.contains(name)) {
+                throw ValidationException(context.getString(R.string.name_error))
             }
 
             /** Salva novo usuário, retornando o ID inserido */
