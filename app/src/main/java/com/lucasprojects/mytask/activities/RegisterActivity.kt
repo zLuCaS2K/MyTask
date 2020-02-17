@@ -52,7 +52,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         } catch (e: ValidationException) {
-            Toast.makeText(this, "Erro Inesperado!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
         }
     }
 }

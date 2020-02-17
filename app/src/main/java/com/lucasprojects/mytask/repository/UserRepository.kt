@@ -12,7 +12,7 @@ import com.lucasprojects.mytask.repository.helper.TaskDataBaseHelper
  * Classe de acesso a dados para Usuário
  * */
 
-class UserRepository private constructor(context: Context) {
+class UserRepository private constructor(val context: Context) {
 
     private var mUltraTaskDataBaseHelper: TaskDataBaseHelper = TaskDataBaseHelper(context)
 
@@ -147,7 +147,8 @@ class UserRepository private constructor(context: Context) {
             insertValues.put(DataBaseConstants.USER.COLUMNS.PASSWORD, password)
 
             // Faz a inserção e retorna
-            return db.insert(DataBaseConstants.USER.TABLE_NAME, null, insertValues).toInt()
+            val userId = db.insert(DataBaseConstants.USER.TABLE_NAME, null, insertValues).toInt()
+            return userId
 
         } catch (e: Exception) {
             throw e

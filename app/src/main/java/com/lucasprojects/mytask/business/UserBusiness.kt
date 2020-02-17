@@ -15,7 +15,10 @@ class UserBusiness(val context: Context) {
     /** Instância do Shared Preferences */
     private val mSecurityPreferences: SecurityPreferences = SecurityPreferences(context)
     /** MutableListOf de caracteres especiais para a validação de nome de usuário */
-    private val mMutableListOf = mutableListOf(",", ".", "?", "#")
+    private val mMutableListOf = mutableListOf(
+        "!", "@", "#", "$", "%", "¨", "&", "(", ")", "|", ",", ".",
+        "<", ">", " "
+    )
 
     /**
      * Responsável por verificar se usuário existe e se os dados estão corretos
@@ -56,8 +59,10 @@ class UserBusiness(val context: Context) {
             }
 
             /** Verifica se o nome possuí algum caractere especial */
-            if (mMutableListOf.contains(name)) {
-                throw ValidationException(context.getString(R.string.name_error))
+            for (letter in name) {
+                if (mMutableListOf.contains(letter.toString())) {
+                    throw ValidationException(context.getString(R.string.name_error))
+                }
             }
 
             /** Salva novo usuário, retornando o ID inserido */
