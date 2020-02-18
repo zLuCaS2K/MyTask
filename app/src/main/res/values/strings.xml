@@ -36,5 +36,9 @@
     <string name="priority">Prioridade:</string>
     <string name="hello">Olá</string>
     <string name="name_error">"Insira apenas letras e números!"</string>
+    <string name="about">Sobre</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
