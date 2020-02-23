@@ -9,11 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.TaskFormActivity"/>
+        <activity android:name=".activities.TaskFormActivity" />
         <activity android:name=".activities.SlideActivity" />
-        <activity android:name=".activities.OpeningActivity" />
-        <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.LoginActivity" />
+        <activity
+            android:name=".activities.OpeningActivity"
+            android:theme="@style/AppThemeScreens" />
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:theme="@style/AppThemeScreens" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:theme="@style/AppThemeScreens" />
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/AppTheme.SplashScreen">

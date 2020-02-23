@@ -40,5 +40,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_dialog_about_one">Versão do Aplicativo: 1.0</string>
+    <string name="ok">OK</string>
 
 </resources>

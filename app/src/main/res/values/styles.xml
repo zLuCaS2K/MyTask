@@ -11,7 +11,7 @@
     <style name="AppThemeScreens" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorOrangeLight</item>
-        <item name="colorPrimaryDark">@color/colorOrangeLight</item>
+        <item name="colorPrimaryDark">@color/colorBlack</item>
         <item name="colorAccent">@color/colorOrangeDark</item>
     </style>
 
