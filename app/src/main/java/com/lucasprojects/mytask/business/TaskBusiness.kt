@@ -18,10 +18,10 @@ class TaskBusiness(val context: Context) {
     /** Retorna lista de tarefas */
     fun getList(filter: Int): MutableList<TaskEntity> {
 
-        // Obtém o Id do usuário
+        /** Obtém o ID do usuário */
         val userId: Int = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_ID).toInt()
 
-        // Faz a listagem de tarefas com filtros
+        /** Faz a listagem de tarefas com filtros */
         return mTaskRepository.getList(filter, userId)
     }
 
@@ -29,12 +29,12 @@ class TaskBusiness(val context: Context) {
     fun insert(task: TaskEntity) {
 
         try {
-            // Faz a validação dos campos
-            if (task.description == "" || task.dueDate == "" || task.priorityId == 0) {
+            /** Faz a validação dos campos */
+            if (task.description.isEmpty() || task.dueDate.isEmpty() || task.priorityId == 0) {
                 throw ValidationException(context.getString(R.string.all_camps))
             }
 
-            // Faz a inserção da tarefa
+            /** Faz a inserção da tarefa */
             mTaskRepository.insert(task)
         } catch (e: Exception) {
             throw e
@@ -45,12 +45,12 @@ class TaskBusiness(val context: Context) {
     fun update(task: TaskEntity) {
 
         try {
-            // Faz a validação dos campos
-            if (task.description == "" || task.dueDate == "" || task.priorityId == 0) {
+            /** Faz a validação dos campos */
+            if (task.description.isEmpty() || task.dueDate.isEmpty() || task.priorityId == 0) {
                 throw ValidationException(context.getString(R.string.all_camps))
             }
 
-            // Faz a atualização da tarefa
+            /** Faz a atualização da tarefa */
             mTaskRepository.update(task)
         } catch (e: Exception) {
             throw e
