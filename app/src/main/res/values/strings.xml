@@ -5,7 +5,7 @@
     <string name="app_logout">Sair</string>
     <string name="enter">Entrar</string>
     <string name="register">Cadastrar-se</string>
-    <string name="opening_descriptionOne">Bem vindo(a)\nMy Task</string>
+    <string name="opening_descriptionOne">Bem Vindo(a)\nMy Task</string>
     <string name="opening_descriptionTwo">Melhore sua produtividade como você nunca viu, seja no trabalho ou nas tarefas em casa.</string>
     <string name="email">Email</string>
     <string name="password">Senha</string>
@@ -42,5 +42,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_dialog_about_one">Versão do Aplicativo: 1.0</string>
     <string name="ok">OK</string>
+    <string name="licences">Licenças</string>
 
 </resources>

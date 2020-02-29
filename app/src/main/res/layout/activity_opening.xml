@@ -33,7 +33,6 @@
         android:background="@drawable/model_button_enter"
         android:text="@string/enter"
         android:textColor="@color/colorBlack"
-        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/btnRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -48,7 +47,6 @@
         android:background="@drawable/model_button_register"
         android:text="@string/register"
         android:textColor="@color/colorBlack"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

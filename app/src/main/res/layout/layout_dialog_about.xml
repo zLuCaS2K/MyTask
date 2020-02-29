@@ -34,7 +34,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <TextView
             android:id="@+id/textOne"
             android:layout_width="match_parent"
@@ -61,6 +60,19 @@
             app:layout_constraintTop_toBottomOf="@id/textOne" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLicenses"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/model_button_register"
+            android:text="@string/licences"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnOk"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textTwo" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnOk"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -70,7 +82,7 @@
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnLicenses"
             app:layout_constraintTop_toBottomOf="@id/textTwo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
