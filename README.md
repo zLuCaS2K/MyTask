@@ -5,9 +5,9 @@ MyTask é um app de agendamento de tarefas bem simples feito usando a linguagem 
 
 [Rounded Image View](https://github.com/vinc3m1/RoundedImageView)
 ## Screenshots
-![Screenshot 1](https://user-images.githubusercontent.com/52612637/75114812-193ff280-5638-11ea-9925-3db16c336c1b.png) ![Screenshot 2](https://user-images.githubusercontent.com/52612637/75114816-23fa8780-5638-11ea-904e-6878e395faed.png)
-![Screenshot 3](https://user-images.githubusercontent.com/52612637/75114817-2826a500-5638-11ea-9988-f368bd0bdc06.png) ![Screenshot 6](https://user-images.githubusercontent.com/52612637/75114821-2fe64980-5638-11ea-9adb-086d373be5fd.png)
-![Screenshot 4](https://user-images.githubusercontent.com/52612637/75114819-2b219580-5638-11ea-993c-7b54c719d015.png) ![Screenshot 5](https://user-images.githubusercontent.com/52612637/75114820-2d83ef80-5638-11ea-80ed-d5068a71c12e.png)
+![Screenshot 1](https://user-images.githubusercontent.com/52612637/75682159-ba9bf980-5c73-11ea-8013-e41bbf68d33e.png) ![Screenshot 2](https://user-images.githubusercontent.com/52612637/75682163-bb349000-5c73-11ea-80a5-7c23ba48dc40.png)
+![Screenshot 3](https://user-images.githubusercontent.com/52612637/75682165-bb349000-5c73-11ea-88a0-e69d24b6de4c.png) ![Screenshot 4](https://user-images.githubusercontent.com/52612637/75682169-bb349000-5c73-11ea-8f78-2b2dc9caa929.png)
+![Screenshot 5](https://user-images.githubusercontent.com/52612637/75682171-bbcd2680-5c73-11ea-9572-fc352965b8a6.png) ![Screenshot 6](https://user-images.githubusercontent.com/52612637/75682174-bbcd2680-5c73-11ea-9516-cd2306bbeb0d.png)
 ## Licença
 ```text
 MIT License
