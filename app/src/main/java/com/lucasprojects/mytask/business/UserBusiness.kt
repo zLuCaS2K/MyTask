@@ -49,7 +49,7 @@ class UserBusiness(val context: Context) {
     fun save(name: String, email: String, password: String) {
         try {
             /** Verificando se os campos possuem dados */
-            if (name == "" || email == "" || password == "") {
+            if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 throw ValidationException(context.getString(R.string.all_camps))
             }
 
