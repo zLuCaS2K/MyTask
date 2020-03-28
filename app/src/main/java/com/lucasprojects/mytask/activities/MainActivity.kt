@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.nav_Done -> titleListTask.text = getString(R.string.tasks_done)
                 R.id.nav_Todo -> titleListTask.text = getString(R.string.tasks_todo)
+                R.id.nav_Invisible -> titleListTask.text = getString(R.string.tasks_invisible)
             }
         }
     }

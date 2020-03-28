@@ -43,5 +43,6 @@
     <string name="text_dialog_about_one">Versão do Aplicativo: 1.0</string>
     <string name="ok">OK</string>
     <string name="licences">Licenças</string>
+    <string name="tasks_invisible">Tarefas Ocultas</string>
 
 </resources>
