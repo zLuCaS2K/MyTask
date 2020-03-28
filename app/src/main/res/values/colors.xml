@@ -6,11 +6,12 @@
     <color name="colorGray">#676767</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGreenLight">#32CD32</color>
-    <color name="colorOrangeLight">#FDC830</color>
-    <color name="colorOrangeDark">#F37335</color>
+    <color name="colorPurpleDark">#7933A5</color>
+    <color name="colorPinkLight">#D4489E</color>
 
-    <!-- Gradient Blue -->
+    <!--
     <color name="colorBlueLight">#00EFFF</color>
     <color name="colorBlueMedium">#00C2FF</color>
-    <color name="colorBlueDark">#00ADFF</color>
+    <color name="colorBlueDark">#00ADFF</color> -->
+
 </resources>

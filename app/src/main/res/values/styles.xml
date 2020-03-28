@@ -3,21 +3,21 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorOrangeLight</item>
-        <item name="colorPrimaryDark">@color/colorOrangeLight</item>
-        <item name="colorAccent">@color/colorOrangeDark</item>
+        <item name="colorPrimary">@color/colorPurpleDark</item>
+        <item name="colorPrimaryDark">@color/colorPurpleDark</item>
+        <item name="colorAccent">@color/colorPinkLight</item>
     </style>
 
     <style name="AppThemeScreens" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorOrangeLight</item>
-        <item name="colorPrimaryDark">@color/colorBlack</item>
-        <item name="colorAccent">@color/colorOrangeDark</item>
+        <item name="colorPrimary">@color/colorPurpleDark</item>
+        <item name="colorPrimaryDark">@color/colorPurpleDark</item>
+        <item name="colorAccent">@color/colorPinkLight</item>
     </style>
 
     <style name="AppTheme.SplashScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorOrangeLight</item>
-        <item name="colorPrimaryDark">@color/colorOrangeLight</item>
+        <item name="colorPrimary">@color/colorPurpleDark</item>
+        <item name="colorPrimaryDark">@color/colorPurpleDark</item>
         <item name="colorAccent">@color/colorWhite</item>
     </style>
 

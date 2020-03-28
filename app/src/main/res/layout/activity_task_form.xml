@@ -8,16 +8,6 @@
     android:background="@drawable/gradient_background_fab"
     tools:context=".activities.TaskFormActivity">
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintBottom_toTopOf="@id/scrollView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:riv_oval="true" />
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -30,6 +20,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="150dp"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintBottom_toTopOf="@id/editDescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_oval="true" />
 
             <EditText
                 android:id="@+id/editDescription"

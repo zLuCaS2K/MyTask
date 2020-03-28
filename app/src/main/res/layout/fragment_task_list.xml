@@ -22,7 +22,7 @@
         android:id="@+id/fabAddTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorOrangeDark"
+        android:backgroundTint="@color/colorPurpleDark"
         android:src="@drawable/ic_add"
         android:tint="@color/colorWhite"
         app:elevation="6dp"
