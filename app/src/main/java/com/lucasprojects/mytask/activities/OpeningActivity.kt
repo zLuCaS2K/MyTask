@@ -43,9 +43,8 @@ class OpeningActivity : AppCompatActivity(), View.OnClickListener {
     private fun verifyLoggedUser() {
         val securityPreferences = SecurityPreferences(this)
         val userId = securityPreferences.getSharedStored(TaskConstants.KEY.USER_ID)
-        val userEmail = securityPreferences.getSharedStored(TaskConstants.KEY.USER_EMAIL)
 
-        if (userId.isNotEmpty() || userEmail.isNotEmpty()) {
+        if (userId.isNotEmpty()) {
             startActivity(Intent(this, MainActivity::class.java))
         }
     }
