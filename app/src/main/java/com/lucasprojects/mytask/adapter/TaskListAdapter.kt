@@ -8,10 +8,7 @@ import com.lucasprojects.mytask.entities.TaskEntity
 import com.lucasprojects.mytask.entities.listenner.OnTaskListFragmentInteractionListenner
 import com.lucasprojects.mytask.holder.TaskViewHolder
 
-class TaskListAdapter(
-    tasklist: List<TaskEntity>,
-    listener: OnTaskListFragmentInteractionListenner
-) : RecyclerView.Adapter<TaskViewHolder>() {
+class TaskListAdapter(tasklist: List<TaskEntity>, listener: OnTaskListFragmentInteractionListenner) : RecyclerView.Adapter<TaskViewHolder>() {
 
     private val mListTaskEntity: List<TaskEntity> = tasklist
     private val listener: OnTaskListFragmentInteractionListenner = listener
@@ -27,11 +24,7 @@ class TaskListAdapter(
 
     /** Metodo que conta o tamanho da lista de tasks */
     override fun getItemCount(): Int {
-        if (mListTaskEntity != null) {
-            return mListTaskEntity.size
-        } else {
-            return 0
-        }
+        return mListTaskEntity.size
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {

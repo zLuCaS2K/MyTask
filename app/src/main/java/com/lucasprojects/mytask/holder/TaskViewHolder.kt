@@ -68,19 +68,12 @@ class TaskViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHo
     }
 
     /** Dialog de confirmação de remoção de task*/
-    private fun showConfirmDialog(
-        taskEntity: TaskEntity,
-        listenner: OnTaskListFragmentInteractionListenner
-    ) {
+    private fun showConfirmDialog(taskEntity: TaskEntity,
+        listenner: OnTaskListFragmentInteractionListenner) {
         AlertDialog.Builder(context)
             .setTitle(R.string.task_remove_confirm)
             .setMessage("${R.string.task_remove_message} ${taskEntity.description}?")
-            .setPositiveButton(R.string.remove) { dialog, which ->
-                listenner.onDeleteClick(
-                    taskEntity.id
-                )
-            }
+            .setPositiveButton(R.string.remove) { dialog, which -> listenner.onDeleteClick(taskEntity.id) }
             .setNegativeButton(R.string.cancel, null).show()
     }
-
 }

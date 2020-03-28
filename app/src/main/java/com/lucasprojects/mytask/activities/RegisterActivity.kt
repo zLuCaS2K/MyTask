@@ -44,11 +44,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     /** Executa o login do usuário */
     private fun handleSave() {
         val userName = editUsername.text.toString()
-        val userEmail = editEmail.text.toString()
         val userPassword = editPassword.text.toString()
 
         try {
-            mUserBusiness.save(userName, userEmail, userPassword)
+            mUserBusiness.save(userName, userPassword)
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         } catch (e: ValidationException) {

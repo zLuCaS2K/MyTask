@@ -32,7 +32,8 @@ class UserRepository private constructor(val context: Context) {
     /**
      * Carrega usuário
      */
-    fun get(email: String, password: String): UserEntity? {
+
+    fun get(name: String, password: String): UserEntity? {
 
         var userEntity: UserEntity? = null
 
@@ -41,41 +42,25 @@ class UserRepository private constructor(val context: Context) {
             val db = this.mUltraTaskDataBaseHelper.readableDatabase
 
             // Colunas que serão retornadas
-            val projection = arrayOf(
-                DataBaseConstants.USER.COLUMNS.ID
-                , DataBaseConstants.USER.COLUMNS.NAME
-                , DataBaseConstants.USER.COLUMNS.EMAIL
-            )
+            val projection = arrayOf(DataBaseConstants.USER.COLUMNS.ID, DataBaseConstants.USER.COLUMNS.NAME)
 
             // Filtro
-            val selection =
-                " ${DataBaseConstants.USER.COLUMNS.EMAIL} = ? AND ${DataBaseConstants.USER.COLUMNS.PASSWORD} = ?"
-            val selectionArgs = arrayOf(email, password)
+            val selection = " ${DataBaseConstants.USER.COLUMNS.NAME} = ? AND ${DataBaseConstants.USER.COLUMNS.PASSWORD} = ?"
+            val selectionArgs = arrayOf(name, password)
 
             // Carrega usuário
-            cursor = db.query(
-                DataBaseConstants.USER.TABLE_NAME,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null
+            cursor = db.query(DataBaseConstants.USER.TABLE_NAME, projection, selection, selectionArgs, null, null, null
             )
 
             // Verifica se existe retorno
             if (cursor.count > 0) {
                 cursor.moveToFirst()
 
-                val id =
-                    cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.USER.COLUMNS.ID))
-                val name =
-                    cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.USER.COLUMNS.NAME))
-                val mail =
-                    cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.USER.COLUMNS.EMAIL))
+                val id = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.USER.COLUMNS.ID))
+                val name = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.USER.COLUMNS.NAME))
 
                 // Atribui valor a variável do usuário
-                userEntity = UserEntity(id, mail, name)
+                userEntity = UserEntity(id, name)
             }
 
             // Fecha cursor
@@ -90,9 +75,9 @@ class UserRepository private constructor(val context: Context) {
     }
 
     /**
-     * Verifica se email já existe
+     * Verifica se já existe o usuário
      */
-    fun isEmailExistent(email: String): Boolean {
+    fun isUserExistent(name: String): Boolean {
 
         val ret: Boolean
         try {
@@ -103,8 +88,8 @@ class UserRepository private constructor(val context: Context) {
             val projection = arrayOf(DataBaseConstants.USER.COLUMNS.ID)
 
             // Filtro
-            val selection = DataBaseConstants.USER.COLUMNS.EMAIL + " = ?"
-            val selectionArgs = arrayOf(email)
+            val selection = DataBaseConstants.USER.COLUMNS.NAME + " = ?"
+            val selectionArgs = arrayOf(name)
 
             // Carrega usuário - Linha única
             // cursor = db.rawQuery("select * from user where email = '$email'", null)
@@ -134,26 +119,23 @@ class UserRepository private constructor(val context: Context) {
     /**
      * Faz a inserção do usuário
      * */
-    fun insert(name: String, email: String, password: String): Int {
+
+    fun insert(name: String, password: String): Int {
 
         try {
-
-            // Para fazer escrita de dados
+            /** Fazendo escrita dos dados */
             val db = mUltraTaskDataBaseHelper.writableDatabase
 
             val insertValues = ContentValues()
             insertValues.put(DataBaseConstants.USER.COLUMNS.NAME, name)
-            insertValues.put(DataBaseConstants.USER.COLUMNS.EMAIL, email)
             insertValues.put(DataBaseConstants.USER.COLUMNS.PASSWORD, password)
 
-            // Faz a inserção e retorna
+            /** Faz a inserção e retorna */
             val userId = db.insert(DataBaseConstants.USER.TABLE_NAME, null, insertValues).toInt()
             return userId
 
         } catch (e: Exception) {
             throw e
         }
-
     }
-
 }

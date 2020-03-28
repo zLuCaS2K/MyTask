@@ -9,6 +9,7 @@ import com.lucasprojects.mytask.util.SecurityPreferences
 import com.lucasprojects.mytask.util.ValidationException
 
 class TaskBusiness(val context: Context) {
+
     private val mTaskRepository: TaskRepository = TaskRepository.getInstance(context)
     private val mSecurityPreferences: SecurityPreferences = SecurityPreferences(context)
 

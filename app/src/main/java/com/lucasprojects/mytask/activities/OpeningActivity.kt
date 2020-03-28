@@ -45,7 +45,7 @@ class OpeningActivity : AppCompatActivity(), View.OnClickListener {
         val userId = securityPreferences.getSharedStored(TaskConstants.KEY.USER_ID)
         val userEmail = securityPreferences.getSharedStored(TaskConstants.KEY.USER_EMAIL)
 
-        if ("" != userId || "" != userEmail) {
+        if (userId.isNotEmpty() || userEmail.isNotEmpty()) {
             startActivity(Intent(this, MainActivity::class.java))
         }
     }

@@ -88,7 +88,6 @@ class MainActivity : AppCompatActivity() {
         /** Limpando os dados do usuário do SharedPreferences */
         mSecurityPreferences.removeSharedStored(TaskConstants.KEY.USER_ID)
         mSecurityPreferences.removeSharedStored(TaskConstants.KEY.USER_NAME)
-        mSecurityPreferences.removeSharedStored(TaskConstants.KEY.USER_EMAIL)
         /** Chamando a LoginActivity */
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
@@ -100,10 +99,8 @@ class MainActivity : AppCompatActivity() {
         val headerView = navigationView.getHeaderView(0)
         /** Recuperando views do Header da NavigationView */
         val textUserName = headerView.findViewById<TextView>(R.id.textUserName)
-        val textUserEmail = headerView.findViewById<TextView>(R.id.textUserEmail)
         /** Definindo o texto com os dados do usuário logado */
         textUserName.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_NAME)
-        textUserEmail.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_EMAIL)
     }
 
     /** Metodo responsável por definir o texto da toolbar com o nome do usuário logado */

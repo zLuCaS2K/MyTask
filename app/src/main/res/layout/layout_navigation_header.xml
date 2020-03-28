@@ -37,14 +37,4 @@
         app:layout_constraintBottom_toTopOf="@id/viewSupport"
         app:layout_constraintStart_toEndOf="@id/imageApp" />
 
-    <TextView
-        android:id="@+id/textUserEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/colorGreenLight"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@id/imageApp"
-        app:layout_constraintTop_toBottomOf="@id/viewSupport" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

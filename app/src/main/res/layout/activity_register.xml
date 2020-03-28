@@ -64,27 +64,6 @@
                 android:paddingEnd="18dp"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
-                app:layout_constraintBottom_toTopOf="@id/editEmail"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <EditText
-                android:id="@+id/editEmail"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/model_editext_input"
-                android:drawableStart="@drawable/ic_email"
-                android:drawablePadding="10dp"
-                android:hint="@string/email"
-                android:imeOptions="actionDone"
-                android:inputType="textEmailAddress"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:textColor="@color/colorWhite"
-                android:textColorHint="@color/colorWhite"
                 app:layout_constraintBottom_toTopOf="@id/editPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

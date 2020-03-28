@@ -5,6 +5,7 @@ import com.lucasprojects.mytask.entities.PriorityEntity
 import com.lucasprojects.mytask.repository.PriorityRepository
 
 class PriorityBusiness(context: Context) {
+
     private val mPriorityRepository: PriorityRepository = PriorityRepository.getInstance(context)
 
     /**

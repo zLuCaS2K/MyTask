@@ -42,10 +42,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     /** Executa o login do usuário */
     private fun handleLogin() {
-        val email = this.editEmail.text.toString()
+        val name = this.editUsername.text.toString()
         val password = this.editPassword.text.toString()
 
-        if (mUserBusiness.login(email, password)) {
+        if (mUserBusiness.login(name, password)) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else {

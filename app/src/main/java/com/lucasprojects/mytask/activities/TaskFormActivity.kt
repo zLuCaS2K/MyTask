@@ -86,11 +86,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
         mPriorityEntityListId = mPriorityEntityList.map { it.id }.toMutableList()
 
         /** Criando adapter e usando no elemento */
-        val adapter = ArrayAdapter<String>(
-            this,
-            android.R.layout.simple_spinner_dropdown_item,
-            listPriorities
-        )
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listPriorities)
         spinnerPriority.adapter = adapter
     }
 
