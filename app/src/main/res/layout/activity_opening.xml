@@ -8,71 +8,70 @@
     android:background="@drawable/gradient_background_fab"
     tools:context=".activities.OpeningActivity">
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/imageAppOpening"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintBottom_toTopOf="@id/textOne"
+    <TextView
+        android:id="@+id/appName"
+        style="@style/TextViewTitle"
+        android:text="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:riv_oval="true" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnEnter"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/model_button_enter"
-        android:text="@string/enter"
-        android:textColor="@color/colorBlack"
-        app:layout_constraintBottom_toTopOf="@id/btnRegister"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/model_button_register"
-        android:text="@string/register"
-        android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appName"
+        app:layout_constraintVertical_bias="1.0">
 
-    <TextView
-        android:id="@+id/textTwo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="15dp"
-        android:text="@string/opening_descriptionTwo"
-        android:textColor="@color/colorWhite"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/btnEnter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnEnter"
+            style="@style/ButtonLoginWhite"
+            android:layout_marginBottom="15dp"
+            android:text="@string/enter"
+            app:layout_constraintBottom_toTopOf="@id/btnRegister"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textOne"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="15dp"
-        android:text="@string/opening_descriptionOne"
-        android:textColor="@color/colorWhite"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@id/textTwo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnRegister"
+            style="@style/ButtonLoginPink"
+            android:text="@string/register"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/lobster"
+            android:text="@string/opening_descriptionOne"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toTopOf="@id/textTwo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/lobster"
+            android:text="@string/opening_descriptionTwo"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/btnEnter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,23 +6,26 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background_fab">
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/imageAppSplash"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@mipmap/ic_launcher"
+    <TextView
+        android:id="@+id/appName"
+        style="@style/TextViewTitle"
+        android:text="@string/app_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:riv_oval="true" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ProgressBar
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/lobster"
+        android:text="@string/text_dialog_about_one"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageAppSplash" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
