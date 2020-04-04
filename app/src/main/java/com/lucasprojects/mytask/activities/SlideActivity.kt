@@ -1,81 +1,131 @@
 package com.lucasprojects.mytask.activities
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import com.github.paolorotolo.appintro.AppIntro2
-import com.github.paolorotolo.appintro.AppIntro2Fragment
-import com.github.paolorotolo.appintro.model.SliderPagerBuilder
+import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
+import androidx.core.view.get
+import androidx.viewpager2.widget.ViewPager2
 import com.lucasprojects.mytask.R
+import com.lucasprojects.mytask.adapter.IntroSlideAdapter
+import com.lucasprojects.mytask.entities.IntroSlide
 import com.lucasprojects.mytask.util.PreferenceManager
+import kotlinx.android.synthetic.main.activity_slide.*
 
-/**
- * A SlideActivity é a activity responsável por mostrar slides de apresentação do app ao usuário,
- * essa activity só será chamada uma única vez, ou seja apenas na primeira abertura do app.
- * */
+class SlideActivity : AppCompatActivity(), View.OnClickListener {
 
-class SlideActivity : AppIntro2() {
-
-    /** Váriaveis do SharedPreferences */
     private lateinit var mPreferenceManager: PreferenceManager
+    private val introSlideAdapter = IntroSlideAdapter(
+        listOf(
+            IntroSlide(
+                "Bem-Vindo",
+                "O MyTask é um app totalmente de código aberto, você pode modificá-lo quanto quiser!",
+                R.raw.welcome
+            ),
+            IntroSlide(
+                "Agendamento de Tarefas",
+                "O agendamento ainda está em processo de desenvolvimento, por enquanto o app está somente anotando!",
+                R.raw.task_man
+            ),
+            IntroSlide(
+                "Licenças de Código",
+                "Todos os ícones, animações, imagens, APIs e bibliotecas usadas, podem ser encontradas na barra de navegação, no item Sobre!",
+                R.raw.license
+            )
+        )
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /** Instancia da Classe PreferenceManager */
+        setContentView(R.layout.activity_slide)
         mPreferenceManager = PreferenceManager(this)
-        /** Verificação se é a primeira vez que o app está sendo aberto */
+        btnNext.setOnClickListener(this)
+        textSkipIntro.setOnClickListener(this)
         if (mPreferenceManager.isFirstRun()) {
-            showIntroSlides()
+            showSlides()
+            setupIndicators()
+            setCurrentIndicator(0)
+            introSliderViewPager.registerOnPageChangeCallback(object :
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    setCurrentIndicator(position)
+                }
+            })
         } else {
-            goToMain()
+            goToOpening()
         }
     }
 
-    /** Metodo responsável por mostrar os slides de apresentação */
-    private fun showIntroSlides() {
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.btnNext -> {
+                if (introSliderViewPager.currentItem + 1 < introSlideAdapter.itemCount) {
+                    introSliderViewPager.currentItem += 1
+                } else {
+                    goToOpening()
+                }
+            }
+            R.id.textSkipIntro -> {
+                goToOpening()
+            }
+        }
+    }
+
+    private fun setupIndicators() {
+        val indicators = arrayOfNulls<ImageView>(introSlideAdapter.itemCount)
+        val layoutParans = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        layoutParans.setMargins(8, 0, 8, 0)
+        for (i in indicators.indices) {
+            indicators[i] = ImageView(this)
+            indicators[i].apply {
+                this?.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.indicator_inactive
+                    )
+                )
+                this?.layoutParams = layoutParans
+            }
+            indicatorsContainer.addView(indicators[i])
+        }
+    }
+
+    private fun setCurrentIndicator(index: Int) {
+        val childCount = indicatorsContainer.childCount
+        for (i in 0 until childCount) {
+            val imageView = indicatorsContainer[i] as ImageView
+            if (i == index) {
+                imageView.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.indicator_active
+                    )
+                )
+            } else {
+                imageView.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.indicator_inactive
+                    )
+                )
+            }
+        }
+    }
+
+    private fun showSlides() {
         mPreferenceManager.setFirstRun()
-
-        val pageOne = SliderPagerBuilder()
-            .title(getString(R.string.slide_welcome))
-            .description(getString(R.string.opening_descriptionTwo))
-            .imageDrawable(R.mipmap.ic_launcher)
-            .bgColor(R.color.colorWhite)
-            .build()
-
-        val pageTwo = SliderPagerBuilder()
-            .title(getString(R.string.slide_welcomeTwo))
-            .description(getString(R.string.slide_welcome_descriptionTwo))
-            .imageDrawable(R.drawable.ic_productivity)
-            .bgColor(R.color.colorWhite)
-            .build()
-
-        val pageTree = SliderPagerBuilder()
-            .title(getString(R.string.slide_welcomeThree))
-            .description(getString(R.string.slide_welcome_descriptionThree))
-            .imageDrawable(R.drawable.ic_ux)
-            .bgColor(R.color.colorWhite)
-            .build()
-
-        /** Adicionando Slides ao App */
-        addSlide(AppIntro2Fragment.newInstance(pageOne))
-        addSlide(AppIntro2Fragment.newInstance(pageTwo))
-        addSlide(AppIntro2Fragment.newInstance(pageTree))
+        introSliderViewPager.adapter = introSlideAdapter
     }
 
-    /** Metodo que chama a OpeningAcitivity */
-    private fun goToMain() {
+    private fun goToOpening() {
         startActivity(Intent(this, OpeningActivity::class.java))
-    }
-
-    /** Metodo que chama a OpeningAcitivity, caso o usuário aperte no botão de pular */
-    override fun onSkipPressed(currentFragment: Fragment?) {
-        super.onSkipPressed(currentFragment)
-        goToMain()
-    }
-
-    /** Metodo que chama a OpeningAcitivity, caso o usuário aperte no botão de próximo */
-    override fun onDonePressed(currentFragment: Fragment?) {
-        super.onDonePressed(currentFragment)
-        goToMain()
+        finish()
     }
 }

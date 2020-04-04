@@ -13,7 +13,6 @@ class AboutFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val viewRoot = inflater.inflate(R.layout.fragment_about, container, false)
-        return viewRoot
+        return inflater.inflate(R.layout.fragment_about, container, false)
     }
 }

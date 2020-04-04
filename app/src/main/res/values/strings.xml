@@ -41,5 +41,6 @@
     <string name="ok">OK</string>
     <string name="licences">Licenças</string>
     <string name="tasks_invisible">Tarefas Ocultas</string>
-
+    <string name="next">Avançar</string>
+    <string name="skip_intro">Pular Intro</string>
 </resources>

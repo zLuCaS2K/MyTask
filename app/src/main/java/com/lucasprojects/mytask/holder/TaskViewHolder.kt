@@ -1,6 +1,5 @@
 package com.lucasprojects.mytask.holder
 
-import android.content.Context
 import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
@@ -14,7 +13,7 @@ import com.lucasprojects.mytask.entities.TaskEntity
 import com.lucasprojects.mytask.entities.listenner.OnTaskListFragmentInteractionListenner
 import com.lucasprojects.mytask.repository.cache.PriorityCacheConstants
 
-class TaskViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHolder(itemView) {
+class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val mTextDescription = itemView.findViewById<TextView>(R.id.textDescription)
     private val mTextPriority = itemView.findViewById<TextView>(R.id.textPriority)
@@ -68,12 +67,14 @@ class TaskViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHo
     }
 
     /** Dialog de confirmação de remoção de task*/
-    private fun showConfirmDialog(taskEntity: TaskEntity,
-        listenner: OnTaskListFragmentInteractionListenner) {
-        AlertDialog.Builder(context)
+    private fun showConfirmDialog(
+        taskEntity: TaskEntity,
+        listenner: OnTaskListFragmentInteractionListenner
+    ) {
+        AlertDialog.Builder(itemView.context)
             .setTitle(R.string.task_remove_confirm)
             .setMessage("${R.string.task_remove_message} ${taskEntity.description}?")
-            .setPositiveButton(R.string.remove) { dialog, which -> listenner.onDeleteClick(taskEntity.id) }
+            .setPositiveButton(R.string.remove) { _, _ -> listenner.onDeleteClick(taskEntity.id) }
             .setNegativeButton(R.string.cancel, null).show()
     }
 }

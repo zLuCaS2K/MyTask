@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     /** Váriaveis da Camada Business */
     private lateinit var mPriorityBusiness: PriorityBusiness
+
     /** Váriaveis do SharedPreferences */
     private lateinit var mSecurityPreferences: SecurityPreferences
 
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         /** Configurando a navegação do app */
         NavigationUI.setupWithNavController(navigationView, navController)
         /** Execução com a navegação baseada no destino */
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.nav_Done -> titleListTask.text = getString(R.string.tasks_done)
                 R.id.nav_Todo -> titleListTask.text = getString(R.string.tasks_todo)
