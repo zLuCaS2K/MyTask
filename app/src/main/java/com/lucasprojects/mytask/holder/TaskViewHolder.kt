@@ -73,7 +73,7 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     ) {
         AlertDialog.Builder(itemView.context)
             .setTitle(R.string.task_remove_confirm)
-            .setMessage("${R.string.task_remove_message} ${taskEntity.description}?")
+            .setMessage("${itemView.context.resources.getString(R.string.task_remove_message)} ${taskEntity.description}?")
             .setPositiveButton(R.string.remove) { _, _ -> listenner.onDeleteClick(taskEntity.id) }
             .setNegativeButton(R.string.cancel, null).show()
     }
