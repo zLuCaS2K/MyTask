@@ -1,11 +1,20 @@
 ## MyTask
-MyTask é um app de agendamento de tarefas bem simples feito usando a linguagem de programação Kotlin, o projeto foi criado com o intuito de praticar meus conhecimentos com desenvolvimento android com o kotlin, fique a vontade de baixar e modificar o projeto como quiser, praticamente todo o código está comentado e explicado.
+MyTask é um app de agendamento de tarefas bem simples feito usando a linguagem de programação [Kotlin](https://kotlinlang.org/), o projeto foi criado com o intuito de praticar meus conhecimentos com desenvolvimento android com essa linguagem incrível.
+## Features
+- [x] Cadastro de usuários.
+- [x] Adicione, exclua, edite, liste, filtre uma tarefa.
+- [x] Slide de apresentação ao app usando [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2?authuser=2) e [Lottie](https://github.com/airbnb/lottie-android).
+- [x] ActionBar, Botões, TextView, RecyclerView totalmente personalizados.
+- [ ] Animações no RecyclerView e ao mudar o status de uma tarefa.
+- [ ] Notificar usuário que o dia da sua tarefa chegou.
 ## Bibliotecas & APIs
-[Lottie API](https://github.com/airbnb/lottie-android)
+[Lottie](https://github.com/airbnb/lottie-android)
 
 [Rounded Image View](https://github.com/vinc3m1/RoundedImageView)
 ## Screenshots
 ![Screenshot_1585759479](https://user-images.githubusercontent.com/52612637/78164067-94f34300-741f-11ea-80e1-5848f6b6ddb5.png) ![Screenshot_1585759483](https://user-images.githubusercontent.com/52612637/78164069-958bd980-741f-11ea-9ff5-9053656fad61.png) ![Screenshot_1585759489](https://user-images.githubusercontent.com/52612637/78164071-958bd980-741f-11ea-8db8-9231543fe91d.png) ![Screenshot_1585759625](https://user-images.githubusercontent.com/52612637/78164153-b2281180-741f-11ea-97fa-3fe36b39197d.png) ![Screenshot_1585759619](https://user-images.githubusercontent.com/52612637/78164169-b81df280-741f-11ea-8244-14d3e4900029.png) ![Screenshot_1585759612](https://user-images.githubusercontent.com/52612637/78164178-bbb17980-741f-11ea-9281-097aa94c1e87.png)
+## Créditos
+Todas as animações, ícones, imagens, fontes, bibliotecas, tudo que foi obtido de maneira externa terão recebidos seus devidos créditos na aba sobre do app em breve.
 ## Licença
 ```text
 MIT License
