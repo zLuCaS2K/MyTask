@@ -2,9 +2,8 @@ package com.lucasprojects.mytask.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         val itemAbout = navigationView.menu.findItem(R.id.nav_About)
         itemAbout.setOnMenuItemClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
-            showAboutDialog()
+            Toast.makeText(this, "Em Desenvolvimento!", Toast.LENGTH_SHORT).show()
             true
         }
         /** Definindo texto da Header da NavigationView */
@@ -74,7 +73,10 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.nav_Done -> titleListTask.text = getString(R.string.tasks_done)
                 R.id.nav_Todo -> titleListTask.text = getString(R.string.tasks_todo)
-                R.id.nav_Invisible -> titleListTask.text = getString(R.string.tasks_invisible)
+                R.id.nav_Invisible -> {
+                    titleListTask.text = getString(R.string.tasks_invisible)
+                    Toast.makeText(this, "Em Desenvolvimento!", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -108,30 +110,5 @@ class MainActivity : AppCompatActivity() {
     private fun setDateUserTitle() {
         /** Definindo o texto com os dados do usuário logado */
         textTitle.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_NAME)
-    }
-
-    /** Metodo responsável por exibir o dialog de sobre do aplicativo */
-    private fun showAboutDialog() {
-        /** Obtendo o LayoutInflater */
-        val inflater = layoutInflater
-        /** Mapeando a View do AlertDialog */
-        val inflaterView = inflater.inflate(R.layout.layout_dialog_about, null)
-        /** Mapeando o botão do AlertDialog */
-        val btnOk = inflaterView.findViewById<Button>(R.id.btnOk)
-        /** Construindo o AlertDialog */
-        val alertDialog = AlertDialog.Builder(this)
-        /** Definindo a View do AlertDialog */
-        alertDialog.setView(inflaterView)
-        /** Definindo se o AlertDialog pode ser cancelado */
-        alertDialog.setCancelable(false)
-        /** Criando o AlertDialog */
-        val dialogAbout = alertDialog.create()
-        /** Exibindo o AlertDialog */
-        dialogAbout.show()
-        /** Evento de click do botão Ok */
-        btnOk.setOnClickListener {
-            /** Fechando o AlertDialog */
-            dialogAbout.dismiss()
-        }
     }
 }
