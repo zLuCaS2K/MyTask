@@ -1,7 +1,7 @@
 ## MyTask
 MyTask é um app de agendamento de tarefas bem simples feito usando a linguagem de programação Kotlin, o projeto foi criado com o intuito de praticar meus conhecimentos com desenvolvimento android com o kotlin, fique a vontade de baixar e modificar o projeto como quiser, praticamente todo o código está comentado e explicado.
 ## Bibliotecas
-[AndroidX Intro Slide](https://github.com/AppIntro/AppIntro)
+[Lottie API](https://github.com/airbnb/lottie-android)
 
 [Rounded Image View](https://github.com/vinc3m1/RoundedImageView)
 ## Screenshots
