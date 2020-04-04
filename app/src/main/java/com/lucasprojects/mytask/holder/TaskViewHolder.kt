@@ -5,8 +5,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.lucasprojects.mytask.R
 import com.lucasprojects.mytask.constants.TaskConstants
 import com.lucasprojects.mytask.entities.TaskEntity
@@ -19,23 +19,20 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val mTextPriority = itemView.findViewById<TextView>(R.id.textPriority)
     private val mTextDueDate = itemView.findViewById<TextView>(R.id.textDueDate)
     private val mImageView = itemView.findViewById<ImageView>(R.id.imageTask)
-    private val mConstraintLayout = itemView.findViewById<ConstraintLayout>(R.id.layoutContraintOne)
+    private val mMaterialCardView = itemView.findViewById<MaterialCardView>(R.id.layoutCardView)
 
-    fun bindData(
-        taskEntity: TaskEntity,
-        listenner: OnTaskListFragmentInteractionListenner
-    ) {
+    fun bindData(taskEntity: TaskEntity, listenner: OnTaskListFragmentInteractionListenner) {
         mTextDescription.text = taskEntity.description
         mTextPriority.text = PriorityCacheConstants.getPriorityDescription(taskEntity.priorityId)
         mTextDueDate.text = taskEntity.dueDate
 
         /** Evento de click para cada task */
-        mConstraintLayout.setOnClickListener {
+        mMaterialCardView.setOnClickListener {
             listenner.onListClick(taskEntity.id)
         }
 
         /** Evento de remoção de task */
-        mConstraintLayout.setOnLongClickListener {
+        mMaterialCardView.setOnLongClickListener {
             showConfirmDialog(taskEntity, listenner)
             true
         }
