@@ -13,12 +13,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+<<<<<<< HEAD
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="110dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+=======
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/imageTask"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toTopOf="@id/guidelineOne"
+            app:layout_constraintEnd_toStartOf="@id/guidelineTwo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_loop="false" />
+>>>>>>> changes_icon
 
             <ImageView
                 android:id="@+id/imageTask"

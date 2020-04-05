@@ -9,8 +9,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.lucasprojects.mytask.R
 import com.lucasprojects.mytask.entities.IntroSlide
 
-class IntroSlideAdapter(private val listIntroSlide: List<IntroSlide>) :
-    RecyclerView.Adapter<IntroSlideAdapter.IntroSlideViewHolder>() {
+class IntroSlideAdapter(private val listIntroSlide: List<IntroSlide>) : RecyclerView.Adapter<IntroSlideAdapter.IntroSlideViewHolder>() {
 
     inner class IntroSlideViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
