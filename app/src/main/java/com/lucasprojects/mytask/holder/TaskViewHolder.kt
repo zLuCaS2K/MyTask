@@ -1,12 +1,15 @@
 package com.lucasprojects.mytask.holder
 
 import android.graphics.Color
+import android.os.Handler
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.lucasprojects.mytask.R
 import com.lucasprojects.mytask.constants.TaskConstants
 import com.lucasprojects.mytask.entities.TaskEntity
@@ -18,13 +21,10 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val mTextDescription = itemView.findViewById<TextView>(R.id.textDescription)
     private val mTextPriority = itemView.findViewById<TextView>(R.id.textPriority)
     private val mTextDueDate = itemView.findViewById<TextView>(R.id.textDueDate)
-    private val mImageView = itemView.findViewById<ImageView>(R.id.imageTask)
+    private val mImageView = itemView.findViewById<LottieAnimationView>(R.id.imageTask)
     private val mConstraintLayout = itemView.findViewById<ConstraintLayout>(R.id.layoutContraintOne)
 
-    fun bindData(
-        taskEntity: TaskEntity,
-        listenner: OnTaskListFragmentInteractionListenner
-    ) {
+    fun bindData(taskEntity: TaskEntity, listenner: OnTaskListFragmentInteractionListenner) {
         mTextDescription.text = taskEntity.description
         mTextPriority.text = PriorityCacheConstants.getPriorityDescription(taskEntity.priorityId)
         mTextDueDate.text = taskEntity.dueDate
@@ -43,18 +43,31 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         /** Evento de competar a task */
         mImageView.setOnClickListener {
             if (taskEntity.complete) {
-                listenner.onUnCompleteTaskClick(taskEntity.id)
+                mImageView.setAnimation(R.raw.pedding)
+                Handler().postDelayed({
+                        listenner.onUnCompleteTaskClick(taskEntity.id)
+                        Toast.makeText(itemView.context, "A Tarefa ficou Pendente!", Toast.LENGTH_SHORT).show()
+                    }, 2500
+                )
             } else {
-                listenner.onCompleteTaskClick(taskEntity.id)
+                mImageView.setAnimation(R.raw.complete)
+                Handler().postDelayed({
+                        listenner.onCompleteTaskClick(taskEntity.id)
+                        Toast.makeText(itemView.context, "A Tarefa foi Completa!", Toast.LENGTH_SHORT).show()
+                    }, 2500
+                )
             }
+            mImageView.playAnimation()
         }
 
         /** Tratamento de tasks completas */
         if (taskEntity.complete) {
-            mImageView.setImageResource(R.drawable.sucess)
+            mImageView.setAnimation(R.raw.complete)
+            mImageView.playAnimation()
             mTextDescription.setTextColor(Color.GREEN)
         } else {
-            mImageView.setImageResource(R.drawable.pedding)
+            mImageView.setAnimation(R.raw.pedding)
+            mImageView.playAnimation()
         }
 
         /** Definindo cor da prioridade de acordo com sua prioridade */
@@ -67,10 +80,7 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     /** Dialog de confirmação de remoção de task*/
-    private fun showConfirmDialog(
-        taskEntity: TaskEntity,
-        listenner: OnTaskListFragmentInteractionListenner
-    ) {
+    private fun showConfirmDialog(taskEntity: TaskEntity, listenner: OnTaskListFragmentInteractionListenner) {
         AlertDialog.Builder(itemView.context)
             .setTitle(R.string.task_remove_confirm)
             .setMessage("${R.string.task_remove_message} ${taskEntity.description}?")
