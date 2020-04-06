@@ -8,10 +8,7 @@ import com.lucasprojects.mytask.entities.TaskEntity
 import com.lucasprojects.mytask.entities.listenner.OnTaskListFragmentInteractionListenner
 import com.lucasprojects.mytask.holder.TaskViewHolder
 
-class TaskListAdapter(
-    tasklist: List<TaskEntity>,
-    listener: OnTaskListFragmentInteractionListenner
-) : RecyclerView.Adapter<TaskViewHolder>() {
+class TaskListAdapter(tasklist: List<TaskEntity>, listener: OnTaskListFragmentInteractionListenner) : RecyclerView.Adapter<TaskViewHolder>() {
 
     private val mListTaskEntity: List<TaskEntity> = tasklist
     private val listener: OnTaskListFragmentInteractionListenner = listener

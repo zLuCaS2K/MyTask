@@ -3,16 +3,12 @@ package com.lucasprojects.mytask.holder
 import android.graphics.Color
 import android.os.Handler
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-<<<<<<< HEAD
-import com.google.android.material.card.MaterialCardView
-=======
 import com.airbnb.lottie.LottieAnimationView
->>>>>>> changes_icon
+import com.google.android.material.card.MaterialCardView
 import com.lucasprojects.mytask.R
 import com.lucasprojects.mytask.constants.TaskConstants
 import com.lucasprojects.mytask.entities.TaskEntity
@@ -24,13 +20,8 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val mTextDescription = itemView.findViewById<TextView>(R.id.textDescription)
     private val mTextPriority = itemView.findViewById<TextView>(R.id.textPriority)
     private val mTextDueDate = itemView.findViewById<TextView>(R.id.textDueDate)
-<<<<<<< HEAD
-    private val mImageView = itemView.findViewById<ImageView>(R.id.imageTask)
     private val mMaterialCardView = itemView.findViewById<MaterialCardView>(R.id.layoutCardView)
-=======
     private val mImageView = itemView.findViewById<LottieAnimationView>(R.id.imageTask)
-    private val mConstraintLayout = itemView.findViewById<ConstraintLayout>(R.id.layoutContraintOne)
->>>>>>> changes_icon
 
     fun bindData(taskEntity: TaskEntity, listenner: OnTaskListFragmentInteractionListenner) {
         mTextDescription.text = taskEntity.description
@@ -52,16 +43,26 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         mImageView.setOnClickListener {
             if (taskEntity.complete) {
                 mImageView.setAnimation(R.raw.pedding)
-                Handler().postDelayed({
+                Handler().postDelayed(
+                    {
                         listenner.onUnCompleteTaskClick(taskEntity.id)
-                        Toast.makeText(itemView.context, "A Tarefa ficou Pendente!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            itemView.context,
+                            "A Tarefa ficou Pendente!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }, 2500
                 )
             } else {
                 mImageView.setAnimation(R.raw.complete)
-                Handler().postDelayed({
+                Handler().postDelayed(
+                    {
                         listenner.onCompleteTaskClick(taskEntity.id)
-                        Toast.makeText(itemView.context, "A Tarefa foi Completa!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            itemView.context,
+                            "A Tarefa foi Completa!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }, 2500
                 )
             }
@@ -88,7 +89,10 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     /** Dialog de confirmação de remoção de task*/
-    private fun showConfirmDialog(taskEntity: TaskEntity, listenner: OnTaskListFragmentInteractionListenner) {
+    private fun showConfirmDialog(
+        taskEntity: TaskEntity,
+        listenner: OnTaskListFragmentInteractionListenner
+    ) {
         AlertDialog.Builder(itemView.context)
             .setTitle(R.string.task_remove_confirm)
             .setMessage("${itemView.context.resources.getString(R.string.task_remove_message)} ${taskEntity.description}?")
