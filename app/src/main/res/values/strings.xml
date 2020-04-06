@@ -1,8 +1,13 @@
 <resources>
+    <!-- Nome do Aplicativo -->
     <string name="app_name">My Task</string>
+    <!-- NavigationView -->
     <string name="tasks_done">Tarefas Completas</string>
     <string name="tasks_todo">Tarefas Pendentes</string>
+    <string name="tasks_invisible">Tarefas Ocultas</string>
+    <string name="about">Sobre</string>
     <string name="app_logout">Sair</string>
+
     <string name="enter">Entrar</string>
     <string name="register">Cadastrar-se</string>
     <string name="opening_descriptionOne">Bem Vindo(a) ao My Task</string>
@@ -36,11 +41,9 @@
     <string name="priority">Prioridade:</string>
     <string name="hello">Olá</string>
     <string name="name_error">"Insira apenas letras e números!"</string>
-    <string name="about">Sobre</string>
     <string name="text_dialog_about_one">Versão: 1.0</string>
     <string name="ok">OK</string>
     <string name="licences">Licenças</string>
-    <string name="tasks_invisible">Tarefas Ocultas</string>
     <string name="next">Avançar</string>
     <string name="skip_intro">Pular Intro</string>
 </resources>

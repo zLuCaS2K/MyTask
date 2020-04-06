@@ -1,15 +1,13 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Tema base do aplicativo -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPurpleDark</item>
         <item name="colorPrimaryDark">@color/colorPurpleDark</item>
         <item name="colorAccent">@color/colorPinkLight</item>
     </style>
 
     <style name="AppThemeScreens" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPurpleDark</item>
         <item name="colorPrimaryDark">@color/colorPurpleDark</item>
         <item name="colorAccent">@color/colorPinkLight</item>
@@ -62,7 +60,7 @@
         <item name="fontFamily">@font/lobster</item>
         <item name="textAllCaps">true</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textSize">50dp</item>
+        <item name="android:textSize">50sp</item>
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 

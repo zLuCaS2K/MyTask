@@ -6,7 +6,7 @@
     <color name="colorGray">#676767</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGreenLight">#32CD32</color>
-    <color name="colorPurpleDark">#7933A5</color>
     <color name="colorPinkLight">#D4489E</color>
     <color name="colorPinkMedium">#B53FA1</color>
+    <color name="colorPurpleDark">#7933A5</color>
 </resources>
