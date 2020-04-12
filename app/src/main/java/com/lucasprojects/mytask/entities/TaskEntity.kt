@@ -5,7 +5,8 @@ data class TaskEntity(
     val id: Int,
     val userId: Int,
     var priorityId: Int,
-    var description: String,
+    var name: String,
+    var text: String,
     var dueDate: String,
     var complete: Boolean = false
 )

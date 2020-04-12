@@ -42,8 +42,9 @@ class TaskRepository private constructor(context: Context) {
             // Colunas que serão retornadas
             val projection = arrayOf(
                 DataBaseConstants.TASK.COLUMNS.USERID
-                , DataBaseConstants.TASK.COLUMNS.DESCRIPTION
+                , DataBaseConstants.TASK.COLUMNS.NAME
                 , DataBaseConstants.TASK.COLUMNS.DUEDATE
+                , DataBaseConstants.TASK.COLUMNS.TEXT
                 , DataBaseConstants.TASK.COLUMNS.PRIORITYID
                 , DataBaseConstants.TASK.COLUMNS.COMPLETE
             )
@@ -67,19 +68,15 @@ class TaskRepository private constructor(context: Context) {
             if (cursor.count > 0) {
                 cursor.moveToFirst()
 
-                val userId =
-                    cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.USERID))
-                val description =
-                    cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.DESCRIPTION))
-                val dueDate =
-                    cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.DUEDATE))
-                val priorityId =
-                    cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.PRIORITYID))
-                val complete =
-                    (cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.COMPLETE)) == 1)
+                val userId = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.USERID))
+                val name = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.NAME))
+                val text = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.TEXT))
+                val dueDate = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.DUEDATE))
+                val priorityId = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.PRIORITYID))
+                val complete = (cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.COMPLETE)) == 1)
 
                 // Atribui valor a variável do usuário
-                taskEntity = TaskEntity(taskID, userId, priorityId, description, dueDate, complete)
+                taskEntity = TaskEntity(taskID, userId, priorityId, name, text, dueDate, complete)
             }
 
             // Fecha cursor
@@ -112,24 +109,16 @@ class TaskRepository private constructor(context: Context) {
             if (cursor.count > 0) {
                 while (cursor.moveToNext()) {
 
-                    val taskID =
-                        cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.ID))
-                    val usuId =
-                        cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.USERID))
-                    val description = cursor.getString(
-                        cursor.getColumnIndexOrThrow(
-                            DataBaseConstants.TASK.COLUMNS.DESCRIPTION
-                        )
-                    )
-                    val dueDate =
-                        cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.DUEDATE))
-                    val priorityId =
-                        cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.PRIORITYID))
-                    val complete =
-                        (cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.COMPLETE)) == 1)
+                    val taskID = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.ID))
+                    val usuId = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.USERID))
+                    val name = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.NAME))
+                    val text = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.TEXT))
+                    val dueDate = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.DUEDATE))
+                    val priorityId = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.PRIORITYID))
+                    val complete = (cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.COMPLETE)) == 1)
 
                     // Adiciona item a lista
-                    list.add(TaskEntity(taskID, usuId, priorityId, description, dueDate, complete))
+                    list.add(TaskEntity(taskID, usuId, priorityId, name, text, dueDate, complete))
                 }
             }
 
@@ -159,7 +148,8 @@ class TaskRepository private constructor(context: Context) {
             val insertValues = ContentValues()
             insertValues.put(DataBaseConstants.TASK.COLUMNS.USERID, task.userId)
             insertValues.put(DataBaseConstants.TASK.COLUMNS.PRIORITYID, task.priorityId)
-            insertValues.put(DataBaseConstants.TASK.COLUMNS.DESCRIPTION, task.description)
+            insertValues.put(DataBaseConstants.TASK.COLUMNS.NAME, task.name)
+            insertValues.put(DataBaseConstants.TASK.COLUMNS.TEXT, task.text)
             insertValues.put(DataBaseConstants.TASK.COLUMNS.DUEDATE, task.dueDate)
             insertValues.put(DataBaseConstants.TASK.COLUMNS.COMPLETE, complete)
 
@@ -185,7 +175,8 @@ class TaskRepository private constructor(context: Context) {
 
             val updateValues = ContentValues()
             updateValues.put(DataBaseConstants.TASK.COLUMNS.USERID, task.userId)
-            updateValues.put(DataBaseConstants.TASK.COLUMNS.DESCRIPTION, task.description)
+            updateValues.put(DataBaseConstants.TASK.COLUMNS.NAME, task.name)
+            updateValues.put(DataBaseConstants.TASK.COLUMNS.TEXT, task.text)
             updateValues.put(DataBaseConstants.TASK.COLUMNS.DUEDATE, task.dueDate)
             updateValues.put(DataBaseConstants.TASK.COLUMNS.PRIORITYID, task.priorityId)
             updateValues.put(DataBaseConstants.TASK.COLUMNS.COMPLETE, complete)

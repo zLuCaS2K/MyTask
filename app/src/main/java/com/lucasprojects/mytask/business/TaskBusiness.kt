@@ -31,7 +31,7 @@ class TaskBusiness(val context: Context) {
 
         try {
             /** Faz a validação dos campos */
-            if (task.description.isEmpty() || task.dueDate.isEmpty() || task.priorityId == 0) {
+            if (task.name.isEmpty() || task.text.isEmpty() ||task.dueDate.isEmpty() || task.priorityId == 0) {
                 throw ValidationException(context.getString(R.string.all_camps))
             }
 
@@ -47,7 +47,7 @@ class TaskBusiness(val context: Context) {
 
         try {
             /** Faz a validação dos campos */
-            if (task.description.isEmpty() || task.dueDate.isEmpty() || task.priorityId == 0) {
+            if (task.name.isEmpty() || task.text.isEmpty() || task.dueDate.isEmpty() || task.priorityId == 0) {
                 throw ValidationException(context.getString(R.string.all_camps))
             }
 

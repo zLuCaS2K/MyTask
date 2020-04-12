@@ -30,7 +30,8 @@ class DataBaseConstants {
         object COLUMNS {
             const val ID = "id"
             const val USERID = "userId"
-            const val DESCRIPTION = "description"
+            const val NAME = "name"
+            const val TEXT = "text"
             const val DUEDATE = "duedate"
             const val PRIORITYID = "priorityId"
             const val COMPLETE = "complete"

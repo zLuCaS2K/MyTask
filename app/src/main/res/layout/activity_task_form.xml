@@ -21,24 +21,41 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appName">
+        app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/editDescription"
+            android:id="@+id/editTaskName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="40dp"
             android:background="@drawable/model_editext_input"
-            android:hint="@string/task_description"
+            android:hint="@string/name_task"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorWhite"
             app:layout_constraintBottom_toTopOf="@id/checkboxComplete"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTaskText"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/model_editext_input_task"
+            android:hint="@string/task_description"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTaskName" />
 
         <Spinner
             android:id="@+id/spinnerPriority"
@@ -47,7 +64,8 @@
             android:layout_marginBottom="15dp"
             app:layout_constraintBottom_toTopOf="@id/btnPickerDate"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/checkboxComplete" />
+            app:layout_constraintStart_toEndOf="@id/checkboxComplete"
+            app:layout_constraintTop_toBottomOf="@+id/editTaskText" />
 
         <CheckBox
             android:id="@+id/checkboxComplete"
@@ -59,7 +77,8 @@
             android:text="@string/complete"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toTopOf="@id/btnPickerDate"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTaskText" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnPickerDate"

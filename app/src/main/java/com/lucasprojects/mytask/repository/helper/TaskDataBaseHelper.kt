@@ -44,7 +44,8 @@ class TaskDataBaseHelper(context: Context) :
                     + DataBaseConstants.TASK.COLUMNS.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + DataBaseConstants.TASK.COLUMNS.USERID + " INTEGER, "
                     + DataBaseConstants.TASK.COLUMNS.PRIORITYID + " INTEGER, "
-                    + DataBaseConstants.TASK.COLUMNS.DESCRIPTION + " TEXT, "
+                    + DataBaseConstants.TASK.COLUMNS.NAME + " TEXT, "
+                    + DataBaseConstants.TASK.COLUMNS.TEXT + " TEXT, "
                     + DataBaseConstants.TASK.COLUMNS.DUEDATE + " TEXT, "
                     + DataBaseConstants.TASK.COLUMNS.COMPLETE + " INTEGER);")
 

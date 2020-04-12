@@ -95,13 +95,14 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
 
         try {
             val userId: Int = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_ID).toInt()
-            val description: String = editDescription.text.toString()
+            val name: String = editTaskName.text.toString()
+            val text: String = editTaskText.text.toString()
             val priorityId = mPriorityEntityListId[spinnerPriority.selectedItemPosition]
             val dueDate: String = btnPickerDate.text.toString()
             val complete: Boolean = checkboxComplete.isChecked
 
             /** Inicializa entidade TaskEntity */
-            val task = TaskEntity(mTaskId, userId, priorityId, description, dueDate, complete)
+            val task = TaskEntity(mTaskId, userId, priorityId, name,text, dueDate, complete)
 
             /** Inserção de tarefa */
             if (mTaskId == 0) {
@@ -146,7 +147,8 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
                 val task = mTaskBusiness.get(mTaskId)
 
                 /** Atribui valores as propriedades */
-                editDescription.setText(task?.description)
+                editTaskName.setText(task?.name)
+                editTaskText.setText(task?.text)
                 btnPickerDate.text = task?.dueDate
                 if (task != null) {
                     checkboxComplete.isChecked = task.complete

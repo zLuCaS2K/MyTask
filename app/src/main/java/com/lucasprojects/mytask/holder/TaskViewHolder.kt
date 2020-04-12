@@ -17,14 +17,14 @@ import com.lucasprojects.mytask.repository.cache.PriorityCacheConstants
 
 class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val mTextDescription = itemView.findViewById<TextView>(R.id.textDescription)
+    private val mTextName = itemView.findViewById<TextView>(R.id.textDescription)
     private val mTextPriority = itemView.findViewById<TextView>(R.id.textPriority)
     private val mTextDueDate = itemView.findViewById<TextView>(R.id.textDueDate)
     private val mMaterialCardView = itemView.findViewById<MaterialCardView>(R.id.layoutCardView)
     private val mImageView = itemView.findViewById<LottieAnimationView>(R.id.imageTask)
 
     fun bindData(taskEntity: TaskEntity, listenner: OnTaskListFragmentInteractionListenner) {
-        mTextDescription.text = taskEntity.description
+        mTextName.text = taskEntity.name
         mTextPriority.text = PriorityCacheConstants.getPriorityDescription(taskEntity.priorityId)
         mTextDueDate.text = taskEntity.dueDate
 
@@ -73,7 +73,7 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         if (taskEntity.complete) {
             mImageView.setAnimation(R.raw.complete)
             mImageView.playAnimation()
-            mTextDescription.setTextColor(Color.GREEN)
+            mTextName.setTextColor(Color.GREEN)
         } else {
             mImageView.setAnimation(R.raw.pedding)
             mImageView.playAnimation()
@@ -95,7 +95,7 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     ) {
         AlertDialog.Builder(itemView.context)
             .setTitle(R.string.task_remove_confirm)
-            .setMessage("${itemView.context.resources.getString(R.string.task_remove_message)} ${taskEntity.description}?")
+            .setMessage("${itemView.context.resources.getString(R.string.task_remove_message)} ${taskEntity.name}?")
             .setPositiveButton(R.string.remove) { _, _ -> listenner.onDeleteClick(taskEntity.id) }
             .setNegativeButton(R.string.cancel, null).show()
     }

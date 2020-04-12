@@ -37,7 +37,7 @@
     <string name="remove_task_sucess">Tarefa Removida com Sucesso!</string>
     <string name="add_task_sucess">Tarefa Adicionada com Sucesso!</string>
     <string name="update_task_sucess">Tarefa Atualizada com Sucesso!</string>
-    <string name="update_task_button">Atualizar Tarefa!</string>
+    <string name="update_task_button">Atualizar Tarefa</string>
     <string name="priority">Prioridade:</string>
     <string name="hello">Olá</string>
     <string name="name_error">"Insira apenas letras e números!"</string>
@@ -46,4 +46,5 @@
     <string name="licences">Licenças</string>
     <string name="next">Avançar</string>
     <string name="skip_intro">Pular Intro</string>
+    <string name="name_task">Insira o Nome</string>
 </resources>
