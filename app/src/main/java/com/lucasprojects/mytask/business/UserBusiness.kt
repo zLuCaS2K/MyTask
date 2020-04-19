@@ -10,65 +10,37 @@ import com.lucasprojects.mytask.util.ValidationException
 
 class UserBusiness(val context: Context) {
 
-    /** Instância do UserRepository */
     private val mUserRepository: UserRepository = UserRepository.getInstance(context)
-    /** Instância do Shared Preferences */
     private val mSecurityPreferences: SecurityPreferences = SecurityPreferences(context)
-    /** MutableListOf de caracteres especiais para a validação de nome de usuário */
-    private val mMutableListOf = mutableListOf(
-        "!", "@", "#", "$", "%", "¨", "&", "(", ")", "|", ",", ".",
-        "<", ">", " "
-    )
+    private val mMutableListOf = mutableListOf("!", "@", "#", "$", "%", "¨", "&", "(", ")", "|", ",", ".", "<", ">", " ")
 
-    /**
-     * Responsável por verificar se usuário existe e se os dados estão corretos
-     * Caso exista, salva dos dados no SharedPreferences para uso posterior
-     * */
-
+    /** Faz o login do usuário e salva no SharedPreferences */
     fun login(email: String, password: String): Boolean {
-
         val user: UserEntity? = mUserRepository.get(email, password)
         return if (user != null) {
-
-            /** Salva os dados no SharedPreferences */
             mSecurityPreferences.setSharedStored(TaskConstants.KEY.USER_ID, user.id.toString())
             mSecurityPreferences.setSharedStored(TaskConstants.KEY.USER_NAME, user.name)
-
-            /** Retorna usuário válido */
             true
         } else {
             false
         }
     }
 
-    /**
-     * Salva o usuário no banco de dados e verifica se já existe
-     * Caso já exista, lança um erro de email já existente
-     * */
-
-    fun save(name: String,  password: String) {
+    /** Salva o usuário */
+    fun save(name: String, password: String) {
         try {
-            /** Verificando se os campos possuem dados */
             if (name.isEmpty() || password.isEmpty()) {
                 throw ValidationException(context.getString(R.string.all_camps))
             }
-
-            /** Verifica se email já existe no banco de dados */
             if (mUserRepository.isUserExistent(name)) {
                 throw ValidationException(context.getString(R.string.email_in_use))
             }
-
-            /** Verifica se o nome possuí algum caractere especial */
             for (letter in name) {
                 if (mMutableListOf.contains(letter.toString())) {
                     throw ValidationException(context.getString(R.string.name_error))
                 }
             }
-
-            /** Salva novo usuário, retornando o ID inserido */
             val userId = mUserRepository.insert(name, password)
-
-            /** Salva os dados no SharedPreferences */
             mSecurityPreferences.setSharedStored(TaskConstants.KEY.USER_ID, userId.toString())
             mSecurityPreferences.setSharedStored(TaskConstants.KEY.USER_NAME, name)
         } catch (e: Exception) {

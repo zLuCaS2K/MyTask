@@ -8,7 +8,6 @@ class DataBaseConstants {
         object COLUMNS {
             const val ID = "id"
             const val NAME = "name"
-            const val EMAIL = "email"
             const val PASSWORD = "password"
         }
 
@@ -21,7 +20,6 @@ class DataBaseConstants {
             const val ID = "id"
             const val DESCRIPTION = "description"
         }
-
     }
 
     object TASK {
@@ -36,6 +34,5 @@ class DataBaseConstants {
             const val PRIORITYID = "priorityId"
             const val COMPLETE = "complete"
         }
-
     }
 }

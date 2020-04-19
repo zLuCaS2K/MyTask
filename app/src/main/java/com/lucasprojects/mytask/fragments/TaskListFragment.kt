@@ -27,61 +27,29 @@ class TaskListFragment : Fragment(), View.OnClickListener {
     private lateinit var mOnTaskListFragmentInteractionListenner: OnTaskListFragmentInteractionListenner
     private lateinit var mRecyclerTaskList: RecyclerView
 
-    companion object {
-        fun newInstance(filter: Int): TaskListFragment {
-            /** Instãncia do Fragment */
-            val fragment = TaskListFragment()
-            /**Adicionando parâmetros */
-            val bundle = Bundle()
-            bundle.putInt(TaskConstants.TASKFILTER.FILTERKEY, filter)
-            fragment.arguments = bundle
-            /**Retorna o Fragment */
-            return fragment
-        }
-    }
-
-    /** Metodo de criação do Fragment */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /** Verificação de qual filtro foi passado para a listagem */
         if (arguments != null) {
             val bundle = arguments
-            mFilter = bundle!!.getInt(TaskConstants.TASKFILTER.FILTERKEY,0)
+            mFilter = bundle!!.getInt(TaskConstants.TASKFILTER.FILTERKEY, 0)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_task_list, container, false)
 
-        /** Inicialização das variáveis */
         mContext = rootView.context
         mTaskBusiness = TaskBusiness(mContext)
-
-        /**
-         * Buscando os elementos de interface através do findViewById. Por que o Kotlin-Extensions
-         * n ão funciona nesse contexto.
-         */
         rootView.findViewById<FloatingActionButton>(R.id.fabAddTask).setOnClickListener(this)
 
-        /** Inicialização do listener */
         createInteractionListener()
-
-        /** Passo 1 - Obter a RecyclerView */
         mRecyclerTaskList = rootView.findViewById(R.id.recyclerTaskList)
-
-        /** Passo 2 - Definindo o adapter passando listagem de itens */
-        val taskListAdapter =
-            TaskListAdapter(mutableListOf(), mOnTaskListFragmentInteractionListenner)
-        mRecyclerTaskList.adapter = taskListAdapter
-
-        /** Passo 3 - Definindo o layout do RecyclerView */
-        mRecyclerTaskList.layoutManager = LinearLayoutManager(mContext)
-
-        /** Retornando a View do Fragment */
+        val taskListAdapter = TaskListAdapter(mutableListOf(), mOnTaskListFragmentInteractionListenner)
+        with(mRecyclerTaskList) {
+            adapter = taskListAdapter
+            layoutManager = LinearLayoutManager(mContext)
+        }
         return rootView
     }
 
@@ -102,10 +70,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
 
     /** Carregamento de tarefas */
     private fun loadTasks() {
-        /** Carrega lista de tarefas */
         val listTaskEntity: MutableList<TaskEntity> = mTaskBusiness.getList(mFilter)
-
-        /** Inicializa o adapter com registros atualizados */
         mRecyclerTaskList.adapter = TaskListAdapter(listTaskEntity, mOnTaskListFragmentInteractionListenner)
     }
 
@@ -123,7 +88,8 @@ class TaskListFragment : Fragment(), View.OnClickListener {
 
             override fun onDeleteClick(taskId: Int) {
                 mTaskBusiness.delete(taskId)
-                Toast.makeText(mContext, getString(R.string.remove_task_sucess), Toast.LENGTH_LONG).show()
+                Toast.makeText(mContext, getString(R.string.remove_task_sucess), Toast.LENGTH_LONG)
+                    .show()
                 loadTasks()
             }
 

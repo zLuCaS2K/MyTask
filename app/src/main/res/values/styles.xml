@@ -7,18 +7,6 @@
         <item name="colorAccent">@color/colorPinkLight</item>
     </style>
 
-    <style name="AppThemeScreens" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPurpleDark</item>
-        <item name="colorPrimaryDark">@color/colorPurpleDark</item>
-        <item name="colorAccent">@color/colorPinkLight</item>
-    </style>
-
-    <style name="AppTheme.SplashScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPurpleDark</item>
-        <item name="colorPrimaryDark">@color/colorPurpleDark</item>
-        <item name="colorAccent">@color/colorWhite</item>
-    </style>
-
     <style name="EditTextLogin" parent="Widget.AppCompat.EditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>

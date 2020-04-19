@@ -13,29 +13,19 @@ class TaskBusiness(val context: Context) {
     private val mTaskRepository: TaskRepository = TaskRepository.getInstance(context)
     private val mSecurityPreferences: SecurityPreferences = SecurityPreferences(context)
 
-    /** Retorna entidade de task */
     fun get(id: Int): TaskEntity? = mTaskRepository.get(id)
 
-    /** Retorna lista de tarefas */
     fun getList(filter: Int): MutableList<TaskEntity> {
-
-        /** Obtém o ID do usuário */
         val userId: Int = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_ID).toInt()
-
-        /** Faz a listagem de tarefas com filtros */
         return mTaskRepository.getList(filter, userId)
     }
 
     /** Faz a inserção da tarefa */
     fun insert(task: TaskEntity) {
-
         try {
-            /** Faz a validação dos campos */
-            if (task.name.isEmpty() || task.text.isEmpty() ||task.dueDate.isEmpty() || task.priorityId == 0) {
+            if (task.name.isEmpty() || task.text.isEmpty() || task.dueDate.isEmpty() || task.priorityId == 0) {
                 throw ValidationException(context.getString(R.string.all_camps))
             }
-
-            /** Faz a inserção da tarefa */
             mTaskRepository.insert(task)
         } catch (e: Exception) {
             throw e
@@ -44,14 +34,10 @@ class TaskBusiness(val context: Context) {
 
     /** Faz a atualização da task */
     fun update(task: TaskEntity) {
-
         try {
-            /** Faz a validação dos campos */
             if (task.name.isEmpty() || task.text.isEmpty() || task.dueDate.isEmpty() || task.priorityId == 0) {
                 throw ValidationException(context.getString(R.string.all_camps))
             }
-
-            /** Faz a atualização da tarefa */
             mTaskRepository.update(task)
         } catch (e: Exception) {
             throw e

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lucasprojects.mytask">
 
@@ -11,18 +12,10 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.SlideActivity" />
         <activity android:name=".activities.TaskFormActivity" />
-        <activity
-            android:name=".activities.OpeningActivity"
-            android:theme="@style/AppThemeScreens" />
-        <activity
-            android:name=".activities.RegisterActivity"
-            android:theme="@style/AppThemeScreens" />
-        <activity
-            android:name=".activities.LoginActivity"
-            android:theme="@style/AppThemeScreens" />
-        <activity
-            android:name=".activities.SplashActivity"
-            android:theme="@style/AppTheme.SplashScreen">
+        <activity android:name=".activities.OpeningActivity" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

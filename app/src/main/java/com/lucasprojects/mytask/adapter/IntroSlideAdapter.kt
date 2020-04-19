@@ -26,15 +26,10 @@ class IntroSlideAdapter(private val listIntroSlide: List<IntroSlide>) : Recycler
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IntroSlideViewHolder {
-        return IntroSlideViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.slide_item_container, parent, false)
-        )
+        return IntroSlideViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.slide_item_container, parent, false))
     }
 
-    override fun getItemCount(): Int {
-        return listIntroSlide.size
-    }
+    override fun getItemCount() = listIntroSlide.size
 
     override fun onBindViewHolder(holder: IntroSlideViewHolder, position: Int) {
         holder.bindData(listIntroSlide[position])

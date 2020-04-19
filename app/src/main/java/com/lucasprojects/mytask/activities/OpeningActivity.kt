@@ -9,19 +9,13 @@ import com.lucasprojects.mytask.constants.TaskConstants
 import com.lucasprojects.mytask.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_opening.*
 
-/**
- * A OpeningActivity é a activity mais simples, sua única função é possibilitar que o usuário, vá
- * para a LoginActivity ou RegisterActiviry, dependendo se tiver alguma usuário logado no app.
- * */
-
 class OpeningActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_opening)
-        /** Definindo os listenners do itens */
+
         setListeners()
-        /** Verifica se tem usuário com sessão ativa */
         verifyLoggedUser()
     }
 

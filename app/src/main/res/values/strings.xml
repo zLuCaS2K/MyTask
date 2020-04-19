@@ -7,22 +7,14 @@
     <string name="tasks_invisible">Tarefas Ocultas</string>
     <string name="about">Sobre</string>
     <string name="app_logout">Sair</string>
-
     <string name="enter">Entrar</string>
     <string name="register">Cadastrar-se</string>
     <string name="opening_descriptionOne">Bem Vindo(a) ao My Task</string>
     <string name="opening_descriptionTwo">Melhore sua produtividade como você nunca viu, seja no trabalho ou nas tarefas em casa.</string>
-    <string name="email">Email</string>
     <string name="password">Senha</string>
     <string name="login_slogan">Faça Login em sua Conta</string>
     <string name="register_slogan">Cadastre-se sua Conta</string>
     <string name="user">Usuário</string>
-    <string name="slide_welcome">Bem-Vindo(a) ao My Task</string>
-    <string name="slide_welcomeTwo">Melhore sua Produtividade</string>
-    <string name="slide_welcomeThree">Interface Atraente</string>
-    <string name="slide_welcome_descriptionOne">O My Task está aqui, para auxiliar sua vida, agende sua tarefas, defina datas e prioridades!</string>
-    <string name="slide_welcome_descriptionTwo">Com o uso do My Task sua produtividade ira alcançar nivéis altissímos!</string>
-    <string name="slide_welcome_descriptionThree">Com uma interface atraente e fluída o My Task ira auxiliar você no seu dia-a-dia!</string>
     <string name="task_description">Insira a Tarefa</string>
     <string name="save_task">Salvar Tarefa</string>
     <string name="select_date">Selecionar Data</string>
@@ -39,12 +31,17 @@
     <string name="update_task_sucess">Tarefa Atualizada com Sucesso!</string>
     <string name="update_task_button">Atualizar Tarefa</string>
     <string name="priority">Prioridade:</string>
-    <string name="hello">Olá</string>
     <string name="name_error">"Insira apenas letras e números!"</string>
     <string name="text_dialog_about_one">Versão: 1.0</string>
-    <string name="ok">OK</string>
-    <string name="licences">Licenças</string>
     <string name="next">Avançar</string>
     <string name="skip_intro">Pular Intro</string>
     <string name="name_task">Insira o Nome</string>
+
+    <!-- Slides de Apresentação -->
+    <string name="welcome">Bem-Vindo(a)</string>
+    <string name="welcome_text">O MyTask é um agendador de tarefas totalmente de código aberto, você pode modificá-lo quanto quiser!</string>
+    <string name="task_scheduler">Agendamento de Tarefas</string>
+    <string name="task_scheduler_text">O agendamento ainda está em processo de desenvolvimento, por enquanto o app está somente anotando!</string>
+    <string name="license_code">Licenças de Código</string>
+    <string name="license_code_text">Todos os ícones, animações, imagens, APIs e bibliotecas usadas, podem ser encontradas na barra de navegação, no item Sobre!</string>
 </resources>

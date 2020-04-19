@@ -10,22 +10,15 @@ import com.lucasprojects.mytask.business.UserBusiness
 import com.lucasprojects.mytask.util.ValidationException
 import kotlinx.android.synthetic.main.activity_register.*
 
-/**
- * A RegisterActivity é a activity responsável por efetuar o cadastro de um usuário, para essa
- * acitvity ser chamada todos os usuários precisam ter encerrados suas devidas sessões
- * */
-
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
-    /** Váriaveis da Camada Business */
     private lateinit var mUserBusiness: UserBusiness
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        /** Instancia da Classe Business */
+
         mUserBusiness = UserBusiness(this)
-        /** Definindo os listenners do itens */
         setListenner()
     }
 

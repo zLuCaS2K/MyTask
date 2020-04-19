@@ -15,60 +15,46 @@ import com.lucasprojects.mytask.repository.cache.PriorityCacheConstants
 import com.lucasprojects.mytask.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_main.*
 
-/**
- * A MainActivity principal do app, ela é reponsável pela navegação, e é onde o carregamento das
- * PriorityCache irá ser feito.
- * */
-
 class MainActivity : AppCompatActivity() {
 
-    /** Váriaveis da Camada Business */
     private lateinit var mPriorityBusiness: PriorityBusiness
-
-    /** Váriaveis do SharedPreferences */
     private lateinit var mSecurityPreferences: SecurityPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        /** Instancia da Classe Business */
+
         mPriorityBusiness = PriorityBusiness(this)
-        /** Instancia da Classe Security Preferences */
         mSecurityPreferences = SecurityPreferences(this)
-        /** Inicializa o Cache de Priority */
         loadCachePriority()
-        /** Abrir NavigationDrawer */
+
         imageMenuOne.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
-        /** Evento de logout do app pela ToolBar */
+
         imageMenuTwo.setOnClickListener {
             handleLogout()
         }
-        /** Evento de logout do app pela Navigation View*/
+
         val itemLogout = navigationView.menu.findItem(R.id.nav_Logout)
         itemLogout.setOnMenuItemClickListener {
             handleLogout()
             true
         }
-        /** Evento de exibir o dialog de sobre o aplicativo */
+
         val itemAbout = navigationView.menu.findItem(R.id.nav_About)
         itemAbout.setOnMenuItemClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
             Toast.makeText(this, "Em Desenvolvimento!", Toast.LENGTH_SHORT).show()
             true
         }
-        /** Definindo texto da Header da NavigationView */
+
         setDateUserHeader()
-        /** Definindo texto da Title da Toolbar */
         setDateUserTitle()
-        /** Removendo a cor default da NavigationDrawer */
+
         navigationView.itemIconTintList = null
-        /** Localizando o NavController */
         val navController = Navigation.findNavController(this, R.id.navHostFragment)
-        /** Configurando a navegação do app */
         NavigationUI.setupWithNavController(navigationView, navController)
-        /** Execução com a navegação baseada no destino */
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.nav_Done -> titleListTask.text = getString(R.string.tasks_done)
@@ -98,17 +84,13 @@ class MainActivity : AppCompatActivity() {
 
     /** Metodo responsável por definir o texto da Header da NavigationView com os dados do usuário */
     private fun setDateUserHeader() {
-        /** Obtendo o HeaderView */
         val headerView = navigationView.getHeaderView(0)
-        /** Recuperando views do Header da NavigationView */
         val textUserName = headerView.findViewById<TextView>(R.id.textUserName)
-        /** Definindo o texto com os dados do usuário logado */
         textUserName.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_NAME)
     }
 
     /** Metodo responsável por definir o texto da toolbar com o nome do usuário logado */
     private fun setDateUserTitle() {
-        /** Definindo o texto com os dados do usuário logado */
         textTitle.text = mSecurityPreferences.getSharedStored(TaskConstants.KEY.USER_NAME)
     }
 }

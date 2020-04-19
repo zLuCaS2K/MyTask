@@ -9,22 +9,15 @@ import com.lucasprojects.mytask.R
 import com.lucasprojects.mytask.business.UserBusiness
 import kotlinx.android.synthetic.main.activity_login.*
 
-/**
- * A LoginActivity é a activity responsável por efetuar o login de um usuário, essa tela só será,
- * chamada caso não possua usuários no cadastrados app ou se o usuário encerrar a sessão.
- * */
-
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
-    /** Váriaveis da Camada Business */
     private lateinit var mUserBusiness: UserBusiness
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        /** Instancia da Classe Business */
+
         mUserBusiness = UserBusiness(this)
-        /** Definindo os listenners do itens */
         setListenner()
     }
 

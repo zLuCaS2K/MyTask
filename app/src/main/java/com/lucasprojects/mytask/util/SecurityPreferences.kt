@@ -6,8 +6,7 @@ import android.content.SharedPreferences
 class SecurityPreferences(context: Context) {
 
     /** Implementação do SharedPreferences */
-    private val mSecurityPreferences: SharedPreferences =
-        context.getSharedPreferences("Tasks", Context.MODE_PRIVATE)
+    private val mSecurityPreferences: SharedPreferences = context.getSharedPreferences("Tasks", Context.MODE_PRIVATE)
 
     /** Salvando no SharedPreferences */
     fun setSharedStored(key: String, value: String) {
