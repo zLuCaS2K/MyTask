@@ -31,12 +31,14 @@
         android:orientation="horizontal"
         android:padding="5dp">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/bottomLottieAnimation"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="10dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/done"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/task"
             app:riv_corner_radius="10dp" />
 
         <LinearLayout

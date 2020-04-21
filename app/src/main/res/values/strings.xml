@@ -44,7 +44,13 @@
     <string name="task_scheduler_text">O agendamento ainda está em processo de desenvolvimento, por enquanto o app está somente anotando!</string>
     <string name="license_code">Licenças de Código</string>
     <string name="license_code_text">Todos os ícones, animações, imagens, APIs e bibliotecas usadas, podem ser encontradas na barra de navegação, no item Sobre!</string>
+
+    <!-- BottomSheetDialog -->
     <string name="edit_task">Editar Tarefa</string>
     <string name="delete_task">Excluir Tarefa</string>
     <string name="close">Fechar</string>
+
+    <!-- Toast Adapter -->
+    <string name="task_todo_toast">A Tarefa ficou Pendente!</string>
+    <string name="task_done_toast">A Tarefa foi Completa!</string>
 </resources>

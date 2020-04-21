@@ -31,10 +31,13 @@ class TaskListAdapter(private val tasklist: List<TaskEntity>, private val listen
         private val mImageView = itemView.findViewById(R.id.imageTask) as LottieAnimationView
 
         fun bindData(taskEntity: TaskEntity, listenner: OnTaskListFragmentInteractionListenner) {
-            mTextName.text = taskEntity.name
-            mTextPriority.text = PriorityCacheConstants.getPriorityDescription(taskEntity.priorityId)
-            mTextDueDate.text = taskEntity.dueDate
-
+            
+            with(taskEntity){
+                mTextName.text = this.name
+                mTextPriority.text = PriorityCacheConstants.getPriorityDescription(this.priorityId)
+                mTextDueDate.text = this.dueDate
+            }
+            
             /** Evento de click para cada task */
             mMaterialCardView.setOnClickListener {
                 listenner.onListClick(taskEntity.id)
@@ -52,13 +55,13 @@ class TaskListAdapter(private val tasklist: List<TaskEntity>, private val listen
                     mImageView.setAnimation(R.raw.pedding)
                     Handler().postDelayed({
                         listenner.onUnCompleteTaskClick(taskEntity.id)
-                        Toast.makeText(itemView.context, "A Tarefa ficou Pendente!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(itemView.context, itemView.context.getString(R.string.task_todo_toast), Toast.LENGTH_SHORT).show()
                     }, 2500)
                 } else {
                     mImageView.setAnimation(R.raw.complete)
                     Handler().postDelayed({
                         listenner.onCompleteTaskClick(taskEntity.id)
-                        Toast.makeText(itemView.context, "A Tarefa foi Completa!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(itemView.context, itemView.context.getString(R.string.task_done_toast), Toast.LENGTH_SHORT).show()
                     }, 2500)
                 }
                 mImageView.playAnimation()
@@ -80,6 +83,7 @@ class TaskListAdapter(private val tasklist: List<TaskEntity>, private val listen
         private fun showBottomSheetDialog(taskEntity: TaskEntity, listener: OnTaskListFragmentInteractionListenner) {
             val bottomSheetDialog = BottomSheetDialog(itemView.context, R.style.BottomSheetDialogTheme)
             val bottomSheetView = LayoutInflater.from(itemView.context).inflate(R.layout.layout_bottom_sheet, bottomSheetDialog.findViewById(R.id.bottomSheetContainer))
+            val bottomLottieAnimation = bottomSheetView.findViewById(R.id.bottomLottieAnimation) as LottieAnimationView
             val bottomNameTask = bottomSheetView.findViewById(R.id.bottomNameTask) as TextView
             val bottomDueDateTask = bottomSheetView.findViewById(R.id.bottomDueDateTask) as TextView
             val bottomPriorityTask = bottomSheetView.findViewById(R.id.bottomPriorityTask) as TextView
@@ -90,10 +94,11 @@ class TaskListAdapter(private val tasklist: List<TaskEntity>, private val listen
             with(taskEntity) {
                 bottomNameTask.text = this.name
                 bottomDueDateTask.text = this.dueDate
-                bottomPriorityTask.text = PriorityCacheConstants.getPriorityDescription(taskEntity.priorityId)
+                bottomPriorityTask.text = PriorityCacheConstants.getPriorityDescription(this.priorityId)
             }
 
             defineColorPriority(bottomPriorityTask)
+            bottomLottieAnimation.playAnimation()
 
             containerEditTask.setOnClickListener {
                 listener.onListClick(taskEntity.id)
