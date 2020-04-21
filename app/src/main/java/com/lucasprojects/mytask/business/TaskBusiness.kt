@@ -23,8 +23,11 @@ class TaskBusiness(val context: Context) {
     /** Faz a inserção da tarefa */
     fun insert(task: TaskEntity) {
         try {
-            if (task.name.isEmpty() || task.text.isEmpty() || task.dueDate.isEmpty() || task.dueDate == context.getString(R.string.select_date)) {
+            if (task.name.isEmpty() || task.text.isEmpty() || task.dueDate == context.getString(R.string.select_date)) {
                 throw ValidationException(context.getString(R.string.all_camps))
+            }
+            if (task.name.count() > 30) {
+                throw ValidationException(context.getString(R.string.number_characters))
             }
             mTaskRepository.insert(task)
         } catch (e: Exception) {
@@ -35,8 +38,11 @@ class TaskBusiness(val context: Context) {
     /** Faz a atualização da task */
     fun update(task: TaskEntity) {
         try {
-            if (task.name.isEmpty() || task.text.isEmpty() || task.dueDate.isEmpty() || task.priorityId == 0) {
+            if (task.name.isEmpty() || task.text.isEmpty() || task.dueDate == context.getString(R.string.select_date)) {
                 throw ValidationException(context.getString(R.string.all_camps))
+            }
+            if (task.name.count() > 30) {
+                throw ValidationException(context.getString(R.string.number_characters))
             }
             mTaskRepository.update(task)
         } catch (e: Exception) {

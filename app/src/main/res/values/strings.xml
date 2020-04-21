@@ -53,4 +53,5 @@
     <!-- Toast Adapter -->
     <string name="task_todo_toast">A Tarefa ficou Pendente!</string>
     <string name="task_done_toast">A Tarefa foi Completa!</string>
+    <string name="number_characters">Insira um Nome Abaixo de 30 Caracteres!</string>
 </resources>
