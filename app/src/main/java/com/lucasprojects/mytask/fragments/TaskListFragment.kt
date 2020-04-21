@@ -125,6 +125,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         val bottomPriorityTask = bottomSheetView.findViewById(R.id.bottomPriorityTask) as TextView
         val containerEditTask = bottomSheetView.findViewById(R.id.containerEditTask) as LinearLayout
         val containerDeleteTask = bottomSheetView.findViewById(R.id.containerDeleteTask) as LinearLayout
+        val containerCompleteTask = bottomSheetView.findViewById(R.id.containerCompleteTask) as LinearLayout
         val btnCloseBottom = bottomSheetView.findViewById(R.id.btnCloseBottom) as Button
 
         with(taskEntity) {
@@ -144,6 +145,10 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         containerDeleteTask.setOnClickListener {
             showConfirmDialog(taskEntity, listener)
             bottomSheetDialog.dismiss()
+        }
+
+        containerCompleteTask.setOnClickListener {
+
         }
 
         btnCloseBottom.setOnClickListener {

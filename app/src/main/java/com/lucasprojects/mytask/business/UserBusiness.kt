@@ -15,8 +15,8 @@ class UserBusiness(val context: Context) {
     private val mMutableListOf = mutableListOf("!", "@", "#", "$", "%", "¨", "&", "(", ")", "|", ",", ".", "<", ">", " ")
 
     /** Faz o login do usuário e salva no SharedPreferences */
-    fun login(email: String, password: String): Boolean {
-        val user: UserEntity? = mUserRepository.get(email, password)
+    fun login(name: String, password: String): Boolean {
+        val user: UserEntity? = mUserRepository.get(name, password)
         return if (user != null) {
             mSecurityPreferences.setSharedStored(TaskConstants.KEY.USER_ID, user.id.toString())
             mSecurityPreferences.setSharedStored(TaskConstants.KEY.USER_NAME, user.name)

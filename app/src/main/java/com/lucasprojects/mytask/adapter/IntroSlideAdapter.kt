@@ -18,12 +18,10 @@ class IntroSlideAdapter(private val listIntroSlide: List<IntroSlide>) : Recycler
         private val imageIcon = view.findViewById(R.id.imageSlideIcon) as LottieAnimationView
 
         fun bindData(introSlide: IntroSlide) {
-            with(introSlide){
-                textTitle.text = this.title
-                textDescription.text = this.description
-                imageIcon.setAnimation(this.icon)
+                textTitle.text = introSlide.title
+                textDescription.text = introSlide.description
+                imageIcon.setAnimation(introSlide.icon)
                 imageIcon.playAnimation()
-            }
         }
     }
 
