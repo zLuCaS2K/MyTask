@@ -102,10 +102,12 @@ class TaskListAdapter(private val tasklist: List<TaskEntity>, private val listen
 
             containerEditTask.setOnClickListener {
                 listener.onListClick(taskEntity.id)
+                bottomSheetDialog.dismiss()
             }
 
             containerDeleteTask.setOnClickListener {
                 showConfirmDialog(taskEntity, listener)
+                bottomSheetDialog.dismiss()
             }
 
             btnCloseBottom.setOnClickListener {
