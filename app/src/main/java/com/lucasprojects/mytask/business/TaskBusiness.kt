@@ -23,7 +23,7 @@ class TaskBusiness(val context: Context) {
     /** Faz a inserção da tarefa */
     fun insert(task: TaskEntity) {
         try {
-            if (task.name.isEmpty() || task.text.isEmpty() || task.dueDate.isEmpty() || task.priorityId == 0) {
+            if (task.name.isEmpty() || task.text.isEmpty() || task.dueDate.isEmpty() || task.dueDate == context.getString(R.string.select_date)) {
                 throw ValidationException(context.getString(R.string.all_camps))
             }
             mTaskRepository.insert(task)
