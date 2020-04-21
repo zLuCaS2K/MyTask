@@ -88,8 +88,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
 
             override fun onDeleteClick(taskId: Int) {
                 mTaskBusiness.delete(taskId)
-                Toast.makeText(mContext, getString(R.string.remove_task_sucess), Toast.LENGTH_LONG)
-                    .show()
+                Toast.makeText(mContext, getString(R.string.remove_task_sucess), Toast.LENGTH_LONG).show()
                 loadTasks()
             }
 
