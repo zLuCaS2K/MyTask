@@ -1,5 +1,7 @@
 package com.lucasprojects.mytask.entities.listenner
 
+import com.lucasprojects.mytask.entities.TaskEntity
+
 interface OnTaskListFragmentInteractionListenner {
 
     fun onListClick(taskId: Int)
@@ -9,4 +11,6 @@ interface OnTaskListFragmentInteractionListenner {
     fun onCompleteTaskClick(taskId: Int)
 
     fun onUnCompleteTaskClick(taskId: Int)
+
+    fun onShowBottomSheetDialog(taskEntity: TaskEntity)
 }
