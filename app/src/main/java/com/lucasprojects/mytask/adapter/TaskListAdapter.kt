@@ -1,14 +1,11 @@
 package com.lucasprojects.mytask.adapter
 
 import android.graphics.Color
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.card.MaterialCardView
 import com.lucasprojects.mytask.R
 import com.lucasprojects.mytask.entities.TaskEntity
@@ -24,7 +21,6 @@ class TaskListAdapter(private val tasklist: List<TaskEntity>, private val listen
         private val mTextPriority = itemView.findViewById(R.id.textPriority) as TextView
         private val mTextDueDate = itemView.findViewById(R.id.textDueDate) as TextView
         private val mMaterialCardView = itemView.findViewById(R.id.layoutCardView) as MaterialCardView
-        private val mImageView = itemView.findViewById(R.id.imageTask) as LottieAnimationView
 
         fun bindData(taskEntity: TaskEntity, listenner: OnTaskListFragmentInteractionListenner) {
             
@@ -45,32 +41,9 @@ class TaskListAdapter(private val tasklist: List<TaskEntity>, private val listen
                 true
             }
 
-            /** Evento de competar a task */
-            mImageView.setOnClickListener {
-                if (taskEntity.complete) {
-                    mImageView.setAnimation(R.raw.pedding)
-                    Handler().postDelayed({
-                        listenner.onUnCompleteTaskClick(taskEntity.id)
-                        Toast.makeText(itemView.context, itemView.context.getString(R.string.task_todo_toast), Toast.LENGTH_SHORT).show()
-                    }, 2500)
-                } else {
-                    mImageView.setAnimation(R.raw.complete)
-                    Handler().postDelayed({
-                        listenner.onCompleteTaskClick(taskEntity.id)
-                        Toast.makeText(itemView.context, itemView.context.getString(R.string.task_done_toast), Toast.LENGTH_SHORT).show()
-                    }, 2500)
-                }
-                mImageView.playAnimation()
-            }
-
             /** Tratamento de tasks completas */
             if (taskEntity.complete) {
-                mImageView.setAnimation(R.raw.complete)
-                mImageView.playAnimation()
                 mTextName.setTextColor(Color.GREEN)
-            } else {
-                mImageView.setAnimation(R.raw.pedding)
-                mImageView.playAnimation()
             }
 
             Utils.setColorPriority(mTextPriority)

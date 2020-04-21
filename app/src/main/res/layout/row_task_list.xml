@@ -2,6 +2,7 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp">
 
@@ -20,35 +21,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/imageTask"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                app:layout_constraintBottom_toTopOf="@id/guidelineOne"
-                app:layout_constraintEnd_toStartOf="@id/guidelineTwo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lottie_loop="false" />
-
             <TextView
                 android:id="@+id/textDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Acordar muito Cedro"
-                android:textSize="16sp"
-                android:textStyle="italic"
+                android:fontFamily="@font/roboto"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@id/guidelineOne"
-                app:layout_constraintEnd_toStartOf="@id/guidelineThree"
-                app:layout_constraintStart_toEndOf="@id/guidelineTwo"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Acordar muito Tarde" />
 
             <TextView
                 android:id="@+id/textPriorityView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:fontFamily="@font/roboto"
                 android:text="@string/priority"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/guidelineOne" />
@@ -58,21 +49,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="Alta"
+                android:fontFamily="@font/roboto"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textPriorityView"
-                app:layout_constraintTop_toBottomOf="@id/guidelineOne" />
+                app:layout_constraintTop_toBottomOf="@id/guidelineOne"
+                tools:text="Alta" />
 
             <TextView
                 android:id="@+id/textDueDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:text="17/08/2000"
-                android:textStyle="bold"
+                android:fontFamily="@font/roboto"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/guidelineOne" />
+                app:layout_constraintTop_toBottomOf="@+id/guidelineOne"
+                tools:text="17/08/2000" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineOne"
@@ -80,20 +72,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.7" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guidelineTwo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.2" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guidelineThree"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.8" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
