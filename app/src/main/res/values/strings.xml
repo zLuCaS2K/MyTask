@@ -60,4 +60,9 @@
     <!-- ContentDescription-->
     <string name="open_navigation">Abrir Barra de Navegação!</string>
     <string name="exit_acc">Sair da Conta!</string>
+
+    <!-- About Screen -->
+    <string name="developer">Desenvolvedor</string>
+    <string name="code">Código Fonte</string>
+    <string name="version">Versão Beta</string>
 </resources>
