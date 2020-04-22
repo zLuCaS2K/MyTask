@@ -15,6 +15,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.lucasprojects.mytask.R
+import com.lucasprojects.mytask.activities.TaskDetailsActivity
 import com.lucasprojects.mytask.activities.TaskFormActivity
 import com.lucasprojects.mytask.adapter.TaskListAdapter
 import com.lucasprojects.mytask.business.TaskBusiness
@@ -84,7 +85,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
                 val bundle = Bundle()
                 bundle.putInt(TaskConstants.BUNDLE.TASKID, taskId)
 
-                val intent = Intent(mContext, TaskFormActivity::class.java)
+                val intent = Intent(mContext, TaskDetailsActivity::class.java)
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
@@ -93,6 +94,15 @@ class TaskListFragment : Fragment(), View.OnClickListener {
                 mTaskBusiness.delete(taskId)
                 Toast.makeText(mContext, getString(R.string.remove_task_sucess), Toast.LENGTH_LONG).show()
                 loadTasks()
+            }
+
+            override fun onEditClick(taskId: Int) {
+                val bundle = Bundle()
+                bundle.putInt(TaskConstants.BUNDLE.TASKID, taskId)
+
+                val intent = Intent(mContext, TaskFormActivity::class.java)
+                intent.putExtras(bundle)
+                startActivity(intent)
             }
 
             override fun onCompleteTaskClick(taskId: Int) {
@@ -140,7 +150,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         bottomLottieAnimation.playAnimation()
 
         containerEditTask.setOnClickListener {
-            listener.onListClick(taskEntity.id)
+            listener.onEditClick(taskEntity.id)
             bottomSheetDialog.dismiss()
         }
 

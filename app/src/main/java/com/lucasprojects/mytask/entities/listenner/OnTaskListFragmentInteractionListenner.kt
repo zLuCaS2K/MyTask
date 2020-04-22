@@ -8,6 +8,8 @@ interface OnTaskListFragmentInteractionListenner {
 
     fun onDeleteClick(taskId: Int)
 
+    fun onEditClick(taskId: Int)
+
     fun onCompleteTaskClick(taskId: Int)
 
     fun onUnCompleteTaskClick(taskId: Int)
