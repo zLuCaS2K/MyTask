@@ -49,6 +49,7 @@
     <string name="edit_task">Editar Tarefa</string>
     <string name="delete_task">Excluir Tarefa</string>
     <string name="complete_task">Concluir Tarefa</string>
+    <string name="uncomplete_task">Pendente Tarefa</string>
     <string name="close">Fechar</string>
 
     <!-- Toast Adapter -->

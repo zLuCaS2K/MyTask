@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,11 +43,9 @@ class TaskListFragment : Fragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_task_list, container, false)
-
         mContext = rootView.context
         mTaskBusiness = TaskBusiness(mContext)
         rootView.findViewById<FloatingActionButton>(R.id.fabAddTask).setOnClickListener(this)
-
         createInteractionListener()
         mRecyclerTaskList = rootView.findViewById(R.id.recyclerTaskList)
         val taskListAdapter = TaskListAdapter(mutableListOf(), mOnTaskListFragmentInteractionListenner)
@@ -126,6 +121,8 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         val containerEditTask = bottomSheetView.findViewById(R.id.containerEditTask) as LinearLayout
         val containerDeleteTask = bottomSheetView.findViewById(R.id.containerDeleteTask) as LinearLayout
         val containerCompleteTask = bottomSheetView.findViewById(R.id.containerCompleteTask) as LinearLayout
+        val textCompleteTask = bottomSheetView.findViewById(R.id.textCompleteTask) as TextView
+        val imageCompleteTask = bottomSheetView.findViewById(R.id.imageCompleteTask) as ImageView
         val btnCloseBottom = bottomSheetView.findViewById(R.id.btnCloseBottom) as Button
 
         with(taskEntity) {
@@ -134,7 +131,12 @@ class TaskListFragment : Fragment(), View.OnClickListener {
             bottomPriorityTask.text = PriorityCacheConstants.getPriorityDescription(this.priorityId)
         }
 
-        Utils.setColorPriority(bottomPriorityTask)
+        if (taskEntity.complete) {
+            textCompleteTask.text = mContext.getString(R.string.uncomplete_task)
+            imageCompleteTask.setImageResource(R.drawable.ic_pedding)
+        }
+
+        Utils.setColorPriority(bottomPriorityTask, mContext)
         bottomLottieAnimation.playAnimation()
 
         containerEditTask.setOnClickListener {
@@ -148,7 +150,13 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         }
 
         containerCompleteTask.setOnClickListener {
-
+            if (taskEntity.complete) {
+                listener.onUnCompleteTaskClick(taskEntity.id)
+            } else {
+                listener.onCompleteTaskClick(taskEntity.id)
+            }
+            Utils.showToastTask(mContext, taskEntity.complete)
+            bottomSheetDialog.dismiss()
         }
 
         btnCloseBottom.setOnClickListener {

@@ -1,10 +1,10 @@
 package com.lucasprojects.mytask.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.lucasprojects.mytask.R
@@ -43,10 +43,9 @@ class TaskListAdapter(private val tasklist: List<TaskEntity>, private val listen
 
             /** Tratamento de tasks completas */
             if (taskEntity.complete) {
-                mTextName.setTextColor(Color.GREEN)
+                mTextName.setTextColor(ContextCompat.getColor(itemView.context, R.color.colorTaskDone))
             }
-
-            Utils.setColorPriority(mTextPriority)
+            Utils.setColorPriority(mTextPriority, itemView.context)
         }
     }
 

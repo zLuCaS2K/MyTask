@@ -8,4 +8,11 @@
     <color name="colorPinkMedium">#B53FA1</color>
     <color name="colorPurpleDark">#7933A5</color>
     <color name="colorGrayLight">#38FFFFFF</color>
+
+    <!-- Material Design Colors -->
+    <color name="colorTaskDone">#43A047</color>
+    <color name="colorPriorityLow">#689F38</color>
+    <color name="colorPriorityMedium">#FBC02D</color>
+    <color name="colorPriorityHigh">#F57C00</color>
+    <color name="colorPriorityCritical">#D32F2F</color>
 </resources>

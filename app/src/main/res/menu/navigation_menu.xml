@@ -13,11 +13,6 @@
         android:title="@string/tasks_todo" />
 
     <item
-        android:id="@+id/nav_Invisible"
-        android:icon="@drawable/invisible"
-        android:title="@string/tasks_invisible" />
-
-    <item
         android:id="@+id/nav_About"
         android:icon="@drawable/info"
         android:title="@string/about" />

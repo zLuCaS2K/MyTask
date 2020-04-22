@@ -158,12 +158,14 @@
         android:padding="12dp">
 
         <ImageView
+            android:id="@+id/imageCompleteTask"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginStart="10dp"
             android:src="@drawable/ic_complete" />
 
         <TextView
+            android:id="@+id/textCompleteTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
