@@ -4,9 +4,9 @@
     <!-- NavigationView -->
     <string name="tasks_done">Tarefas Completas</string>
     <string name="tasks_todo">Tarefas Pendentes</string>
-    <string name="tasks_invisible">Tarefas Ocultas</string>
     <string name="about">Sobre</string>
     <string name="app_logout">Sair</string>
+    <!-- -->
     <string name="enter">Entrar</string>
     <string name="register">Cadastrar-se</string>
     <string name="opening_descriptionOne">Bem Vindo(a) ao My Task</string>
@@ -56,4 +56,8 @@
     <string name="task_todo_toast">A Tarefa ficou Pendente!</string>
     <string name="task_done_toast">A Tarefa foi Completa!</string>
     <string name="number_characters">Insira um Nome Abaixo de 30 Caracteres!</string>
+
+    <!-- ContentDescription-->
+    <string name="open_navigation">Abrir Barra de Navegação!</string>
+    <string name="exit_acc">Sair da Conta!</string>
 </resources>

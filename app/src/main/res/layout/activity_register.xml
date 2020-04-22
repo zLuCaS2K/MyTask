@@ -44,6 +44,8 @@
             style="@style/EditTextLogin"
             android:drawableStart="@drawable/ic_username"
             android:hint="@string/user"
+            android:importantForAutofill="no"
+            android:inputType="text"
             app:layout_constraintBottom_toTopOf="@id/editPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -54,6 +56,7 @@
             android:drawableStart="@drawable/ic_password"
             android:hint="@string/password"
             android:imeOptions="actionDone"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="@id/btnRegister"
             app:layout_constraintEnd_toEndOf="parent"
