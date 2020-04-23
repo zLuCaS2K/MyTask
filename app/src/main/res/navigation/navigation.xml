@@ -7,16 +7,6 @@
     app:startDestination="@id/nav_Done">
 
     <fragment
-        android:id="@+id/nav_Invisible"
-        android:name="com.lucasprojects.mytask.fragments.TaskListFragment"
-        tools:layout="@layout/fragment_task_list">
-        <argument
-            android:name="filterKey"
-            android:defaultValue="2"
-            app:argType="integer" />
-    </fragment>
-
-    <fragment
         android:id="@+id/nav_Done"
         android:name="com.lucasprojects.mytask.fragments.TaskListFragment"
         tools:layout="@layout/fragment_task_list">
@@ -35,5 +25,10 @@
             android:defaultValue="0"
             app:argType="integer" />
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_About"
+        android:name="com.lucasprojects.mytask.fragments.AboutFragment"
+        tools:layout="@layout/fragment_about" />
 
 </navigation>

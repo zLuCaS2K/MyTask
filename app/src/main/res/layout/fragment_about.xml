@@ -9,6 +9,7 @@
     tools:context=".fragments.AboutFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutConstraintOne"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="10dp"
@@ -16,16 +17,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@mipmap/ic_launcher"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/guidelineOne"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:riv_oval="true" />
 
         <TextView
             android:id="@+id/textNameApp"
@@ -37,7 +28,7 @@
             android:textColor="@color/colorBlack"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/guidelineOne"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -51,7 +42,7 @@
             android:textSize="15sp"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/guidelineOne"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textNameApp" />
 
         <ImageButton
@@ -59,13 +50,12 @@
             style="@style/ButtonLoginPink"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="40dp"
             android:contentDescription="@string/code"
             android:src="@drawable/ic_code"
-            android:text="@string/code"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guidelineTwo"
-            app:layout_constraintStart_toStartOf="@+id/guidelineOne"
+            app:layout_constraintStart_toEndOf="@+id/guidelineOne"
             app:layout_constraintTop_toBottomOf="@id/textVersionApp" />
 
         <ImageButton
@@ -73,28 +63,42 @@
             style="@style/ButtonLoginPink"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="40dp"
+            android:layout_marginEnd="10dp"
             android:contentDescription="@string/developer"
             android:src="@drawable/ic_developer"
-            android:text="@string/developer"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guidelineTwo"
+            app:layout_constraintEnd_toStartOf="@id/btnLicenses"
+            app:layout_constraintStart_toEndOf="@id/btnGitHubApp"
+            app:layout_constraintTop_toBottomOf="@id/textVersionApp" />
+
+        <ImageButton
+            android:id="@+id/btnLicenses"
+            style="@style/ButtonLoginPink"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="30dp"
+            android:contentDescription="@string/license_code"
+            android:src="@drawable/ic_copyright"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guidelineTwo"
             app:layout_constraintTop_toBottomOf="@id/textVersionApp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineOne"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.20" />
+            app:layout_constraintGuide_percent="0.05" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineTwo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.60" />
+            app:layout_constraintGuide_percent="0.95" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

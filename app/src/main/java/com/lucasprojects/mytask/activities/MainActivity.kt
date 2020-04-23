@@ -3,7 +3,6 @@ package com.lucasprojects.mytask.activities
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation
@@ -42,13 +41,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        val itemAbout = navigationView.menu.findItem(R.id.nav_About)
-        itemAbout.setOnMenuItemClickListener {
-            drawerLayout.closeDrawer(GravityCompat.START)
-            Toast.makeText(this, "Em Desenvolvimento!", Toast.LENGTH_SHORT).show()
-            true
-        }
-
         setDateUserHeader()
         setDateUserTitle()
 
@@ -59,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.nav_Done -> titleListTask.text = getString(R.string.tasks_done)
                 R.id.nav_Todo -> titleListTask.text = getString(R.string.tasks_todo)
+                R.id.nav_About -> titleListTask.text = getString(R.string.about)
             }
         }
     }
