@@ -26,6 +26,8 @@ class AboutFragment : Fragment(), View.OnClickListener {
         btnGitHubApp.setOnClickListener(this)
         btnGitHubDeveloper.setOnClickListener(this)
         btnLicenses.setOnClickListener(this)
+        imageKotlin.setOnClickListener(this)
+        backgroundRipple.startRippleAnimation()
     }
 
     override fun onClick(v: View) {
@@ -33,6 +35,7 @@ class AboutFragment : Fragment(), View.OnClickListener {
             R.id.btnGitHubApp -> Utils.openBrower(mViewRoot.context, LinkConstants.LINKAPP)
             R.id.btnGitHubDeveloper -> Utils.openBrower(mViewRoot.context, LinkConstants.LINKDEVELOPER)
             R.id.btnLicenses -> startActivity(Intent(mViewRoot.context, LicensesActivity::class.java))
+            R.id.imageKotlin -> Utils.openBrower(mViewRoot.context, LinkConstants.LINKKOTLINSITE)
         }
     }
 }

@@ -65,4 +65,6 @@
     <string name="developer">Desenvolvedor</string>
     <string name="code">Código Fonte</string>
     <string name="version">Versão Beta</string>
+    <string name="about_text">MyTask é um aplicativo simples para fazer anotações de tarefas que você deve executar. Criado com o objetivo principal de aprimorar meus conhecimentos em desenvolvimento Android usando a linguagem Kotlin.</string>
+    <string name="kotlin">Kotlin</string>
 </resources>

@@ -44,4 +44,6 @@ dependencies {
     // Navigation Component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
+    // Ripple Background
+    implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
 }
