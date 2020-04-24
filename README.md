@@ -1,23 +1,20 @@
 ## MyTask
-MyTask é um app de agendamento de tarefas bem simples feito usando a linguagem de programação [Kotlin](https://kotlinlang.org/), o projeto foi criado com o intuito de praticar meus conhecimentos com desenvolvimento android com essa linguagem incrível.
+Created with the main objective of improving my knowledge in Android development using the [Kotlin](https://kotlinlang.org/) language.
 ## Features
-- [x] Cadastro de usuários.
-- [x] Adicione, exclua, edite, liste, filtre uma tarefa.
-- [x] Slide de apresentação ao app usando [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2?authuser=2) e [Lottie](https://github.com/airbnb/lottie-android).
-- [x] ActionBar, Botões, TextView, RecyclerView totalmente personalizados.
-- [ ] Animações no RecyclerView e ao mudar o status de uma tarefa.
-- [ ] Notificar usuário que o dia da sua tarefa chegou.
+- [x] Multiple users.
+- [x] Annotation of tasks.
+- [x] SQLite storage (Room will soon be used).
+- [x] Application presentation slide using [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2?authuser=2) and [Lottie](https://github.com/airbnb/lottie-android).
+- [x] RecyclerView e BottomSheetDialog Customized.
 ## Bibliotecas & APIs
 [Lottie](https://github.com/airbnb/lottie-android)
 
+[Ripple Background](https://github.com/skyfishjy/android-ripple-background)
+
 [Rounded Image View](https://github.com/vinc3m1/RoundedImageView)
-## Preview
-![Preview #01](https://user-images.githubusercontent.com/52612637/78606667-138f1c80-7834-11ea-90a0-b42bb6d29496.gif) ![Preview #02](https://user-images.githubusercontent.com/52612637/78606694-1e49b180-7834-11ea-9e18-2c66b96cf61c.gif)
 ## Screenshots
-![Screenshot_1586204788](https://user-images.githubusercontent.com/52612637/78606815-4d602300-7834-11ea-993e-66a8efb3e601.png) ![Screenshot_1586204792](https://user-images.githubusercontent.com/52612637/78606816-4df8b980-7834-11ea-97a7-d3fb4ce9d0a1.png) ![Screenshot_1586204796](https://user-images.githubusercontent.com/52612637/78606817-4e915000-7834-11ea-9022-b4894a361326.png) ![Screenshot_1586204813](https://user-images.githubusercontent.com/52612637/78606851-636de380-7834-11ea-8842-7c2142ed6b1e.png) ![Screenshot_1586204899](https://user-images.githubusercontent.com/52612637/78606863-6668d400-7834-11ea-96cc-b61726e2fb86.png) ![Screenshot_1586204881](https://user-images.githubusercontent.com/52612637/78606867-68cb2e00-7834-11ea-9faa-ecafeccbf8d8.png)
-## Créditos
-Todas as animações, ícones, imagens, fontes, bibliotecas, tudo que foi obtido de maneira externa terão recebidos seus devidos créditos na aba sobre do app em breve.
-## Licença
+![Screenshot_1587745424](https://user-images.githubusercontent.com/52612637/80235898-ac91a600-8630-11ea-9da7-8223a79e9b3c.png) ![Screenshot_1587745429](https://user-images.githubusercontent.com/52612637/80235913-b1eef080-8630-11ea-9eab-cba5e20d1683.png) ![Screenshot_1587745433](https://user-images.githubusercontent.com/52612637/80235920-b5827780-8630-11ea-94d3-43bb1f1df77e.png) ![Screenshot_1587745609](https://user-images.githubusercontent.com/52612637/80235974-ccc16500-8630-11ea-888d-b8d0471a3d3d.png) ![Screenshot_1587745623](https://user-images.githubusercontent.com/52612637/80235981-d054ec00-8630-11ea-838e-52eccb2a7c4a.png) ![Screenshot_1587745600](https://user-images.githubusercontent.com/52612637/80235986-d2b74600-8630-11ea-86c7-67a436e50023.png)
+## License
 ```text
 MIT License
 
