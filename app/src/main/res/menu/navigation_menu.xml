@@ -4,22 +4,22 @@
 
     <item
         android:id="@+id/nav_Done"
-        android:icon="@drawable/done"
+        android:icon="@drawable/ic_done"
         android:title="@string/tasks_done" />
 
     <item
         android:id="@+id/nav_Todo"
-        android:icon="@drawable/todo"
+        android:icon="@drawable/ic_todo"
         android:title="@string/tasks_todo" />
 
     <item
         android:id="@+id/nav_About"
-        android:icon="@drawable/info"
+        android:icon="@drawable/ic_about"
         android:title="@string/about" />
 
     <item
         android:id="@+id/nav_Logout"
-        android:icon="@drawable/logout"
+        android:icon="@drawable/ic_logout"
         android:title="@string/app_logout" />
 
 </menu>

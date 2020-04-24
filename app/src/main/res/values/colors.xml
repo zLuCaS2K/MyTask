@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+    <!-- Main Colors -->
+    <color name="colorPurpleLight">#9c4dcc</color>
+    <color name="colorPurpleMedium">#6A1B9A</color>
+    <color name="colorPurpleDark">#38006b</color>
+
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGray">#676767</color>
-    <color name="colorBlack">#000000</color>
-    <color name="colorPinkLight">#D4489E</color>
-    <color name="colorPinkMedium">#B53FA1</color>
-    <color name="colorPurpleDark">#7933A5</color>
     <color name="colorGrayLight">#38FFFFFF</color>
+    <color name="colorBlack">#000000</color>
 
     <!-- Material Design Colors -->
     <color name="colorTaskDone">#43A047</color>
