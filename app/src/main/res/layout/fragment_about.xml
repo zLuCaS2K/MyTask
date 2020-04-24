@@ -55,7 +55,7 @@
             android:contentDescription="@string/code"
             android:src="@drawable/ic_code"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/guidelineOne"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textVersionApp" />
 
         <ImageButton
@@ -83,22 +83,8 @@
             android:contentDescription="@string/license_code"
             android:src="@drawable/ic_copyright"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/guidelineTwo"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textVersionApp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineOne"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.05" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineTwo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.95" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
