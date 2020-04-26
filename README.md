@@ -1,4 +1,13 @@
-## MyTask
+<p align="center"><img src="https://github.com/zLuCaS2K/MyTask/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" width="150"></p>    
+
+<h1 align="center">MyTask</h1>
+<p align="center">
+<img src="https://img.shields.io/github/repo-size/zLuCaS2K/MyTask">
+<img src="https://img.shields.io/github/languages/count/zLuCaS2K/MyTask">
+<img src="https://img.shields.io/github/languages/top/zLuCaS2K/MyTask">
+<img src="https://img.shields.io/github/license/zLuCaS2K/MyTask">
+</p>
+
 Created with the main objective of improving my knowledge in Android development using the [Kotlin](https://kotlinlang.org/) language.
 ## Features
 - [x] Multiple users.
@@ -6,7 +15,7 @@ Created with the main objective of improving my knowledge in Android development
 - [x] SQLite storage (Room will soon be used).
 - [x] Application presentation slide using [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2?authuser=2) and [Lottie](https://github.com/airbnb/lottie-android).
 - [x] RecyclerView e BottomSheetDialog Customized.
-## Bibliotecas & APIs
+## Libraries
 [Lottie](https://github.com/airbnb/lottie-android)
 
 [Ripple Background](https://github.com/skyfishjy/android-ripple-background)
