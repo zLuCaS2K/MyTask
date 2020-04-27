@@ -13,20 +13,20 @@ class TaskDataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         private const val DATABASE_NAME: String = "Tasks.db"
     }
 
-    // Criação da tabela de usuário
+    /** Criação da tabela de usuário */
     private val createTableUser = (
             "CREATE TABLE " + DataBaseConstants.USER.TABLE_NAME + " ("
                     + DataBaseConstants.USER.COLUMNS.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + DataBaseConstants.USER.COLUMNS.NAME + " TEXT, "
                     + DataBaseConstants.USER.COLUMNS.PASSWORD + " TEXT);")
 
-    // Criação da tabela de categoria
+    /** Criação da tabela de prioridade */
     private val createTableProperty = """
         CREATE TABLE ${DataBaseConstants.PRIORITY.TABLE_NAME}
         (${DataBaseConstants.PRIORITY.COLUMNS.ID} INTEGER PRIMARY KEY,
         ${DataBaseConstants.PRIORITY.COLUMNS.DESCRIPTION} TEXT); """
 
-    // Criação da tabela de tarefas
+    /** Criação da tabela de tarefas */
     private val createTableTask = (
             "CREATE TABLE " + DataBaseConstants.TASK.TABLE_NAME + " ("
                     + DataBaseConstants.TASK.COLUMNS.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -37,19 +37,20 @@ class TaskDataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
                     + DataBaseConstants.TASK.COLUMNS.DUEDATE + " TEXT, "
                     + DataBaseConstants.TASK.COLUMNS.COMPLETE + " INTEGER);")
 
-    // Populando dados de prioridades
+    /** Adicionando prioridades */
     private val inserPriorities = ("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME}"
             + " VALUES (1, '${TaskConstants.PRIORITIES.LOW}')" +
             ", (2, '${TaskConstants.PRIORITIES.MEDIUM}')" +
             ", (3, '${TaskConstants.PRIORITIES.HIGH}')" +
             ", (4, '${TaskConstants.PRIORITIES.CRITICAL}')")
 
-    // Remoção de tabelas
-    //private val dropTableUser = "DROP TABLE IF EXISTS " + DataBaseConstants.USER.TABLE_NAME
-    //private val dropTablePriority = "DROP TABLE IF EXISTS " + DataBaseConstants.PRIORITY.TABLE_NAME
-    //private val dropTableTask = "DROP TABLE IF EXISTS " + DataBaseConstants.TASK.TABLE_NAME
+    /** Remoção de tabelas
+    private val dropTableUser = "DROP TABLE IF EXISTS " + DataBaseConstants.USER.TABLE_NAME
+    private val dropTablePriority = "DROP TABLE IF EXISTS " + DataBaseConstants.PRIORITY.TABLE_NAME
+    private val dropTableTask = "DROP TABLE IF EXISTS " + DataBaseConstants.TASK.TABLE_NAME
+    */
 
-    // Criação das tabelas
+    /** Criação das tabelas */
     override fun onCreate(sqLiteDatabase: SQLiteDatabase) {
         with(sqLiteDatabase){
             execSQL(createTableUser)
@@ -65,7 +66,8 @@ class TaskDataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         /** Remover todas as tabelas
             sqLiteDatabase.execSQL(dropTableUser)
             sqLiteDatabase.execSQL(dropTablePriority)
-            sqLiteDatabase.execSQL(dropTableTask) */
+            sqLiteDatabase.execSQL(dropTableTask)
+        */
 
         // Fazer a criação novamente
         // onCreate(sqLiteDatabase)

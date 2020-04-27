@@ -71,7 +71,7 @@ class TaskRepository private constructor(context: Context) {
             val cursor: Cursor
             val db = this.mUltraTaskDataBaseHelper.readableDatabase
             cursor = db.rawQuery(
-                "select * from ${DataBaseConstants.TASK.TABLE_NAME} WHERE " +
+                "SELECT * FROM ${DataBaseConstants.TASK.TABLE_NAME} WHERE " +
                         "${DataBaseConstants.TASK.COLUMNS.COMPLETE} = $filter" +
                         " AND ${DataBaseConstants.TASK.COLUMNS.USERID} = $userId",
                 null
@@ -79,7 +79,6 @@ class TaskRepository private constructor(context: Context) {
             if (cursor.count > 0) {
                 while (cursor.moveToNext()) {
                     val taskID = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.ID))
-                    val userId = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.USERID))
                     val name = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.NAME))
                     val text = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.TEXT))
                     val dueDate = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseConstants.TASK.COLUMNS.DUEDATE))
