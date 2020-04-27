@@ -15,6 +15,7 @@ Created with the main objective of improving my knowledge in Android development
 - [x] SQLite storage (Room will soon be used).
 - [x] Application presentation slide using [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2?authuser=2) and [Lottie](https://github.com/airbnb/lottie-android).
 - [x] RecyclerView e BottomSheetDialog Customized.
+- [ ] Alert the user to a task.
 ## Libraries
 [Lottie](https://github.com/airbnb/lottie-android)
 
