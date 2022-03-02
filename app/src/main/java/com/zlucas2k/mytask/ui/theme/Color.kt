@@ -1,4 +1,4 @@
-package com.lucassantos.mytask.ui.theme
+package com.zlucas2k.mytask.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
