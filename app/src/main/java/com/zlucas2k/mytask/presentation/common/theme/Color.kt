@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.ui.theme
+package com.zlucas2k.mytask.presentation.common.theme
 
 import androidx.compose.ui.graphics.Color
 

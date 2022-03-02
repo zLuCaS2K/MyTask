@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask
+package com.zlucas2k.mytask.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.zlucas2k.mytask.ui.theme.MyTaskTheme
+import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 
 class MainActivity : ComponentActivity() {
 
