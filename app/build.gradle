@@ -1,6 +1,8 @@
 plugins {
-    id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'dagger.hilt.android.plugin'
+    id 'com.android.application'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -55,8 +57,19 @@ dependencies {
     implementation "androidx.activity:activity-compose:$compose_activity_version"
     // Material
     implementation "androidx.compose.material:material:$compose_version"
+    // Material You
+    implementation "androidx.compose.material3:material3:$material_you_version"
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    // Hilt
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    // Room
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-runtime:$room_version"
     // JUnit
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
