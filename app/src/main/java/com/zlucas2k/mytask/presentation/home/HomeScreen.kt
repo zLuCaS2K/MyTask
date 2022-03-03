@@ -6,13 +6,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 import com.zlucas2k.mytask.presentation.home.components.HomeAddFAB
+import com.zlucas2k.mytask.presentation.home.components.HomeTopAppBar
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun HomeScreen() {
     Scaffold(
         topBar = {
-            // TODO 01: Implementar TopAppBar
+            HomeTopAppBar(
+                onClickAbout = {
+                    // TODO: Abrir dialog de Sobre
+                },
+                onClickSettings = {
+                    // TODO: Abrir tela de Configurações
+                }
+            )
         },
         floatingActionButton = {
             HomeAddFAB {
