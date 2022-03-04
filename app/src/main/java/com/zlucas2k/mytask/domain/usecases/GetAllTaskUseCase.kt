@@ -8,7 +8,7 @@ class GetAllTaskUseCase constructor(
     private val repository: TaskRepository
 ) {
 
-    suspend operator fun invoke(): Flow<List<Task>> {
+    operator fun invoke(): Flow<List<Task>> {
         return repository.getAllTask()
     }
 }
