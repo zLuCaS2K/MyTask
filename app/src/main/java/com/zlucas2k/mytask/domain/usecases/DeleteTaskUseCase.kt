@@ -2,8 +2,9 @@ package com.zlucas2k.mytask.domain.usecases
 
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.domain.repository.TaskRepository
+import javax.inject.Inject
 
-class DeleteTaskUseCase constructor(
+class DeleteTaskUseCase @Inject constructor(
     private val repository: TaskRepository
 ) {
 

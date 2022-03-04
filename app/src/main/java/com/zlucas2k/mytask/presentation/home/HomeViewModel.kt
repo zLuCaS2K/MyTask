@@ -8,12 +8,15 @@ import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.domain.usecases.DeleteTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.GetAllTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.SaveTaskUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel constructor(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     private val getAllTaskUseCase: GetAllTaskUseCase,
     private val saveTaskUseCase: SaveTaskUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase
