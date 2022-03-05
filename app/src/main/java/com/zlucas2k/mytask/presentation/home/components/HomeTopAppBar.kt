@@ -1,10 +1,13 @@
 package com.zlucas2k.mytask.presentation.home.components
 
 import android.content.res.Configuration
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,12 +19,9 @@ fun HomeTopAppBar(
     onClickAbout: () -> Unit,
     onClickSettings: () -> Unit
 ) {
-    SmallTopAppBar(
+    TopAppBar(
         title = {
-            Text(
-                text = stringResource(id = R.string.app_name),
-                style = MaterialTheme.typography.titleLarge
-            )
+            Text(text = stringResource(id = R.string.app_name))
         },
         actions = {
             IconButton(onClick = onClickAbout) {
