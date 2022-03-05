@@ -57,8 +57,6 @@ dependencies {
     implementation "androidx.activity:activity-compose:$compose_activity_version"
     // Material
     implementation "androidx.compose.material:material:$compose_version"
-    // Material You
-    implementation "androidx.compose.material3:material3:$material_you_version"
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     // Coroutines
