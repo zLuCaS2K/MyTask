@@ -23,35 +23,32 @@ import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 @Composable
 fun TaskPriorityDropDown(
     priority: Priority,
-    onPrioritySelected: (Priority) -> Unit
+    onPrioritySelected: (Priority) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
     val angel: Float by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
+            .wrapContentHeight()
             .background(MaterialTheme.colors.background)
-            .height(60.dp)
             .clickable { expanded = true }
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
                 shape = MaterialTheme.shapes.small
             ),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround
     ) {
-        Canvas(
-            modifier = Modifier
-                .size(16.dp)
-                .weight(1f)
-        ) {
+        Canvas(modifier = Modifier.size(16.dp)) {
             drawCircle(color = priority.color)
         }
 
         Text(
             text = priority.name,
-            modifier = Modifier.weight(8f),
             style = MaterialTheme.typography.subtitle2
         )
 
@@ -60,12 +57,8 @@ fun TaskPriorityDropDown(
             modifier = Modifier
                 .alpha(ContentAlpha.medium)
                 .rotate(degrees = angel)
-                .weight(1.5f)
         ) {
-            Icon(
-                imageVector = Icons.Filled.ArrowDropDown,
-                contentDescription = null
-            )
+            Icon(imageVector = Icons.Filled.ArrowDropDown, contentDescription = null)
         }
 
         DropdownMenu(
@@ -108,9 +101,7 @@ fun TaskPriorityDropDown(
 @Composable
 private fun PriorityItem(priority: Priority) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Canvas(
-            modifier = Modifier.size(16.dp)
-        ) {
+        Canvas(modifier = Modifier.size(16.dp)) {
             drawCircle(color = priority.color)
         }
 
@@ -128,8 +119,12 @@ private fun PriorityItem(priority: Priority) {
 @Preview(name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun Preview() {
     MyTaskTheme {
-        TaskPriorityDropDown(Priority.HIGH) {
+        TaskPriorityDropDown(
+            priority = Priority.HIGH,
+            modifier = Modifier,
+            onPrioritySelected = {
 
-        }
+            }
+        )
     }
 }
