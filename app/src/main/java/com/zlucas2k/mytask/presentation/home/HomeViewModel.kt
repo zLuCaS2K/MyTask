@@ -1,17 +1,20 @@
 package com.zlucas2k.mytask.presentation.home
 
-import androidx.compose.runtime.State
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zlucas2k.mytask.common.utils.Action
+import com.zlucas2k.mytask.common.utils.RequestState
+import com.zlucas2k.mytask.domain.model.Priority
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.domain.usecases.DeleteTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.GetAllTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.SaveTaskUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,27 +25,62 @@ class HomeViewModel @Inject constructor(
     private val deleteTaskUseCase: DeleteTaskUseCase
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(HomeScreenState())
-    val state: State<HomeScreenState> = _state
+    val action: MutableState<Action> = mutableStateOf(Action.NO_ACTION)
+    val idTask: MutableState<Int> = mutableStateOf(0)
+    val titleTask: MutableState<String> = mutableStateOf("")
+    val descriptionTask: MutableState<String> = mutableStateOf("")
+    val priorityTask: MutableState<Priority> = mutableStateOf(Priority.LOW)
+    val dateTask: MutableState<String> = mutableStateOf("")
+    val completedTask: MutableState<Boolean> = mutableStateOf(false)
 
-    init {
-        getAllTask()
+    private val _allTasks = MutableStateFlow<RequestState<List<Task>>>(RequestState.Idle)
+    val allTasks: StateFlow<RequestState<List<Task>>> = _allTasks
+
+    fun handleDatabaseActions(action: Action) {
+        when (action) {
+            Action.ADD -> saveTask()
+            Action.UPDATE -> saveTask()
+            Action.DELETE -> deleteTask()
+            else -> {}
+        }
+        this.action.value = Action.NO_ACTION
     }
 
-    private fun getAllTask() {
-        getAllTaskUseCase().onEach { tasks ->
-            _state.value = _state.value.copy(tasks = tasks, anError = false)
-        }.launchIn(viewModelScope)
+    fun getAllTasks() {
+        _allTasks.value = RequestState.Loading
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                getAllTaskUseCase().collect {
+                    _allTasks.value = RequestState.Success(it)
+                }
+            }
+        } catch (e: Exception) {
+            _allTasks.value = RequestState.Error(e)
+        }
     }
 
-    suspend fun saveTask(task: Task) {
+    private fun saveTask() {
         viewModelScope.launch(Dispatchers.IO) {
+            val task = Task(
+                title = titleTask.value,
+                description = descriptionTask.value,
+                priority = priorityTask.value,
+                date = dateTask.value,
+                isCompleted = completedTask.value
+            )
             saveTaskUseCase(task)
         }
     }
 
-    suspend fun deleteTask(task: Task) {
+    private fun deleteTask() {
         viewModelScope.launch(Dispatchers.IO) {
+            val task = Task(
+                title = titleTask.value,
+                description = descriptionTask.value,
+                priority = priorityTask.value,
+                date = dateTask.value,
+                isCompleted = completedTask.value
+            )
             deleteTaskUseCase(task)
         }
     }
