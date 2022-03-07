@@ -10,6 +10,7 @@ object TaskMapperImpl : Mapper<TaskEntity, Task> {
             id = entity.id,
             title = entity.title,
             description = entity.description,
+            priority = entity.priority,
             date = entity.date,
             isCompleted = entity.isCompleted
         )
@@ -20,6 +21,7 @@ object TaskMapperImpl : Mapper<TaskEntity, Task> {
             id = model.id,
             title = model.title,
             description = model.description,
+            priority = model.priority,
             date = model.date,
             isCompleted = model.isCompleted
         )
