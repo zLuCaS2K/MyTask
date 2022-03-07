@@ -8,19 +8,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.zlucas2k.mytask.domain.model.Priority
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
-import com.zlucas2k.mytask.presentation.home.HomeViewModel
+import com.zlucas2k.mytask.presentation.viewmodel.TaskViewModel
 import com.zlucas2k.mytask.presentation.task.components.TaskScreenContent
 
 @Composable
 fun TaskScreen(
     selectedTask: Task?,
-    homeViewModel: HomeViewModel
+    taskViewModel: TaskViewModel
 ) {
-    val title: String by homeViewModel.titleTask
-    val description: String by homeViewModel.descriptionTask
-    val priority: Priority by homeViewModel.priorityTask
-    val date: String by homeViewModel.dateTask
-    val completed: Boolean by homeViewModel.completedTask
+    val title: String by taskViewModel.titleTask
+    val description: String by taskViewModel.descriptionTask
+    val priority: Priority by taskViewModel.priorityTask
+    val date: String by taskViewModel.dateTask
+    val completed: Boolean by taskViewModel.completedTask
 
     Scaffold(
         topBar = {
@@ -30,23 +30,23 @@ fun TaskScreen(
             TaskScreenContent(
                 title = title,
                 onTitleChange = {
-                    homeViewModel.titleTask.value = it
+                    taskViewModel.titleTask.value = it
                 },
                 description = description,
                 onDescriptionChange = {
-                    homeViewModel.descriptionTask.value = it
+                    taskViewModel.descriptionTask.value = it
                 },
                 priority = priority,
                 onPrioritySelected = {
-                    homeViewModel.priorityTask.value = it
+                    taskViewModel.priorityTask.value = it
                 },
                 date = date,
                 onDateChange = {
-                    homeViewModel.dateTask.value = it
+                    taskViewModel.dateTask.value = it
                 },
                 completed = completed,
                 onCompletedChange = {
-                    homeViewModel.completedTask.value = it
+                    taskViewModel.completedTask.value = it
                 }
             )
         }

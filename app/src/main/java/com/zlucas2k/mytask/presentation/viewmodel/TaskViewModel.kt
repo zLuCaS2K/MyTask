@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.home
+package com.zlucas2k.mytask.presentation.viewmodel
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class TaskViewModel @Inject constructor(
     private val getAllTaskUseCase: GetAllTaskUseCase,
     private val saveTaskUseCase: SaveTaskUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase
