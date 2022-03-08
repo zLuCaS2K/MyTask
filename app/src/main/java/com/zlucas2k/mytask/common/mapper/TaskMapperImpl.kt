@@ -9,10 +9,11 @@ object TaskMapperImpl : Mapper<TaskEntity, Task> {
         return Task(
             id = entity.id,
             title = entity.title,
+            date = entity.date,
+            time = entity.time,
             description = entity.description,
             priority = entity.priority,
-            date = entity.date,
-            isCompleted = entity.isCompleted
+            status = entity.status
         )
     }
 
@@ -20,10 +21,11 @@ object TaskMapperImpl : Mapper<TaskEntity, Task> {
         return TaskEntity(
             id = model.id,
             title = model.title,
+            date = model.date,
+            time = model.time,
             description = model.description,
             priority = model.priority,
-            date = model.date,
-            isCompleted = model.isCompleted
+            status = model.status
         )
     }
 }
