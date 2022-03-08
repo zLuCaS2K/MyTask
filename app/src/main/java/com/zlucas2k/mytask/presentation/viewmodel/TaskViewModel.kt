@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.zlucas2k.mytask.common.utils.Action
 import com.zlucas2k.mytask.common.utils.RequestState
 import com.zlucas2k.mytask.domain.model.Priority
+import com.zlucas2k.mytask.domain.model.Status
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.domain.usecases.DeleteTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.GetAllTaskUseCase
@@ -28,10 +29,11 @@ class TaskViewModel @Inject constructor(
     val action: MutableState<Action> = mutableStateOf(Action.NO_ACTION)
     val idTask: MutableState<Int> = mutableStateOf(0)
     val titleTask: MutableState<String> = mutableStateOf("")
+    val dateTask: MutableState<String> = mutableStateOf("")
+    val timeTask: MutableState<String> = mutableStateOf("")
     val descriptionTask: MutableState<String> = mutableStateOf("")
     val priorityTask: MutableState<Priority> = mutableStateOf(Priority.LOW)
-    val dateTask: MutableState<String> = mutableStateOf("")
-    val completedTask: MutableState<Boolean> = mutableStateOf(false)
+    val statusTask: MutableState<Status> = mutableStateOf(Status.TODO)
 
     private val _allTasks = MutableStateFlow<RequestState<List<Task>>>(RequestState.Idle)
     val allTasks: StateFlow<RequestState<List<Task>>> = _allTasks
@@ -63,10 +65,11 @@ class TaskViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val task = Task(
                 title = titleTask.value,
+                date = dateTask.value,
+                time = timeTask.value,
                 description = descriptionTask.value,
                 priority = priorityTask.value,
-                date = dateTask.value,
-                isCompleted = completedTask.value
+                status = statusTask.value
             )
             saveTaskUseCase(task)
         }
@@ -76,10 +79,11 @@ class TaskViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val task = Task(
                 title = titleTask.value,
+                date = dateTask.value,
+                time = timeTask.value,
                 description = descriptionTask.value,
                 priority = priorityTask.value,
-                date = dateTask.value,
-                isCompleted = completedTask.value
+                status = statusTask.value
             )
             deleteTaskUseCase(task)
         }
