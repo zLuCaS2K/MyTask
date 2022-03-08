@@ -3,10 +3,11 @@ package com.zlucas2k.mytask.presentation.task.components
 import android.content.res.Configuration
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -29,72 +30,65 @@ fun TaskPriorityDropDown(
     var expanded by remember { mutableStateOf(false) }
     val angel: Float by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
 
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .background(MaterialTheme.colors.background)
-            .clickable { expanded = true }
-            .border(
-                width = 1.dp,
-                color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
-                shape = MaterialTheme.shapes.small
-            ),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround
-    ) {
-        Canvas(modifier = Modifier.size(16.dp)) {
-            drawCircle(color = priority.color)
+    TaskTextField(
+        value = priority.name,
+        onValueChange = { },
+        placeholderText = "Prioridade",
+        leadingIcon = {
+            Canvas(modifier = Modifier.size(16.dp)) {
+                drawCircle(color = priority.color)
+            }
+        },
+        trailingIcon = {
+            Icon(
+                imageVector = Icons.Filled.ArrowDropDown,
+                contentDescription = null,
+                modifier = Modifier
+                    .alpha(ContentAlpha.medium)
+                    .rotate(degrees = angel)
+            )
+        },
+        readOnly = true,
+        singleLine = true,
+        maxLines = 1,
+        modifier = modifier.clickable {
+            expanded = true
         }
+    )
 
-        Text(
-            text = priority.name,
-            style = MaterialTheme.typography.subtitle2
+    DropdownMenu(
+        expanded = expanded,
+        onDismissRequest = { expanded = false },
+        modifier = Modifier.fillMaxWidth(fraction = 0.94f)
+    ) {
+        DropdownMenuItem(
+            onClick = {
+                expanded = false
+                onPrioritySelected(Priority.LOW)
+            },
+            content = {
+                PriorityItem(priority = Priority.LOW)
+            }
+        )
+        DropdownMenuItem(
+            onClick = {
+                expanded = false
+                onPrioritySelected(Priority.MEDIUM)
+            },
+            content = {
+                PriorityItem(priority = Priority.MEDIUM)
+            }
         )
 
-        IconButton(
-            onClick = { expanded = true },
-            modifier = Modifier
-                .alpha(ContentAlpha.medium)
-                .rotate(degrees = angel)
-        ) {
-            Icon(imageVector = Icons.Filled.ArrowDropDown, contentDescription = null)
-        }
-
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-            modifier = Modifier.fillMaxWidth(fraction = 0.94f)
-        ) {
-            DropdownMenuItem(
-                onClick = {
-                    expanded = false
-                    onPrioritySelected(Priority.LOW)
-                },
-                content = {
-                    PriorityItem(priority = Priority.LOW)
-                }
-            )
-            DropdownMenuItem(
-                onClick = {
-                    expanded = false
-                    onPrioritySelected(Priority.MEDIUM)
-                },
-                content = {
-                    PriorityItem(priority = Priority.MEDIUM)
-                }
-            )
-
-            DropdownMenuItem(
-                onClick = {
-                    expanded = false
-                    onPrioritySelected(Priority.HIGH)
-                },
-                content = {
-                    PriorityItem(priority = Priority.HIGH)
-                }
-            )
-        }
+        DropdownMenuItem(
+            onClick = {
+                expanded = false
+                onPrioritySelected(Priority.HIGH)
+            },
+            content = {
+                PriorityItem(priority = Priority.HIGH)
+            }
+        )
     }
 }
 
@@ -108,8 +102,8 @@ private fun PriorityItem(priority: Priority) {
         Text(
             text = priority.name,
             modifier = Modifier.padding(start = 12.dp),
-            style = MaterialTheme.typography.subtitle2,
-            color = MaterialTheme.colors.onSurface
+            color = MaterialTheme.colors.primary,
+            style = MaterialTheme.typography.subtitle2
         )
     }
 }
@@ -121,10 +115,8 @@ private fun Preview() {
     MyTaskTheme {
         TaskPriorityDropDown(
             priority = Priority.HIGH,
+            onPrioritySelected = {},
             modifier = Modifier,
-            onPrioritySelected = {
-
-            }
         )
     }
 }
