@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.widget.DatePicker
 import androidx.compose.foundation.clickable
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.runtime.Composable
@@ -23,7 +24,8 @@ fun TaskDatePicker(
     val calendarMonth = calendar.get(Calendar.MONTH)
     val calendarDay = calendar.get(Calendar.DAY_OF_MONTH)
 
-    val datePickerDialog = DatePickerDialog(context, { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+    val datePickerDialog = DatePickerDialog(
+        context, { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
             onValueChange("$dayOfMonth/$month/$year")
         }, calendarYear, calendarMonth, calendarDay
     )
@@ -32,7 +34,13 @@ fun TaskDatePicker(
         value = value,
         onValueChange = {},
         placeholderText = "Data",
-        leadingIcon = { Icon(imageVector = Icons.Filled.DateRange, contentDescription = null) },
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Filled.DateRange,
+                contentDescription = null,
+                tint = MaterialTheme.colors.onPrimary
+            )
+        },
         readOnly = true,
         singleLine = true,
         maxLines = 1,

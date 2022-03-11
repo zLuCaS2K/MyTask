@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,7 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.domain.model.Priority
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
@@ -29,15 +32,14 @@ fun TaskPriorityDropDown(
 ) {
     var expanded by remember { mutableStateOf(false) }
     val angel: Float by animateFloatAsState(targetValue = if (expanded) 180f else 0f)
+    val colorPriority = if (isSystemInDarkTheme()) priority.colorDark else priority.colorLight
 
     TaskTextField(
         value = priority.name,
         onValueChange = { },
         placeholderText = "Prioridade",
         leadingIcon = {
-            Canvas(modifier = Modifier.size(16.dp)) {
-                drawCircle(color = priority.color)
-            }
+            CircleIndicatorPriority(color = colorPriority, size = 16.dp)
         },
         trailingIcon = {
             Icon(
@@ -64,10 +66,20 @@ fun TaskPriorityDropDown(
         DropdownMenuItem(
             onClick = {
                 expanded = false
+                onPrioritySelected(Priority.NONE)
+            },
+            content = {
+                PriorityItem(namePriority = "Sem", color = colorPriority)
+            }
+        )
+
+        DropdownMenuItem(
+            onClick = {
+                expanded = false
                 onPrioritySelected(Priority.LOW)
             },
             content = {
-                PriorityItem(priority = Priority.LOW)
+                PriorityItem(namePriority = "Baixa", color = colorPriority)
             }
         )
         DropdownMenuItem(
@@ -76,7 +88,7 @@ fun TaskPriorityDropDown(
                 onPrioritySelected(Priority.MEDIUM)
             },
             content = {
-                PriorityItem(priority = Priority.MEDIUM)
+                PriorityItem(namePriority = "Média", color = colorPriority)
             }
         )
 
@@ -86,21 +98,26 @@ fun TaskPriorityDropDown(
                 onPrioritySelected(Priority.HIGH)
             },
             content = {
-                PriorityItem(priority = Priority.HIGH)
+                PriorityItem(namePriority = "Alta", color = colorPriority)
             }
         )
     }
 }
 
 @Composable
-private fun PriorityItem(priority: Priority) {
+private fun CircleIndicatorPriority(color: Color, size: Dp) {
+    Canvas(modifier = Modifier.size(size)) {
+        drawCircle(color = color)
+    }
+}
+
+@Composable
+private fun PriorityItem(namePriority: String, color: Color) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Canvas(modifier = Modifier.size(16.dp)) {
-            drawCircle(color = priority.color)
-        }
+        CircleIndicatorPriority(color = color, size = 16.dp)
 
         Text(
-            text = priority.name,
+            text = namePriority,
             modifier = Modifier.padding(start = 12.dp),
             color = MaterialTheme.colors.primary,
             style = MaterialTheme.typography.subtitle2

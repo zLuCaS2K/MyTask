@@ -1,5 +1,6 @@
 package com.zlucas2k.mytask.presentation.task.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
@@ -9,6 +10,7 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,6 +34,7 @@ fun TaskTextField(
         onValueChange = { onValueChange(it) },
         modifier = modifier,
         readOnly = readOnly,
+        textStyle = TextStyle(color = MaterialTheme.colors.onBackground.copy(alpha = 0.5f)),
         placeholder = { Text(text = placeholderText) },
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
@@ -43,20 +46,21 @@ fun TaskTextField(
         maxLines = maxLines,
         shape = RoundedCornerShape(8.dp),
         colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.White,
-            placeholderColor = MaterialTheme.colors.primary,
+            backgroundColor = MaterialTheme.colors.primary,
+            placeholderColor = MaterialTheme.colors.primaryVariant,
             focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.White
+            unfocusedIndicatorColor = MaterialTheme.colors.primary
         )
     )
 }
 
-@Preview
 @Composable
+@Preview(name = "Light")
+@Preview(name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun Preview() {
     MyTaskTheme {
         TaskTextField(
-            value = "",
+            value = "Estudar Kotlin",
             onValueChange = {},
             placeholderText = "Título",
             singleLine = true,

@@ -3,6 +3,7 @@ package com.zlucas2k.mytask.presentation.task.components
 import android.app.TimePickerDialog
 import androidx.compose.foundation.clickable
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
@@ -21,7 +22,8 @@ fun TaskTimePicker(
     val calendarHours = calendar.get(Calendar.HOUR_OF_DAY)
     val calendarMinutes = calendar.get(Calendar.MINUTE)
 
-    val timePickerDialog = TimePickerDialog(context, { _, hour: Int, minute: Int ->
+    val timePickerDialog = TimePickerDialog(
+        context, { _, hour: Int, minute: Int ->
             onValueChange("$hour:$minute")
         }, calendarHours, calendarMinutes, false
     )
@@ -30,7 +32,13 @@ fun TaskTimePicker(
         value = value,
         onValueChange = {},
         placeholderText = "Hora",
-        leadingIcon = { Icon(imageVector = Icons.Filled.Home, contentDescription = null) },
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Filled.Home,
+                contentDescription = null,
+                tint = MaterialTheme.colors.onPrimary
+            )
+        },
         readOnly = true,
         singleLine = true,
         maxLines = 1,
