@@ -55,6 +55,7 @@ dependencies {
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation "androidx.activity:activity-compose:$compose_activity_version"
+    implementation "androidx.navigation:navigation-compose:$compose_navigation_version"
     // Material
     implementation "androidx.compose.material:material:$compose_version"
     // Lifecycle
