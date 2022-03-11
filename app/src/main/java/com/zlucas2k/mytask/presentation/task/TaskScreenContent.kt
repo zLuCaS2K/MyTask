@@ -4,8 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,7 +47,7 @@ fun TaskScreenContent(
             onValueChange = { onTitleChange(it) },
             placeholderText = "Título",
             singleLine = true,
-            maxLines = 16,
+            maxLines = 1,
             modifier = modifier,
         )
 
@@ -79,14 +78,13 @@ fun TaskScreenContent(
             )
         }
 
-        OutlinedTextField(
+        TaskTextField(
             value = description,
             onValueChange = { onDescriptionChange(it) },
-            label = { Text(text = "Descrição") },
-            textStyle = MaterialTheme.typography.body1,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(10.dp),
+            placeholderText = "Descrição",
+            singleLine = false,
+            maxLines = 20,
+            modifier = modifier
         )
     }
 }
@@ -106,19 +104,21 @@ private fun Preview() {
         val priority = Priority.HIGH
         val status = Status.TODO
 
-        TaskScreenContent(
-            title = title,
-            onTitleChange = {},
-            date = date,
-            onDateChange = {},
-            time = time,
-            onTimeChange = {},
-            description = description,
-            onDescriptionChange = {},
-            priority = priority,
-            onPrioritySelected = {},
-            status = status,
-            onStatusChange = {}
-        )
+        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+            TaskScreenContent(
+                title = title,
+                onTitleChange = {},
+                date = date,
+                onDateChange = {},
+                time = time,
+                onTimeChange = {},
+                description = description,
+                onDescriptionChange = {},
+                priority = priority,
+                onPrioritySelected = {},
+                status = status,
+                onStatusChange = {}
+            )
+        }
     }
 }
