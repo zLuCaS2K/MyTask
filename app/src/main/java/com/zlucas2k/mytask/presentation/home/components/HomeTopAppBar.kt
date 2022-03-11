@@ -1,10 +1,7 @@
 package com.zlucas2k.mytask.presentation.home.components
 
 import android.content.res.Configuration
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
@@ -21,15 +18,26 @@ fun HomeTopAppBar(
 ) {
     TopAppBar(
         title = {
-            Text(text = stringResource(id = R.string.app_name))
+            Text(
+                text = stringResource(id = R.string.app_name),
+                color = MaterialTheme.colors.onPrimary
+            )
         },
         actions = {
             IconButton(onClick = onClickAbout) {
-                Icon(imageVector = Icons.Default.Info, contentDescription = null)
+                Icon(
+                    imageVector = Icons.Default.Info,
+                    contentDescription = null,
+                    tint = MaterialTheme.colors.onPrimary
+                )
             }
 
             IconButton(onClick = onClickSettings) {
-                Icon(imageVector = Icons.Default.Settings, contentDescription = null)
+                Icon(
+                    imageVector = Icons.Default.Settings,
+                    contentDescription = null,
+                    tint = MaterialTheme.colors.onPrimary
+                )
             }
         }
     )
