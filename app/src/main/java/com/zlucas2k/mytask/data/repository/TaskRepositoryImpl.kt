@@ -31,6 +31,6 @@ class TaskRepositoryImpl @Inject constructor(
 
     override suspend fun deleteTask(task: Task) {
         val taskEntity = TaskMapperImpl.mapModelToEntity(task)
-        taskDAO.saveTask(taskEntity)
+        taskDAO.deleteTask(taskEntity)
     }
 }
