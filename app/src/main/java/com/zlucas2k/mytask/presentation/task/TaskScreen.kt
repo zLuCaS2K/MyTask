@@ -1,27 +1,15 @@
 package com.zlucas2k.mytask.presentation.task
 
-import android.content.res.Configuration
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.tooling.preview.Preview
-import com.zlucas2k.mytask.domain.model.Priority
-import com.zlucas2k.mytask.domain.model.Status
-import com.zlucas2k.mytask.domain.model.Task
-import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
-import com.zlucas2k.mytask.presentation.viewmodel.TaskViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import com.zlucas2k.mytask.presentation.task.viewmodel.TaskViewModel
 
 @Composable
-fun TaskScreen(
-    selectedTask: Task?,
-    taskViewModel: TaskViewModel
-) {
-    val title: String by taskViewModel.titleTask
-    val date: String by taskViewModel.dateTask
-    val time: String by taskViewModel.timeTask
-    val description: String by taskViewModel.descriptionTask
-    val priority: Priority by taskViewModel.priorityTask
-    val status: Status by taskViewModel.statusTask
+fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = viewModel()) {
+
+    val state = viewModel.state.value
 
     Scaffold(
         topBar = {
@@ -29,41 +17,31 @@ fun TaskScreen(
         },
         content = {
             TaskScreenContent(
-                title = title,
+                title = state.title,
                 onTitleChange = {
-                    taskViewModel.titleTask.value = it
+                    viewModel.onTitleChange(it)
                 },
-                date = date,
+                date = state.date,
                 onDateChange = {
-                    taskViewModel.dateTask.value = it
+                    viewModel.onDateChange(it)
                 },
-                time = time,
+                time = state.time,
                 onTimeChange = {
-                    taskViewModel.timeTask.value = it
+                    viewModel.onTimeChange(it)
                 },
-                description = description,
+                description = state.description,
                 onDescriptionChange = {
-                    taskViewModel.descriptionTask.value = it
+                    viewModel.onDescriptionChange(it)
                 },
-                priority = priority,
+                priority = state.priority,
                 onPrioritySelected = {
-                    taskViewModel.priorityTask.value = it
+                    viewModel.onPriorityChange(it)
                 },
-                status = status,
+                status = state.status,
                 onStatusChange = {
-                    taskViewModel.statusTask.value = it
+                    viewModel.onStatusChange(it)
                 }
             )
         }
     )
-}
-
-
-@Composable
-@Preview(name = "Light")
-@Preview(name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
-private fun Preview() {
-    MyTaskTheme {
-
-    }
 }
