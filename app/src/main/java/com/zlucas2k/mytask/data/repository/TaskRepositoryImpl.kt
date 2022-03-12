@@ -20,6 +20,10 @@ class TaskRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getTaskById(id: Int): Task? {
+        return taskDAO.getTaskById(id)?.let { TaskMapperImpl.mapEntityToModel(it) }
+    }
+
     override suspend fun saveTask(task: Task) {
         val taskEntity = TaskMapperImpl.mapModelToEntity(task)
         taskDAO.saveTask(taskEntity)

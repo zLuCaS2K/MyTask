@@ -13,6 +13,9 @@ interface TaskDAO {
     @Query("SELECT * FROM task")
     fun getAllTask(): Flow<List<TaskEntity>>
 
+    @Query("SELECT * FROM task WHERE id = :id")
+    suspend fun getTaskById(id: Int): TaskEntity?
+
     @Insert
     suspend fun saveTask(taskEntity: TaskEntity)
 
