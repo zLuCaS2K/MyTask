@@ -23,6 +23,7 @@ fun TaskTextField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     readOnly: Boolean = false,
+    textStyle: TextStyle,
     placeholderText: String,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
@@ -34,8 +35,8 @@ fun TaskTextField(
         onValueChange = { onValueChange(it) },
         modifier = modifier,
         readOnly = readOnly,
-        textStyle = TextStyle(color = MaterialTheme.colors.onBackground.copy(alpha = 0.5f)),
-        placeholder = { Text(text = placeholderText) },
+        textStyle = textStyle,
+        placeholder = { Text(text = placeholderText, style = MaterialTheme.typography.body1) },
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         keyboardOptions = KeyboardOptions(
@@ -44,7 +45,6 @@ fun TaskTextField(
         ),
         singleLine = singleLine,
         maxLines = maxLines,
-        shape = RoundedCornerShape(8.dp),
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = MaterialTheme.colors.primary,
             placeholderColor = MaterialTheme.colors.primaryVariant,
@@ -62,6 +62,7 @@ private fun Preview() {
         TaskTextField(
             value = "Estudar Kotlin",
             onValueChange = {},
+            textStyle = MaterialTheme.typography.h1,
             placeholderText = "Título",
             singleLine = true,
             maxLines = 1

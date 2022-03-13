@@ -1,22 +1,24 @@
 package com.zlucas2k.mytask.presentation.task
 
+import android.app.TimePickerDialog
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.domain.model.Priority
 import com.zlucas2k.mytask.domain.model.Status
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
-import com.zlucas2k.mytask.presentation.task.components.TaskDatePicker
-import com.zlucas2k.mytask.presentation.task.components.TaskPriorityDropDown
-import com.zlucas2k.mytask.presentation.task.components.TaskTextField
-import com.zlucas2k.mytask.presentation.task.components.TaskTimePicker
+import com.zlucas2k.mytask.presentation.task.components.*
+import java.util.*
 
 @Composable
 fun TaskScreenContent(
@@ -33,9 +35,7 @@ fun TaskScreenContent(
     status: Status,
     onStatusChange: (Status) -> Unit
 ) {
-    val modifier = Modifier
-        .fillMaxWidth()
-        .padding(10.dp)
+    val modifier = Modifier.fillMaxWidth()
 
     Column(
         modifier = Modifier
@@ -45,52 +45,49 @@ fun TaskScreenContent(
         TaskTextField(
             value = title,
             onValueChange = { onTitleChange(it) },
-            placeholderText = "Título",
+            textStyle = MaterialTheme.typography.h1,
+            placeholderText = "Título da Tarefa",
             singleLine = true,
             maxLines = 1,
             modifier = modifier,
         )
 
-        TaskPriorityDropDown(
+        PriorityDropDownMenu(
             priority = priority,
             onPrioritySelected = onPrioritySelected,
-            modifier = modifier
+            modifier = modifier.padding(start = 20.dp, top = 10.dp)
         )
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            TaskDatePicker(
-                value = date,
-                onValueChange = { onDateChange(it) },
-                modifier = Modifier
-                    .padding(10.dp)
-                    .weight(1f),
-            )
+        TimePicker(
+            value = time,
+            onValueChange = { onTimeChange(it) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 10.dp, top = 10.dp, end = 10.dp)
+        )
 
-            TaskTimePicker(
-                value = time,
-                onValueChange = { onTimeChange(it) },
-                modifier = Modifier
-                    .padding(10.dp)
-                    .weight(1f),
-            )
-        }
+        DatePicker(
+            value = date,
+            onValueChange = { onDateChange(it) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 10.dp, top = 10.dp, end = 10.dp)
+        )
 
         TaskTextField(
             value = description,
             onValueChange = { onDescriptionChange(it) },
+            textStyle = MaterialTheme.typography.body2,
             placeholderText = "Descrição",
             singleLine = false,
             maxLines = 20,
-            modifier = modifier
+            modifier = modifier.fillMaxHeight()
         )
     }
 }
 
 @Composable
-@Preview(name = "Light")
+@Preview(name = "Light", apiLevel = 32)
 @Preview(name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun Preview() {
     MyTaskTheme {
