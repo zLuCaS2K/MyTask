@@ -7,6 +7,7 @@ buildscript {
         lifecycle_version = '2.4.1'
         coroutines_version = '1.6.0-native-mt'
         hilt_version = '2.41'
+        hilt_compose_navigation_version = '1.0.0'
         room_version = '2.4.2'
         splash_version = '1.0.0-beta01'
         work_version = '2.7.1'
