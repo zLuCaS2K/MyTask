@@ -10,7 +10,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.zlucas2k.mytask.presentation.common.navigation.model.Screen
 import com.zlucas2k.mytask.presentation.home.components.HomeAddFAB
@@ -19,24 +19,24 @@ import com.zlucas2k.mytask.presentation.home.components.HomeTopAppBar
 import com.zlucas2k.mytask.presentation.home.viewmodel.HomeViewModel
 
 @Composable
-fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = viewModel()) {
+fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = hiltViewModel()) {
 
     val state = viewModel.state.value
 
     Scaffold(
         topBar = {
             HomeTopAppBar(
-                onClickAbout = {
-                    // TODO: Abrir dialog de Sobre
-                },
                 onClickSettings = {
                     // TODO: Abrir tela de Configurações
+                },
+                onClickAbout = {
+                    // TODO: Abrir dialog de Sobre
                 }
             )
         },
         floatingActionButton = {
             HomeAddFAB {
-                // TODO: Adicionar Tarefa
+                navHostController.navigate(Screen.TaskScreen.route)
             }
         }
     ) {
