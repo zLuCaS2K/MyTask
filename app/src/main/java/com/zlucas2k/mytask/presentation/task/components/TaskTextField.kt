@@ -1,7 +1,6 @@
 package com.zlucas2k.mytask.presentation.task.components
 
 import android.content.res.Configuration
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -14,7 +13,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 
 @Composable
