@@ -16,8 +16,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 import java.util.*
 
@@ -46,7 +48,7 @@ fun DatePicker(
             modifier = Modifier.padding(start = 5.dp)
         ) {
             Text(
-                text = "Time",
+                text = stringResource(id = R.string.date),
                 color = MaterialTheme.colors.onPrimary.copy(alpha = 0.8f),
                 style = MaterialTheme.typography.caption
             )

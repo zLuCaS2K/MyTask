@@ -28,18 +28,18 @@ fun HomeTopAppBar(onClickAbout: () -> Unit, onClickSettings: () -> Unit) {
             IconButton(onClick = { expanded.value = true }) {
                 Icon(
                     imageVector = Icons.Filled.MoreVert,
-                    contentDescription = null,
+                    contentDescription = stringResource(id = R.string.show_options),
                     tint = MaterialTheme.colors.onPrimary
                 )
             }
 
             DropdownMenu(expanded = expanded.value, onDismissRequest = { expanded.value = false }) {
                 DropdownMenuItem(onClick = onClickSettings) {
-                    Text(text = "Configurações")
+                    Text(text = stringResource(id = R.string.settings))
                 }
 
                 DropdownMenuItem(onClick = onClickAbout) {
-                    Text(text = "Sobre")
+                    Text(text = stringResource(id = R.string.about))
                 }
             }
         }

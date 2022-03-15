@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">MyTask</string>
+    <string name="settings">Configurações</string>
+    <string name="about">Sobre</string>
+    <string name="show_options">Mostrar Opções</string>
+    <string name="add_task">Adicionar Tarefa</string>
+    <string name="sucess_task">Salvar Tarefa</string>
+    <string name="save_sucess_task">Salvo com Sucesso</string>
+    <string name="delete_task">Deletar Tarefa</string>
+    <string name="delete_sucess_task">Deletado com Sucesso</string>
+    <string name="title_task">Título da Tarefa</string>
+    <string name="time">Hora</string>
+    <string name="date">Data</string>
+    <string name="description">Descrição</string>
+    <string name="back">Voltar</string>
 </resources>

@@ -7,6 +7,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.task.common.TaskEventUI
 import com.zlucas2k.mytask.presentation.task.components.TaskTopAppBar
 import com.zlucas2k.mytask.presentation.task.viewmodel.TaskViewModel
@@ -23,11 +24,19 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
         viewModel.eventUI.collectLatest { taskEvent ->
             when (taskEvent) {
                 is TaskEventUI.SaveTask -> {
-                    Toast.makeText(context, "Salvo com Sucesso", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.save_sucess_task),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     navHostController.navigateUp()
                 }
                 is TaskEventUI.DeleteTask -> {
-                    Toast.makeText(context, "Deletado com Sucesso", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.delete_sucess_task),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     navHostController.navigateUp()
                 }
                 is TaskEventUI.ShowToast -> {

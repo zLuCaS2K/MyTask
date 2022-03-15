@@ -12,8 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.domain.model.Priority
 import com.zlucas2k.mytask.domain.model.Status
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
@@ -46,7 +48,7 @@ fun TaskScreenContent(
             value = title,
             onValueChange = { onTitleChange(it) },
             textStyle = MaterialTheme.typography.h1,
-            placeholderText = "Título da Tarefa",
+            placeholderText = stringResource(id = R.string.title_task),
             singleLine = true,
             maxLines = 1,
             modifier = modifier,
@@ -78,7 +80,7 @@ fun TaskScreenContent(
             value = description,
             onValueChange = { onDescriptionChange(it) },
             textStyle = MaterialTheme.typography.body2,
-            placeholderText = "Descrição",
+            placeholderText = stringResource(id = R.string.description),
             singleLine = false,
             maxLines = 20,
             modifier = modifier.fillMaxHeight()

@@ -10,8 +10,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 
 @Composable
@@ -27,7 +29,7 @@ fun TaskTopAppBar(
             IconButton(onClick = onBackPressed) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = null,
+                    contentDescription = stringResource(id = R.string.back),
                     tint = MaterialTheme.colors.onPrimary
                 )
             }
@@ -37,7 +39,7 @@ fun TaskTopAppBar(
                 IconButton(onClick = onDeleteClick) {
                     Icon(
                         imageVector = Icons.Filled.Delete,
-                        contentDescription = null,
+                        contentDescription = stringResource(id = R.string.delete_task),
                         tint = MaterialTheme.colors.onPrimary
                     )
                 }
@@ -46,7 +48,7 @@ fun TaskTopAppBar(
             IconButton(onClick = onSaveClick) {
                 Icon(
                     imageVector = Icons.Filled.Done,
-                    contentDescription = null,
+                    contentDescription = stringResource(id = R.string.save_sucess_task),
                     tint = MaterialTheme.colors.onPrimary
                 )
             }
