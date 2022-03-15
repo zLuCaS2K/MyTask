@@ -9,15 +9,14 @@ class SaveTaskUseCase @Inject constructor(
     private val repository: TaskRepository
 ) {
 
+    @Throws(TaskException::class)
     suspend operator fun invoke(task: Task) {
-        try {
-            if (task.title.isEmpty() || task.description.isEmpty() || task.date.isEmpty()) {
-                throw TaskException("Preencha Todos os Campos!")
-            } else {
-                repository.saveTask(task)
-            }
-        } catch (e: TaskException) {
-            e.printStackTrace()
+        if (task.title.isBlank()) {
+            throw TaskException("Insira um título")
         }
+        if (task.description.isBlank()) {
+            throw TaskException("Insira uma descrição")
+        }
+        repository.saveTask(task)
     }
 }

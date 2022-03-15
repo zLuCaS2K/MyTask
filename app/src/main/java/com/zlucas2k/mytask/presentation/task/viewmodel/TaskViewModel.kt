@@ -6,15 +6,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zlucas2k.mytask.common.exceptions.TaskException
 import com.zlucas2k.mytask.domain.model.Priority
 import com.zlucas2k.mytask.domain.model.Status
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.domain.usecases.DeleteTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.GetTaskByIdUseCase
 import com.zlucas2k.mytask.domain.usecases.SaveTaskUseCase
+import com.zlucas2k.mytask.presentation.task.common.TaskEventUI
 import com.zlucas2k.mytask.presentation.task.common.TaskState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,6 +32,9 @@ class TaskViewModel @Inject constructor(
 
     private val _state: MutableState<TaskState> = mutableStateOf(TaskState())
     val state: State<TaskState> = _state
+
+    private val _eventUI = MutableSharedFlow<TaskEventUI>()
+    val eventUI: SharedFlow<TaskEventUI> = _eventUI
 
     init {
         savedStateHandle.get<Int>("id")?.let { taskId ->
@@ -51,31 +58,45 @@ class TaskViewModel @Inject constructor(
 
     fun onSaveNote() {
         viewModelScope.launch(Dispatchers.IO) {
-            val task = Task(
-                id = _state.value.selectedId,
-                title = _state.value.title,
-                date = _state.value.date,
-                time = _state.value.time,
-                description = _state.value.description,
-                priority = _state.value.priority,
-                status = _state.value.status
-            )
-            saveTaskUseCase(task)
+            try {
+                val task = Task(
+                    id = _state.value.selectedId,
+                    title = _state.value.title,
+                    date = _state.value.date,
+                    time = _state.value.time,
+                    description = _state.value.description,
+                    priority = _state.value.priority,
+                    status = _state.value.status
+                )
+                saveTaskUseCase(task)
+                _eventUI.emit(TaskEventUI.SaveTask)
+            } catch (e: TaskException) {
+                _eventUI.emit(
+                    TaskEventUI.ShowToast(e.message ?: "Não foi possivel salvar")
+                )
+            }
         }
     }
 
     fun onDeleteNote() {
         viewModelScope.launch(Dispatchers.IO) {
-            val task = Task(
-                id = _state.value.selectedId,
-                title = _state.value.title,
-                date = _state.value.date,
-                time = _state.value.time,
-                description = _state.value.description,
-                priority = _state.value.priority,
-                status = _state.value.status
-            )
-            deleteTaskUseCase(task)
+            try {
+                val task = Task(
+                    id = _state.value.selectedId,
+                    title = _state.value.title,
+                    date = _state.value.date,
+                    time = _state.value.time,
+                    description = _state.value.description,
+                    priority = _state.value.priority,
+                    status = _state.value.status
+                )
+                deleteTaskUseCase(task)
+                _eventUI.emit(TaskEventUI.DeleteTask)
+            } catch (e: TaskException) {
+                _eventUI.emit(
+                    TaskEventUI.ShowToast(e.message ?: "Não foi possivel deletar")
+                )
+            }
         }
     }
 
