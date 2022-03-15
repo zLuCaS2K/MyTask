@@ -18,7 +18,7 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
 
     val context = LocalContext.current
     val state = viewModel.state.value
-    val isEditing = state.selectedId == -1
+    val isEditing = state.selectedId != -1
 
     LaunchedEffect(key1 = true) {
         viewModel.eventUI.collectLatest { taskEvent ->

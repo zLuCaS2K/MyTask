@@ -52,6 +52,8 @@ class TaskViewModel @Inject constructor(
                         )
                     }
                 }
+            } else {
+                _state.value = TaskState(selectedId = taskId)
             }
         }
     }
