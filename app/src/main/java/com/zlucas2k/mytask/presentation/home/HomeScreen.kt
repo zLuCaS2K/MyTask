@@ -44,12 +44,6 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
             items(state.tasks) { task ->
                 HomeTaskCard(
                     task = task,
-                    onEditTask = {
-
-                    },
-                    onDeleteTask = {
-
-                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp)
