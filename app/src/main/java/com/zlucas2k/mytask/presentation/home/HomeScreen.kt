@@ -49,7 +49,7 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
                         .height(200.dp)
                         .padding(10.dp)
                         .clickable {
-                            navHostController.navigate(Screen.TaskScreen.route + "?id={id}")
+                            navHostController.navigate(Screen.TaskScreen.route + "?id=${task.id}")
                         }
                 )
             }
