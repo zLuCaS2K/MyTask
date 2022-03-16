@@ -38,7 +38,7 @@ class TaskViewModel @Inject constructor(
 
     init {
         savedStateHandle.get<Int>("id")?.let { taskId ->
-            if (taskId != -1) {
+            if (taskId != 0) {
                 viewModelScope.launch {
                     getTaskByIdUseCase(taskId)?.also { task ->
                         _state.value = TaskState(

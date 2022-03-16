@@ -21,7 +21,7 @@ fun NavigationComponent(navHostController: NavHostController) {
             arguments = listOf(
                 navArgument(name = "id") {
                     type = NavType.IntType
-                    defaultValue = -1
+                    defaultValue = 0
                 }
             )
         ) {
