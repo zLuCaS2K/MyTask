@@ -2,8 +2,8 @@ package com.zlucas2k.mytask.presentation.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
@@ -46,7 +46,7 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
                     task = task,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
+                        .wrapContentHeight()
                         .padding(10.dp)
                         .clickable {
                             navHostController.navigate(Screen.TaskScreen.route + "?id=${task.id}")

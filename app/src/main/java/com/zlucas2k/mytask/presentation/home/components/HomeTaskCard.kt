@@ -1,13 +1,9 @@
 package com.zlucas2k.mytask.presentation.home.components
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.runtime.Composable
@@ -29,21 +25,17 @@ fun HomeTaskCard(task: Task, modifier: Modifier = Modifier) {
         task.priority.colorLight
     }
 
-    Card(modifier = modifier) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            Spacer(
+    Card(modifier = modifier, elevation = 8.dp) {
+        Row(modifier = Modifier.height(IntrinsicSize.Min)) {
+            Divider(
+                color = colorPriority,
+                thickness = 1.dp,
                 modifier = Modifier
+                    .width(2.dp)
                     .fillMaxHeight()
-                    .fillMaxWidth(0.01f)
-                    .background(colorPriority)
-                    .align(Alignment.CenterStart)
             )
 
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.TopStart)
-            ) {
+            Column(modifier = Modifier.padding(8.dp)) {
                 Text(
                     text = task.title,
                     style = MaterialTheme.typography.h1,
@@ -58,21 +50,27 @@ fun HomeTaskCard(task: Task, modifier: Modifier = Modifier) {
                     maxLines = 5,
                     textAlign = TextAlign.Justify,
                     modifier = Modifier
-                        .fillMaxHeight()
+                        .wrapContentHeight()
                         .padding(start = 8.dp, top = 8.dp, end = 8.dp)
                 )
-            }
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.BottomStart)
-                    .padding(start = 8.dp, top = 8.dp, bottom = 8.dp)
-            ) {
-                Icon(imageVector = Icons.Default.DateRange, contentDescription = null)
-                Text(text = "${task.date} | ${task.time}")
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 8.dp, top = 8.dp, bottom = 8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.DateRange,
+                        contentDescription = null,
+                        tint = MaterialTheme.colors.onPrimary.copy(0.5f)
+                    )
 
+                    Text(
+                        text = "${task.date} | ${task.time}",
+                        style = MaterialTheme.typography.caption
+                    )
+                }
             }
         }
     }
@@ -96,7 +94,7 @@ private fun Preview() {
             task = task,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
+                .wrapContentHeight()
                 .padding(10.dp)
         )
     }
