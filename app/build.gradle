@@ -58,6 +58,7 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:$compose_navigation_version"
     // Material
     implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     // Coroutines
