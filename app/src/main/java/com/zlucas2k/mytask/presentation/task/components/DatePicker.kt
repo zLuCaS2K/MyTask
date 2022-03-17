@@ -86,18 +86,18 @@ private fun IconBox() {
 }
 
 private fun showDatePickerDialog(context: Context, onDateValue: (String) -> Unit) {
-    val calendar = Calendar.getInstance()
-    val calendarYear = calendar.get(Calendar.YEAR)
-    val calendarMonth = calendar.get(Calendar.MONTH)
-    val calendarDay = calendar.get(Calendar.DAY_OF_MONTH)
+    val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
 
-    val datePickerDialog = DatePickerDialog(
-        context, { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+    val cYear = calendar.get(Calendar.YEAR)
+    val cMonth = calendar.get(Calendar.MONTH)
+    val cDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+    val datePicker = DatePickerDialog(context, { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
             onDateValue("$dayOfMonth/$month/$year")
-        }, calendarYear, calendarMonth, calendarDay
+        }, cYear, cMonth, cDay
     )
 
-    datePickerDialog.show()
+    datePicker.show()
 }
 
 @Composable
