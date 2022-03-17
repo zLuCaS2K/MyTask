@@ -54,7 +54,7 @@ fun TaskScreenContent(
         PriorityDropDownMenu(
             priority = priority,
             onPrioritySelected = onPrioritySelected,
-            modifier = modifier.padding(start = 20.dp, top = 10.dp)
+            modifier = modifier.padding(start = 20.dp, top = 10.dp, end = 10.dp)
         )
 
         TimePicker(

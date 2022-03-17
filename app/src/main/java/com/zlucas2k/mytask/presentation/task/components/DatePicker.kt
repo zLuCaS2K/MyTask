@@ -72,7 +72,7 @@ private fun IconBox() {
             .wrapContentHeight()
             .padding(start = 10.dp)
             .clip(RoundedCornerShape(10.dp))
-            .background(color = MaterialTheme.colors.primaryVariant)
+            .background(color = MaterialTheme.colors.primaryVariant.copy(alpha = 0.3f))
     ) {
         Icon(
             imageVector = Icons.Filled.DateRange,
