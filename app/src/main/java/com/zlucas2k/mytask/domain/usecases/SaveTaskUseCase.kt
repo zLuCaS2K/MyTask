@@ -3,10 +3,12 @@ package com.zlucas2k.mytask.domain.usecases
 import com.zlucas2k.mytask.common.exceptions.TaskException
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.domain.repository.TaskRepository
+import com.zlucas2k.mytask.infrastructure.worker.provider.TaskWorkerProvider
 import javax.inject.Inject
 
 class SaveTaskUseCase @Inject constructor(
-    private val repository: TaskRepository
+    private val repository: TaskRepository,
+    private val workerProvider: TaskWorkerProvider
 ) {
 
     // TODO: Resolver problema de internacionalização dessas strings.
@@ -19,6 +21,7 @@ class SaveTaskUseCase @Inject constructor(
         if (task.description.isBlank()) {
             throw TaskException("Insira uma descrição")
         }
-        repository.saveTask(task)
+        val id = repository.saveTask(task)
+        workerProvider.createTaskWork(task.copy(id = id.toInt()))
     }
 }
