@@ -16,7 +16,7 @@ import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 fun HomeAddFAB(onClick: () -> Unit) {
     FloatingActionButton(onClick = onClick) {
         Icon(
-            imageVector = Icons.Default.Add,
+            imageVector = Icons.Filled.Add,
             contentDescription = stringResource(id = R.string.add_task),
             tint = MaterialTheme.colors.onSecondary
         )

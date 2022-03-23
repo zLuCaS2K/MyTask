@@ -61,7 +61,7 @@ fun HomeTaskCard(task: Task, modifier: Modifier = Modifier) {
                         .padding(start = 8.dp, top = 8.dp, bottom = 8.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.DateRange,
+                        imageVector = Icons.Filled.DateRange,
                         contentDescription = null,
                         tint = MaterialTheme.colors.onPrimary.copy(0.5f)
                     )
