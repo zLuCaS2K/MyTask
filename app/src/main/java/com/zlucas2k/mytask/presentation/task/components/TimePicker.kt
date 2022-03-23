@@ -3,12 +3,14 @@ package com.zlucas2k.mytask.presentation.task.components
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.res.Configuration
+import android.text.format.DateFormat
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Alarm
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.R
+import com.zlucas2k.mytask.common.utils.Utils
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 import java.util.*
 
@@ -74,7 +77,7 @@ private fun IconBox() {
             .background(color = MaterialTheme.colors.primaryVariant.copy(alpha = 0.3f))
     ) {
         Icon(
-            imageVector = Icons.Filled.DateRange,
+            imageVector = Icons.Filled.Alarm,
             contentDescription = null,
             tint = MaterialTheme.colors.onPrimary,
             modifier = Modifier
@@ -88,11 +91,11 @@ private fun showTimerPickerDialog(context: Context, onTimeValue: (String) -> Uni
     val calendar = Calendar.getInstance()
     val calendarHours = calendar.get(Calendar.HOUR_OF_DAY)
     val calendarMinutes = calendar.get(Calendar.MINUTE)
+    val isSystem24Hour = DateFormat.is24HourFormat(context)
 
-    val timePickerDialog = TimePickerDialog(
-        context, { _, hour: Int, minute: Int ->
+    val timePickerDialog = TimePickerDialog(context, { _, hour: Int, minute: Int ->
             onTimeValue("$hour:$minute")
-        }, calendarHours, calendarMinutes, false
+        }, calendarHours, calendarMinutes, isSystem24Hour
     )
 
     timePickerDialog.show()
