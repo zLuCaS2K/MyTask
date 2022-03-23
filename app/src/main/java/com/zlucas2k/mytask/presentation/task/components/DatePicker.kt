@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.R
+import com.zlucas2k.mytask.common.utils.Utils
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 import java.util.*
 
@@ -86,14 +87,15 @@ private fun IconBox() {
 }
 
 private fun showDatePickerDialog(context: Context, onDateValue: (String) -> Unit) {
-    val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+    val calendar = Calendar.getInstance()
 
     val cYear = calendar.get(Calendar.YEAR)
     val cMonth = calendar.get(Calendar.MONTH)
     val cDay = calendar.get(Calendar.DAY_OF_MONTH)
 
     val datePicker = DatePickerDialog(context, { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
-            onDateValue("$dayOfMonth/$month/$year")
+            val dateFormatted = Utils.formatDate("$dayOfMonth/${month + 1}/$year")
+            onDateValue(dateFormatted)
         }, cYear, cMonth, cDay
     )
 
