@@ -13,13 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.zlucas2k.mytask.domain.model.Priority
+import com.zlucas2k.mytask.presentation.common.model.PriorityView
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 
 @Composable
 fun PriorityDropDownMenu(
-    priority: Priority,
-    onPrioritySelected: (Priority) -> Unit,
+    priority: PriorityView,
+    onPrioritySelected: (PriorityView) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val expanded = remember { mutableStateOf(false) }
@@ -50,7 +50,7 @@ fun PriorityDropDownMenu(
             DropdownMenuItem(
                 onClick = {
                     expanded.value = false
-                    onPrioritySelected(Priority.NONE)
+                    onPrioritySelected(PriorityView.NONE)
                 },
                 content = {
                     PriorityDropDownMenuItem("Sem")
@@ -60,7 +60,7 @@ fun PriorityDropDownMenu(
             DropdownMenuItem(
                 onClick = {
                     expanded.value = false
-                    onPrioritySelected(Priority.LOW)
+                    onPrioritySelected(PriorityView.LOW)
                 },
                 content = {
                     PriorityDropDownMenuItem("Baixa")
@@ -70,7 +70,7 @@ fun PriorityDropDownMenu(
             DropdownMenuItem(
                 onClick = {
                     expanded.value = false
-                    onPrioritySelected(Priority.MEDIUM)
+                    onPrioritySelected(PriorityView.MEDIUM)
                 },
                 content = {
                     PriorityDropDownMenuItem("Média")
@@ -80,7 +80,7 @@ fun PriorityDropDownMenu(
             DropdownMenuItem(
                 onClick = {
                     expanded.value = false
-                    onPrioritySelected(Priority.HIGH)
+                    onPrioritySelected(PriorityView.HIGH)
                 },
                 content = {
                     PriorityDropDownMenuItem("Alta")
@@ -99,11 +99,11 @@ private fun PriorityDropDownMenuItem(text: String) {
     )
 }
 
-private fun getPriorityName(priority: Priority) = when (priority) {
-    Priority.NONE -> "Sem"
-    Priority.LOW -> "Baixa"
-    Priority.MEDIUM -> "Média"
-    Priority.HIGH -> "Alta"
+private fun getPriorityName(priority: PriorityView) = when (priority) {
+    PriorityView.NONE -> "Sem"
+    PriorityView.LOW -> "Baixa"
+    PriorityView.MEDIUM -> "Média"
+    PriorityView.HIGH -> "Alta"
 }
 
 @Composable
@@ -112,7 +112,7 @@ private fun getPriorityName(priority: Priority) = when (priority) {
 private fun Preview() {
     MyTaskTheme {
         PriorityDropDownMenu(
-            priority = Priority.HIGH,
+            priority = PriorityView.HIGH,
             onPrioritySelected = {},
             modifier = Modifier.fillMaxWidth()
         )

@@ -1,5 +1,5 @@
 package com.zlucas2k.mytask.presentation.home.common
 
-import com.zlucas2k.mytask.domain.model.Task
+import com.zlucas2k.mytask.presentation.common.model.TaskView
 
-data class HomeState(val tasks: List<Task> = emptyList())
+data class HomeState(val tasks: List<TaskView> = emptyList())

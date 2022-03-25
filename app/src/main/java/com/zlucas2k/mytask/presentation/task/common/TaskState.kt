@@ -1,7 +1,7 @@
 package com.zlucas2k.mytask.presentation.task.common
 
-import com.zlucas2k.mytask.domain.model.Priority
-import com.zlucas2k.mytask.domain.model.Status
+import com.zlucas2k.mytask.presentation.common.model.PriorityView
+import com.zlucas2k.mytask.presentation.common.model.StatusView
 
 data class TaskState(
     val selectedId: Int = 0,
@@ -9,6 +9,6 @@ data class TaskState(
     val date: String = "",
     val time: String = "",
     val description: String = "",
-    val priority: Priority = Priority.NONE,
-    val status: Status = Status.TODO
+    val priority: PriorityView = PriorityView.NONE,
+    val status: StatusView = StatusView.TODO
 )

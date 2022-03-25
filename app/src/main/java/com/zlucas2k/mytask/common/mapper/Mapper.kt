@@ -1,8 +1,8 @@
 package com.zlucas2k.mytask.common.mapper
 
-interface Mapper<E, M> {
+interface Mapper<I, O> {
 
-    fun mapEntityToModel(entity: E): M
+    fun mapTo(modelEntry: I): O
 
-    fun mapModelToEntity(model: M): E
+    fun mapFrom(modelEntry: O): I
 }

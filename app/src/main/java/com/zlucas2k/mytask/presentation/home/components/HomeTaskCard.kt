@@ -12,12 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.zlucas2k.mytask.domain.model.Priority
-import com.zlucas2k.mytask.domain.model.Task
+import com.zlucas2k.mytask.presentation.common.model.PriorityView
+import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 
 @Composable
-fun HomeTaskCard(task: Task, modifier: Modifier = Modifier) {
+fun HomeTaskCard(task: TaskView, modifier: Modifier = Modifier) {
 
     val colorPriority = if (isSystemInDarkTheme()) {
         task.priority.colorDark
@@ -80,13 +80,13 @@ fun HomeTaskCard(task: Task, modifier: Modifier = Modifier) {
 @Preview("Light")
 @Preview("Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun Preview() {
-    val task = Task(
+    val task = TaskView(
         1,
         "Estudar Kotlin",
         "17/08/2000",
         "18:00",
         "ADsdadsadsadafmdfmadfapfmsfoamsfmaf",
-        Priority.HIGH
+        PriorityView.HIGH
     )
 
     MyTaskTheme {

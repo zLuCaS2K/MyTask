@@ -21,7 +21,12 @@ class SaveTaskUseCase @Inject constructor(
         if (task.description.isBlank()) {
             throw TaskException("Insira uma descrição")
         }
-        val id = repository.saveTask(task)
-        workerProvider.createTaskWork(task.copy(id = id.toInt()))
+        if (task.isNotValidDateAndTimeTask()) {
+            throw TaskException("Insira uma data válida!")
+        }
+
+        repository.saveTask(task).also {
+            workerProvider.createTaskWork(task.copy(id = it.toInt()))
+        }
     }
 }

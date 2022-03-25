@@ -11,8 +11,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.R
-import com.zlucas2k.mytask.domain.model.Priority
-import com.zlucas2k.mytask.domain.model.Status
+import com.zlucas2k.mytask.presentation.common.model.PriorityView
+import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 import com.zlucas2k.mytask.presentation.task.components.DatePicker
 import com.zlucas2k.mytask.presentation.task.components.PriorityDropDownMenu
@@ -29,10 +29,10 @@ fun TaskScreenContent(
     onTimeChange: (String) -> Unit,
     description: String,
     onDescriptionChange: (String) -> Unit,
-    priority: Priority,
-    onPrioritySelected: (Priority) -> Unit,
-    status: Status,
-    onStatusChange: (Status) -> Unit
+    priority: PriorityView,
+    onPrioritySelected: (PriorityView) -> Unit,
+    status: StatusView,
+    onStatusChange: (StatusView) -> Unit
 ) {
     val modifier = Modifier.fillMaxWidth()
 
@@ -97,8 +97,8 @@ private fun Preview() {
                 "readable content of a page when looking at its layout. The point of using Lorem Ipsum" +
                 " is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here," +
                 " content here', making it look like readable English."
-        val priority = Priority.HIGH
-        val status = Status.TODO
+        val priority = PriorityView.HIGH
+        val status = StatusView.TODO
 
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
             TaskScreenContent(
