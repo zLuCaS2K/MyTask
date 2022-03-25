@@ -1,6 +1,10 @@
 package com.zlucas2k.mytask.data.database
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Query
+import androidx.room.Insert
+import androidx.room.Delete
+import androidx.room.OnConflictStrategy
 import com.zlucas2k.mytask.data.entity.TaskEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -14,7 +18,7 @@ interface TaskDAO {
     suspend fun getTaskById(id: Int): TaskEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveTask(taskEntity: TaskEntity) : Long
+    suspend fun saveTask(taskEntity: TaskEntity): Long
 
     @Delete
     suspend fun deleteTask(taskEntity: TaskEntity)

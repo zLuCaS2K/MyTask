@@ -16,8 +16,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object PresentationModule {
 
-    // TODO: Implementar somente uma única dependência em formato de classe com todos os casos de usos.
-
     @Provides
     @Singleton
     fun provideGetAllTaskUseCase(repository: TaskRepository): GetAllTaskUseCase {
@@ -32,13 +30,13 @@ object PresentationModule {
 
     @Provides
     @Singleton
-    fun provideSaveTaskUseCase(repository: TaskRepository, taskWorkerProvider: TaskWorkerProvider): SaveTaskUseCase {
-        return SaveTaskUseCase(repository, taskWorkerProvider)
+    fun provideSaveTaskUseCase(repository: TaskRepository, workerProvider: TaskWorkerProvider): SaveTaskUseCase {
+        return SaveTaskUseCase(repository, workerProvider)
     }
 
     @Provides
     @Singleton
-    fun provideDeleteTaskUseCase(repository: TaskRepository, taskWorkerProvider: TaskWorkerProvider): DeleteTaskUseCase {
-        return DeleteTaskUseCase(repository, taskWorkerProvider)
+    fun provideDeleteTaskUseCase(repository: TaskRepository, workerProvider: TaskWorkerProvider): DeleteTaskUseCase {
+        return DeleteTaskUseCase(repository, workerProvider)
     }
 }

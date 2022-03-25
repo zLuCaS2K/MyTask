@@ -9,7 +9,7 @@ import com.zlucas2k.mytask.common.utils.Constants
 import com.zlucas2k.mytask.common.utils.Utils
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.infrastructure.worker.work.TaskWork
-import java.util.*
+import java.util.Calendar
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 

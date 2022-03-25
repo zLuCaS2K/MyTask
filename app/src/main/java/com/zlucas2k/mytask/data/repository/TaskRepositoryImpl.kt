@@ -9,11 +9,11 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class TaskRepositoryImpl @Inject constructor(
-    private val taskDAO: TaskDAO
+    private val _taskDAO: TaskDAO
 ) : TaskRepository {
 
     override fun getAllTask(): Flow<List<Task>> {
-        return taskDAO.getAllTask().map { listTaskEntity ->
+        return _taskDAO.getAllTask().map { listTaskEntity ->
             listTaskEntity.map { taskEntity ->
                 TaskMapperImpl.mapEntityToModel(taskEntity)
             }
@@ -21,16 +21,16 @@ class TaskRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getTaskById(id: Int): Task? {
-        return taskDAO.getTaskById(id)?.let { TaskMapperImpl.mapEntityToModel(it) }
+        return _taskDAO.getTaskById(id)?.let { TaskMapperImpl.mapEntityToModel(it) }
     }
 
     override suspend fun saveTask(task: Task): Long {
         val taskEntity = TaskMapperImpl.mapModelToEntity(task)
-        return taskDAO.saveTask(taskEntity)
+        return _taskDAO.saveTask(taskEntity)
     }
 
     override suspend fun deleteTask(task: Task) {
         val taskEntity = TaskMapperImpl.mapModelToEntity(task)
-        taskDAO.deleteTask(taskEntity)
+        _taskDAO.deleteTask(taskEntity)
     }
 }
