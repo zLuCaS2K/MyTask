@@ -5,14 +5,10 @@ import java.util.*
 
 object Utils {
 
-    private val timeFormatter = SimpleDateFormat("hh:mm", Locale.ROOT)
     private val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.ROOT)
     private val dateFullFormatter = SimpleDateFormat("dd/MM/yyyy hh:mm", Locale.ROOT)
 
-    fun formatTime(time: String): String {
-        timeFormatter.timeZone = TimeZone.getDefault()
-        return timeFormatter.format(timeFormatter.parse(time))
-    }
+    fun formatTime(hour: Int, minute: Int) = String.format("%02d:%02d", hour, minute)
 
     fun formatDate(date: String): String {
         return dateFormatter.format(dateFormatter.parse(date))
