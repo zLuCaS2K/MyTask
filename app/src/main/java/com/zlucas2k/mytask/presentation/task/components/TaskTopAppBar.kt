@@ -12,7 +12,6 @@ import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 
@@ -24,7 +23,7 @@ fun TaskTopAppBar(
     onBackPressed: () -> Unit
 ) {
     TopAppBar(
-        title = { },
+        title = {},
         navigationIcon = {
             IconButton(onClick = onBackPressed) {
                 Icon(
@@ -52,8 +51,7 @@ fun TaskTopAppBar(
                     tint = MaterialTheme.colors.onPrimary
                 )
             }
-        },
-        elevation = 0.dp
+        }
     )
 }
 
