@@ -34,7 +34,13 @@ fun TaskTextField(
         modifier = modifier,
         readOnly = readOnly,
         textStyle = textStyle,
-        placeholder = { Text(text = placeholderText, style = MaterialTheme.typography.body1) },
+        placeholder = {
+            Text(
+                text = placeholderText,
+                style = MaterialTheme.typography.body1,
+                color = MaterialTheme.colors.onBackground.copy(alpha = 0.5f)
+            )
+        },
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         keyboardOptions = KeyboardOptions(
