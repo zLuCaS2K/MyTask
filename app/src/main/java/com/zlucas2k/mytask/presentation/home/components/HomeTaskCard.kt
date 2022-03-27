@@ -5,6 +5,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Alarm
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -67,7 +68,20 @@ fun HomeTaskCard(task: TaskView, modifier: Modifier = Modifier) {
                     )
 
                     Text(
-                        text = "${task.date} | ${task.time}",
+                        text = task.date,
+                        style = MaterialTheme.typography.caption
+                    )
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    Icon(
+                        imageVector = Icons.Filled.Alarm,
+                        contentDescription = null,
+                        tint = MaterialTheme.colors.onPrimary.copy(0.5f)
+                    )
+
+                    Text(
+                        text = task.time,
                         style = MaterialTheme.typography.caption
                     )
                 }
