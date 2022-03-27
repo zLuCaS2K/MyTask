@@ -56,7 +56,7 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
             )
         },
         content = {
-            TaskScreenContent(
+            TaskScreenForm(
                 title = state.title,
                 onTitleChange = {
                     viewModel.onTitleChange(it)
@@ -66,8 +66,8 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
                     viewModel.onDateChange(it)
                 },
                 time = state.time,
-                onTimeChange = {
-                    viewModel.onTimeChange(it)
+                onTimeChange = { hour, minute ->
+                    viewModel.onTimeChange(hour, minute)
                 },
                 description = state.description,
                 onDescriptionChange = {
