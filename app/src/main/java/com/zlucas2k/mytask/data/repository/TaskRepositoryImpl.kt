@@ -12,25 +12,27 @@ class TaskRepositoryImpl @Inject constructor(
     private val _taskDAO: TaskDAO
 ) : TaskRepository {
 
+    private val _mapper = TaskEntityMapperImpl
+
     override fun getAllTask(): Flow<List<Task>> {
         return _taskDAO.getAllTask().map { listTaskEntity ->
             listTaskEntity.map { taskEntity ->
-                TaskEntityMapperImpl.mapFrom(taskEntity)
+                _mapper.mapFrom(taskEntity)
             }
         }
     }
 
     override suspend fun getTaskById(id: Int): Task? {
-        return _taskDAO.getTaskById(id)?.let { TaskEntityMapperImpl.mapFrom(it) }
+        return _taskDAO.getTaskById(id)?.let { _mapper.mapFrom(it) }
     }
 
     override suspend fun saveTask(task: Task): Long {
-        val taskEntity = TaskEntityMapperImpl.mapTo(task)
+        val taskEntity = _mapper.mapTo(task)
         return _taskDAO.saveTask(taskEntity)
     }
 
     override suspend fun deleteTask(task: Task) {
-        val taskEntity = TaskEntityMapperImpl.mapTo(task)
+        val taskEntity = _mapper.mapTo(task)
         _taskDAO.deleteTask(taskEntity)
     }
 }

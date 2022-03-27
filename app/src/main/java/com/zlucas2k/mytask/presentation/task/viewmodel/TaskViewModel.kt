@@ -39,6 +39,8 @@ class TaskViewModel @Inject constructor(
     private val _eventUI = MutableSharedFlow<TaskEventUI>()
     val eventUI: SharedFlow<TaskEventUI> = _eventUI
 
+    private val _mapper = TaskViewMapperImpl
+
     init {
         savedStateHandle.get<Int>("id")?.let { taskId ->
             if (taskId != 0) {
@@ -64,19 +66,17 @@ class TaskViewModel @Inject constructor(
     fun onSaveNote() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val task = TaskViewMapperImpl.mapFrom(
-                    TaskView(
-                        id = _state.value.selectedId,
-                        title = _state.value.title,
-                        date = _state.value.date,
-                        time = _state.value.time,
-                        description = _state.value.description,
-                        priority = _state.value.priority,
-                        status = _state.value.status
-                    )
+                val task = TaskView(
+                    id = _state.value.selectedId,
+                    title = _state.value.title,
+                    date = _state.value.date,
+                    time = _state.value.time,
+                    description = _state.value.description,
+                    priority = _state.value.priority,
+                    status = _state.value.status
                 )
 
-                saveTaskUseCase(task)
+                saveTaskUseCase(_mapper.mapFrom(task))
                 _eventUI.emit(TaskEventUI.SaveTask)
             } catch (e: TaskException) {
                 _eventUI.emit(
@@ -89,18 +89,17 @@ class TaskViewModel @Inject constructor(
     fun onDeleteNote() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val task = TaskViewMapperImpl.mapFrom(
-                    TaskView(
-                        id = _state.value.selectedId,
-                        title = _state.value.title,
-                        date = _state.value.date,
-                        time = _state.value.time,
-                        description = _state.value.description,
-                        priority = _state.value.priority,
-                        status = _state.value.status
-                    )
+                val task = TaskView(
+                    id = _state.value.selectedId,
+                    title = _state.value.title,
+                    date = _state.value.date,
+                    time = _state.value.time,
+                    description = _state.value.description,
+                    priority = _state.value.priority,
+                    status = _state.value.status
                 )
-                deleteTaskUseCase(task)
+
+                deleteTaskUseCase(_mapper.mapFrom(task))
                 _eventUI.emit(TaskEventUI.DeleteTask)
             } catch (e: TaskException) {
                 _eventUI.emit(
