@@ -20,13 +20,13 @@ import com.zlucas2k.mytask.presentation.task.components.TaskTextField
 import com.zlucas2k.mytask.presentation.task.components.TimePicker
 
 @Composable
-fun TaskScreenContent(
+fun TaskScreenForm(
     title: String,
     onTitleChange: (String) -> Unit,
     date: String,
     onDateChange: (String) -> Unit,
     time: String,
-    onTimeChange: (String) -> Unit,
+    onTimeChange: (Int, Int) -> Unit,
     description: String,
     onDescriptionChange: (String) -> Unit,
     priority: PriorityView,
@@ -59,7 +59,9 @@ fun TaskScreenContent(
 
         TimePicker(
             value = time,
-            onValueChange = { onTimeChange(it) },
+            onValueChange = { hour, minute ->
+                onTimeChange(hour, minute)
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 10.dp, top = 10.dp, end = 10.dp)
@@ -86,7 +88,7 @@ fun TaskScreenContent(
 }
 
 @Composable
-@Preview(name = "Light", apiLevel = 32)
+@Preview(name = "Light")
 @Preview(name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun Preview() {
     MyTaskTheme {
@@ -101,13 +103,15 @@ private fun Preview() {
         val status = StatusView.TODO
 
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-            TaskScreenContent(
+            TaskScreenForm(
                 title = title,
                 onTitleChange = {},
                 date = date,
                 onDateChange = {},
                 time = time,
-                onTimeChange = {},
+                onTimeChange = { _, _ ->
+
+                },
                 description = description,
                 onDescriptionChange = {},
                 priority = priority,
