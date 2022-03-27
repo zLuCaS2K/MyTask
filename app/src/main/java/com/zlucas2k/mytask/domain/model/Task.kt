@@ -12,6 +12,10 @@ data class Task(
     val priority: Priority,
     val status: Status = Status.TODO
 ) {
+    /**
+     * Retorna true caso a data e a hora sejam válidas, caso seja uma data ou hora no passado
+     * será retornado false.
+     */
     fun isNotValidDateAndTimeTask(): Boolean {
         val calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
