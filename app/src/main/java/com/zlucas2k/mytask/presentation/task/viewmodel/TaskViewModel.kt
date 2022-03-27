@@ -7,6 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zlucas2k.mytask.common.exceptions.TaskException
+import com.zlucas2k.mytask.common.utils.Utils
 import com.zlucas2k.mytask.domain.usecases.DeleteTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.GetTaskByIdUseCase
 import com.zlucas2k.mytask.domain.usecases.SaveTaskUseCase
@@ -114,11 +115,13 @@ class TaskViewModel @Inject constructor(
     }
 
     fun onDateChange(newText: String) {
-        _state.value = _state.value.copy(date = newText)
+        val dateFormatted = Utils.formatDate(newText)
+        _state.value = _state.value.copy(date = dateFormatted)
     }
 
-    fun onTimeChange(newText: String) {
-        _state.value = _state.value.copy(time = newText)
+    fun onTimeChange(hour: Int, minute: Int) {
+        val timeFormatted = Utils.formatTime(hour, minute)
+        _state.value = _state.value.copy(time = timeFormatted)
     }
 
     fun onDescriptionChange(newText: String) {

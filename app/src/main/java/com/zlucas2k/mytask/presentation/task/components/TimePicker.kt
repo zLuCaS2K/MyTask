@@ -11,7 +11,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Alarm
-import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,14 +20,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.R
-import com.zlucas2k.mytask.common.utils.Utils
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 import java.util.*
 
 @Composable
 fun TimePicker(
     value: String,
-    onValueChange: (String) -> Unit,
+    onValueChange: (Int, Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -37,8 +35,8 @@ fun TimePicker(
         modifier = modifier
             .height(TextFieldDefaults.MinHeight)
             .clickable {
-                showTimerPickerDialog(context) {
-                    onValueChange(it)
+                showTimerPickerDialog(context) { hour, minute ->
+                    onValueChange(hour, minute)
                 }
             },
         verticalAlignment = Alignment.CenterVertically
@@ -87,14 +85,14 @@ private fun IconBox() {
     }
 }
 
-private fun showTimerPickerDialog(context: Context, onTimeValue: (String) -> Unit) {
+private fun showTimerPickerDialog(context: Context, onTimeValue: (Int, Int) -> Unit) {
     val calendar = Calendar.getInstance()
     val calendarHours = calendar.get(Calendar.HOUR_OF_DAY)
     val calendarMinutes = calendar.get(Calendar.MINUTE)
     val isSystem24Hour = DateFormat.is24HourFormat(context)
 
     val timePickerDialog = TimePickerDialog(context, { _, hour: Int, minute: Int ->
-            onTimeValue("$hour:$minute")
+            onTimeValue(hour, minute)
         }, calendarHours, calendarMinutes, isSystem24Hour
     )
 
@@ -109,7 +107,7 @@ private fun Preview() {
         Surface(color = MaterialTheme.colors.surface) {
             TimePicker(
                 value = "13:00",
-                onValueChange = {
+                onValueChange = { _, _ ->
 
                 },
                 modifier = Modifier.fillMaxWidth()
