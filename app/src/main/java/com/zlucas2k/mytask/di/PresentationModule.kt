@@ -1,10 +1,12 @@
 package com.zlucas2k.mytask.di
 
 import com.zlucas2k.mytask.domain.repository.TaskRepository
-import com.zlucas2k.mytask.domain.usecases.DeleteTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.GetAllTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.GetTaskByIdUseCase
-import com.zlucas2k.mytask.domain.usecases.SaveTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.shedule.CancelSheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.shedule.SheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.DeleteTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.GetAllTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.GetTaskByIdUseCase
+import com.zlucas2k.mytask.domain.usecases.task.SaveTaskUseCase
 import com.zlucas2k.mytask.infrastructure.worker.provider.TaskWorkerProvider
 import dagger.Module
 import dagger.Provides
@@ -30,13 +32,25 @@ object PresentationModule {
 
     @Provides
     @Singleton
-    fun provideSaveTaskUseCase(repository: TaskRepository, workerProvider: TaskWorkerProvider): SaveTaskUseCase {
-        return SaveTaskUseCase(repository, workerProvider)
+    fun provideSaveTaskUseCase(repository: TaskRepository): SaveTaskUseCase {
+        return SaveTaskUseCase(repository)
     }
 
     @Provides
     @Singleton
-    fun provideDeleteTaskUseCase(repository: TaskRepository, workerProvider: TaskWorkerProvider): DeleteTaskUseCase {
-        return DeleteTaskUseCase(repository, workerProvider)
+    fun provideDeleteTaskUseCase(repository: TaskRepository): DeleteTaskUseCase {
+        return DeleteTaskUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSheduleTaskUseCase(workerProvider: TaskWorkerProvider): SheduleTaskUseCase {
+        return SheduleTaskUseCase(workerProvider)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCancelSheduleTaskUseCase(workerProvider: TaskWorkerProvider): CancelSheduleTaskUseCase {
+        return CancelSheduleTaskUseCase(workerProvider)
     }
 }
