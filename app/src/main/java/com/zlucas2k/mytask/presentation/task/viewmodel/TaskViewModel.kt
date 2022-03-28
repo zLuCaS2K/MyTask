@@ -8,9 +8,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zlucas2k.mytask.common.exceptions.TaskException
 import com.zlucas2k.mytask.common.utils.Utils
-import com.zlucas2k.mytask.domain.usecases.DeleteTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.GetTaskByIdUseCase
-import com.zlucas2k.mytask.domain.usecases.SaveTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.shedule.CancelSheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.shedule.SheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.DeleteTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.GetTaskByIdUseCase
+import com.zlucas2k.mytask.domain.usecases.task.SaveTaskUseCase
 import com.zlucas2k.mytask.presentation.common.model.PriorityView
 import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.model.TaskView
@@ -31,7 +33,10 @@ class TaskViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val saveTaskUseCase: SaveTaskUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
-    private val getTaskByIdUseCase: GetTaskByIdUseCase
+    private val getTaskByIdUseCase: GetTaskByIdUseCase,
+
+    private val sheduleTaskUseCase: SheduleTaskUseCase,
+    private val cancelSheduleTaskUseCase: CancelSheduleTaskUseCase
 ) : ViewModel() {
 
     private val _state: MutableState<TaskState> = mutableStateOf(TaskState())
@@ -67,17 +72,20 @@ class TaskViewModel @Inject constructor(
     fun onSaveNote() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val task = TaskView(
-                    id = _state.value.selectedId,
-                    title = _state.value.title,
-                    date = _state.value.date,
-                    time = _state.value.time,
-                    description = _state.value.description,
-                    priority = _state.value.priority,
-                    status = _state.value.status
+                val taskMapped = _mapper.mapFrom(
+                    TaskView(
+                        id = _state.value.selectedId,
+                        title = _state.value.title,
+                        date = _state.value.date,
+                        time = _state.value.time,
+                        description = _state.value.description,
+                        priority = _state.value.priority,
+                        status = _state.value.status
+                    )
                 )
-
-                saveTaskUseCase(_mapper.mapFrom(task))
+                saveTaskUseCase(taskMapped).also {
+                    sheduleTaskUseCase(taskMapped.copy(id = it.toInt()))
+                }
                 _eventUI.emit(TaskEventUI.SaveTask)
             } catch (e: TaskException) {
                 _eventUI.emit(
@@ -90,17 +98,19 @@ class TaskViewModel @Inject constructor(
     fun onDeleteNote() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val task = TaskView(
-                    id = _state.value.selectedId,
-                    title = _state.value.title,
-                    date = _state.value.date,
-                    time = _state.value.time,
-                    description = _state.value.description,
-                    priority = _state.value.priority,
-                    status = _state.value.status
+                val taskMapped = _mapper.mapFrom(
+                    TaskView(
+                        id = _state.value.selectedId,
+                        title = _state.value.title,
+                        date = _state.value.date,
+                        time = _state.value.time,
+                        description = _state.value.description,
+                        priority = _state.value.priority,
+                        status = _state.value.status
+                    )
                 )
-
-                deleteTaskUseCase(_mapper.mapFrom(task))
+                deleteTaskUseCase(taskMapped)
+                cancelSheduleTaskUseCase(taskMapped)
                 _eventUI.emit(TaskEventUI.DeleteTask)
             } catch (e: TaskException) {
                 _eventUI.emit(
