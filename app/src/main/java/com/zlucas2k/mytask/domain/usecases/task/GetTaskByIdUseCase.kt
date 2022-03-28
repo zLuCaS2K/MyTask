@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.domain.usecases
+package com.zlucas2k.mytask.domain.usecases.task
 
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.domain.repository.TaskRepository
