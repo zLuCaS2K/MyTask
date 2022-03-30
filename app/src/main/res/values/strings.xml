@@ -4,10 +4,16 @@
     <string name="about">Sobre</string>
     <string name="show_options">Mostrar Opções</string>
     <string name="add_task">Adicionar Tarefa</string>
-    <string name="sucess_task">Salvar Tarefa</string>
+    <string name="save_task">Salvar Tarefa</string>
     <string name="save_sucess_task">Salvo com Sucesso</string>
+    <string name="save_task_title_dialog">Salvar tarefa?</string>
+    <string name="save_task_description_dialog">Deseja realmente salvar essa tarefa?</string>
     <string name="delete_task">Deletar Tarefa</string>
     <string name="delete_sucess_task">Deletado com Sucesso</string>
+    <string name="delete_task_title_dialog">Excluir tarefa?</string>
+    <string name="delete_task_description_dialog">Deseja realmente excluir essa tarefa?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
     <string name="title_task">Título da Tarefa</string>
     <string name="time">Hora</string>
     <string name="date">Data</string>
