@@ -4,5 +4,5 @@ import com.zlucas2k.mytask.domain.model.Task
 
 interface SheduleTaskUseCase {
 
-    operator fun invoke(task: Task)
+    operator fun invoke(task: Task, delayInMillis: Long)
 }

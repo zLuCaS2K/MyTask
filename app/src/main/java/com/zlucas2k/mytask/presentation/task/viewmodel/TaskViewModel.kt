@@ -34,9 +34,6 @@ class TaskViewModel @Inject constructor(
     private val saveTaskUseCase: SaveTaskUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
     private val getTaskByIdUseCase: GetTaskByIdUseCase,
-
-    private val sheduleTaskUseCase: SheduleTaskUseCase,
-    private val cancelSheduleTaskUseCase: CancelSheduleTaskUseCase
 ) : ViewModel() {
 
     private val _state: MutableState<TaskState> = mutableStateOf(TaskState())
@@ -83,9 +80,8 @@ class TaskViewModel @Inject constructor(
                         status = _state.value.status
                     )
                 )
-                saveTaskUseCase(taskMapped).also {
-                    sheduleTaskUseCase(taskMapped.copy(id = it.toInt()))
-                }
+
+                saveTaskUseCase(taskMapped)
                 _eventUI.emit(TaskEventUI.SaveTask)
             } catch (e: TaskException) {
                 _eventUI.emit(
@@ -109,8 +105,8 @@ class TaskViewModel @Inject constructor(
                         status = _state.value.status
                     )
                 )
+
                 deleteTaskUseCase(taskMapped)
-                cancelSheduleTaskUseCase(taskMapped)
                 _eventUI.emit(TaskEventUI.DeleteTask)
             } catch (e: TaskException) {
                 _eventUI.emit(

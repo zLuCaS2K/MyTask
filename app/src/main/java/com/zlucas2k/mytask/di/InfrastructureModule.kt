@@ -1,8 +1,9 @@
 package com.zlucas2k.mytask.di
 
 import android.app.Application
-import com.zlucas2k.mytask.infrastructure.worker.provider.TaskWorkerProvider
-import com.zlucas2k.mytask.infrastructure.worker.provider.TaskWorkerProviderImpl
+import com.zlucas2k.mytask.domain.model.Task
+import com.zlucas2k.mytask.infrastructure.worker.provider.WorkerProvider
+import com.zlucas2k.mytask.infrastructure.worker.work.TaskWorkerProviderImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +16,7 @@ object InfrastructureModule {
 
     @Provides
     @Singleton
-    fun provideTaskWorkerProvider(application: Application): TaskWorkerProvider {
+    fun provideTaskWorkerProvider(application: Application): WorkerProvider<Task> {
         return TaskWorkerProviderImpl(application)
     }
 }

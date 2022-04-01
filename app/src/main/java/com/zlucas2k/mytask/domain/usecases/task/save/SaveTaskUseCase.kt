@@ -4,5 +4,5 @@ import com.zlucas2k.mytask.domain.model.Task
 
 interface SaveTaskUseCase {
 
-    suspend operator fun invoke(task: Task): Long
+    suspend operator fun invoke(task: Task)
 }
