@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Theme.MyTask" parent="android:Theme.Material.Light.NoActionBar">
-
+        <item name="android:colorAccent">@color/black</item>
     </style>
 
     <style name="Theme.MyTaskSplash" parent="Theme.SplashScreen">
