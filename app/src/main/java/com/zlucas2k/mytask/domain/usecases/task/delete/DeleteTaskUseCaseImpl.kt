@@ -1,14 +1,14 @@
-package com.zlucas2k.mytask.domain.usecases.task
+package com.zlucas2k.mytask.domain.usecases.task.delete
 
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.domain.repository.TaskRepository
 import javax.inject.Inject
 
-class DeleteTaskUseCase @Inject constructor(
+class DeleteTaskUseCaseImpl @Inject constructor(
     private val repository: TaskRepository
-) {
+) : DeleteTaskUseCase {
 
-    suspend operator fun invoke(task: Task) {
+    override suspend operator fun invoke(task: Task) {
         repository.deleteTask(task)
     }
 }

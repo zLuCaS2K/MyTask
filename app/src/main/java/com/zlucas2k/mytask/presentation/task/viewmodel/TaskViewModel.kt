@@ -8,11 +8,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zlucas2k.mytask.common.exceptions.TaskException
 import com.zlucas2k.mytask.common.utils.Utils
-import com.zlucas2k.mytask.domain.usecases.shedule.CancelSheduleTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.shedule.SheduleTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.task.DeleteTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.task.GetTaskByIdUseCase
-import com.zlucas2k.mytask.domain.usecases.task.SaveTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelSheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.shedule.shedule.SheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.get.GetTaskByIdUseCase
+import com.zlucas2k.mytask.domain.usecases.task.save.SaveTaskUseCase
 import com.zlucas2k.mytask.presentation.common.model.PriorityView
 import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.model.TaskView

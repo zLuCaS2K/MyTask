@@ -5,7 +5,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zlucas2k.mytask.domain.usecases.task.GetAllTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.get_all.GetAllTaskUseCase
 import com.zlucas2k.mytask.presentation.common.model.mapper.TaskViewMapperImpl
 import com.zlucas2k.mytask.presentation.home.common.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel

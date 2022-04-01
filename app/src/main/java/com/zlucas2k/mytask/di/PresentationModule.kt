@@ -1,12 +1,18 @@
 package com.zlucas2k.mytask.di
 
 import com.zlucas2k.mytask.domain.repository.TaskRepository
-import com.zlucas2k.mytask.domain.usecases.shedule.CancelSheduleTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.shedule.SheduleTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.task.DeleteTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.task.GetAllTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.task.GetTaskByIdUseCase
-import com.zlucas2k.mytask.domain.usecases.task.SaveTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelSheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelSheduleTaskUseCaseImpl
+import com.zlucas2k.mytask.domain.usecases.shedule.shedule.SheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.shedule.shedule.SheduleTaskUseCaseImpl
+import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCaseImpl
+import com.zlucas2k.mytask.domain.usecases.task.get.GetTaskByIdUseCase
+import com.zlucas2k.mytask.domain.usecases.task.get.GetTaskByIdUseCaseImpl
+import com.zlucas2k.mytask.domain.usecases.task.get_all.GetAllTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.get_all.GetAllTaskUseCaseImpl
+import com.zlucas2k.mytask.domain.usecases.task.save.SaveTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.save.SaveTaskUseCaseImpl
 import com.zlucas2k.mytask.infrastructure.worker.provider.TaskWorkerProvider
 import dagger.Module
 import dagger.Provides
@@ -21,36 +27,36 @@ object PresentationModule {
     @Provides
     @Singleton
     fun provideGetAllTaskUseCase(repository: TaskRepository): GetAllTaskUseCase {
-        return GetAllTaskUseCase(repository)
+        return GetAllTaskUseCaseImpl(repository)
     }
 
     @Provides
     @Singleton
     fun provideGetTaskByIdUseCase(repository: TaskRepository): GetTaskByIdUseCase {
-        return GetTaskByIdUseCase(repository)
+        return GetTaskByIdUseCaseImpl(repository)
     }
 
     @Provides
     @Singleton
     fun provideSaveTaskUseCase(repository: TaskRepository): SaveTaskUseCase {
-        return SaveTaskUseCase(repository)
+        return SaveTaskUseCaseImpl(repository)
     }
 
     @Provides
     @Singleton
     fun provideDeleteTaskUseCase(repository: TaskRepository): DeleteTaskUseCase {
-        return DeleteTaskUseCase(repository)
+        return DeleteTaskUseCaseImpl(repository)
     }
 
     @Provides
     @Singleton
     fun provideSheduleTaskUseCase(workerProvider: TaskWorkerProvider): SheduleTaskUseCase {
-        return SheduleTaskUseCase(workerProvider)
+        return SheduleTaskUseCaseImpl(workerProvider)
     }
 
     @Provides
     @Singleton
     fun provideCancelSheduleTaskUseCase(workerProvider: TaskWorkerProvider): CancelSheduleTaskUseCase {
-        return CancelSheduleTaskUseCase(workerProvider)
+        return CancelSheduleTaskUseCaseImpl(workerProvider)
     }
 }

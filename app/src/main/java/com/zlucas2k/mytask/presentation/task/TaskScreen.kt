@@ -95,7 +95,10 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
         ShowAlertDialog(
             title = stringResource(id = R.string.delete_task_title_dialog),
             description = stringResource(id = R.string.delete_task_description_dialog),
-            onConfirmClick = { viewModel.onDeleteNote() },
+            onConfirmClick = {
+                viewModel.onDeleteNote()
+                showDialogDeleteConfirmation.value = !showDialogDeleteConfirmation.value
+            },
             onDismissClick = {
                 showDialogDeleteConfirmation.value = !showDialogDeleteConfirmation.value
             },
