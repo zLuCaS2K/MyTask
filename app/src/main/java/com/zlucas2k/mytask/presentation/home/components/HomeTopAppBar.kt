@@ -13,7 +13,7 @@ import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 
 @Composable
-fun HomeTopAppBar(onClickAbout: () -> Unit, onClickSettings: () -> Unit) {
+fun HomeTopAppBar(onClickAbout: () -> Unit) {
 
     val expanded = remember { mutableStateOf(false) }
 
@@ -34,13 +34,15 @@ fun HomeTopAppBar(onClickAbout: () -> Unit, onClickSettings: () -> Unit) {
             }
 
             DropdownMenu(expanded = expanded.value, onDismissRequest = { expanded.value = false }) {
-                DropdownMenuItem(onClick = onClickSettings) {
-                    Text(text = stringResource(id = R.string.settings))
-                }
-
-                DropdownMenuItem(onClick = onClickAbout) {
-                    Text(text = stringResource(id = R.string.about))
-                }
+                DropdownMenuItem(
+                    onClick = {
+                        expanded.value = false
+                        onClickAbout()
+                    },
+                    content = {
+                        Text(text = stringResource(id = R.string.about))
+                    }
+                )
             }
         }
     )
@@ -53,9 +55,6 @@ private fun Preview() {
     MyTaskTheme {
         HomeTopAppBar(
             onClickAbout = {
-
-            },
-            onClickSettings = {
 
             }
         )
