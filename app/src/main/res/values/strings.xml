@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">MyTask</string>
-    <string name="settings">Configurações</string>
+    <string name="app_description">Um simples projeto de código aberto</string>
     <string name="about">Sobre</string>
     <string name="show_options">Mostrar Opções</string>
     <string name="add_task">Adicionar Tarefa</string>
@@ -19,4 +19,6 @@
     <string name="date">Data</string>
     <string name="description">Descrição</string>
     <string name="back">Voltar</string>
+    <string name="source_code">Código Fonte</string>
+    <string name="version">Versão</string>
 </resources>
