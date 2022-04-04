@@ -8,7 +8,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Save
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,7 +46,7 @@ fun TaskTopAppBar(
 
             IconButton(onClick = onSaveClick) {
                 Icon(
-                    imageVector = Icons.Filled.Done,
+                    imageVector = Icons.Filled.Save,
                     contentDescription = stringResource(id = R.string.save_sucess_task),
                     tint = MaterialTheme.colors.onPrimary
                 )

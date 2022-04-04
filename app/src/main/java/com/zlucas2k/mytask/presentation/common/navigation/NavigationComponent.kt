@@ -1,5 +1,6 @@
 package com.zlucas2k.mytask.presentation.common.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -11,6 +12,7 @@ import com.zlucas2k.mytask.presentation.home.HomeScreen
 import com.zlucas2k.mytask.presentation.task.TaskScreen
 
 @Composable
+@ExperimentalMaterialApi
 fun NavigationComponent(navHostController: NavHostController) {
     NavHost(navController = navHostController, startDestination = Screen.HomeScreen.route) {
         composable(route = Screen.HomeScreen.route) {
