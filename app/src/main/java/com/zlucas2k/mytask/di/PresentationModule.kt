@@ -51,13 +51,20 @@ object PresentationModule {
 
     @Provides
     @Singleton
-    fun provideSaveTaskUseCase(repository: TaskRepository, sheduleTaskUseCase: SheduleTaskUseCase): SaveTaskUseCase {
-        return SaveTaskUseCaseImpl(repository, sheduleTaskUseCase)
+    fun provideSaveTaskUseCase(
+        repository: TaskRepository,
+        sheduleTaskUseCase: SheduleTaskUseCase,
+        cancelSheduleTaskUseCase: CancelSheduleTaskUseCase
+    ): SaveTaskUseCase {
+        return SaveTaskUseCaseImpl(repository, sheduleTaskUseCase, cancelSheduleTaskUseCase)
     }
 
     @Provides
     @Singleton
-    fun provideDeleteTaskUseCase(repository: TaskRepository, cancelSheduleTaskUseCase: CancelSheduleTaskUseCase): DeleteTaskUseCase {
+    fun provideDeleteTaskUseCase(
+        repository: TaskRepository,
+        cancelSheduleTaskUseCase: CancelSheduleTaskUseCase
+    ): DeleteTaskUseCase {
         return DeleteTaskUseCaseImpl(repository, cancelSheduleTaskUseCase)
     }
 }
