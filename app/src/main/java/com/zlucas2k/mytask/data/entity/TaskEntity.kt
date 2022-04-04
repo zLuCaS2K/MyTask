@@ -2,8 +2,6 @@ package com.zlucas2k.mytask.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.zlucas2k.mytask.domain.model.Priority
-import com.zlucas2k.mytask.domain.model.Status
 
 @Entity(tableName = "Task")
 data class TaskEntity(
@@ -12,6 +10,5 @@ data class TaskEntity(
     val date: String,
     val time: String,
     val description: String,
-    val priority: PriorityDTO,
-    val status: StatusDTO
+    val priority: PriorityDTO
 )

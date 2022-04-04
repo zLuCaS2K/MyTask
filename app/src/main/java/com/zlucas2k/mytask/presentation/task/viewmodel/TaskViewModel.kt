@@ -8,16 +8,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zlucas2k.mytask.common.exceptions.TaskException
 import com.zlucas2k.mytask.common.utils.Utils
-import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelSheduleTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.shedule.shedule.SheduleTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.get.GetTaskByIdUseCase
 import com.zlucas2k.mytask.domain.usecases.task.save.SaveTaskUseCase
 import com.zlucas2k.mytask.presentation.common.model.PriorityView
-import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.model.mapper.PriorityViewMapperImpl
-import com.zlucas2k.mytask.presentation.common.model.mapper.StatusViewMapperImpl
 import com.zlucas2k.mytask.presentation.common.model.mapper.TaskViewMapperImpl
 import com.zlucas2k.mytask.presentation.task.common.TaskEventUI
 import com.zlucas2k.mytask.presentation.task.common.TaskState
@@ -55,8 +51,7 @@ class TaskViewModel @Inject constructor(
                             date = task.date,
                             time = task.time,
                             description = task.description,
-                            priority = PriorityViewMapperImpl.mapTo(task.priority),
-                            status = StatusViewMapperImpl.mapTo(task.status)
+                            priority = PriorityViewMapperImpl.mapTo(task.priority)
                         )
                     }
                 }
@@ -76,8 +71,7 @@ class TaskViewModel @Inject constructor(
                         date = _state.value.date,
                         time = _state.value.time,
                         description = _state.value.description,
-                        priority = _state.value.priority,
-                        status = _state.value.status
+                        priority = _state.value.priority
                     )
                 )
 
@@ -101,8 +95,7 @@ class TaskViewModel @Inject constructor(
                         date = _state.value.date,
                         time = _state.value.time,
                         description = _state.value.description,
-                        priority = _state.value.priority,
-                        status = _state.value.status
+                        priority = _state.value.priority
                     )
                 )
 
@@ -136,9 +129,5 @@ class TaskViewModel @Inject constructor(
 
     fun onPriorityChange(newPriority: PriorityView) {
         _state.value = _state.value.copy(priority = newPriority)
-    }
-
-    fun onStatusChange(newStatus: StatusView) {
-        _state.value = _state.value.copy(status = newStatus)
     }
 }

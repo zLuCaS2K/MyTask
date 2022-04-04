@@ -12,7 +12,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.model.PriorityView
-import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 import com.zlucas2k.mytask.presentation.task.components.DatePicker
 import com.zlucas2k.mytask.presentation.task.components.PriorityDropDownMenu
@@ -30,9 +29,7 @@ fun TaskScreenForm(
     description: String,
     onDescriptionChange: (String) -> Unit,
     priority: PriorityView,
-    onPrioritySelected: (PriorityView) -> Unit,
-    status: StatusView,
-    onStatusChange: (StatusView) -> Unit
+    onPrioritySelected: (PriorityView) -> Unit
 ) {
     val modifier = Modifier.fillMaxWidth()
 
@@ -100,7 +97,6 @@ private fun Preview() {
                 " is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here," +
                 " content here', making it look like readable English."
         val priority = PriorityView.HIGH
-        val status = StatusView.TODO
 
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
             TaskScreenForm(
@@ -116,8 +112,6 @@ private fun Preview() {
                 onDescriptionChange = {},
                 priority = priority,
                 onPrioritySelected = {},
-                status = status,
-                onStatusChange = {}
             )
         }
     }

@@ -82,10 +82,6 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
                 priority = state.priority,
                 onPrioritySelected = {
                     viewModel.onPriorityChange(it)
-                },
-                status = state.status,
-                onStatusChange = {
-                    viewModel.onStatusChange(it)
                 }
             )
         }
