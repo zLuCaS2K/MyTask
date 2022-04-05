@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
-import java.util.*
+import java.util.Calendar
 
 @Composable
 fun TimePicker(
@@ -91,7 +91,8 @@ private fun showTimerPickerDialog(context: Context, onTimeValue: (Int, Int) -> U
     val calendarMinutes = calendar.get(Calendar.MINUTE)
     val isSystem24Hour = DateFormat.is24HourFormat(context)
 
-    val timePickerDialog = TimePickerDialog(context, { _, hour: Int, minute: Int ->
+    val timePickerDialog = TimePickerDialog(
+        context, { _, hour: Int, minute: Int ->
             onTimeValue(hour, minute)
         }, calendarHours, calendarMinutes, isSystem24Hour
     )

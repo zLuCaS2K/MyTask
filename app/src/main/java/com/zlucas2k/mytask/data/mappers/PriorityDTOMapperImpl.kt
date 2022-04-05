@@ -7,7 +7,7 @@ import com.zlucas2k.mytask.domain.model.Priority
 object PriorityDTOMapperImpl : Mapper<Priority, PriorityDTO> {
 
     override fun mapTo(modelEntry: Priority): PriorityDTO {
-        return when(modelEntry) {
+        return when (modelEntry) {
             Priority.NONE -> PriorityDTO.NONE
             Priority.LOW -> PriorityDTO.LOW
             Priority.MEDIUM -> PriorityDTO.MEDIUM
@@ -16,7 +16,7 @@ object PriorityDTOMapperImpl : Mapper<Priority, PriorityDTO> {
     }
 
     override fun mapFrom(modelEntry: PriorityDTO): Priority {
-        return when(modelEntry) {
+        return when (modelEntry) {
             PriorityDTO.NONE -> Priority.NONE
             PriorityDTO.LOW -> Priority.LOW
             PriorityDTO.MEDIUM -> Priority.MEDIUM

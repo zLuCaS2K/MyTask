@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
-import java.util.*
+import java.util.Calendar
 
 @Composable
 fun DatePicker(
@@ -92,7 +92,8 @@ private fun showDatePickerDialog(context: Context, onDateValue: (String) -> Unit
     val cMonth = calendar.get(Calendar.MONTH)
     val cDay = calendar.get(Calendar.DAY_OF_MONTH)
 
-    val datePicker = DatePickerDialog(context, { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+    val datePicker = DatePickerDialog(
+        context, { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
             onDateValue("$dayOfMonth/${month + 1}/$year")
         }, cYear, cMonth, cDay
     )

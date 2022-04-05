@@ -8,7 +8,7 @@ class SheduleTaskUseCaseImpl @Inject constructor(
     private val workerProvider: WorkerProvider<Task>
 ) : SheduleTaskUseCase {
 
-    override operator fun invoke(task: Task, delay: Long) {
-        workerProvider.createWork(task, delay)
+    override operator fun invoke(task: Task, delayInMillis: Long) {
+        workerProvider.createWork(task, delayInMillis)
     }
 }

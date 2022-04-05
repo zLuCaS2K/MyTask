@@ -11,9 +11,7 @@ import com.zlucas2k.mytask.infrastructure.worker.provider.WorkerProvider
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class TaskWorkerProviderImpl @Inject constructor(
-    private val context: Context
-) : WorkerProvider<Task> {
+class TaskWorkerProviderImpl @Inject constructor(context: Context) : WorkerProvider<Task> {
 
     private val _workManager = WorkManager.getInstance(context)
     private val _workConstraints = Constraints.Builder().build()
