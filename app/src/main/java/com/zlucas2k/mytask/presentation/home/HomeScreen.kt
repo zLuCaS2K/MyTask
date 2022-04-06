@@ -15,6 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.navigation.model.Screen
+import com.zlucas2k.mytask.presentation.home.common.SearchWidgetState
 import com.zlucas2k.mytask.presentation.home.components.HomeAddFAB
 import com.zlucas2k.mytask.presentation.home.components.HomeTaskCard
 import com.zlucas2k.mytask.presentation.home.components.HomeTopAppBar
@@ -25,10 +26,27 @@ import com.zlucas2k.mytask.presentation.home.viewmodel.HomeViewModel
 fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = hiltViewModel()) {
 
     val state = viewModel.state.value
+    val searchWidgetState = viewModel.searchWidgetState
+    val searchTextState = viewModel.searchTextState
 
     Scaffold(
         topBar = {
-            HomeTopAppBar()
+            HomeTopAppBar(
+                searchWidgetState = searchWidgetState.value,
+                searchTextState = searchTextState.value,
+                onTextChange = {
+                    viewModel.onTextSearchChange(it)
+                },
+                onCloseClicked = {
+                    viewModel.onSearchWidgetStateChange(SearchWidgetState.CLOSED)
+                },
+                onSearchClicked = {
+                    viewModel.onSearchTask()
+                },
+                onSearchTriggered = {
+                    viewModel.onSearchWidgetStateChange(SearchWidgetState.OPENED)
+                }
+            )
         },
         floatingActionButton = {
             HomeAddFAB {
