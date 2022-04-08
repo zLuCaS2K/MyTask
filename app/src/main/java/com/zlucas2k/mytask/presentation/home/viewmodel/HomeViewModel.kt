@@ -1,6 +1,5 @@
 package com.zlucas2k.mytask.presentation.home.viewmodel
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -31,15 +30,13 @@ class HomeViewModel @Inject constructor(
 
     private fun getAllTasks() {
         viewModelScope.launch {
-            getAllTaskUseCase()
-                .map { tasks ->
-                    tasks.map { task ->
-                        _mapper.mapTo(task)
-                    }
+            getAllTaskUseCase().map { tasks ->
+                tasks.map { taskNotMapped ->
+                    _mapper.mapTo(taskNotMapped)
                 }
-                .collect { tasks ->
-                    _state.value = _state.value.copy(tasks = tasks)
-                }
+            }.collect { tasksMapped ->
+                _state.value = _state.value.copy(tasks = tasksMapped)
+            }
         }
     }
 
@@ -49,16 +46,11 @@ class HomeViewModel @Inject constructor(
     private val _searchTextState: MutableState<String> = mutableStateOf("")
     val searchTextState: State<String> = _searchTextState
 
-    fun onSearchTask() {
-        val query = _searchTextState.value
-        Log.i("HomeViewModel", "Pesquisa: $query")
+    fun onTextSearchChange(newValue: String) {
+        _searchTextState.value = newValue
     }
 
     fun onSearchWidgetStateChange(newValue: SearchWidgetState) {
         _searchWidgetState.value = newValue
-    }
-
-    fun onTextSearchChange(newValue: String) {
-        _searchTextState.value = newValue
     }
 }

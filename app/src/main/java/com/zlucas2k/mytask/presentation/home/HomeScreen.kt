@@ -41,7 +41,7 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
                     viewModel.onSearchWidgetStateChange(SearchWidgetState.CLOSED)
                 },
                 onSearchClicked = {
-                    viewModel.onSearchTask()
+
                 },
                 onSearchTriggered = {
                     viewModel.onSearchWidgetStateChange(SearchWidgetState.OPENED)
@@ -54,7 +54,16 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
             }
         },
         content = {
-            HomeTaskListItems(tasks = state.tasks) { idTaskClicked ->
+            val tasks = if (searchTextState.value.isEmpty()) {
+                state.tasks
+            } else {
+                state.tasks.filter {
+                    it.title.contains(searchTextState.value, true) ||
+                            it.description.contains(searchTextState.value, true)
+                }
+            }
+
+            HomeTaskListItems(tasks = tasks) { idTaskClicked ->
                 navHostController.navigate(Screen.TaskScreen.route + "?id=$idTaskClicked")
             }
         }
