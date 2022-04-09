@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zlucas2k.mytask.domain.usecases.task.get_all.GetAllTaskUseCase
+import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.model.mapper.TaskViewMapperImpl
 import com.zlucas2k.mytask.presentation.home.common.HomeState
 import com.zlucas2k.mytask.presentation.home.common.SearchWidgetState
@@ -19,10 +20,17 @@ class HomeViewModel @Inject constructor(
     private val getAllTaskUseCase: GetAllTaskUseCase
 ) : ViewModel() {
 
-    private val _mapper = TaskViewMapperImpl
+    private val _uiState: MutableState<HomeState> = mutableStateOf(HomeState())
+    val uiState: State<HomeState> get() = _uiState
 
-    private val _state: MutableState<HomeState> = mutableStateOf(HomeState())
-    val state: State<HomeState> = _state
+    private val _searchWidgetState: MutableState<SearchWidgetState> = mutableStateOf(SearchWidgetState.CLOSED)
+    val searchWidgetState: State<SearchWidgetState> get() = _searchWidgetState
+
+    private val _searchTextState: MutableState<String> = mutableStateOf("")
+    val searchTextState: State<String> get() = _searchTextState
+
+    private val _presentationMapper = TaskViewMapperImpl
+    private val _tasksCached: MutableState<List<TaskView>> = mutableStateOf(emptyList())
 
     init {
         getAllTasks()
@@ -30,21 +38,33 @@ class HomeViewModel @Inject constructor(
 
     private fun getAllTasks() {
         viewModelScope.launch {
-            getAllTaskUseCase().map { tasks ->
-                tasks.map { taskNotMapped ->
-                    _mapper.mapTo(taskNotMapped)
+            getAllTaskUseCase().map { tasksNotMapped ->
+                tasksNotMapped.map { taskNotMapped ->
+                    _presentationMapper.mapTo(taskNotMapped)
                 }
-            }.collect { tasksMapped ->
-                _state.value = _state.value.copy(tasks = tasksMapped)
+            }.collect { tasks ->
+                _uiState.value = _uiState.value.copy(tasks = tasks)
+                _tasksCached.value = _uiState.value.tasks
             }
         }
     }
 
-    private val _searchWidgetState: MutableState<SearchWidgetState> = mutableStateOf(SearchWidgetState.CLOSED)
-    val searchWidgetState: State<SearchWidgetState> = _searchWidgetState
+    fun onSearchTask(query: String) {
+        _uiState.value = _uiState.value.copy(isSearching = true)
+        if (query.isEmpty()) {
+            _uiState.value = _uiState.value.copy(tasks = _tasksCached.value)
+        } else {
+            val searchResult = _uiState.value.tasks.filter {
+                it.title.contains(query, false) || it.description.contains(query, false)
+            }
+            _uiState.value = _uiState.value.copy(tasks = searchResult)
+        }
+        _uiState.value = _uiState.value.copy(isSearching = false)
+    }
 
-    private val _searchTextState: MutableState<String> = mutableStateOf("")
-    val searchTextState: State<String> = _searchTextState
+    fun onSearchingState(newValue: Boolean) {
+        _uiState.value = _uiState.value.copy(isSearching = newValue)
+    }
 
     fun onTextSearchChange(newValue: String) {
         _searchTextState.value = newValue

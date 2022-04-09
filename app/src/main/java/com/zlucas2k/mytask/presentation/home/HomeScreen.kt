@@ -9,6 +9,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -25,15 +27,21 @@ import com.zlucas2k.mytask.presentation.home.viewmodel.HomeViewModel
 @ExperimentalMaterialApi
 fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = hiltViewModel()) {
 
-    val state = viewModel.state.value
-    val searchWidgetState = viewModel.searchWidgetState
-    val searchTextState = viewModel.searchTextState
+    val uiState by viewModel.uiState
+    val searchTextState by viewModel.searchTextState
+    val searchWidgetState by viewModel.searchWidgetState
+
+    LaunchedEffect(key1 = searchTextState) {
+        viewModel.onSearchingState(true)
+        viewModel.onSearchTask(searchTextState)
+        viewModel.onSearchingState(false)
+    }
 
     Scaffold(
         topBar = {
             HomeTopAppBar(
-                searchWidgetState = searchWidgetState.value,
-                searchTextState = searchTextState.value,
+                searchWidgetState = searchWidgetState,
+                searchTextState = searchTextState,
                 onTextChange = {
                     viewModel.onTextSearchChange(it)
                 },
@@ -41,7 +49,7 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
                     viewModel.onSearchWidgetStateChange(SearchWidgetState.CLOSED)
                 },
                 onSearchClicked = {
-
+                    viewModel.onSearchTask(searchTextState)
                 },
                 onSearchTriggered = {
                     viewModel.onSearchWidgetStateChange(SearchWidgetState.OPENED)
@@ -54,16 +62,7 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
             }
         },
         content = {
-            val tasks = if (searchTextState.value.isEmpty()) {
-                state.tasks
-            } else {
-                state.tasks.filter {
-                    it.title.contains(searchTextState.value, true) ||
-                            it.description.contains(searchTextState.value, true)
-                }
-            }
-
-            HomeTaskListItems(tasks = tasks) { idTaskClicked ->
+            HomeTaskListItems(tasks = uiState.tasks) { idTaskClicked ->
                 navHostController.navigate(Screen.TaskScreen.route + "?id=$idTaskClicked")
             }
         }
