@@ -7,7 +7,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zlucas2k.mytask.common.exceptions.TaskException
-import com.zlucas2k.mytask.common.utils.Utils
+import com.zlucas2k.mytask.domain.usecases.format.date.FormatDateUseCase
+import com.zlucas2k.mytask.domain.usecases.format.time.FormatTimeUseCase
 import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.get.GetTaskByIdUseCase
 import com.zlucas2k.mytask.domain.usecases.task.save.SaveTaskUseCase
@@ -30,6 +31,8 @@ class TaskViewModel @Inject constructor(
     private val saveTaskUseCase: SaveTaskUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
     private val getTaskByIdUseCase: GetTaskByIdUseCase,
+    private val formatDateUseCase: FormatDateUseCase,
+    private val formatTimeUseCase: FormatTimeUseCase
 ) : ViewModel() {
 
     private val _state: MutableState<TaskState> = mutableStateOf(TaskState())
@@ -114,12 +117,12 @@ class TaskViewModel @Inject constructor(
     }
 
     fun onDateChange(newText: String) {
-        val dateFormatted = Utils.formatDate(newText)
+        val dateFormatted = formatDateUseCase(newText)
         _state.value = _state.value.copy(date = dateFormatted)
     }
 
     fun onTimeChange(hour: Int, minute: Int) {
-        val timeFormatted = Utils.formatTime(hour, minute)
+        val timeFormatted = formatTimeUseCase(hour, minute)
         _state.value = _state.value.copy(time = timeFormatted)
     }
 

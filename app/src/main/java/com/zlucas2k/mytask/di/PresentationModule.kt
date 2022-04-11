@@ -2,6 +2,10 @@ package com.zlucas2k.mytask.di
 
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.domain.repository.TaskRepository
+import com.zlucas2k.mytask.domain.usecases.format.date.FormatDateUseCase
+import com.zlucas2k.mytask.domain.usecases.format.date.FormatDateUseCaseImpl
+import com.zlucas2k.mytask.domain.usecases.format.time.FormatTimeUseCase
+import com.zlucas2k.mytask.domain.usecases.format.time.FormatTimeUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelSheduleTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelSheduleTaskUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.shedule.shedule.SheduleTaskUseCase
@@ -66,5 +70,17 @@ object PresentationModule {
         cancelSheduleTaskUseCase: CancelSheduleTaskUseCase
     ): DeleteTaskUseCase {
         return DeleteTaskUseCaseImpl(repository, cancelSheduleTaskUseCase)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFormatDateUseCase(): FormatDateUseCase {
+        return FormatDateUseCaseImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFormatTimeUseCase(): FormatTimeUseCase {
+        return FormatTimeUseCaseImpl()
     }
 }
