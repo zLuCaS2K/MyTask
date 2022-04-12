@@ -12,9 +12,12 @@ import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.model.PriorityView
 import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.model.TaskView
@@ -31,9 +34,8 @@ fun HomeTaskCard(task: TaskView, modifier: Modifier = Modifier) {
 
     Card(modifier = modifier, elevation = 8.dp) {
         Row(modifier = Modifier.height(IntrinsicSize.Min)) {
-            Divider(
+            IndicatorTaskPriorityColor(
                 color = colorPriority,
-                thickness = 1.dp,
                 modifier = Modifier
                     .width(2.dp)
                     .fillMaxHeight()
@@ -61,7 +63,7 @@ fun HomeTaskCard(task: TaskView, modifier: Modifier = Modifier) {
                 TaskCardFooter(
                     date = task.date,
                     time = task.time,
-                    status = "Pendente"
+                    status = task.status
                 )
             }
         }
@@ -69,10 +71,22 @@ fun HomeTaskCard(task: TaskView, modifier: Modifier = Modifier) {
 }
 
 @Composable
+private fun IndicatorTaskPriorityColor(
+    color: Color,
+    modifier: Modifier = Modifier
+) {
+    Divider(
+        color = color,
+        thickness = 1.dp,
+        modifier = modifier
+    )
+}
+
+@Composable
 private fun TaskCardFooter(
     date: String,
     time: String,
-    status: String
+    status: StatusView
 ) {
     Box(
         modifier = Modifier
@@ -127,9 +141,15 @@ private fun TaskSheduleTimeIndicator(
 
 @Composable
 private fun TaskStatusIndicator(
-    status: String,
+    status: StatusView,
     modifier: Modifier = Modifier
 ) {
+    val statusName = when (status) {
+        StatusView.TODO -> stringResource(id = R.string.todo)
+        StatusView.PROGRESS -> stringResource(id = R.string.progress)
+        StatusView.DONE -> stringResource(id = R.string.done)
+    }
+
     Box(
         modifier = modifier
             .border(
@@ -139,7 +159,7 @@ private fun TaskStatusIndicator(
             )
     ) {
         Text(
-            text = status,
+            text = statusName,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.caption,
             modifier = Modifier

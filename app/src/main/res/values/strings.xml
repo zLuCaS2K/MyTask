@@ -21,4 +21,7 @@
     <string name="back">Voltar</string>
     <string name="source_code">Código Fonte</string>
     <string name="version">Versão</string>
+    <string name="todo">Agendado</string>
+    <string name="progress">Em andamento</string>
+    <string name="done">Concluida</string>
 </resources>

@@ -15,6 +15,10 @@ import com.zlucas2k.mytask.presentation.common.model.PriorityView
 import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 import com.zlucas2k.mytask.presentation.task.components.*
+import com.zlucas2k.mytask.presentation.task.components.dropdowns.PriorityDropDownMenu
+import com.zlucas2k.mytask.presentation.task.components.dropdowns.StatusDropDownMenu
+import com.zlucas2k.mytask.presentation.task.components.pickers.DatePicker
+import com.zlucas2k.mytask.presentation.task.components.pickers.TimePicker
 
 @Composable
 fun TaskScreenForm(

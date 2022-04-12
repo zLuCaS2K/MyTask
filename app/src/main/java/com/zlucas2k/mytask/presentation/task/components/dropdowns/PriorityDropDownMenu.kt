@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.task.components
+package com.zlucas2k.mytask.presentation.task.components.dropdowns
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background

@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.task.components
+package com.zlucas2k.mytask.presentation.task.components.pickers
 
 import android.app.TimePickerDialog
 import android.content.Context
