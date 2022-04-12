@@ -13,8 +13,10 @@ import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.get.GetTaskByIdUseCase
 import com.zlucas2k.mytask.domain.usecases.task.save.SaveTaskUseCase
 import com.zlucas2k.mytask.presentation.common.model.PriorityView
+import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.model.mapper.PriorityViewMapperImpl
+import com.zlucas2k.mytask.presentation.common.model.mapper.StatusViewMapperImpl
 import com.zlucas2k.mytask.presentation.common.model.mapper.TaskViewMapperImpl
 import com.zlucas2k.mytask.presentation.task.common.TaskEventUI
 import com.zlucas2k.mytask.presentation.task.common.TaskState
@@ -35,7 +37,7 @@ class TaskViewModel @Inject constructor(
     private val formatTimeUseCase: FormatTimeUseCase
 ) : ViewModel() {
 
-    private val _state: MutableState<TaskState> = mutableStateOf(TaskState())
+    private val _state: MutableState<TaskState> = mutableStateOf(TaskState(0))
     val state: State<TaskState> = _state
 
     private val _eventUI = MutableSharedFlow<TaskEventUI>()
@@ -49,17 +51,18 @@ class TaskViewModel @Inject constructor(
                 viewModelScope.launch {
                     getTaskByIdUseCase(taskId)?.also { task ->
                         _state.value = TaskState(
-                            selectedId = task.id,
+                            id = task.id,
                             title = task.title,
                             date = task.date,
                             time = task.time,
                             description = task.description,
-                            priority = PriorityViewMapperImpl.mapTo(task.priority)
+                            priority = PriorityViewMapperImpl.mapTo(task.priority),
+                            status = StatusViewMapperImpl.mapTo(task.status)
                         )
                     }
                 }
             } else {
-                _state.value = TaskState(selectedId = taskId)
+                _state.value = TaskState(id = taskId)
             }
         }
     }
@@ -69,12 +72,13 @@ class TaskViewModel @Inject constructor(
             try {
                 val taskMapped = _mapper.mapFrom(
                     TaskView(
-                        id = _state.value.selectedId,
+                        id = _state.value.id,
                         title = _state.value.title,
                         date = _state.value.date,
                         time = _state.value.time,
                         description = _state.value.description,
-                        priority = _state.value.priority
+                        priority = _state.value.priority,
+                        status = _state.value.status
                     )
                 )
 
@@ -93,12 +97,13 @@ class TaskViewModel @Inject constructor(
             try {
                 val taskMapped = _mapper.mapFrom(
                     TaskView(
-                        id = _state.value.selectedId,
+                        id = _state.value.id,
                         title = _state.value.title,
                         date = _state.value.date,
                         time = _state.value.time,
                         description = _state.value.description,
-                        priority = _state.value.priority
+                        priority = _state.value.priority,
+                        status = _state.value.status
                     )
                 )
 
@@ -132,5 +137,9 @@ class TaskViewModel @Inject constructor(
 
     fun onPriorityChange(newPriority: PriorityView) {
         _state.value = _state.value.copy(priority = newPriority)
+    }
+
+    fun onStatusChange(newStatus: StatusView) {
+        _state.value = _state.value.copy(status = newStatus)
     }
 }

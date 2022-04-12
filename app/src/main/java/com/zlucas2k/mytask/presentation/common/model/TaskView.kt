@@ -6,5 +6,6 @@ data class TaskView(
     val date: String,
     val time: String,
     val description: String,
-    val priority: PriorityView
+    val priority: PriorityView,
+    val status: StatusView
 )

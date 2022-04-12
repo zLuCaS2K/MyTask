@@ -21,7 +21,7 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
 
     val context = LocalContext.current
     val state = viewModel.state.value
-    val isEditing = state.selectedId != 0
+    val isEditing = state.id != 0
     val showDialogDeleteConfirmation = remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = true) {
@@ -63,6 +63,7 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
         },
         content = {
             TaskScreenForm(
+                isEditing = isEditing,
                 title = state.title,
                 onTitleChange = {
                     viewModel.onTitleChange(it)
@@ -82,6 +83,10 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
                 priority = state.priority,
                 onPrioritySelected = {
                     viewModel.onPriorityChange(it)
+                },
+                status = state.status,
+                onStatusSelected = {
+                    viewModel.onStatusChange(it)
                 }
             )
         }

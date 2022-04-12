@@ -13,7 +13,8 @@ object TaskEntityMapperImpl : Mapper<Task, TaskEntity> {
             date = modelEntry.date,
             time = modelEntry.time,
             description = modelEntry.description,
-            priority = PriorityDTOMapperImpl.mapTo(modelEntry.priority)
+            priority = PriorityDTOMapperImpl.mapTo(modelEntry.priority),
+            status = StatusDTOMapperImpl.mapTo(modelEntry.status)
         )
     }
 
@@ -24,7 +25,8 @@ object TaskEntityMapperImpl : Mapper<Task, TaskEntity> {
             date = modelEntry.date,
             time = modelEntry.time,
             description = modelEntry.description,
-            priority = PriorityDTOMapperImpl.mapFrom(modelEntry.priority)
+            priority = PriorityDTOMapperImpl.mapFrom(modelEntry.priority),
+            status = StatusDTOMapperImpl.mapFrom(modelEntry.status)
         )
     }
 }

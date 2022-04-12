@@ -12,14 +12,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.model.PriorityView
+import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
-import com.zlucas2k.mytask.presentation.task.components.DatePicker
-import com.zlucas2k.mytask.presentation.task.components.PriorityDropDownMenu
-import com.zlucas2k.mytask.presentation.task.components.TaskTextField
-import com.zlucas2k.mytask.presentation.task.components.TimePicker
+import com.zlucas2k.mytask.presentation.task.components.*
 
 @Composable
 fun TaskScreenForm(
+    isEditing: Boolean,
     title: String,
     onTitleChange: (String) -> Unit,
     date: String,
@@ -29,7 +28,9 @@ fun TaskScreenForm(
     description: String,
     onDescriptionChange: (String) -> Unit,
     priority: PriorityView,
-    onPrioritySelected: (PriorityView) -> Unit
+    onPrioritySelected: (PriorityView) -> Unit,
+    status: StatusView,
+    onStatusSelected: (StatusView) -> Unit
 ) {
     val modifier = Modifier.fillMaxWidth()
 
@@ -48,11 +49,25 @@ fun TaskScreenForm(
             modifier = modifier,
         )
 
-        PriorityDropDownMenu(
-            priority = priority,
-            onPrioritySelected = onPrioritySelected,
-            modifier = modifier.padding(start = 20.dp, top = 10.dp, end = 10.dp)
-        )
+        Row {
+            PriorityDropDownMenu(
+                priority = priority,
+                onPrioritySelected = onPrioritySelected,
+                modifier = modifier
+                    .weight(1f)
+                    .padding(start = 20.dp, top = 10.dp, end = 10.dp)
+            )
+
+            if (isEditing) {
+                StatusDropDownMenu(
+                    status = status,
+                    onStatusSelected = onStatusSelected,
+                    modifier = modifier
+                        .weight(1f)
+                        .padding(start = 10.dp, top = 10.dp, end = 20.dp)
+                )
+            }
+        }
 
         TimePicker(
             value = time,
@@ -97,9 +112,11 @@ private fun Preview() {
                 " is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here," +
                 " content here', making it look like readable English."
         val priority = PriorityView.HIGH
+        val status = StatusView.TODO
 
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
             TaskScreenForm(
+                isEditing = true,
                 title = title,
                 onTitleChange = {},
                 date = date,
@@ -112,6 +129,10 @@ private fun Preview() {
                 onDescriptionChange = {},
                 priority = priority,
                 onPrioritySelected = {},
+                status = status,
+                onStatusSelected = {
+
+                }
             )
         }
     }

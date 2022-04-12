@@ -9,7 +9,8 @@ data class Task(
     val date: String,
     val time: String,
     val description: String,
-    val priority: Priority
+    val priority: Priority,
+    val status: Status
 ) {
     /**
      * Retorna o tempo de atraso da tarefa em milisegundos.

@@ -1,6 +1,7 @@
 package com.zlucas2k.mytask.domain.usecases.task.save
 
 import com.zlucas2k.mytask.common.exceptions.TaskException
+import com.zlucas2k.mytask.domain.model.Status
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.domain.repository.TaskRepository
 import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelSheduleTaskUseCase
@@ -19,7 +20,6 @@ class SaveTaskUseCaseImpl @Inject constructor(
         }
 
         val delay = task.getScheduleDelayInMillis()
-
         if (delay < 0) {
             throw TaskException("Insira uma data válida!")
         }
@@ -28,6 +28,9 @@ class SaveTaskUseCaseImpl @Inject constructor(
         val taskSheduleModel = task.copy(id = id.toInt())
 
         cancelSheduleTaskUseCase(taskSheduleModel)
-        sheduleTaskUseCase(taskSheduleModel, delay)
+
+        if (task.status == Status.TODO) {
+            sheduleTaskUseCase(taskSheduleModel, delay)
+        }
     }
 }

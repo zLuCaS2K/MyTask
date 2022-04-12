@@ -13,7 +13,8 @@ object TaskViewMapperImpl : Mapper<Task, TaskView> {
             date = modelEntry.date,
             time = modelEntry.time,
             description = modelEntry.description,
-            priority = PriorityViewMapperImpl.mapTo(modelEntry.priority)
+            priority = PriorityViewMapperImpl.mapTo(modelEntry.priority),
+            status = StatusViewMapperImpl.mapTo(modelEntry.status)
         )
     }
 
@@ -24,7 +25,8 @@ object TaskViewMapperImpl : Mapper<Task, TaskView> {
             date = modelEntry.date,
             time = modelEntry.time,
             description = modelEntry.description,
-            priority = PriorityViewMapperImpl.mapFrom(modelEntry.priority)
+            priority = PriorityViewMapperImpl.mapFrom(modelEntry.priority),
+            status = StatusViewMapperImpl.mapFrom(modelEntry.status)
         )
     }
 }

@@ -10,5 +10,6 @@ data class TaskEntity(
     val date: String,
     val time: String,
     val description: String,
-    val priority: PriorityDTO
+    val priority: PriorityDTO,
+    val status: StatusDTO
 )
