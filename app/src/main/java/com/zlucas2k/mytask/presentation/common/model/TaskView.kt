@@ -1,11 +1,11 @@
 package com.zlucas2k.mytask.presentation.common.model
 
 data class TaskView(
-    val id: Int,
-    val title: String,
-    val date: String,
-    val time: String,
-    val description: String,
-    val priority: PriorityView,
-    val status: StatusView
+    var id: Int = 0,
+    var title: String = "",
+    var date: String = "",
+    var time: String = "",
+    var description: String = "",
+    var priority: PriorityView = PriorityView.NONE,
+    var status: StatusView = StatusView.TODO
 )
