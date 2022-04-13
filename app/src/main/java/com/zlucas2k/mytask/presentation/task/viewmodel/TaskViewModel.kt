@@ -110,12 +110,12 @@ class TaskViewModel @Inject constructor(
         }
     }
 
-    fun onTitleChange(newText: String) {
-        _state.value = _state.value.copy(title = newText)
+    fun onTitleChange(newTitle: String) {
+        _state.value = _state.value.copy(title = newTitle)
     }
 
-    fun onDateChange(newText: String) {
-        val dateFormatted = formatDateUseCase(newText)
+    fun onDateChange(newDate: String) {
+        val dateFormatted = formatDateUseCase(newDate)
         _state.value = _state.value.copy(date = dateFormatted)
     }
 
@@ -124,8 +124,8 @@ class TaskViewModel @Inject constructor(
         _state.value = _state.value.copy(time = timeFormatted)
     }
 
-    fun onDescriptionChange(newText: String) {
-        _state.value = _state.value.copy(description = newText)
+    fun onDescriptionChange(newDescription: String) {
+        _state.value = _state.value.copy(description = newDescription)
     }
 
     fun onPriorityChange(newPriority: PriorityView) {
