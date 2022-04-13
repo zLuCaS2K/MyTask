@@ -7,6 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zlucas2k.mytask.common.exceptions.TaskException
+import com.zlucas2k.mytask.domain.mappers.mapToView
 import com.zlucas2k.mytask.domain.usecases.format.date.FormatDateUseCase
 import com.zlucas2k.mytask.domain.usecases.format.time.FormatTimeUseCase
 import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCase
@@ -15,9 +16,7 @@ import com.zlucas2k.mytask.domain.usecases.task.save.SaveTaskUseCase
 import com.zlucas2k.mytask.presentation.common.model.PriorityView
 import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.model.TaskView
-import com.zlucas2k.mytask.presentation.common.model.mapper.PriorityViewMapperImpl
-import com.zlucas2k.mytask.presentation.common.model.mapper.StatusViewMapperImpl
-import com.zlucas2k.mytask.presentation.common.model.mapper.TaskViewMapperImpl
+import com.zlucas2k.mytask.presentation.common.model.mapper.mapToModel
 import com.zlucas2k.mytask.presentation.task.common.TaskEventUI
 import com.zlucas2k.mytask.presentation.task.common.TaskState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,8 +42,6 @@ class TaskViewModel @Inject constructor(
     private val _eventUI = MutableSharedFlow<TaskEventUI>()
     val eventUI: SharedFlow<TaskEventUI> = _eventUI
 
-    private val _mapper = TaskViewMapperImpl
-
     init {
         savedStateHandle.get<Int>("id")?.let { taskId ->
             if (taskId != 0) {
@@ -56,8 +53,8 @@ class TaskViewModel @Inject constructor(
                             date = task.date,
                             time = task.time,
                             description = task.description,
-                            priority = PriorityViewMapperImpl.mapTo(task.priority),
-                            status = StatusViewMapperImpl.mapTo(task.status)
+                            priority = task.priority.mapToView(),
+                            status = task.status.mapToView()
                         )
                     }
                 }
@@ -70,19 +67,17 @@ class TaskViewModel @Inject constructor(
     fun onSaveNote() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val taskMapped = _mapper.mapFrom(
-                    TaskView(
-                        id = _state.value.id,
-                        title = _state.value.title,
-                        date = _state.value.date,
-                        time = _state.value.time,
-                        description = _state.value.description,
-                        priority = _state.value.priority,
-                        status = _state.value.status
-                    )
+                val taskView = TaskView(
+                    id = _state.value.id,
+                    title = _state.value.title,
+                    date = _state.value.date,
+                    time = _state.value.time,
+                    description = _state.value.description,
+                    priority = _state.value.priority,
+                    status = _state.value.status
                 )
 
-                saveTaskUseCase(taskMapped)
+                saveTaskUseCase(taskView.mapToModel())
                 _eventUI.emit(TaskEventUI.SaveTask)
             } catch (e: TaskException) {
                 _eventUI.emit(
@@ -95,19 +90,17 @@ class TaskViewModel @Inject constructor(
     fun onDeleteNote() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val taskMapped = _mapper.mapFrom(
-                    TaskView(
-                        id = _state.value.id,
-                        title = _state.value.title,
-                        date = _state.value.date,
-                        time = _state.value.time,
-                        description = _state.value.description,
-                        priority = _state.value.priority,
-                        status = _state.value.status
-                    )
+                val taskView = TaskView(
+                    id = _state.value.id,
+                    title = _state.value.title,
+                    date = _state.value.date,
+                    time = _state.value.time,
+                    description = _state.value.description,
+                    priority = _state.value.priority,
+                    status = _state.value.status
                 )
 
-                deleteTaskUseCase(taskMapped)
+                deleteTaskUseCase(taskView.mapToModel())
                 _eventUI.emit(TaskEventUI.DeleteTask)
             } catch (e: TaskException) {
                 _eventUI.emit(

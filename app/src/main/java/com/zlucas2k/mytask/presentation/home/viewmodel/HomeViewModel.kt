@@ -5,9 +5,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zlucas2k.mytask.domain.mappers.mapToView
 import com.zlucas2k.mytask.domain.usecases.task.get_all.GetAllTaskUseCase
 import com.zlucas2k.mytask.presentation.common.model.TaskView
-import com.zlucas2k.mytask.presentation.common.model.mapper.TaskViewMapperImpl
 import com.zlucas2k.mytask.presentation.home.common.HomeState
 import com.zlucas2k.mytask.presentation.home.common.SearchWidgetState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +29,6 @@ class HomeViewModel @Inject constructor(
     private val _searchTextState: MutableState<String> = mutableStateOf("")
     val searchTextState: State<String> get() = _searchTextState
 
-    private val _presentationMapper = TaskViewMapperImpl
     private val _tasksCached: MutableState<List<TaskView>> = mutableStateOf(emptyList())
 
     init {
@@ -40,7 +39,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             getAllTaskUseCase().map { tasksNotMapped ->
                 tasksNotMapped.map { taskNotMapped ->
-                    _presentationMapper.mapTo(taskNotMapped)
+                    taskNotMapped.mapToView()
                 }
             }.collect { tasks ->
                 _uiState.value = _uiState.value.copy(tasks = tasks)
