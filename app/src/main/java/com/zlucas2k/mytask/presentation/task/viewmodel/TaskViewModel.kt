@@ -36,30 +36,28 @@ class TaskViewModel @Inject constructor(
     private val formatTimeUseCase: FormatTimeUseCase
 ) : ViewModel() {
 
-    private val _state: MutableState<TaskState> = mutableStateOf(TaskState(0))
-    val state: State<TaskState> = _state
+    private val _uiState: MutableState<TaskState> = mutableStateOf(TaskState())
+    val uiState: State<TaskState> get() = _uiState
 
-    private val _eventUI = MutableSharedFlow<TaskEventUI>()
-    val eventUI: SharedFlow<TaskEventUI> = _eventUI
+    private val _uiEvent = MutableSharedFlow<TaskEventUI>()
+    val uiEvent: SharedFlow<TaskEventUI> get() = _uiEvent
 
     init {
+        handleTaskEditing()
+    }
+
+    private fun handleTaskEditing() {
         savedStateHandle.get<Int>("id")?.let { taskId ->
             if (taskId != 0) {
                 viewModelScope.launch {
-                    getTaskByIdUseCase(taskId)?.also { task ->
-                        _state.value = TaskState(
-                            id = task.id,
-                            title = task.title,
-                            date = task.date,
-                            time = task.time,
-                            description = task.description,
-                            priority = task.priority.mapToView(),
-                            status = task.status.mapToView()
-                        )
+                    getTaskByIdUseCase(taskId)?.also { taskEditing ->
+                        _uiState.value =
+                            uiState.value.copy(task = taskEditing.mapToView(), isEditing = true)
                     }
                 }
             } else {
-                _state.value = TaskState(id = taskId)
+                val taskNotEditing = TaskView(id = taskId)
+                _uiState.value = _uiState.value.copy(task = taskNotEditing, isEditing = false)
             }
         }
     }
@@ -67,20 +65,12 @@ class TaskViewModel @Inject constructor(
     fun onSaveNote() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val taskView = TaskView(
-                    id = _state.value.id,
-                    title = _state.value.title,
-                    date = _state.value.date,
-                    time = _state.value.time,
-                    description = _state.value.description,
-                    priority = _state.value.priority,
-                    status = _state.value.status
-                )
+                val task = _uiState.value.task
 
-                saveTaskUseCase(taskView.mapToModel())
-                _eventUI.emit(TaskEventUI.SaveTask)
+                saveTaskUseCase(task.mapToModel())
+                _uiEvent.emit(TaskEventUI.SaveTask)
             } catch (e: TaskException) {
-                _eventUI.emit(
+                _uiEvent.emit(
                     TaskEventUI.ShowToast(e.message ?: "Não foi possivel salvar")
                 )
             }
@@ -90,20 +80,12 @@ class TaskViewModel @Inject constructor(
     fun onDeleteNote() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val taskView = TaskView(
-                    id = _state.value.id,
-                    title = _state.value.title,
-                    date = _state.value.date,
-                    time = _state.value.time,
-                    description = _state.value.description,
-                    priority = _state.value.priority,
-                    status = _state.value.status
-                )
+                val task = _uiState.value.task
 
-                deleteTaskUseCase(taskView.mapToModel())
-                _eventUI.emit(TaskEventUI.DeleteTask)
+                deleteTaskUseCase(task.mapToModel())
+                _uiEvent.emit(TaskEventUI.DeleteTask)
             } catch (e: TaskException) {
-                _eventUI.emit(
+                _uiEvent.emit(
                     TaskEventUI.ShowToast(e.message ?: "Não foi possivel deletar")
                 )
             }
@@ -111,28 +93,30 @@ class TaskViewModel @Inject constructor(
     }
 
     fun onTitleChange(newTitle: String) {
-        _state.value = _state.value.copy(title = newTitle)
+        _uiState.value = _uiState.value.copy(task = _uiState.value.task.copy(title = newTitle))
     }
 
     fun onDateChange(newDate: String) {
         val dateFormatted = formatDateUseCase(newDate)
-        _state.value = _state.value.copy(date = dateFormatted)
+        _uiState.value = _uiState.value.copy(task = _uiState.value.task.copy(date = dateFormatted))
     }
 
     fun onTimeChange(hour: Int, minute: Int) {
         val timeFormatted = formatTimeUseCase(hour, minute)
-        _state.value = _state.value.copy(time = timeFormatted)
+        _uiState.value = _uiState.value.copy(task = _uiState.value.task.copy(time = timeFormatted))
     }
 
     fun onDescriptionChange(newDescription: String) {
-        _state.value = _state.value.copy(description = newDescription)
+        _uiState.value =
+            _uiState.value.copy(task = _uiState.value.task.copy(description = newDescription))
     }
 
     fun onPriorityChange(newPriority: PriorityView) {
-        _state.value = _state.value.copy(priority = newPriority)
+        _uiState.value =
+            _uiState.value.copy(task = _uiState.value.task.copy(priority = newPriority))
     }
 
     fun onStatusChange(newStatus: StatusView) {
-        _state.value = _state.value.copy(status = newStatus)
+        _uiState.value = _uiState.value.copy(task = _uiState.value.task.copy(status = newStatus))
     }
 }

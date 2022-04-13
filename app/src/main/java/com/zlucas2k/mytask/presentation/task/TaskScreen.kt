@@ -2,10 +2,7 @@ package com.zlucas2k.mytask.presentation.task
 
 import android.widget.Toast
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -20,13 +17,12 @@ import kotlinx.coroutines.flow.collectLatest
 fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = hiltViewModel()) {
 
     val context = LocalContext.current
-    val state = viewModel.state.value
-    val isEditing = state.id != 0
+    val uiState by viewModel.uiState
     val showDialogDeleteConfirmation = remember { mutableStateOf(false) }
 
-    LaunchedEffect(key1 = true) {
-        viewModel.eventUI.collectLatest { taskEvent ->
-            when (taskEvent) {
+    LaunchedEffect(key1 = Unit) {
+        viewModel.uiEvent.collectLatest { uiEvent ->
+            when(uiEvent) {
                 is TaskEventUI.SaveTask -> {
                     Toast.makeText(
                         context,
@@ -44,7 +40,7 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
                     navHostController.navigateUp()
                 }
                 is TaskEventUI.ShowToast -> {
-                    Toast.makeText(context, taskEvent.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, uiEvent.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -53,7 +49,7 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
     Scaffold(
         topBar = {
             TaskTopAppBar(
-                isEditing = isEditing,
+                isEditing = uiState.isEditing,
                 onDeleteClick = {
                     showDialogDeleteConfirmation.value = true
                 },
@@ -63,28 +59,28 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
         },
         content = {
             TaskScreenForm(
-                isEditing = isEditing,
-                title = state.title,
+                isEditing = uiState.isEditing,
+                title = uiState.task.title,
                 onTitleChange = {
                     viewModel.onTitleChange(it)
                 },
-                date = state.date,
+                date = uiState.task.date,
                 onDateChange = {
                     viewModel.onDateChange(it)
                 },
-                time = state.time,
+                time = uiState.task.time,
                 onTimeChange = { hour, minute ->
                     viewModel.onTimeChange(hour, minute)
                 },
-                description = state.description,
+                description = uiState.task.description,
                 onDescriptionChange = {
                     viewModel.onDescriptionChange(it)
                 },
-                priority = state.priority,
+                priority = uiState.task.priority,
                 onPrioritySelected = {
                     viewModel.onPriorityChange(it)
                 },
-                status = state.status,
+                status = uiState.task.status,
                 onStatusSelected = {
                     viewModel.onStatusChange(it)
                 }
