@@ -53,7 +53,7 @@ class HomeViewModel @Inject constructor(
         if (query.isEmpty()) {
             _uiState.value = _uiState.value.copy(tasks = _tasksCached.value)
         } else {
-            val searchResult = _uiState.value.tasks.filter {
+            val searchResult = _tasksCached.value.filter {
                 it.title.contains(query, true) || it.description.contains(query, true)
             }
             _uiState.value = _uiState.value.copy(tasks = searchResult)
