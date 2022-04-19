@@ -4,9 +4,9 @@ import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.infrastructure.worker.provider.WorkerProvider
 import javax.inject.Inject
 
-class SheduleTaskUseCaseImpl @Inject constructor(
+class ScheduleTaskUseCaseImpl @Inject constructor(
     private val workerProvider: WorkerProvider<Task>
-) : SheduleTaskUseCase {
+) : ScheduleTaskUseCase {
 
     override operator fun invoke(task: Task, delayInMillis: Long) {
         workerProvider.createWork(task, delayInMillis)

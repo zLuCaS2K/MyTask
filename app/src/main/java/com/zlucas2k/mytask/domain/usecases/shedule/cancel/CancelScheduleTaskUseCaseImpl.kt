@@ -4,9 +4,9 @@ import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.infrastructure.worker.provider.WorkerProvider
 import javax.inject.Inject
 
-class CancelSheduleTaskUseCaseImpl @Inject constructor(
+class CancelScheduleTaskUseCaseImpl @Inject constructor(
     private val workerProvider: WorkerProvider<Task>
-) : CancelSheduleTaskUseCase {
+) : CancelScheduleTaskUseCase {
 
     override operator fun invoke(task: Task) {
         workerProvider.cancelWork(task)

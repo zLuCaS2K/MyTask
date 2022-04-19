@@ -4,14 +4,14 @@ import com.zlucas2k.mytask.common.exceptions.TaskException
 import com.zlucas2k.mytask.domain.model.Status
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.domain.repository.TaskRepository
-import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelSheduleTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.shedule.shedule.SheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelScheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.shedule.shedule.ScheduleTaskUseCase
 import javax.inject.Inject
 
 class SaveTaskUseCaseImpl @Inject constructor(
     private val repository: TaskRepository,
-    private val sheduleTaskUseCase: SheduleTaskUseCase,
-    private val cancelSheduleTaskUseCase: CancelSheduleTaskUseCase
+    private val scheduleTaskUseCase: ScheduleTaskUseCase,
+    private val cancelScheduleTaskUseCase: CancelScheduleTaskUseCase
 ) : SaveTaskUseCase {
 
     override suspend operator fun invoke(task: Task) {
@@ -27,10 +27,10 @@ class SaveTaskUseCaseImpl @Inject constructor(
         val id = repository.saveTask(task)
         val taskSheduleModel = task.copy(id = id.toInt())
 
-        cancelSheduleTaskUseCase(taskSheduleModel)
+        cancelScheduleTaskUseCase(taskSheduleModel)
 
         if (task.status == Status.TODO) {
-            sheduleTaskUseCase(taskSheduleModel, delay)
+            scheduleTaskUseCase(taskSheduleModel, delay)
         }
     }
 }

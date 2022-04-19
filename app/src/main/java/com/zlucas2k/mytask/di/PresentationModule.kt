@@ -6,10 +6,10 @@ import com.zlucas2k.mytask.domain.usecases.format.date.FormatDateUseCase
 import com.zlucas2k.mytask.domain.usecases.format.date.FormatDateUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.format.time.FormatTimeUseCase
 import com.zlucas2k.mytask.domain.usecases.format.time.FormatTimeUseCaseImpl
-import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelSheduleTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelSheduleTaskUseCaseImpl
-import com.zlucas2k.mytask.domain.usecases.shedule.shedule.SheduleTaskUseCase
-import com.zlucas2k.mytask.domain.usecases.shedule.shedule.SheduleTaskUseCaseImpl
+import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelScheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelScheduleTaskUseCaseImpl
+import com.zlucas2k.mytask.domain.usecases.shedule.shedule.ScheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.shedule.shedule.ScheduleTaskUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.task.get.GetTaskByIdUseCase
@@ -31,14 +31,14 @@ object PresentationModule {
 
     @Provides
     @Singleton
-    fun provideSheduleTaskUseCase(workerProvider: WorkerProvider<Task>): SheduleTaskUseCase {
-        return SheduleTaskUseCaseImpl(workerProvider)
+    fun provideSheduleTaskUseCase(workerProvider: WorkerProvider<Task>): ScheduleTaskUseCase {
+        return ScheduleTaskUseCaseImpl(workerProvider)
     }
 
     @Provides
     @Singleton
-    fun provideCancelSheduleTaskUseCase(workerProvider: WorkerProvider<Task>): CancelSheduleTaskUseCase {
-        return CancelSheduleTaskUseCaseImpl(workerProvider)
+    fun provideCancelSheduleTaskUseCase(workerProvider: WorkerProvider<Task>): CancelScheduleTaskUseCase {
+        return CancelScheduleTaskUseCaseImpl(workerProvider)
     }
 
     @Provides
@@ -57,19 +57,19 @@ object PresentationModule {
     @Singleton
     fun provideSaveTaskUseCase(
         repository: TaskRepository,
-        sheduleTaskUseCase: SheduleTaskUseCase,
-        cancelSheduleTaskUseCase: CancelSheduleTaskUseCase
+        scheduleTaskUseCase: ScheduleTaskUseCase,
+        cancelScheduleTaskUseCase: CancelScheduleTaskUseCase
     ): SaveTaskUseCase {
-        return SaveTaskUseCaseImpl(repository, sheduleTaskUseCase, cancelSheduleTaskUseCase)
+        return SaveTaskUseCaseImpl(repository, scheduleTaskUseCase, cancelScheduleTaskUseCase)
     }
 
     @Provides
     @Singleton
     fun provideDeleteTaskUseCase(
         repository: TaskRepository,
-        cancelSheduleTaskUseCase: CancelSheduleTaskUseCase
+        cancelScheduleTaskUseCase: CancelScheduleTaskUseCase
     ): DeleteTaskUseCase {
-        return DeleteTaskUseCaseImpl(repository, cancelSheduleTaskUseCase)
+        return DeleteTaskUseCaseImpl(repository, cancelScheduleTaskUseCase)
     }
 
     @Provides
