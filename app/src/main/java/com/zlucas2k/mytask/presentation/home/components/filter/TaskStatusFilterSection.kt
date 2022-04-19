@@ -1,9 +1,11 @@
 package com.zlucas2k.mytask.presentation.home.components.filter
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,7 +34,11 @@ fun TaskStatusFilterSection(
         stringResource(id = R.string.done),
     )
 
-    LazyRow(modifier = modifier) {
+    LazyRow(
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+    ) {
         items(listFilterOptions) { filterOption ->
             RoundedChip(
                 text = listTextFilterOptions[filterOption.ordinal],
