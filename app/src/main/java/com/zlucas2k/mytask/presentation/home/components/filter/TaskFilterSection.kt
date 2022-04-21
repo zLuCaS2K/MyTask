@@ -10,41 +10,44 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.zlucas2k.mytask.R
+import com.zlucas2k.mytask.domain.util.TaskFilter
 import com.zlucas2k.mytask.presentation.common.components.RoundedChip
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
-import com.zlucas2k.mytask.presentation.home.common.filter.TaskStatusFilter
 
 @Composable
-fun TaskStatusFilterSection(
-    filter: TaskStatusFilter,
-    onFilterChange: (TaskStatusFilter) -> Unit,
+fun TaskFilterSection(
+    filter: TaskFilter,
+    onFilterChange: (TaskFilter) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val listFilterOptions = listOf(
-        TaskStatusFilter.ALL,
-        TaskStatusFilter.TODO,
-        TaskStatusFilter.PROGRESS,
-        TaskStatusFilter.DONE,
+    val filterOptions = listOf(
+        TaskFilter.All,
+        TaskFilter.Todo,
+        TaskFilter.Progress,
+        TaskFilter.Done
     )
 
-    val listTextFilterOptions = listOf(
+    val filterTextOptions = listOf(
         "Todos",
         stringResource(id = R.string.todo),
         stringResource(id = R.string.progress),
         stringResource(id = R.string.done),
     )
 
+    // First is text, second is value
+    val filters = filterTextOptions zip filterOptions
+
     LazyRow(
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
     ) {
-        items(listFilterOptions) { filterOption ->
+        items(filters) { filterOption ->
             RoundedChip(
-                text = listTextFilterOptions[filterOption.ordinal],
-                isSelected = filter == filterOption,
+                text = filterOption.first,
+                isSelected = filter == filterOption.second,
                 onClick = {
-                    onFilterChange(filterOption)
+                    onFilterChange(filterOption.second)
                 }
             )
         }
@@ -57,9 +60,9 @@ fun TaskStatusFilterSection(
 private fun Preview() {
     MyTaskTheme {
 
-        var filterSelected by remember { mutableStateOf(TaskStatusFilter.ALL) }
+        var filterSelected by remember { mutableStateOf<TaskFilter>(TaskFilter.All) }
 
-        TaskStatusFilterSection(
+        TaskFilterSection(
             filter = filterSelected,
             onFilterChange = {
                 filterSelected = it
