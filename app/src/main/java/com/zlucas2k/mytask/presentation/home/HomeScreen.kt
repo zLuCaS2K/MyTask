@@ -18,11 +18,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.navigation.model.Screen
+import com.zlucas2k.mytask.presentation.home.common.filter.FilterWidgetState
 import com.zlucas2k.mytask.presentation.home.common.search.SearchWidgetState
-import com.zlucas2k.mytask.presentation.home.common.filter.TaskStatusFilterWidgetState
 import com.zlucas2k.mytask.presentation.home.components.HomeAddFAB
 import com.zlucas2k.mytask.presentation.home.components.HomeTaskCard
-import com.zlucas2k.mytask.presentation.home.components.filter.TaskStatusFilterSection
+import com.zlucas2k.mytask.presentation.home.components.filter.TaskFilterSection
 import com.zlucas2k.mytask.presentation.home.components.topbar.HomeDefaultTopAppBar
 import com.zlucas2k.mytask.presentation.home.components.topbar.HomeSearchTopAppBar
 import com.zlucas2k.mytask.presentation.home.viewmodel.HomeViewModel
@@ -67,11 +67,11 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
         content = {
             Column(modifier = Modifier.fillMaxSize()) {
                 AnimatedVisibility(
-                    visible = uiState.filterWidgetState == TaskStatusFilterWidgetState.OPENED,
+                    visible = uiState.filterWidgetState == FilterWidgetState.OPENED,
                     enter = fadeIn(),
                     exit = fadeOut(),
                     content = {
-                        TaskStatusFilterSection(
+                        TaskFilterSection(
                             filter = uiState.filterQuery,
                             onFilterChange = {
                                 viewModel.onFilterOptionChange(it)

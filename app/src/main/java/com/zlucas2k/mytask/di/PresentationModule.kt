@@ -12,12 +12,16 @@ import com.zlucas2k.mytask.domain.usecases.shedule.shedule.ScheduleTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.shedule.shedule.ScheduleTaskUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCaseImpl
+import com.zlucas2k.mytask.domain.usecases.task.filter.FilterTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.filter.FilterTaskUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.task.get.GetTaskByIdUseCase
 import com.zlucas2k.mytask.domain.usecases.task.get.GetTaskByIdUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.task.get_all.GetAllTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.get_all.GetAllTaskUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.task.save.SaveTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.save.SaveTaskUseCaseImpl
+import com.zlucas2k.mytask.domain.usecases.task.search.SearchTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.search.SearchTaskUseCaseImpl
 import com.zlucas2k.mytask.infrastructure.worker.provider.WorkerProvider
 import dagger.Module
 import dagger.Provides
@@ -51,6 +55,18 @@ object PresentationModule {
     @Singleton
     fun provideGetTaskByIdUseCase(repository: TaskRepository): GetTaskByIdUseCase {
         return GetTaskByIdUseCaseImpl(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchTaskUseCase(repository: TaskRepository): SearchTaskUseCase {
+        return SearchTaskUseCaseImpl(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFilterTaskUseCase(repository: TaskRepository): FilterTaskUseCase {
+        return FilterTaskUseCaseImpl(repository)
     }
 
     @Provides

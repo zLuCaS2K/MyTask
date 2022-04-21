@@ -6,23 +6,34 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zlucas2k.mytask.domain.mappers.mapToView
+import com.zlucas2k.mytask.domain.usecases.task.filter.FilterTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.get_all.GetAllTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.search.SearchTaskUseCase
+import com.zlucas2k.mytask.domain.util.TaskFilter
 import com.zlucas2k.mytask.presentation.home.common.HomeScreenState
-import com.zlucas2k.mytask.presentation.home.common.filter.TaskStatusFilter
-import com.zlucas2k.mytask.presentation.home.common.filter.TaskStatusFilterWidgetState
+import com.zlucas2k.mytask.presentation.home.common.filter.FilterWidgetState
 import com.zlucas2k.mytask.presentation.home.common.search.SearchWidgetState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getAllTaskUseCase: GetAllTaskUseCase
+    private val getAllTaskUseCase: GetAllTaskUseCase,
+    private val searchTaskUseCase: SearchTaskUseCase,
+    private val filterTaskUseCase: FilterTaskUseCase
 ) : ViewModel() {
 
     private val _uiState: MutableState<HomeScreenState> = mutableStateOf(HomeScreenState())
     val uiState: State<HomeScreenState> get() = _uiState
+
+    private var _searchJob: Job? = null
+    private var _filterJob: Job? = null
 
     init {
         getAllTasks()
@@ -48,16 +59,21 @@ class HomeViewModel @Inject constructor(
             val tasksCached = _uiState.value.tasksCached
             _uiState.value = _uiState.value.copy(tasks = tasksCached)
         } else {
-            val searchResult = _uiState.value.tasksCached.filter {
-                it.title.contains(searchQuery, true) || it.description.contains(searchQuery, true)
+            viewModelScope.launch(Dispatchers.IO) {
+                _searchJob?.cancel()
+                _searchJob = searchTaskUseCase(searchQuery)
+                    .map { tasksModel ->
+                        tasksModel.map { it.mapToView() }
+                    }
+                    .onEach { searchResult ->
+                        _uiState.value = _uiState.value.copy(tasks = searchResult)
+                    }.launchIn(viewModelScope)
             }
-
-            _uiState.value = _uiState.value.copy(tasks = searchResult)
         }
     }
 
-    fun onSearchTextChange(newValue: String) {
-        _uiState.value = _uiState.value.copy(searchQuery = newValue)
+    fun onSearchTextChange(newSearchQuery: String) {
+        _uiState.value = _uiState.value.copy(searchQuery = newSearchQuery)
     }
 
     fun onSearchWidgetStateChange() {
@@ -69,30 +85,31 @@ class HomeViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(searchWidgetState = newState)
     }
 
+    // TODO: Implementar uma regra para evitar consultas redundantes no banco de dados
     fun onFilterTask() {
         val filterQuery = _uiState.value.filterQuery
 
-        if (filterQuery != TaskStatusFilter.ALL) {
-            val filterResult = _uiState.value.tasksCached.filter {
-                // -1 because TaskStatusFilter enum have more one property
-                it.status.ordinal == filterQuery.ordinal - 1
-            }
-
-            _uiState.value = _uiState.value.copy(tasks = filterResult)
-        } else {
-            val tasksCached = _uiState.value.tasksCached
-            _uiState.value = _uiState.value.copy(tasks = tasksCached)
+        viewModelScope.launch(Dispatchers.IO) {
+            _filterJob?.cancel()
+            _filterJob = filterTaskUseCase(filterQuery)
+                .map { tasksModel ->
+                    tasksModel.map { it.mapToView() }
+                }
+                .onEach { filterResult ->
+                    _uiState.value = _uiState.value.copy(tasks = filterResult)
+                }
+                .launchIn(viewModelScope)
         }
     }
 
-    fun onFilterOptionChange(newValue: TaskStatusFilter) {
-        _uiState.value = _uiState.value.copy(filterQuery = newValue)
+    fun onFilterOptionChange(newFilterQuery: TaskFilter) {
+        _uiState.value = _uiState.value.copy(filterQuery = newFilterQuery)
     }
 
     fun onFilterWidgetStateChange() {
         val newState = when (_uiState.value.filterWidgetState) {
-            TaskStatusFilterWidgetState.OPENED -> TaskStatusFilterWidgetState.CLOSED
-            TaskStatusFilterWidgetState.CLOSED -> TaskStatusFilterWidgetState.OPENED
+            FilterWidgetState.OPENED -> FilterWidgetState.CLOSED
+            FilterWidgetState.CLOSED -> FilterWidgetState.OPENED
         }
 
         _uiState.value = _uiState.value.copy(filterWidgetState = newState)
