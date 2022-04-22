@@ -10,6 +10,7 @@ import com.zlucas2k.mytask.domain.usecases.task.filter.FilterTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.get_all.GetAllTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.search.SearchTaskUseCase
 import com.zlucas2k.mytask.domain.util.TaskFilter
+import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.home.common.HomeScreenState
 import com.zlucas2k.mytask.presentation.home.common.filter.FilterWidgetState
 import com.zlucas2k.mytask.presentation.home.common.search.SearchWidgetState
@@ -32,6 +33,9 @@ class HomeViewModel @Inject constructor(
     private val _uiState: MutableState<HomeScreenState> = mutableStateOf(HomeScreenState())
     val uiState: State<HomeScreenState> get() = _uiState
 
+    private val _tasksCached: MutableState<List<TaskView>> = mutableStateOf(emptyList())
+    private val _filterLastQuery: MutableState<TaskFilter> = mutableStateOf(TaskFilter.All)
+
     private var _searchJob: Job? = null
     private var _filterJob: Job? = null
 
@@ -46,8 +50,8 @@ class HomeViewModel @Inject constructor(
                     taskNotMapped.mapToView()
                 }
             }.collect { tasks ->
+                _tasksCached.value = tasks
                 _uiState.value = _uiState.value.copy(tasks = tasks)
-                _uiState.value = _uiState.value.copy(tasksCached = tasks)
             }
         }
     }
@@ -56,8 +60,7 @@ class HomeViewModel @Inject constructor(
         val searchQuery = _uiState.value.searchQuery
 
         if (searchQuery.isEmpty()) {
-            val tasksCached = _uiState.value.tasksCached
-            _uiState.value = _uiState.value.copy(tasks = tasksCached)
+            _uiState.value = _uiState.value.copy(tasks = _tasksCached.value)
         } else {
             viewModelScope.launch(Dispatchers.IO) {
                 _searchJob?.cancel()
@@ -88,7 +91,7 @@ class HomeViewModel @Inject constructor(
     fun onFilterTask() {
         val filterQuery = _uiState.value.filterQuery
 
-        if (_uiState.value.filterQuery != _uiState.value.filterLastQuery) {
+        if (_uiState.value.filterQuery != _filterLastQuery) {
             viewModelScope.launch(Dispatchers.IO) {
                 _filterJob?.cancel()
                 _filterJob = filterTaskUseCase(filterQuery)
@@ -96,8 +99,8 @@ class HomeViewModel @Inject constructor(
                         tasksModel.map { it.mapToView() }
                     }
                     .onEach { filterResult ->
+                        _filterLastQuery.value = filterQuery
                         _uiState.value = _uiState.value.copy(tasks = filterResult)
-                        _uiState.value = _uiState.value.copy(filterLastQuery = filterQuery)
                     }
                     .launchIn(viewModelScope)
             }
