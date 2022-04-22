@@ -85,20 +85,22 @@ class HomeViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(searchWidgetState = newState)
     }
 
-    // TODO: Implementar uma regra para evitar consultas redundantes no banco de dados
     fun onFilterTask() {
         val filterQuery = _uiState.value.filterQuery
 
-        viewModelScope.launch(Dispatchers.IO) {
-            _filterJob?.cancel()
-            _filterJob = filterTaskUseCase(filterQuery)
-                .map { tasksModel ->
-                    tasksModel.map { it.mapToView() }
-                }
-                .onEach { filterResult ->
-                    _uiState.value = _uiState.value.copy(tasks = filterResult)
-                }
-                .launchIn(viewModelScope)
+        if (_uiState.value.filterQuery != _uiState.value.filterLastQuery) {
+            viewModelScope.launch(Dispatchers.IO) {
+                _filterJob?.cancel()
+                _filterJob = filterTaskUseCase(filterQuery)
+                    .map { tasksModel ->
+                        tasksModel.map { it.mapToView() }
+                    }
+                    .onEach { filterResult ->
+                        _uiState.value = _uiState.value.copy(tasks = filterResult)
+                        _uiState.value = _uiState.value.copy(filterLastQuery = filterQuery)
+                    }
+                    .launchIn(viewModelScope)
+            }
         }
     }
 

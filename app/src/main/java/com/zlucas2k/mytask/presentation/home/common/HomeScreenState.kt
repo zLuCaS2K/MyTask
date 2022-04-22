@@ -12,5 +12,6 @@ data class HomeScreenState(
     val searchQuery: String = "",
     val searchWidgetState: SearchWidgetState = SearchWidgetState.CLOSED,
     val filterQuery: TaskFilter = TaskFilter.All,
+    val filterLastQuery: TaskFilter = TaskFilter.All,
     val filterWidgetState: FilterWidgetState = FilterWidgetState.CLOSED,
 )
