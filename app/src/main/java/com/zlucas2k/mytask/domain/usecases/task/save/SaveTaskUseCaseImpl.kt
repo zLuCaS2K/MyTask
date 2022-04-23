@@ -19,18 +19,21 @@ class SaveTaskUseCaseImpl @Inject constructor(
             throw TaskException("Preencha todos os campos!")
         }
 
-        val delay = task.getScheduleDelayInMillis()
-        if (delay < 0) {
-            throw TaskException("Insira uma data válida!")
-        }
-
-        val id = repository.saveTask(task)
-        val taskSheduleModel = task.copy(id = id.toInt())
-
-        cancelScheduleTaskUseCase(taskSheduleModel)
+        val delayTaskWorkInMillis = task.getScheduleDelayInMillis()
 
         if (task.status == Status.TODO) {
-            scheduleTaskUseCase(taskSheduleModel, delay)
+            if (delayTaskWorkInMillis < 0) {
+                throw TaskException("Insira uma data válida!")
+            }
+        }
+
+        val idTask = repository.saveTask(task)
+        val taskSchedule = task.copy(id = idTask.toInt())
+
+        cancelScheduleTaskUseCase(task = taskSchedule)
+
+        if (task.status == Status.TODO) {
+            scheduleTaskUseCase(task = taskSchedule, delayInMillis = delayTaskWorkInMillis)
         }
     }
 }
