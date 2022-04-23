@@ -119,8 +119,4 @@ class HomeViewModel @Inject constructor(
 
         _uiState.value = _uiState.value.copy(filterWidgetState = newState)
     }
-
-    fun onSearchingState(newValue: Boolean) {
-        _uiState.value = _uiState.value.copy(isSearching = newValue)
-    }
 }

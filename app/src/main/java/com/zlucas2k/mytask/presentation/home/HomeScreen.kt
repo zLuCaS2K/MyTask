@@ -34,9 +34,7 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
     val uiState by viewModel.uiState
 
     LaunchedEffect(key1 = uiState.searchQuery) {
-        viewModel.onSearchingState(true)
         viewModel.onSearchTask()
-        viewModel.onSearchingState(false)
     }
 
     Scaffold(
