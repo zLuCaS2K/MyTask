@@ -8,8 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.zlucas2k.mytask.presentation.common.navigation.model.Screen
-import com.zlucas2k.mytask.presentation.home.HomeScreen
-import com.zlucas2k.mytask.presentation.task.TaskScreen
+import com.zlucas2k.mytask.presentation.screens.home.HomeScreen
+import com.zlucas2k.mytask.presentation.screens.task.TaskScreen
 
 @Composable
 @ExperimentalMaterialApi
