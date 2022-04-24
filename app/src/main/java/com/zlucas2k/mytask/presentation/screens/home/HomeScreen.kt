@@ -9,18 +9,22 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.navigation.model.Screen
+import com.zlucas2k.mytask.presentation.components.FAB
 import com.zlucas2k.mytask.presentation.screens.home.common.filter.FilterWidgetState
 import com.zlucas2k.mytask.presentation.screens.home.common.search.SearchWidgetState
-import com.zlucas2k.mytask.presentation.screens.home.components.HomeAddFAB
 import com.zlucas2k.mytask.presentation.screens.home.components.HomeTaskCard
 import com.zlucas2k.mytask.presentation.screens.home.components.filter.TaskFilterSection
 import com.zlucas2k.mytask.presentation.screens.home.components.topbar.HomeDefaultTopAppBar
@@ -58,9 +62,13 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
             }
         },
         floatingActionButton = {
-            HomeAddFAB {
-                navHostController.navigate(Screen.TaskScreen.route)
-            }
+            FAB(
+                imageVector = Icons.Filled.Add,
+                contentDescription = stringResource(id = R.string.add_task),
+                onClick = {
+                    navHostController.navigate(Screen.TaskScreen.route)
+                }
+            )
         },
         content = {
             Column(modifier = Modifier.fillMaxSize()) {
