@@ -1,7 +1,6 @@
 package com.zlucas2k.mytask.presentation.screens.home.components.topbar
 
 import android.content.res.Configuration
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.icons.filled.Search
@@ -10,35 +9,28 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
+import com.zlucas2k.mytask.presentation.components.IconButtonDefault
+import com.zlucas2k.mytask.presentation.components.TopAppBarDefault
 
 @Composable
-fun HomeDefaultTopAppBar(
+fun HomeTopAppBarDefault(
     onSearchClicked: () -> Unit,
     onFilterClicked: () -> Unit
 ) {
-    TopAppBar(
-        title = {
-            Text(
-                text = stringResource(id = R.string.app_name),
-                color = MaterialTheme.colors.onPrimary
-            )
-        },
+    TopAppBarDefault(
+        title = stringResource(id = R.string.app_name),
         actions = {
-            IconButton(onClick = onSearchClicked) {
-                Icon(
-                    imageVector = Icons.Filled.Search,
-                    contentDescription = null,
-                    tint = MaterialTheme.colors.onPrimary
-                )
-            }
+            IconButtonDefault(
+                imageVector = Icons.Filled.Search,
+                contentDescription = null,
+                onClick = onSearchClicked
+            )
 
-            IconButton(onClick = onFilterClicked) {
-                Icon(
-                    imageVector = Icons.Filled.FilterAlt,
-                    contentDescription = null,
-                    tint = MaterialTheme.colors.onPrimary
-                )
-            }
+            IconButtonDefault(
+                imageVector = Icons.Filled.FilterAlt,
+                contentDescription = null,
+                onClick = onFilterClicked
+            )
         }
     )
 }
@@ -48,7 +40,7 @@ fun HomeDefaultTopAppBar(
 @Preview(name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun HomeDefaultTopAppBarPreview() {
     MyTaskTheme {
-        HomeDefaultTopAppBar(
+        HomeTopAppBarDefault(
             onSearchClicked = {},
             onFilterClicked = {}
         )
