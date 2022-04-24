@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation
+package com.zlucas2k.mytask
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
