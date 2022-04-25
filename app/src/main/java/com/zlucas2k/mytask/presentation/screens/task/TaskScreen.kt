@@ -9,8 +9,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.screens.task.common.TaskEventUI
-import com.zlucas2k.mytask.presentation.screens.task.components.TaskTopAppBar
-import com.zlucas2k.mytask.presentation.screens.task.viewmodel.TaskViewModel
+import com.zlucas2k.mytask.presentation.screens.task.components.topbar.TaskTopAppBar
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
