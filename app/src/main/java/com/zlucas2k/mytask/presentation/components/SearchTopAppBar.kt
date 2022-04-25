@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 
 @Composable
-fun SearchTopAppBar(
+fun MyTaskSearchTopAppBar(
     query: String,
     onQueryChange: (String) -> Unit,
     onSearchClicked: () -> Unit,
@@ -55,14 +55,14 @@ fun SearchTopAppBar(
                 )
             },
             leadingIcon = {
-                IconButtonDefault(
+                MyTaskIconButton(
                     imageVector = Icons.Filled.Search,
                     contentDescription = null,
                     onClick = onSearchClicked
                 )
             },
             trailingIcon = {
-                IconButtonDefault(
+                MyTaskIconButton(
                     imageVector = Icons.Filled.Close,
                     contentDescription = null,
                     onClick = {
@@ -94,7 +94,7 @@ fun SearchTopAppBar(
 @Composable
 private fun Preview() {
     MyTaskTheme {
-        SearchTopAppBar(
+        MyTaskSearchTopAppBar(
             query = "",
             onQueryChange = {},
             onSearchClicked = {},

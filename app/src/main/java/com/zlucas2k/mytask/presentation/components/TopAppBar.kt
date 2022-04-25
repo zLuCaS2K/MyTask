@@ -11,7 +11,7 @@ import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 
 @Composable
-fun TopAppBarDefault(
+fun MyTaskTopAppBar(
     title: String,
     actions: @Composable RowScope.() -> Unit = {}
 ) {
@@ -30,7 +30,7 @@ fun TopAppBarDefault(
 @Composable
 private fun Preview() {
     MyTaskTheme {
-        TopAppBarDefault(
+        MyTaskTopAppBar(
             title = stringResource(id = R.string.app_name),
             actions = {
 

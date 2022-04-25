@@ -9,24 +9,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
-import com.zlucas2k.mytask.presentation.components.IconButtonDefault
-import com.zlucas2k.mytask.presentation.components.TopAppBarDefault
+import com.zlucas2k.mytask.presentation.components.MyTaskIconButton
+import com.zlucas2k.mytask.presentation.components.MyTaskTopAppBar
 
 @Composable
-fun HomeTopAppBarDefault(
+fun HomeTopAppBar(
     onSearchClicked: () -> Unit,
     onFilterClicked: () -> Unit
 ) {
-    TopAppBarDefault(
+    MyTaskTopAppBar(
         title = stringResource(id = R.string.app_name),
         actions = {
-            IconButtonDefault(
+            MyTaskIconButton(
                 imageVector = Icons.Filled.Search,
                 contentDescription = null,
                 onClick = onSearchClicked
             )
 
-            IconButtonDefault(
+            MyTaskIconButton(
                 imageVector = Icons.Filled.FilterAlt,
                 contentDescription = null,
                 onClick = onFilterClicked
@@ -40,7 +40,7 @@ fun HomeTopAppBarDefault(
 @Preview(name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun HomeDefaultTopAppBarPreview() {
     MyTaskTheme {
-        HomeTopAppBarDefault(
+        HomeTopAppBar(
             onSearchClicked = {},
             onFilterClicked = {}
         )

@@ -22,13 +22,13 @@ import androidx.navigation.NavHostController
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.navigation.model.Screen
-import com.zlucas2k.mytask.presentation.components.FAB
-import com.zlucas2k.mytask.presentation.components.SearchTopAppBar
+import com.zlucas2k.mytask.presentation.components.MyTaskFloatingActionButton
+import com.zlucas2k.mytask.presentation.components.MyTaskSearchTopAppBar
 import com.zlucas2k.mytask.presentation.screens.home.common.filter.FilterWidgetState
 import com.zlucas2k.mytask.presentation.screens.home.common.search.SearchWidgetState
 import com.zlucas2k.mytask.presentation.screens.home.components.card.TaskCard
 import com.zlucas2k.mytask.presentation.screens.home.components.filter.TaskFilterSection
-import com.zlucas2k.mytask.presentation.screens.home.components.topbar.HomeTopAppBarDefault
+import com.zlucas2k.mytask.presentation.screens.home.components.topbar.HomeTopAppBar
 
 @Composable
 @ExperimentalMaterialApi
@@ -44,7 +44,7 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
         topBar = {
             when (uiState.searchWidgetState) {
                 SearchWidgetState.OPENED -> {
-                    SearchTopAppBar(
+                    MyTaskSearchTopAppBar(
                         query = uiState.searchQuery,
                         onQueryChange = viewModel::onSearchTextChange,
                         onSearchClicked = viewModel::onSearchTask,
@@ -53,7 +53,7 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
                 }
 
                 SearchWidgetState.CLOSED -> {
-                    HomeTopAppBarDefault(
+                    HomeTopAppBar(
                         onSearchClicked = viewModel::onSearchWidgetStateChange,
                         onFilterClicked = viewModel::onFilterWidgetStateChange
                     )
@@ -61,7 +61,7 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
             }
         },
         floatingActionButton = {
-            FAB(
+            MyTaskFloatingActionButton(
                 imageVector = Icons.Filled.Add,
                 contentDescription = stringResource(id = R.string.add_task),
                 onClick = {
