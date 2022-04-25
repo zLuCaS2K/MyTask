@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.screens.home.common
+package com.zlucas2k.mytask.presentation.screens.home
 
 import com.zlucas2k.mytask.domain.util.TaskFilter
 import com.zlucas2k.mytask.presentation.common.model.TaskView

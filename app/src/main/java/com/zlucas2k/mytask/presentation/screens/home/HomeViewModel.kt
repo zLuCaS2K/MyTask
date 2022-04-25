@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.screens.home.viewmodel
+package com.zlucas2k.mytask.presentation.screens.home
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -11,7 +11,6 @@ import com.zlucas2k.mytask.domain.usecases.task.get_all.GetAllTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.search.SearchTaskUseCase
 import com.zlucas2k.mytask.domain.util.TaskFilter
 import com.zlucas2k.mytask.presentation.common.model.TaskView
-import com.zlucas2k.mytask.presentation.screens.home.common.HomeScreenState
 import com.zlucas2k.mytask.presentation.screens.home.common.filter.FilterWidgetState
 import com.zlucas2k.mytask.presentation.screens.home.common.search.SearchWidgetState
 import dagger.hilt.android.lifecycle.HiltViewModel

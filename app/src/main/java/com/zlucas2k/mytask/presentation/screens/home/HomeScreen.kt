@@ -29,7 +29,6 @@ import com.zlucas2k.mytask.presentation.screens.home.common.search.SearchWidgetS
 import com.zlucas2k.mytask.presentation.screens.home.components.card.HomeTaskCard
 import com.zlucas2k.mytask.presentation.screens.home.components.filter.TaskFilterSection
 import com.zlucas2k.mytask.presentation.screens.home.components.topbar.HomeTopAppBarDefault
-import com.zlucas2k.mytask.presentation.screens.home.viewmodel.HomeViewModel
 
 @Composable
 @ExperimentalMaterialApi
