@@ -35,8 +35,8 @@ class TaskViewModel @Inject constructor(
     private val formatTimeUseCase: FormatTimeUseCase
 ) : ViewModel() {
 
-    private val _uiState: MutableState<TaskState> = mutableStateOf(TaskState())
-    val uiState: State<TaskState> get() = _uiState
+    private val _uiState: MutableState<TaskScreenState> = mutableStateOf(TaskScreenState())
+    val uiState: State<TaskScreenState> get() = _uiState
 
     private val _uiEvent = MutableSharedFlow<TaskEventUI>()
     val uiEvent: SharedFlow<TaskEventUI> get() = _uiEvent
