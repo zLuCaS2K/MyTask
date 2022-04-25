@@ -8,6 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.zlucas2k.mytask.R
+import com.zlucas2k.mytask.presentation.components.MyTaskAlertDialog
 import com.zlucas2k.mytask.presentation.screens.task.common.TaskEventUI
 import com.zlucas2k.mytask.presentation.screens.task.components.topbar.TaskTopAppBar
 import kotlinx.coroutines.flow.collectLatest
@@ -21,7 +22,7 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
 
     LaunchedEffect(key1 = Unit) {
         viewModel.uiEvent.collectLatest { uiEvent ->
-            when(uiEvent) {
+            when (uiEvent) {
                 is TaskEventUI.SaveTask -> {
                     Toast.makeText(
                         context,
@@ -88,63 +89,16 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
     )
 
     if (showDialogDeleteConfirmation.value) {
-        ShowAlertDialog(
+        MyTaskAlertDialog(
             title = stringResource(id = R.string.delete_task_title_dialog),
-            description = stringResource(id = R.string.delete_task_description_dialog),
+            textDescription = stringResource(id = R.string.delete_task_description_dialog),
             onConfirmClick = {
                 viewModel.onDeleteNote()
                 showDialogDeleteConfirmation.value = !showDialogDeleteConfirmation.value
             },
             onDismissClick = {
                 showDialogDeleteConfirmation.value = !showDialogDeleteConfirmation.value
-            },
-            onDismissRequest = {
-                showDialogDeleteConfirmation.value = !showDialogDeleteConfirmation.value
             }
         )
     }
-}
-
-@Composable
-private fun ShowAlertDialog(
-    title: String,
-    description: String,
-    onConfirmClick: () -> Unit,
-    onDismissClick: () -> Unit,
-    onDismissRequest: () -> Unit
-) {
-    AlertDialog(
-        title = {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.h1,
-                color = MaterialTheme.colors.onBackground
-            )
-        },
-        text = {
-            Text(
-                text = description,
-                style = MaterialTheme.typography.body2,
-                color = MaterialTheme.colors.onBackground.copy(alpha = 0.5f)
-            )
-        },
-        confirmButton = {
-            TextButton(onClick = onConfirmClick) {
-                Text(
-                    text = stringResource(id = R.string.yes).uppercase(),
-                    color = MaterialTheme.colors.secondary
-
-                )
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismissClick) {
-                Text(
-                    text = stringResource(id = R.string.no).uppercase(),
-                    color = MaterialTheme.colors.secondary
-                )
-            }
-        },
-        onDismissRequest = onDismissRequest
-    )
 }
