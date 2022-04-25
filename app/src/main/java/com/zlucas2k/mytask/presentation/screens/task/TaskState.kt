@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.screens.task.common
+package com.zlucas2k.mytask.presentation.screens.task
 
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 

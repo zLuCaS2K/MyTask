@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.screens.task.viewmodel
+package com.zlucas2k.mytask.presentation.screens.task
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -18,7 +18,6 @@ import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.model.mapper.mapToModel
 import com.zlucas2k.mytask.presentation.screens.task.common.TaskEventUI
-import com.zlucas2k.mytask.presentation.screens.task.common.TaskState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
