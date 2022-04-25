@@ -5,7 +5,10 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Divider
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Alarm
 import androidx.compose.material.icons.filled.DateRange
@@ -22,9 +25,10 @@ import com.zlucas2k.mytask.presentation.common.model.PriorityView
 import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
+import com.zlucas2k.mytask.presentation.components.MyTaskCard
 
 @Composable
-fun HomeTaskCard(task: TaskView, modifier: Modifier = Modifier) {
+fun TaskCard(task: TaskView, modifier: Modifier = Modifier) {
 
     val colorPriority = if (isSystemInDarkTheme()) {
         task.priority.colorDark
@@ -32,7 +36,7 @@ fun HomeTaskCard(task: TaskView, modifier: Modifier = Modifier) {
         task.priority.colorLight
     }
 
-    Card(modifier = modifier, elevation = 8.dp) {
+    MyTaskCard(modifier = modifier) {
         Row(modifier = Modifier.height(IntrinsicSize.Min)) {
             IndicatorTaskPriorityColor(
                 color = colorPriority,
@@ -184,7 +188,7 @@ private fun Preview() {
     )
 
     MyTaskTheme {
-        HomeTaskCard(
+        TaskCard(
             task = task,
             modifier = Modifier
                 .fillMaxWidth()
