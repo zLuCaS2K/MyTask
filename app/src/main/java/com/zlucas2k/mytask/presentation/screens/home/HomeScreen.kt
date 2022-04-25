@@ -26,7 +26,7 @@ import com.zlucas2k.mytask.presentation.components.FAB
 import com.zlucas2k.mytask.presentation.components.SearchTopAppBar
 import com.zlucas2k.mytask.presentation.screens.home.common.filter.FilterWidgetState
 import com.zlucas2k.mytask.presentation.screens.home.common.search.SearchWidgetState
-import com.zlucas2k.mytask.presentation.screens.home.components.HomeTaskCard
+import com.zlucas2k.mytask.presentation.screens.home.components.card.HomeTaskCard
 import com.zlucas2k.mytask.presentation.screens.home.components.filter.TaskFilterSection
 import com.zlucas2k.mytask.presentation.screens.home.components.topbar.HomeTopAppBarDefault
 import com.zlucas2k.mytask.presentation.screens.home.viewmodel.HomeViewModel

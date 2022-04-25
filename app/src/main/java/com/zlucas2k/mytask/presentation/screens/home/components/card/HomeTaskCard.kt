@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.screens.home.components
+package com.zlucas2k.mytask.presentation.screens.home.components.card
 
 import android.content.res.Configuration
 import androidx.compose.foundation.border
