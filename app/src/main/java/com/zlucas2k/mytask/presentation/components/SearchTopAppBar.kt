@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.screens.home.components.topbar
+package com.zlucas2k.mytask.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -10,7 +10,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
@@ -18,16 +18,18 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 
 @Composable
-fun HomeSearchTopAppBar(
-    text: String,
-    onTextChange: (String) -> Unit,
+fun SearchTopAppBar(
+    query: String,
+    onQueryChange: (String) -> Unit,
     onSearchClicked: () -> Unit,
     onCloseClicked: () -> Unit
 ) {
-    val focusRequester = remember { FocusRequester() }
+    val focusRequester = rememberSaveable { FocusRequester() }
 
     LaunchedEffect(key1 = Unit) {
         focusRequester.requestFocus()
@@ -41,13 +43,9 @@ fun HomeSearchTopAppBar(
             .height(56.dp)
     ) {
         TextField(
-            value = text,
-            onValueChange = {
-                onTextChange(it)
-            },
-            textStyle = TextStyle(
-                fontSize = MaterialTheme.typography.subtitle1.fontSize
-            ),
+            value = query,
+            onValueChange = { onQueryChange(it) },
+            textStyle = TextStyle(fontSize = MaterialTheme.typography.subtitle1.fontSize),
             placeholder = {
                 Text(
                     text = "Pesquisar",
@@ -57,34 +55,26 @@ fun HomeSearchTopAppBar(
                 )
             },
             leadingIcon = {
-                IconButton(onClick = onSearchClicked) {
-                    Icon(
-                        imageVector = Icons.Filled.Search,
-                        contentDescription = null,
-                        tint = MaterialTheme.colors.onPrimary
-                    )
-                }
+                IconButtonDefault(
+                    imageVector = Icons.Filled.Search,
+                    contentDescription = null,
+                    onClick = onSearchClicked
+                )
             },
             trailingIcon = {
-                IconButton(
+                IconButtonDefault(
+                    imageVector = Icons.Filled.Close,
+                    contentDescription = null,
                     onClick = {
-                        if (text.isNotEmpty()) {
-                            onTextChange("")
+                        if (query.isNotEmpty()) {
+                            onQueryChange("")
                         } else {
                             onCloseClicked()
                         }
                     }
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Close,
-                        contentDescription = null,
-                        tint = MaterialTheme.colors.onPrimary
-                    )
-                }
+                )
             },
-            keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Search
-            ),
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(
                 onSearch = {
                     onSearchClicked()
@@ -96,6 +86,19 @@ fun HomeSearchTopAppBar(
                 cursorColor = Color.White.copy(alpha = ContentAlpha.medium)
             ),
             modifier = Modifier.focusRequester(focusRequester)
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun Preview() {
+    MyTaskTheme {
+        SearchTopAppBar(
+            query = "",
+            onQueryChange = {},
+            onSearchClicked = {},
+            onCloseClicked = {}
         )
     }
 }

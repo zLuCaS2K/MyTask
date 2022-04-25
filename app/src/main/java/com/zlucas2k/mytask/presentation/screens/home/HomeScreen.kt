@@ -23,12 +23,12 @@ import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.navigation.model.Screen
 import com.zlucas2k.mytask.presentation.components.FAB
+import com.zlucas2k.mytask.presentation.components.SearchTopAppBar
 import com.zlucas2k.mytask.presentation.screens.home.common.filter.FilterWidgetState
 import com.zlucas2k.mytask.presentation.screens.home.common.search.SearchWidgetState
 import com.zlucas2k.mytask.presentation.screens.home.components.HomeTaskCard
 import com.zlucas2k.mytask.presentation.screens.home.components.filter.TaskFilterSection
-import com.zlucas2k.mytask.presentation.screens.home.components.topbar.HomeDefaultTopAppBar
-import com.zlucas2k.mytask.presentation.screens.home.components.topbar.HomeSearchTopAppBar
+import com.zlucas2k.mytask.presentation.screens.home.components.topbar.HomeTopAppBarDefault
 import com.zlucas2k.mytask.presentation.screens.home.viewmodel.HomeViewModel
 
 @Composable
@@ -45,16 +45,16 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
         topBar = {
             when (uiState.searchWidgetState) {
                 SearchWidgetState.OPENED -> {
-                    HomeSearchTopAppBar(
-                        text = uiState.searchQuery,
-                        onTextChange = viewModel::onSearchTextChange,
+                    SearchTopAppBar(
+                        query = uiState.searchQuery,
+                        onQueryChange = viewModel::onSearchTextChange,
                         onSearchClicked = viewModel::onSearchTask,
                         onCloseClicked = viewModel::onSearchWidgetStateChange
                     )
                 }
 
                 SearchWidgetState.CLOSED -> {
-                    HomeDefaultTopAppBar(
+                    HomeTopAppBarDefault(
                         onSearchClicked = viewModel::onSearchWidgetStateChange,
                         onFilterClicked = viewModel::onFilterWidgetStateChange
                     )
