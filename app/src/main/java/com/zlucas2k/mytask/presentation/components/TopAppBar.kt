@@ -13,6 +13,7 @@ import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 @Composable
 fun MyTaskTopAppBar(
     title: String,
+    navigationIcon: @Composable (() -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     TopAppBar(
@@ -22,6 +23,7 @@ fun MyTaskTopAppBar(
                 color = MaterialTheme.colors.onPrimary
             )
         },
+        navigationIcon = navigationIcon,
         actions = actions
     )
 }
