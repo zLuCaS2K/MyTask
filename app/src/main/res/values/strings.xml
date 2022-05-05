@@ -24,4 +24,8 @@
     <string name="todo">Agendado</string>
     <string name="progress">Em andamento</string>
     <string name="done">Concluida</string>
+    <string name="none">Sem</string>
+    <string name="low">Baixa</string>
+    <string name="medium">Média</string>
+    <string name="high">Alta</string>
 </resources>

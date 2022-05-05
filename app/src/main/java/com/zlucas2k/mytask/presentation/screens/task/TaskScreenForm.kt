@@ -14,9 +14,9 @@ import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.model.PriorityView
 import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
-import com.zlucas2k.mytask.presentation.screens.task.components.*
-import com.zlucas2k.mytask.presentation.screens.task.components.dropdowns.PriorityDropDownMenu
-import com.zlucas2k.mytask.presentation.screens.task.components.dropdowns.StatusDropDownMenu
+import com.zlucas2k.mytask.presentation.screens.task.components.TaskTextField
+import com.zlucas2k.mytask.presentation.screens.task.components.menu_selectors.PriorityMenuSelector
+import com.zlucas2k.mytask.presentation.screens.task.components.menu_selectors.StatusMenuSelector
 import com.zlucas2k.mytask.presentation.screens.task.components.pickers.DatePicker
 import com.zlucas2k.mytask.presentation.screens.task.components.pickers.TimePicker
 
@@ -54,21 +54,21 @@ fun TaskScreenForm(
         )
 
         Row {
-            PriorityDropDownMenu(
+            PriorityMenuSelector(
                 priority = priority,
-                onPrioritySelected = onPrioritySelected,
+                onPriorityChange = onPrioritySelected,
                 modifier = modifier
                     .weight(1f)
                     .padding(start = 20.dp, top = 10.dp, end = 10.dp)
             )
 
             if (isEditing) {
-                StatusDropDownMenu(
+                StatusMenuSelector(
                     status = status,
-                    onStatusSelected = onStatusSelected,
+                    onStatusChange = onStatusSelected,
                     modifier = modifier
                         .weight(1f)
-                        .padding(start = 10.dp, top = 10.dp, end = 20.dp)
+                        .padding(start = 20.dp, top = 10.dp, end = 10.dp)
                 )
             }
         }
