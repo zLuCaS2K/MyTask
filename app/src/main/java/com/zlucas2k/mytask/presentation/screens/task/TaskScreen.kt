@@ -1,8 +1,10 @@
 package com.zlucas2k.mytask.presentation.screens.task
 
 import android.widget.Toast
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -10,6 +12,7 @@ import androidx.navigation.NavHostController
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.components.MyTaskAlertDialog
 import com.zlucas2k.mytask.presentation.screens.task.common.TaskEventUI
+import com.zlucas2k.mytask.presentation.screens.task.components.form.TaskForm
 import com.zlucas2k.mytask.presentation.screens.task.components.topbar.TaskTopAppBar
 import kotlinx.coroutines.flow.collectLatest
 
@@ -58,32 +61,21 @@ fun TaskScreen(navHostController: NavHostController, viewModel: TaskViewModel = 
             )
         },
         content = {
-            TaskScreenForm(
+            TaskForm(
                 isEditing = uiState.isEditing,
                 title = uiState.task.title,
-                onTitleChange = {
-                    viewModel.onTitleChange(it)
-                },
-                date = uiState.task.date,
-                onDateChange = {
-                    viewModel.onDateChange(it)
-                },
+                onTitleChange = viewModel::onTitleChange,
                 time = uiState.task.time,
-                onTimeChange = { hour, minute ->
-                    viewModel.onTimeChange(hour, minute)
-                },
+                onTimeChange = viewModel::onTimeChange,
+                date = uiState.task.date,
+                onDateChange = viewModel::onDateChange,
                 description = uiState.task.description,
-                onDescriptionChange = {
-                    viewModel.onDescriptionChange(it)
-                },
+                onDescriptionChange = viewModel::onDescriptionChange,
                 priority = uiState.task.priority,
-                onPrioritySelected = {
-                    viewModel.onPriorityChange(it)
-                },
+                onPriorityChange = viewModel::onPriorityChange,
                 status = uiState.task.status,
-                onStatusSelected = {
-                    viewModel.onStatusChange(it)
-                }
+                onStatusChange = viewModel::onStatusChange,
+                modifier = Modifier.fillMaxSize()
             )
         }
     )

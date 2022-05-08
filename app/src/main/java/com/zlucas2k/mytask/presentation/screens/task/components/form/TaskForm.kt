@@ -1,7 +1,6 @@
-package com.zlucas2k.mytask.presentation.screens.task
+package com.zlucas2k.mytask.presentation.screens.task.components.form
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -10,39 +9,36 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.model.PriorityView
 import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 import com.zlucas2k.mytask.presentation.screens.task.components.TaskTextField
+import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.screens.task.components.menu_selectors.PriorityMenuSelector
 import com.zlucas2k.mytask.presentation.screens.task.components.menu_selectors.StatusMenuSelector
 import com.zlucas2k.mytask.presentation.screens.task.components.pickers.DatePicker
 import com.zlucas2k.mytask.presentation.screens.task.components.pickers.TimePicker
 
 @Composable
-fun TaskScreenForm(
-    isEditing: Boolean,
+fun TaskForm(
+    modifier: Modifier = Modifier,
+    isEditing: Boolean = false,
     title: String,
     onTitleChange: (String) -> Unit,
-    date: String,
-    onDateChange: (String) -> Unit,
     time: String,
     onTimeChange: (Int, Int) -> Unit,
+    date: String,
+    onDateChange: (String) -> Unit,
     description: String,
     onDescriptionChange: (String) -> Unit,
     priority: PriorityView,
-    onPrioritySelected: (PriorityView) -> Unit,
+    onPriorityChange: (PriorityView) -> Unit,
     status: StatusView,
-    onStatusSelected: (StatusView) -> Unit
+    onStatusChange: (StatusView) -> Unit
 ) {
-    val modifier = Modifier.fillMaxWidth()
+    val modifierComponents = Modifier.fillMaxWidth()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colors.background)
-    ) {
+    Column(modifier = modifier) {
         TaskTextField(
             value = title,
             onValueChange = { onTitleChange(it) },
@@ -50,14 +46,14 @@ fun TaskScreenForm(
             placeholderText = stringResource(id = R.string.title_task),
             singleLine = true,
             maxLines = 1,
-            modifier = modifier,
+            modifier = modifierComponents
         )
 
         Row {
             PriorityMenuSelector(
                 priority = priority,
-                onPriorityChange = onPrioritySelected,
-                modifier = modifier
+                onPriorityChange = { onPriorityChange(it) },
+                modifier = modifierComponents
                     .weight(1f)
                     .padding(start = 20.dp, top = 10.dp, end = 10.dp)
             )
@@ -65,8 +61,8 @@ fun TaskScreenForm(
             if (isEditing) {
                 StatusMenuSelector(
                     status = status,
-                    onStatusChange = onStatusSelected,
-                    modifier = modifier
+                    onStatusChange = { onStatusChange(it) },
+                    modifier = modifierComponents
                         .weight(1f)
                         .padding(start = 20.dp, top = 10.dp, end = 10.dp)
                 )
@@ -78,17 +74,13 @@ fun TaskScreenForm(
             onValueChange = { hour, minute ->
                 onTimeChange(hour, minute)
             },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 10.dp, top = 10.dp, end = 10.dp)
+            modifier = modifierComponents.padding(start = 10.dp, top = 10.dp, end = 10.dp)
         )
 
         DatePicker(
             value = date,
             onValueChange = { onDateChange(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 10.dp, top = 10.dp, end = 10.dp)
+            modifier = modifierComponents.padding(start = 10.dp, top = 10.dp, end = 10.dp)
         )
 
         TaskTextField(
@@ -98,7 +90,7 @@ fun TaskScreenForm(
             placeholderText = stringResource(id = R.string.description),
             singleLine = false,
             maxLines = 20,
-            modifier = modifier.fillMaxHeight()
+            modifier = Modifier.fillMaxHeight()
         )
     }
 }
@@ -108,35 +100,22 @@ fun TaskScreenForm(
 @Preview(name = "Dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun Preview() {
     MyTaskTheme {
-        val title = "Titulo"
-        val date = "Data"
-        val time = "Hora"
-        val description = "It is a long established fact that a reader will be distracted by the " +
-                "readable content of a page when looking at its layout. The point of using Lorem Ipsum" +
-                " is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here," +
-                " content here', making it look like readable English."
-        val priority = PriorityView.HIGH
-        val status = StatusView.TODO
-
-        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-            TaskScreenForm(
-                isEditing = true,
-                title = title,
+        Surface(color = MaterialTheme.colors.background) {
+            TaskForm(
+                title = "Titulo da Tarefa",
                 onTitleChange = {},
-                date = date,
+                time = "18:00",
+                onTimeChange = { hour, minute -> },
+                date = "17/08/2000",
                 onDateChange = {},
-                time = time,
-                onTimeChange = { _, _ ->
-
-                },
-                description = description,
+                description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
+                        " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an" +
+                        " unknown printer took a galley of type and scrambled it to make a type specimen book.",
                 onDescriptionChange = {},
-                priority = priority,
-                onPrioritySelected = {},
-                status = status,
-                onStatusSelected = {
-
-                }
+                priority = PriorityView.HIGH,
+                onPriorityChange = {},
+                status = StatusView.DONE,
+                onStatusChange = {}
             )
         }
     }
