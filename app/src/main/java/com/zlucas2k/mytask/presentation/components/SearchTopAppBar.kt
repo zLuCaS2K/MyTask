@@ -10,7 +10,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
@@ -29,7 +29,7 @@ fun MyTaskSearchTopAppBar(
     onSearchClicked: () -> Unit,
     onCloseClicked: () -> Unit
 ) {
-    val focusRequester = rememberSaveable { FocusRequester() }
+    val focusRequester = remember { FocusRequester() }
 
     LaunchedEffect(key1 = Unit) {
         focusRequester.requestFocus()
