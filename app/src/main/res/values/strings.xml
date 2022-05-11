@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MyTask</string>
     <string name="app_description">Um simples projeto de código aberto</string>
     <string name="about">Sobre</string>
@@ -8,6 +8,9 @@
     <string name="save_sucess_task">Salvo com Sucesso</string>
     <string name="save_task_title_dialog">Salvar tarefa?</string>
     <string name="save_task_description_dialog">Deseja realmente salvar essa tarefa?</string>
+    <string name="edit_sucess_task" tools:ignore="ExtraTranslation">Editado com Sucesso</string>
+    <string name="edit_task_title_dialog" tools:ignore="ExtraTranslation">Editar tarefa?</string>
+    <string name="edit_task_description_dialog" tools:ignore="ExtraTranslation">Deseja salvar as alterações nessa tarefa?</string>
     <string name="delete_task">Deletar Tarefa</string>
     <string name="delete_sucess_task">Deletado com Sucesso</string>
     <string name="delete_task_title_dialog">Excluir tarefa?</string>

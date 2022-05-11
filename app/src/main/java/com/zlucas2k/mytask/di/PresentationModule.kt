@@ -12,6 +12,8 @@ import com.zlucas2k.mytask.domain.usecases.shedule.shedule.ScheduleTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.shedule.shedule.ScheduleTaskUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCaseImpl
+import com.zlucas2k.mytask.domain.usecases.task.edit.EditTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.task.edit.EditTaskUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.task.filter.FilterTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.filter.FilterTaskUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.task.get.GetTaskByIdUseCase
@@ -77,6 +79,16 @@ object PresentationModule {
         cancelScheduleTaskUseCase: CancelScheduleTaskUseCase
     ): SaveTaskUseCase {
         return SaveTaskUseCaseImpl(repository, scheduleTaskUseCase, cancelScheduleTaskUseCase)
+    }
+
+    @Provides
+    @Singleton
+    fun provideEditTaskUseCase(
+        repository: TaskRepository,
+        scheduleTaskUseCase: ScheduleTaskUseCase,
+        cancelScheduleTaskUseCase: CancelScheduleTaskUseCase
+    ): EditTaskUseCase {
+        return EditTaskUseCaseImpl(repository, scheduleTaskUseCase, cancelScheduleTaskUseCase)
     }
 
     @Provides

@@ -48,6 +48,11 @@ class TaskRepositoryImpl @Inject constructor(
         return _taskDAO.saveTask(taskEntity)
     }
 
+    override suspend fun updateTask(task: Task) {
+        val taskEntity = task.mapToEntity()
+        _taskDAO.updateTask(taskEntity)
+    }
+
     override suspend fun deleteTask(task: Task) {
         val taskEntity = task.mapToEntity()
         _taskDAO.deleteTask(taskEntity)
