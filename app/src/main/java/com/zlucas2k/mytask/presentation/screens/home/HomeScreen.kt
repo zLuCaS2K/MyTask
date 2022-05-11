@@ -65,7 +65,7 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
                 imageVector = Icons.Filled.Add,
                 contentDescription = stringResource(id = R.string.add_task),
                 onClick = {
-                    navHostController.navigate(Screen.TaskScreen.route)
+                    navHostController.navigate(Screen.AddTaskScreen.route)
                 }
             )
         },
@@ -88,7 +88,7 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
                 )
 
                 HomeTaskListItems(tasks = uiState.tasks) { idTaskClicked ->
-                    navHostController.navigate(Screen.TaskScreen.route + "?id=$idTaskClicked")
+                    navHostController.navigate(Screen.EditTaskScreen.route + "?id=$idTaskClicked")
                 }
             }
         }
