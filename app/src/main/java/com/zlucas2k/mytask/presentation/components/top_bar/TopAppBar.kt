@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.components
+package com.zlucas2k.mytask.presentation.components.top_bar
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.MaterialTheme

@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.components
+package com.zlucas2k.mytask.presentation.components.card
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background

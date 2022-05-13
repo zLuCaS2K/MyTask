@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.components
+package com.zlucas2k.mytask.presentation.components.sheet
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
@@ -25,7 +25,7 @@ fun MyTaskBottomSheet(
     ModalBottomSheetLayout(
         modifier = modifier,
         sheetState = sheetState,
-        sheetShape = RoundedCornerShape(8.dp),
+        sheetShape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp),
         sheetElevation = 8.dp,
         sheetBackgroundColor = MaterialTheme.colors.primary,
         sheetContent = {
@@ -35,7 +35,7 @@ fun MyTaskBottomSheet(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Divider(
-                    color = MaterialTheme.colors.primaryVariant,
+                    color = MaterialTheme.colors.onBackground.copy(alpha = 0.5f),
                     thickness = 8.dp,
                     modifier = Modifier
                         .fillMaxWidth(0.1f)

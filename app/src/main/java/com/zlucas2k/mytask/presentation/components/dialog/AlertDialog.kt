@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.components
+package com.zlucas2k.mytask.presentation.components.dialog
 
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.MaterialTheme

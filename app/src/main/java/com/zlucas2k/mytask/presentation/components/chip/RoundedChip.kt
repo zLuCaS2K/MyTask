@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.components
+package com.zlucas2k.mytask.presentation.components.chip
 
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke

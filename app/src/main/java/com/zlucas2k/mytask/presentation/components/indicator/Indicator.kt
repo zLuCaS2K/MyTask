@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.components
+package com.zlucas2k.mytask.presentation.components.indicator
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
+import com.zlucas2k.mytask.presentation.components.icon.MyTaskIcon
 
 @Composable
 fun MyTaskIndicator(

@@ -1,8 +1,5 @@
-package com.zlucas2k.mytask.presentation.components
+package com.zlucas2k.mytask.presentation.screens.home.components.topbar
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -16,18 +13,19 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
+import com.zlucas2k.mytask.R
+import com.zlucas2k.mytask.common.utils.emptyString
+import com.zlucas2k.mytask.presentation.components.icon.MyTaskIconButton
 
 @Composable
-fun MyTaskSearchTopAppBar(
+fun SearchTopAppBar(
+    modifier: Modifier = Modifier,
     query: String,
     onQueryChange: (String) -> Unit,
-    onSearchClicked: () -> Unit,
-    onCloseClicked: () -> Unit
+    onCloseSearchTopAppBar: () -> Unit,
 ) {
     val focusRequester = remember { FocusRequester() }
 
@@ -36,19 +34,19 @@ fun MyTaskSearchTopAppBar(
     }
 
     Surface(
+        modifier = modifier,
         color = MaterialTheme.colors.primary,
-        elevation = AppBarDefaults.TopAppBarElevation,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp)
+        elevation = AppBarDefaults.TopAppBarElevation
     ) {
         TextField(
             value = query,
-            onValueChange = { onQueryChange(it) },
+            onValueChange = { searchQuery ->
+                onQueryChange(searchQuery)
+            },
             textStyle = TextStyle(fontSize = MaterialTheme.typography.subtitle1.fontSize),
             placeholder = {
                 Text(
-                    text = "Pesquisar",
+                    text = stringResource(id = R.string.search),
                     style = MaterialTheme.typography.body1,
                     color = MaterialTheme.colors.onBackground.copy(alpha = 0.5f),
                     modifier = Modifier.alpha(ContentAlpha.medium)
@@ -58,7 +56,6 @@ fun MyTaskSearchTopAppBar(
                 MyTaskIconButton(
                     imageVector = Icons.Filled.Search,
                     contentDescription = null,
-                    onClick = onSearchClicked
                 )
             },
             trailingIcon = {
@@ -66,39 +63,22 @@ fun MyTaskSearchTopAppBar(
                     imageVector = Icons.Filled.Close,
                     contentDescription = null,
                     onClick = {
-                        if (query.isNotEmpty()) {
-                            onQueryChange("")
+                        // This is for clean query if not have query.
+                        if (query.isNotBlank()) {
+                            onQueryChange(emptyString())
                         } else {
-                            onCloseClicked()
+                            onCloseSearchTopAppBar()
                         }
                     }
                 )
             },
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-            keyboardActions = KeyboardActions(
-                onSearch = {
-                    onSearchClicked()
-                }
-            ),
             singleLine = true,
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = Color.Transparent,
                 cursorColor = Color.White.copy(alpha = ContentAlpha.medium)
             ),
             modifier = Modifier.focusRequester(focusRequester)
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun Preview() {
-    MyTaskTheme {
-        MyTaskSearchTopAppBar(
-            query = "",
-            onQueryChange = {},
-            onSearchClicked = {},
-            onCloseClicked = {}
         )
     }
 }
