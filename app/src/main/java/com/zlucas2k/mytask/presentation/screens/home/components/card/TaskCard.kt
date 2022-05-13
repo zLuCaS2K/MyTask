@@ -25,7 +25,7 @@ import com.zlucas2k.mytask.presentation.common.model.PriorityView
 import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
-import com.zlucas2k.mytask.presentation.components.MyTaskCard
+import com.zlucas2k.mytask.presentation.components.card.MyTaskCard
 
 @Composable
 fun TaskCard(task: TaskView, modifier: Modifier = Modifier) {

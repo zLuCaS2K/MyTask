@@ -31,4 +31,5 @@
     <string name="low">Baixa</string>
     <string name="medium">Média</string>
     <string name="high">Alta</string>
+    <string name="search">Pesquisar</string>
 </resources>

@@ -11,7 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.domain.util.TaskFilter
-import com.zlucas2k.mytask.presentation.components.RoundedChip
+import com.zlucas2k.mytask.presentation.components.chip.RoundedChip
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 
 @Composable

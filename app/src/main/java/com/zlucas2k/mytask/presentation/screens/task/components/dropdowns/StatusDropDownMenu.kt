@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.model.StatusView
-import com.zlucas2k.mytask.presentation.components.MyTaskDropDownMenu
+import com.zlucas2k.mytask.presentation.components.drop_down.MyTaskDropDownMenu
 
 @Composable
 fun StatusDropDownMenu(

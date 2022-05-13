@@ -10,8 +10,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
-import com.zlucas2k.mytask.presentation.components.MyTaskIconButton
-import com.zlucas2k.mytask.presentation.components.MyTaskTopAppBar
+import com.zlucas2k.mytask.presentation.components.icon.MyTaskIconButton
+import com.zlucas2k.mytask.presentation.components.top_bar.MyTaskTopAppBar
 
 @Composable
 fun TaskTopAppBar(

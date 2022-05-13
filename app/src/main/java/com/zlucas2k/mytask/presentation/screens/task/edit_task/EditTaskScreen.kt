@@ -12,8 +12,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.zlucas2k.mytask.R
-import com.zlucas2k.mytask.presentation.components.MyTaskIconButton
-import com.zlucas2k.mytask.presentation.components.MyTaskTopAppBar
+import com.zlucas2k.mytask.presentation.components.icon.MyTaskIconButton
+import com.zlucas2k.mytask.presentation.components.top_bar.MyTaskTopAppBar
 import com.zlucas2k.mytask.presentation.screens.task.components.form.TaskForm
 import com.zlucas2k.mytask.presentation.screens.task.edit_task.utils.EditTaskScreenEvent
 import kotlinx.coroutines.flow.collectLatest
