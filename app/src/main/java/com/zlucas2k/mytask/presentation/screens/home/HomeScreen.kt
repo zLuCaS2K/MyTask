@@ -12,7 +12,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -22,40 +21,45 @@ import androidx.navigation.NavHostController
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.navigation.model.Screen
-import com.zlucas2k.mytask.presentation.components.MyTaskFloatingActionButton
-import com.zlucas2k.mytask.presentation.components.MyTaskSearchTopAppBar
-import com.zlucas2k.mytask.presentation.screens.home.common.filter.FilterWidgetState
-import com.zlucas2k.mytask.presentation.screens.home.common.search.SearchWidgetState
+import com.zlucas2k.mytask.presentation.components.fab.MyTaskFloatingActionButton
+import com.zlucas2k.mytask.presentation.components.widget.WidgetValue
+import com.zlucas2k.mytask.presentation.screens.home.common.filter.rememberFilterWidgetState
+import com.zlucas2k.mytask.presentation.screens.home.common.search.rememberSearchWidgetState
 import com.zlucas2k.mytask.presentation.screens.home.components.card.TaskCard
 import com.zlucas2k.mytask.presentation.screens.home.components.filter.TaskFilterSection
 import com.zlucas2k.mytask.presentation.screens.home.components.topbar.HomeTopAppBar
+import com.zlucas2k.mytask.presentation.screens.home.components.topbar.SearchTopAppBar
 
 @Composable
 @ExperimentalMaterialApi
 fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = hiltViewModel()) {
 
     val uiState by viewModel.uiState
-
-    LaunchedEffect(key1 = uiState.searchQuery) {
-        viewModel.onSearchTask()
-    }
+    val searchWidgetState = rememberSearchWidgetState()
+    val filterWidgetState = rememberFilterWidgetState()
 
     Scaffold(
         topBar = {
-            when (uiState.searchWidgetState) {
-                SearchWidgetState.OPENED -> {
-                    MyTaskSearchTopAppBar(
-                        query = uiState.searchQuery,
-                        onQueryChange = viewModel::onSearchTextChange,
-                        onSearchClicked = viewModel::onSearchTask,
-                        onCloseClicked = viewModel::onSearchWidgetStateChange
+            when (searchWidgetState.currentWidgetValue) {
+                WidgetValue.Opened -> {
+                    SearchTopAppBar(
+                        query = searchWidgetState.searchQuery,
+                        onQueryChange = { searchQuery ->
+                            searchWidgetState.onSearchQueryChange(searchQuery)
+                        },
+                        onCloseSearchTopAppBar = {
+                            searchWidgetState.onSearchWidgetStateChange()
+                        }
                     )
                 }
-
-                SearchWidgetState.CLOSED -> {
+                WidgetValue.Closed -> {
                     HomeTopAppBar(
-                        onSearchClicked = viewModel::onSearchWidgetStateChange,
-                        onFilterClicked = viewModel::onFilterWidgetStateChange
+                        onSearchClicked = {
+                            searchWidgetState.onSearchWidgetStateChange()
+                        },
+                        onFilterClicked = {
+                            filterWidgetState.onFilterWidgetStateChange()
+                        }
                     )
                 }
             }
@@ -72,15 +76,14 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
         content = {
             Column(modifier = Modifier.fillMaxSize()) {
                 AnimatedVisibility(
-                    visible = uiState.filterWidgetState == FilterWidgetState.OPENED,
+                    visible = filterWidgetState.currentWidgetValue == WidgetValue.Opened,
                     enter = fadeIn(),
                     exit = fadeOut(),
                     content = {
                         TaskFilterSection(
-                            filter = uiState.filterQuery,
-                            onFilterChange = {
-                                viewModel.onFilterOptionChange(it)
-                                viewModel.onFilterTask()
+                            filter = filterWidgetState.filterQuery,
+                            onFilterChange = { filterQuery ->
+                                filterWidgetState.onFilterQueryChange(filterQuery)
                             },
                             modifier = Modifier.fillMaxWidth()
                         )
