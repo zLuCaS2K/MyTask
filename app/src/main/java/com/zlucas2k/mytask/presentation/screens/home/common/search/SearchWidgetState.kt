@@ -9,6 +9,7 @@ import com.zlucas2k.mytask.presentation.screens.home.HomeViewModel
 
 private sealed interface SearchWidgetState : WidgetState {
     var searchQuery: String
+    fun onSearchQueryChange(query: String)
 }
 
 class SearchWidgetStateImpl(
@@ -16,18 +17,21 @@ class SearchWidgetStateImpl(
 ) : SearchWidgetState {
 
     override var searchQuery: String by mutableStateOf(emptyString())
-    override var currentWidgetValue: WidgetValue by mutableStateOf(WidgetValue.Closed)
+    override val isVisible: Boolean get() = _currentWidgetValueState.value != WidgetValue.Closed
 
-    fun onSearchQueryChange(query: String) {
+    private val _currentWidgetValueState: MutableState<WidgetValue> = mutableStateOf(WidgetValue.Closed)
+
+    override fun onSearchQueryChange(query: String) {
         searchQuery = query
         homeViewModel.onSearchQueryChange(query)
     }
 
-    fun onSearchWidgetStateChange() {
-        currentWidgetValue = when (currentWidgetValue) {
-            WidgetValue.Opened -> WidgetValue.Closed
-            WidgetValue.Closed -> WidgetValue.Opened
-        }
+    override fun openWidget() {
+        _currentWidgetValueState.value = WidgetValue.Opened
+    }
+
+    override fun closeWidget() {
+        _currentWidgetValueState.value = WidgetValue.Closed
     }
 }
 
