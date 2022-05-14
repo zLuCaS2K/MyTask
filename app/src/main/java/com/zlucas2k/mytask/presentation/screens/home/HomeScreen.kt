@@ -22,7 +22,6 @@ import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.navigation.model.Screen
 import com.zlucas2k.mytask.presentation.components.fab.MyTaskFloatingActionButton
-import com.zlucas2k.mytask.presentation.components.widget.WidgetValue
 import com.zlucas2k.mytask.presentation.screens.home.common.filter.rememberFilterWidgetState
 import com.zlucas2k.mytask.presentation.screens.home.common.search.rememberSearchWidgetState
 import com.zlucas2k.mytask.presentation.screens.home.components.card.TaskCard
@@ -40,28 +39,29 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
 
     Scaffold(
         topBar = {
-            when (searchWidgetState.currentWidgetValue) {
-                WidgetValue.Opened -> {
-                    SearchTopAppBar(
-                        query = searchWidgetState.searchQuery,
-                        onQueryChange = { searchQuery ->
-                            searchWidgetState.onSearchQueryChange(searchQuery)
-                        },
-                        onCloseSearchTopAppBar = {
-                            searchWidgetState.onSearchWidgetStateChange()
+            if (searchWidgetState.isVisible) {
+                SearchTopAppBar(
+                    query = searchWidgetState.searchQuery,
+                    onQueryChange = { searchQuery ->
+                        searchWidgetState.onSearchQueryChange(searchQuery)
+                    },
+                    onCloseSearchTopAppBar = {
+                        searchWidgetState.closeWidget()
+                    }
+                )
+            } else {
+                HomeTopAppBar(
+                    onSearchClicked = {
+                        searchWidgetState.openWidget()
+                    },
+                    onFilterClicked = {
+                        if (filterWidgetState.isVisible) {
+                            filterWidgetState.closeWidget()
+                        } else {
+                            filterWidgetState.openWidget()
                         }
-                    )
-                }
-                WidgetValue.Closed -> {
-                    HomeTopAppBar(
-                        onSearchClicked = {
-                            searchWidgetState.onSearchWidgetStateChange()
-                        },
-                        onFilterClicked = {
-                            filterWidgetState.onFilterWidgetStateChange()
-                        }
-                    )
-                }
+                    }
+                )
             }
         },
         floatingActionButton = {
@@ -76,7 +76,7 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
         content = {
             Column(modifier = Modifier.fillMaxSize()) {
                 AnimatedVisibility(
-                    visible = filterWidgetState.currentWidgetValue == WidgetValue.Opened,
+                    visible = filterWidgetState.isVisible,
                     enter = fadeIn(),
                     exit = fadeOut(),
                     content = {
