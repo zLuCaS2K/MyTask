@@ -26,6 +26,8 @@ import com.zlucas2k.mytask.presentation.screens.home.common.filter.rememberFilte
 import com.zlucas2k.mytask.presentation.screens.home.common.search.rememberSearchWidgetState
 import com.zlucas2k.mytask.presentation.screens.home.components.card.TaskCard
 import com.zlucas2k.mytask.presentation.screens.home.components.filter.TaskFilterSection
+import com.zlucas2k.mytask.presentation.screens.home.components.sheet.TaskDetailBottomSheet
+import com.zlucas2k.mytask.presentation.screens.home.components.sheet.rememberTaskDetailBottomSheetState
 import com.zlucas2k.mytask.presentation.screens.home.components.topbar.HomeTopAppBar
 import com.zlucas2k.mytask.presentation.screens.home.components.topbar.SearchTopAppBar
 
@@ -36,70 +38,76 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
     val uiState by viewModel.uiState
     val searchWidgetState = rememberSearchWidgetState()
     val filterWidgetState = rememberFilterWidgetState()
+    val taskDetailBottomSheetState = rememberTaskDetailBottomSheetState()
 
-    Scaffold(
-        topBar = {
-            if (searchWidgetState.isVisible) {
-                SearchTopAppBar(
-                    query = searchWidgetState.searchQuery,
-                    onQueryChange = { searchQuery ->
-                        searchWidgetState.onSearchQueryChange(searchQuery)
-                    },
-                    onCloseSearchTopAppBar = {
-                        searchWidgetState.closeWidget()
-                    }
-                )
-            } else {
-                HomeTopAppBar(
-                    onSearchClicked = {
-                        searchWidgetState.openWidget()
-                    },
-                    onFilterClicked = {
-                        if (filterWidgetState.isVisible) {
-                            filterWidgetState.closeWidget()
-                        } else {
-                            filterWidgetState.openWidget()
-                        }
-                    }
-                )
-            }
-        },
-        floatingActionButton = {
-            MyTaskFloatingActionButton(
-                imageVector = Icons.Filled.Add,
-                contentDescription = stringResource(id = R.string.add_task),
-                onClick = {
-                    navHostController.navigate(Screen.AddTaskScreen.route)
-                }
-            )
-        },
-        content = {
-            Column(modifier = Modifier.fillMaxSize()) {
-                AnimatedVisibility(
-                    visible = filterWidgetState.isVisible,
-                    enter = fadeIn(),
-                    exit = fadeOut(),
-                    content = {
-                        TaskFilterSection(
-                            filter = filterWidgetState.filterQuery,
-                            onFilterChange = { filterQuery ->
-                                filterWidgetState.onFilterQueryChange(filterQuery)
+    TaskDetailBottomSheet(
+        taskDetailBottomSheetState = taskDetailBottomSheetState,
+        screenContent = {
+            Scaffold(
+                topBar = {
+                    if (searchWidgetState.isVisible) {
+                        SearchTopAppBar(
+                            query = searchWidgetState.searchQuery,
+                            onQueryChange = { searchQuery ->
+                                searchWidgetState.onSearchQueryChange(searchQuery)
                             },
-                            modifier = Modifier.fillMaxWidth()
+                            onCloseSearchTopAppBar = {
+                                searchWidgetState.closeWidget()
+                            }
+                        )
+                    } else {
+                        HomeTopAppBar(
+                            onSearchClicked = {
+                                searchWidgetState.openWidget()
+                            },
+                            onFilterClicked = {
+                                if (filterWidgetState.isVisible) {
+                                    filterWidgetState.closeWidget()
+                                } else {
+                                    filterWidgetState.openWidget()
+                                }
+                            }
                         )
                     }
-                )
+                },
+                floatingActionButton = {
+                    MyTaskFloatingActionButton(
+                        imageVector = Icons.Filled.Add,
+                        contentDescription = stringResource(id = R.string.add_task),
+                        onClick = {
+                            navHostController.navigate(Screen.AddTaskScreen.route)
+                        }
+                    )
+                },
+                content = {
+                    Column(modifier = Modifier.fillMaxSize()) {
+                        AnimatedVisibility(
+                            visible = filterWidgetState.isVisible,
+                            enter = fadeIn(),
+                            exit = fadeOut(),
+                            content = {
+                                TaskFilterSection(
+                                    filter = filterWidgetState.filterQuery,
+                                    onFilterChange = { filterQuery ->
+                                        filterWidgetState.onFilterQueryChange(filterQuery)
+                                    },
+                                    modifier = Modifier.fillMaxWidth()
+                                )
+                            }
+                        )
 
-                HomeTaskListItems(tasks = uiState.tasks) { idTaskClicked ->
-                    navHostController.navigate(Screen.EditTaskScreen.route + "?id=$idTaskClicked")
+                        HomeTaskListItems(tasks = uiState.tasks) { taskClicked ->
+                            taskDetailBottomSheetState.onShowTaskDetailBottomSheet(taskClicked)
+                        }
+                    }
                 }
-            }
+            )
         }
     )
 }
 
 @Composable
-private fun HomeTaskListItems(tasks: List<TaskView>, onClickTask: (Int) -> Unit) {
+private fun HomeTaskListItems(tasks: List<TaskView>, onClickTask: (TaskView) -> Unit) {
     LazyColumn {
         items(tasks) { task ->
             TaskCard(
@@ -108,7 +116,7 @@ private fun HomeTaskListItems(tasks: List<TaskView>, onClickTask: (Int) -> Unit)
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .padding(10.dp)
-                    .clickable { onClickTask(task.id) }
+                    .clickable { onClickTask(task) }
             )
         }
     }
