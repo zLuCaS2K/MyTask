@@ -1,5 +1,6 @@
 package com.zlucas2k.mytask.presentation.screens.home.components.topbar
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -34,9 +35,9 @@ fun SearchTopAppBar(
     }
 
     Surface(
-        modifier = modifier,
         color = MaterialTheme.colors.primary,
-        elevation = AppBarDefaults.TopAppBarElevation
+        elevation = AppBarDefaults.TopAppBarElevation,
+        modifier = modifier.fillMaxWidth(),
     ) {
         TextField(
             value = query,
