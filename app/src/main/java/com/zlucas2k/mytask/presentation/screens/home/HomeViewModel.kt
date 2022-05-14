@@ -29,7 +29,6 @@ class HomeViewModel @Inject constructor(
     val uiState: State<HomeScreenState> get() = _uiState
 
     private val _tasksCache: MutableState<List<TaskView>> = mutableStateOf(emptyList())
-    private val _lastFilterQuery: MutableState<TaskFilter> = mutableStateOf(TaskFilter.All)
 
     private var _searchJob: Job? = null
     private var _filterJob: Job? = null
@@ -61,16 +60,13 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onFilterQueryChange(filterQuery: TaskFilter) {
-        if (filterQuery != _lastFilterQuery) {
-            viewModelScope.launch(Dispatchers.IO) {
-                _searchJob?.cancel()
-                _searchJob = filterTaskUseCase(filterQuery).map { tasksModel ->
-                    tasksModel.map { taskModel -> taskModel.mapToView() }
-                }.onEach { filterResult ->
-                    _lastFilterQuery.value = filterQuery
-                    _uiState.value = _uiState.value.copy(tasks = filterResult)
-                }.launchIn(viewModelScope)
-            }
+        viewModelScope.launch(Dispatchers.IO) {
+            _searchJob?.cancel()
+            _searchJob = filterTaskUseCase(filterQuery).map { tasksModel ->
+                tasksModel.map { taskModel -> taskModel.mapToView() }
+            }.onEach { filterResult ->
+                _uiState.value = _uiState.value.copy(tasks = filterResult)
+            }.launchIn(viewModelScope)
         }
     }
 
