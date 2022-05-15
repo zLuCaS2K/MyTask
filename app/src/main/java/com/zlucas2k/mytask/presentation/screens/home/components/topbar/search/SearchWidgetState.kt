@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.screens.home.common.search
+package com.zlucas2k.mytask.presentation.screens.home.components.topbar.search
 
 import androidx.compose.runtime.*
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -7,7 +7,7 @@ import com.zlucas2k.mytask.presentation.components.widget.WidgetState
 import com.zlucas2k.mytask.presentation.components.widget.WidgetValue
 import com.zlucas2k.mytask.presentation.screens.home.HomeViewModel
 
-private sealed interface SearchWidgetState : WidgetState {
+sealed interface SearchWidgetState : WidgetState {
     var searchQuery: String
     fun onSearchQueryChange(query: String)
 }
