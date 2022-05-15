@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.screens.home.components.topbar
+package com.zlucas2k.mytask.presentation.screens.home.components.topbar.home
 
 import android.content.res.Configuration
 import androidx.compose.material.icons.Icons
