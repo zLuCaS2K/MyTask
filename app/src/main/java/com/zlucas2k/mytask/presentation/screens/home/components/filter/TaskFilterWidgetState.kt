@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.presentation.screens.home.common.filter
+package com.zlucas2k.mytask.presentation.screens.home.components.filter
 
 import androidx.compose.runtime.*
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -7,14 +7,14 @@ import com.zlucas2k.mytask.presentation.components.widget.WidgetState
 import com.zlucas2k.mytask.presentation.components.widget.WidgetValue
 import com.zlucas2k.mytask.presentation.screens.home.HomeViewModel
 
-private sealed interface FilterWidgetState : WidgetState {
+sealed interface TaskFilterWidgetState : WidgetState {
     var filterQuery: TaskFilter
     fun onFilterQueryChange(query: TaskFilter)
 }
 
-class FilterWidgetStateImpl(
+class TaskFilterWidgetStateImpl(
     private val homeViewModel: HomeViewModel
-) : FilterWidgetState {
+) : TaskFilterWidgetState {
 
     override var filterQuery: TaskFilter by mutableStateOf(TaskFilter.All)
     override val isVisible: Boolean get() = _currentWidgetValueState.value != WidgetValue.Closed
@@ -44,5 +44,5 @@ class FilterWidgetStateImpl(
 fun rememberFilterWidgetState(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) = remember {
-    FilterWidgetStateImpl(homeViewModel = homeViewModel)
+    TaskFilterWidgetStateImpl(homeViewModel = homeViewModel)
 }
