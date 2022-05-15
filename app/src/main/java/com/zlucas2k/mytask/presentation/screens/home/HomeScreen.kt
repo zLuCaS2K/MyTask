@@ -1,8 +1,5 @@
 package com.zlucas2k.mytask.presentation.screens.home
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,14 +19,14 @@ import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.navigation.model.Screen
 import com.zlucas2k.mytask.presentation.components.fab.MyTaskFloatingActionButton
-import com.zlucas2k.mytask.presentation.screens.home.common.filter.rememberFilterWidgetState
-import com.zlucas2k.mytask.presentation.screens.home.common.search.rememberSearchWidgetState
 import com.zlucas2k.mytask.presentation.screens.home.components.card.TaskCard
-import com.zlucas2k.mytask.presentation.screens.home.components.filter.TaskFilterSection
+import com.zlucas2k.mytask.presentation.screens.home.components.filter.TaskFilterWidget
+import com.zlucas2k.mytask.presentation.screens.home.components.filter.rememberFilterWidgetState
 import com.zlucas2k.mytask.presentation.screens.home.components.sheet.TaskDetailBottomSheet
 import com.zlucas2k.mytask.presentation.screens.home.components.sheet.rememberTaskDetailBottomSheetState
-import com.zlucas2k.mytask.presentation.screens.home.components.topbar.HomeTopAppBar
-import com.zlucas2k.mytask.presentation.screens.home.components.topbar.SearchTopAppBar
+import com.zlucas2k.mytask.presentation.screens.home.components.topbar.home.HomeTopAppBar
+import com.zlucas2k.mytask.presentation.screens.home.components.topbar.search.SearchTopAppBar
+import com.zlucas2k.mytask.presentation.screens.home.components.topbar.search.rememberSearchWidgetState
 
 @Composable
 @ExperimentalMaterialApi
@@ -47,13 +44,8 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
                 topBar = {
                     if (searchWidgetState.isVisible) {
                         SearchTopAppBar(
-                            query = searchWidgetState.searchQuery,
-                            onQueryChange = { searchQuery ->
-                                searchWidgetState.onSearchQueryChange(searchQuery)
-                            },
-                            onCloseSearchTopAppBar = {
-                                searchWidgetState.closeWidget()
-                            }
+                            searchWidgetState = searchWidgetState,
+                            modifier = Modifier.fillMaxWidth()
                         )
                     } else {
                         HomeTopAppBar(
@@ -81,19 +73,9 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
                 },
                 content = {
                     Column(modifier = Modifier.fillMaxSize()) {
-                        AnimatedVisibility(
-                            visible = filterWidgetState.isVisible,
-                            enter = fadeIn(),
-                            exit = fadeOut(),
-                            content = {
-                                TaskFilterSection(
-                                    filter = filterWidgetState.filterQuery,
-                                    onFilterChange = { filterQuery ->
-                                        filterWidgetState.onFilterQueryChange(filterQuery)
-                                    },
-                                    modifier = Modifier.fillMaxWidth()
-                                )
-                            }
+                        TaskFilterWidget(
+                            taskFilterWidgetState = filterWidgetState,
+                            modifier = Modifier.fillMaxWidth()
                         )
 
                         HomeTaskListItems(tasks = uiState.tasks) { taskClicked ->

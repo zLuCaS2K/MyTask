@@ -1,7 +1,11 @@
 package com.zlucas2k.mytask.presentation.screens.home.components.filter
 
 import android.content.res.Configuration
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
@@ -11,14 +15,35 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.domain.util.TaskFilter
-import com.zlucas2k.mytask.presentation.components.chip.RoundedChip
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
+import com.zlucas2k.mytask.presentation.components.chip.RoundedChip
 
 @Composable
-fun TaskFilterSection(
+fun TaskFilterWidget(
+    modifier: Modifier = Modifier,
+    taskFilterWidgetState: TaskFilterWidgetState,
+) {
+    AnimatedVisibility(
+        visible = taskFilterWidgetState.isVisible,
+        enter = fadeIn(),
+        exit = fadeOut(),
+        content = {
+            TaskFilterWidgetContent(
+                filter = taskFilterWidgetState.filterQuery,
+                onFilterChange = { filterQuery ->
+                    taskFilterWidgetState.onFilterQueryChange(filterQuery)
+                },
+                modifier = modifier
+            )
+        }
+    )
+}
+
+@Composable
+private fun TaskFilterWidgetContent(
     filter: TaskFilter,
     onFilterChange: (TaskFilter) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier
 ) {
     val filterOptions = listOf(
         TaskFilter.All,
@@ -59,14 +84,14 @@ fun TaskFilterSection(
 @Preview(name = "Dark", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 private fun Preview() {
     MyTaskTheme {
-
         var filterSelected by remember { mutableStateOf<TaskFilter>(TaskFilter.All) }
 
-        TaskFilterSection(
+        TaskFilterWidgetContent(
             filter = filterSelected,
-            onFilterChange = {
-                filterSelected = it
-            }
+            onFilterChange = { filterQuery ->
+                filterSelected = filterQuery
+            },
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
