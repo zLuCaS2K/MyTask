@@ -16,21 +16,19 @@ import com.zlucas2k.mytask.presentation.screens.task.components.menu_selectors.P
 import com.zlucas2k.mytask.presentation.screens.task.components.menu_selectors.StatusMenuSelector
 import com.zlucas2k.mytask.presentation.screens.task.components.pickers.DatePicker
 import com.zlucas2k.mytask.presentation.screens.task.components.pickers.TimePicker
+import com.zlucas2k.mytask.presentation.screens.task.edit_task.components.EditTaskFormState
 
 @Composable
 fun TaskForm(
     modifier: Modifier = Modifier,
-    isEditing: Boolean = false,
     taskFormState: TaskFormState,
-    onTimeChange: (Int, Int) -> Unit,
-    onDateChange: (String) -> Unit
 ) {
     val modifierComponents = Modifier.fillMaxWidth()
 
     Column(modifier = modifier) {
         TaskTextField(
-            value = taskFormState.title,
-            onValueChange = { taskFormState.title = it },
+            value = taskFormState.task.title,
+            onValueChange = { taskFormState.onTitleChange(it) },
             textStyle = MaterialTheme.typography.h1,
             placeholderText = stringResource(id = R.string.title_task),
             singleLine = true,
@@ -40,17 +38,17 @@ fun TaskForm(
 
         Row {
             PriorityMenuSelector(
-                priority = taskFormState.priority,
-                onPriorityChange = { taskFormState.priority = it },
+                priority = taskFormState.task.priority,
+                onPriorityChange = { taskFormState.onPriorityChange(it) },
                 modifier = modifierComponents
                     .weight(1f)
                     .padding(start = 20.dp, top = 10.dp, end = 10.dp)
             )
 
-            if (isEditing) {
+            if (taskFormState is EditTaskFormState) {
                 StatusMenuSelector(
-                    status = taskFormState.status,
-                    onStatusChange = { taskFormState.status = it },
+                    status = taskFormState.task.status,
+                    onStatusChange = { taskFormState.onStatusChange(it) },
                     modifier = modifierComponents
                         .weight(1f)
                         .padding(start = 20.dp, top = 10.dp, end = 10.dp)
@@ -59,20 +57,20 @@ fun TaskForm(
         }
 
         TimePicker(
-            value = taskFormState.time,
-            onValueChange = { hour, minute -> onTimeChange(hour, minute) },
+            value = taskFormState.task.time,
+            onValueChange = { hour, minute -> taskFormState.onTimeChange(hour, minute) },
             modifier = modifierComponents.padding(start = 10.dp, top = 10.dp, end = 10.dp)
         )
 
         DatePicker(
-            value = taskFormState.date,
-            onValueChange = { date -> onDateChange(date) },
+            value = taskFormState.task.date,
+            onValueChange = { date -> taskFormState.onDateChange(date) },
             modifier = modifierComponents.padding(start = 10.dp, top = 10.dp, end = 10.dp)
         )
 
         TaskTextField(
-            value = taskFormState.description,
-            onValueChange = { taskFormState.description = it },
+            value = taskFormState.task.description,
+            onValueChange = { taskFormState.onDescriptionChange(it) },
             textStyle = MaterialTheme.typography.body2,
             placeholderText = stringResource(id = R.string.description),
             singleLine = false,

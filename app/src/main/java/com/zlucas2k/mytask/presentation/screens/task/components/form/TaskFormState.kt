@@ -1,15 +1,14 @@
 package com.zlucas2k.mytask.presentation.screens.task.components.form
 
-import androidx.compose.runtime.Stable
-import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.model.PriorityView
+import com.zlucas2k.mytask.presentation.common.model.TaskView
 
-@Stable
 interface TaskFormState {
-    var title: String
-    var time: String
-    var date: String
-    var description: String
-    var priority: PriorityView
-    var status: StatusView
+    val task: TaskView
+
+    fun onTitleChange(title: String)
+    fun onTimeChange(hour: Int, minute: Int)
+    fun onDateChange(date: String)
+    fun onDescriptionChange(description: String)
+    fun onPriorityChange(priority: PriorityView)
 }
