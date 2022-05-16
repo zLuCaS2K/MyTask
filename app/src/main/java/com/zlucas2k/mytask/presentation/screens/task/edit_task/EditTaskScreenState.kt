@@ -6,38 +6,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.zlucas2k.mytask.presentation.screens.task.common.EditTaskFormScreenState
+import com.zlucas2k.mytask.presentation.screens.task.common.ScreenState
+import com.zlucas2k.mytask.presentation.screens.task.edit_task.utils.EditTaskScreenEvent
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 
-class EditTaskScreenState(
-    val scaffoldState: ScaffoldState,
+sealed interface EditTaskScreenState : ScreenState<EditTaskScreenEvent>
+
+class EditTaskScreenStateImpl(
+    override val scaffoldState: ScaffoldState,
     private val coroutineScope: CoroutineScope,
-    private val editTaskViewModel: EditTaskViewModel,
-) : EditTaskFormScreenState {
+    private val editTaskViewModel: EditTaskViewModel
+) : EditTaskScreenState {
 
-    override var event = editTaskViewModel.event
+    override val uiEvent: SharedFlow<EditTaskScreenEvent> get() = editTaskViewModel.uiEvent
 
-    override var taskFormState = editTaskViewModel.formState.value
-
-    override fun onEditTask() {
-        editTaskViewModel.onEditTask()
-    }
-
-    fun onShowSnackbarShort(message: String) {
+    override fun showSnackbar(message: String) {
         coroutineScope.launch {
-            scaffoldState.snackbarHostState.showSnackbar(
-                message = message
-            )
+            scaffoldState.snackbarHostState.showSnackbar(message = message)
         }
-    }
-
-    override fun applyTimeFormattingStrategy(hour: Int, minute: Int) {
-        editTaskViewModel.onTimeChange(hour, minute)
-    }
-
-    override fun applyDateFormattingStrategy(date: String) {
-        editTaskViewModel.onDateChange(date)
     }
 }
 
@@ -46,8 +34,8 @@ fun rememberEditTaskScreenState(
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     editTaskViewModel: EditTaskViewModel = hiltViewModel()
-) = remember {
-    EditTaskScreenState(
+): EditTaskScreenState = remember {
+    EditTaskScreenStateImpl(
         scaffoldState = scaffoldState,
         coroutineScope = coroutineScope,
         editTaskViewModel = editTaskViewModel

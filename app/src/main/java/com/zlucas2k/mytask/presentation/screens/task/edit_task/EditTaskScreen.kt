@@ -1,5 +1,6 @@
 package com.zlucas2k.mytask.presentation.screens.task.edit_task
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
@@ -10,30 +11,38 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.zlucas2k.mytask.R
+import com.zlucas2k.mytask.common.utils.emptyString
 import com.zlucas2k.mytask.presentation.components.icon.MyTaskIconButton
 import com.zlucas2k.mytask.presentation.components.top_bar.MyTaskTopAppBar
-import com.zlucas2k.mytask.presentation.screens.task.components.form.TaskForm
+import com.zlucas2k.mytask.presentation.screens.task.edit_task.components.EditTaskForm
+import com.zlucas2k.mytask.presentation.screens.task.edit_task.components.rememberEditTaskFormState
 import com.zlucas2k.mytask.presentation.screens.task.edit_task.utils.EditTaskScreenEvent
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun EditTaskScreen(navController: NavController) {
+fun EditTaskScreen(navController: NavController, viewModel: EditTaskViewModel = hiltViewModel()) {
 
     val context = LocalContext.current
-    val uiState = rememberEditTaskScreenState()
+    val uiState = rememberEditTaskScreenState(editTaskViewModel = viewModel)
+    val formState = rememberEditTaskFormState(editTaskViewModel = viewModel)
 
     LaunchedEffect(key1 = Unit) {
-        uiState.event.collectLatest { uiEvent ->
+        uiState.uiEvent.collectLatest { uiEvent ->
             when (uiEvent) {
                 is EditTaskScreenEvent.EditTaskSuccess -> {
-                    uiState.onShowSnackbarShort(context.getString(R.string.save_sucess_task))
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.edit_sucess_task),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     navController.navigateUp()
                 }
 
                 is EditTaskScreenEvent.EditTaskFailed -> {
-                    uiState.onShowSnackbarShort(uiEvent.message)
+                    uiState.showSnackbar(uiEvent.message)
                 }
             }
         }
@@ -43,7 +52,7 @@ fun EditTaskScreen(navController: NavController) {
         scaffoldState = uiState.scaffoldState,
         topBar = {
             MyTaskTopAppBar(
-                title = "",
+                title = emptyString(),
                 navigationIcon = {
                     MyTaskIconButton(
                         imageVector = Icons.Filled.ArrowBack,
@@ -55,21 +64,14 @@ fun EditTaskScreen(navController: NavController) {
                     MyTaskIconButton(
                         imageVector = Icons.Filled.Save,
                         contentDescription = stringResource(id = R.string.save_task),
-                        onClick = { uiState.onEditTask() }
+                        onClick = { formState.onEditTask() }
                     )
                 }
             )
         },
         content = {
-            TaskForm(
-                isEditing = true,
-                taskFormState = uiState.taskFormState,
-                onTimeChange = { hour, minute ->
-                    uiState.applyTimeFormattingStrategy(hour, minute)
-                },
-                onDateChange = { date ->
-                    uiState.applyDateFormattingStrategy(date)
-                },
+            EditTaskForm(
+                editTaskFormState = formState,
                 modifier = Modifier.fillMaxSize()
             )
         }
