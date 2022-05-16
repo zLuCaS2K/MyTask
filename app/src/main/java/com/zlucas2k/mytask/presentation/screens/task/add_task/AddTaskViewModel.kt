@@ -6,14 +6,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zlucas2k.mytask.common.exceptions.TaskException
+import com.zlucas2k.mytask.common.utils.emptyString
 import com.zlucas2k.mytask.domain.usecases.format.date.FormatDateUseCase
 import com.zlucas2k.mytask.domain.usecases.format.time.FormatTimeUseCase
 import com.zlucas2k.mytask.domain.usecases.task.save.SaveTaskUseCase
+import com.zlucas2k.mytask.presentation.common.model.PriorityView
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.model.mapper.mapToModel
 import com.zlucas2k.mytask.presentation.screens.task.add_task.utils.AddTaskScreenEvent
-import com.zlucas2k.mytask.presentation.screens.task.components.form.TaskFormState
-import com.zlucas2k.mytask.presentation.screens.task.components.form.TaskFormStateImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -28,42 +28,43 @@ class AddTaskViewModel @Inject constructor(
     private val formatDateUseCase: FormatDateUseCase,
 ) : ViewModel() {
 
-    private val _formState: MutableState<TaskFormState> = mutableStateOf(TaskFormStateImpl())
-    val formState: State<TaskFormState> get() = _formState
+    private val _task: MutableState<TaskView> = mutableStateOf(TaskView())
+    val task: State<TaskView> get() = _task
 
-    private val _event: MutableSharedFlow<AddTaskScreenEvent> = MutableSharedFlow()
-    val event: SharedFlow<AddTaskScreenEvent> get() = _event
+    private val _uiEvent: MutableSharedFlow<AddTaskScreenEvent> = MutableSharedFlow()
+    val uiEvent: SharedFlow<AddTaskScreenEvent> get() = _uiEvent
 
     fun onSaveTask() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val task = buildTask()
-                saveTaskUseCase(task.mapToModel())
-                _event.emit(AddTaskScreenEvent.SaveTaskSuccess)
+                val task = _task.value.mapToModel()
+                saveTaskUseCase(task)
+                _uiEvent.emit(AddTaskScreenEvent.SaveTaskSuccess)
             } catch (e: TaskException) {
-                _event.emit(AddTaskScreenEvent.SaveTaskFailed(e.message ?: ""))
+                _uiEvent.emit(AddTaskScreenEvent.SaveTaskFailed(e.message ?: emptyString()))
             }
         }
     }
 
-    fun onTimeChange(newHour: Int, newMinute: Int) {
-        val newTimeFormatted = formatTimeUseCase(newHour, newMinute)
-        _formState.value.time = newTimeFormatted
+    fun onTitleChange(title: String) {
+        _task.value = _task.value.copy(title = title)
     }
 
-    fun onDateChange(newDate: String) {
-        val newDateFormatted = formatDateUseCase(newDate)
-        _formState.value.date = newDateFormatted
+    fun onTimeChange(hour: Int, minute: Int) {
+        val timeFormatted = formatTimeUseCase(hour, minute)
+        _task.value = _task.value.copy(time = timeFormatted)
     }
 
-    private fun buildTask(): TaskView {
-        return TaskView(
-            title = _formState.value.title,
-            time = _formState.value.time,
-            date = _formState.value.date,
-            description = _formState.value.description,
-            priority = _formState.value.priority,
-            status = _formState.value.status
-        )
+    fun onDateChange(date: String) {
+        val dateFormatted = formatDateUseCase(date)
+        _task.value = _task.value.copy(date = dateFormatted)
+    }
+
+    fun onDescriptionChange(description: String) {
+        _task.value = _task.value.copy(description = description)
+    }
+
+    fun onPriorityChange(priority: PriorityView) {
+        _task.value = _task.value.copy(priority = priority)
     }
 }

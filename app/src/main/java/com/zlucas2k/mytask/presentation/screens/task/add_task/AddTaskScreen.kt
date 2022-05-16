@@ -1,5 +1,6 @@
 package com.zlucas2k.mytask.presentation.screens.task.add_task
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
@@ -10,29 +11,36 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.components.icon.MyTaskIconButton
 import com.zlucas2k.mytask.presentation.components.top_bar.MyTaskTopAppBar
+import com.zlucas2k.mytask.presentation.screens.task.add_task.components.AddTaskForm
+import com.zlucas2k.mytask.presentation.screens.task.add_task.components.rememberAddTaskFormState
 import com.zlucas2k.mytask.presentation.screens.task.add_task.utils.AddTaskScreenEvent
-import com.zlucas2k.mytask.presentation.screens.task.components.form.TaskForm
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun AddTaskScreen(navController: NavController) {
+fun AddTaskScreen(navController: NavController, viewModel: AddTaskViewModel = hiltViewModel()) {
 
     val context = LocalContext.current
-    val uiState = rememberAddTaskScreenState()
+    val uiState = rememberAddTaskScreenState(addTaskViewModel = viewModel)
+    val formState = rememberAddTaskFormState(addTaskViewModel = viewModel)
 
     LaunchedEffect(key1 = Unit) {
-        uiState.event.collectLatest { uiEvent ->
+        uiState.uiEvent.collectLatest { uiEvent ->
             when (uiEvent) {
                 is AddTaskScreenEvent.SaveTaskSuccess -> {
-                    uiState.onShowSnackbarShort(context.getString(R.string.save_sucess_task))
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.save_sucess_task),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    navController.navigateUp()
                 }
-
                 is AddTaskScreenEvent.SaveTaskFailed -> {
-                    uiState.onShowSnackbarShort(context.getString(R.string.save_sucess_task))
+                    uiState.showSnackbar(uiEvent.message)
                 }
             }
         }
@@ -54,21 +62,14 @@ fun AddTaskScreen(navController: NavController) {
                     MyTaskIconButton(
                         imageVector = Icons.Filled.Save,
                         contentDescription = stringResource(id = R.string.add_task),
-                        onClick = { uiState.onSaveTask() }
+                        onClick = { formState.onSaveTask() }
                     )
                 }
             )
         },
         content = {
-            TaskForm(
-                taskFormState = uiState.taskFormState,
-                onTimeChange = { hour, minute ->
-                    uiState.applyTimeFormattingStrategy(hour, minute)
-
-                },
-                onDateChange = { date ->
-                    uiState.applyDateFormattingStrategy(date)
-                },
+            AddTaskForm(
+                addTaskFormState = formState,
                 modifier = Modifier.fillMaxSize()
             )
         }

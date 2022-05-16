@@ -6,38 +6,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.zlucas2k.mytask.presentation.screens.task.common.AddTaskFormScreenState
+import com.zlucas2k.mytask.presentation.screens.task.add_task.utils.AddTaskScreenEvent
+import com.zlucas2k.mytask.presentation.screens.task.common.ScreenState
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 
-class AddTaskScreenState(
-    val scaffoldState: ScaffoldState,
+sealed interface AddTaskScreenState : ScreenState<AddTaskScreenEvent>
+
+class AddTaskScreenStateImpl(
+    override val scaffoldState: ScaffoldState,
     private val coroutineScope: CoroutineScope,
-    private val addTaskViewModel: AddTaskViewModel,
-) : AddTaskFormScreenState {
+    private val addTaskViewModel: AddTaskViewModel
+) : AddTaskScreenState {
 
-    override var event = addTaskViewModel.event
+    override val uiEvent: SharedFlow<AddTaskScreenEvent> get() = addTaskViewModel.uiEvent
 
-    override var taskFormState = addTaskViewModel.formState.value
-
-    override fun onSaveTask() {
-        addTaskViewModel.onSaveTask()
-    }
-
-    fun onShowSnackbarShort(message: String) {
+    override fun showSnackbar(message: String) {
         coroutineScope.launch {
-            scaffoldState.snackbarHostState.showSnackbar(
-                message = message
-            )
+            scaffoldState.snackbarHostState.showSnackbar(message = message)
         }
-    }
-
-    override fun applyTimeFormattingStrategy(hour: Int, minute: Int) {
-        addTaskViewModel.onTimeChange(hour, minute)
-    }
-
-    override fun applyDateFormattingStrategy(date: String) {
-        addTaskViewModel.onDateChange(date)
     }
 }
 
@@ -46,8 +34,8 @@ fun rememberAddTaskScreenState(
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     addTaskViewModel: AddTaskViewModel = hiltViewModel()
-) = remember {
-    AddTaskScreenState(
+): AddTaskScreenState = remember {
+    AddTaskScreenStateImpl(
         scaffoldState = scaffoldState,
         coroutineScope = coroutineScope,
         addTaskViewModel = addTaskViewModel
