@@ -1,36 +1,31 @@
 package com.zlucas2k.mytask.domain.usecases.task.edit
 
-import com.zlucas2k.mytask.common.exceptions.TaskException
 import com.zlucas2k.mytask.domain.model.Status
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.domain.repository.TaskRepository
 import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelScheduleTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.shedule.shedule.ScheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.validate.input.ValidateInputsUseCase
+import com.zlucas2k.mytask.domain.usecases.validate.shedule.ValidateScheduleTimeUseCase
 
 class EditTaskUseCaseImpl constructor(
     private val repository: TaskRepository,
     private val scheduleTaskUseCase: ScheduleTaskUseCase,
     private val cancelScheduleTaskUseCase: CancelScheduleTaskUseCase,
+    private val validateInputsUseCase: ValidateInputsUseCase,
+    private val validateScheduleTimeUseCase: ValidateScheduleTimeUseCase
 ) : EditTaskUseCase {
 
     override suspend fun invoke(task: Task) {
-        if (task.title.isBlank() || task.description.isBlank() || task.date.isBlank() || task.time.isBlank()) {
-            throw TaskException("Preencha todos os campos!")
-        }
-
-        val delayWork = task.getScheduleDelayInMillis()
+        validateInputsUseCase(task.title, task.description, task.date, task.time)
 
         if (task.status == Status.TODO) {
-            if (delayWork < 0) {
-                throw TaskException("Insira uma data válida!")
+            validateScheduleTimeUseCase(task.time, task.date, task.status).also { delayInMillisTaskWork ->
+                scheduleTaskUseCase(task = task, delayInMillis = delayInMillisTaskWork)
             }
         }
 
         repository.updateTask(task)
         cancelScheduleTaskUseCase(task = task)
-
-        if (task.status == Status.TODO) {
-            scheduleTaskUseCase(task = task, delayInMillis = delayWork)
-        }
     }
 }

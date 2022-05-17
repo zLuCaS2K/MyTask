@@ -24,6 +24,10 @@ import com.zlucas2k.mytask.domain.usecases.task.save.SaveTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.save.SaveTaskUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.task.search.SearchTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.search.SearchTaskUseCaseImpl
+import com.zlucas2k.mytask.domain.usecases.validate.input.ValidateInputsUseCase
+import com.zlucas2k.mytask.domain.usecases.validate.input.ValidateInputsUseCaseImpl
+import com.zlucas2k.mytask.domain.usecases.validate.shedule.ValidateScheduleTimeUseCase
+import com.zlucas2k.mytask.domain.usecases.validate.shedule.ValidateScheduleTimeUseCaseImpl
 import com.zlucas2k.mytask.infrastructure.worker.provider.WorkerProvider
 import dagger.Module
 import dagger.Provides
@@ -73,12 +77,32 @@ object PresentationModule {
 
     @Provides
     @Singleton
+    fun ValidateInputsUseCase(): ValidateInputsUseCase {
+        return ValidateInputsUseCaseImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun ValidateScheduleTimeUseCase(): ValidateScheduleTimeUseCase {
+        return ValidateScheduleTimeUseCaseImpl()
+    }
+
+    @Provides
+    @Singleton
     fun provideSaveTaskUseCase(
         repository: TaskRepository,
         scheduleTaskUseCase: ScheduleTaskUseCase,
-        cancelScheduleTaskUseCase: CancelScheduleTaskUseCase
+        cancelScheduleTaskUseCase: CancelScheduleTaskUseCase,
+        validateInputsUseCase: ValidateInputsUseCase,
+        validateScheduleTimeUseCase: ValidateScheduleTimeUseCase
     ): SaveTaskUseCase {
-        return SaveTaskUseCaseImpl(repository, scheduleTaskUseCase, cancelScheduleTaskUseCase)
+        return SaveTaskUseCaseImpl(
+            repository,
+            scheduleTaskUseCase,
+            cancelScheduleTaskUseCase,
+            validateInputsUseCase,
+            validateScheduleTimeUseCase
+        )
     }
 
     @Provides
@@ -86,9 +110,17 @@ object PresentationModule {
     fun provideEditTaskUseCase(
         repository: TaskRepository,
         scheduleTaskUseCase: ScheduleTaskUseCase,
-        cancelScheduleTaskUseCase: CancelScheduleTaskUseCase
+        cancelScheduleTaskUseCase: CancelScheduleTaskUseCase,
+        validateInputsUseCase: ValidateInputsUseCase,
+        validateScheduleTimeUseCase: ValidateScheduleTimeUseCase
     ): EditTaskUseCase {
-        return EditTaskUseCaseImpl(repository, scheduleTaskUseCase, cancelScheduleTaskUseCase)
+        return EditTaskUseCaseImpl(
+            repository,
+            scheduleTaskUseCase,
+            cancelScheduleTaskUseCase,
+            validateInputsUseCase,
+            validateScheduleTimeUseCase
+        )
     }
 
     @Provides

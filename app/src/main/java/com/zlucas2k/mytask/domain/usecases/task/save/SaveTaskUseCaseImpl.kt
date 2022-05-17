@@ -1,36 +1,32 @@
 package com.zlucas2k.mytask.domain.usecases.task.save
 
-import com.zlucas2k.mytask.common.exceptions.TaskException
-import com.zlucas2k.mytask.domain.model.Status
 import com.zlucas2k.mytask.domain.model.Task
 import com.zlucas2k.mytask.domain.repository.TaskRepository
 import com.zlucas2k.mytask.domain.usecases.shedule.cancel.CancelScheduleTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.shedule.shedule.ScheduleTaskUseCase
+import com.zlucas2k.mytask.domain.usecases.validate.input.ValidateInputsUseCase
+import com.zlucas2k.mytask.domain.usecases.validate.shedule.ValidateScheduleTimeUseCase
 import javax.inject.Inject
 
 class SaveTaskUseCaseImpl @Inject constructor(
     private val repository: TaskRepository,
     private val scheduleTaskUseCase: ScheduleTaskUseCase,
-    private val cancelScheduleTaskUseCase: CancelScheduleTaskUseCase
+    private val cancelScheduleTaskUseCase: CancelScheduleTaskUseCase,
+    private val validateInputsUseCase: ValidateInputsUseCase,
+    private val validateScheduleTimeUseCase: ValidateScheduleTimeUseCase
 ) : SaveTaskUseCase {
 
     override suspend operator fun invoke(task: Task) {
-        if (task.title.isBlank() || task.description.isBlank() || task.date.isBlank() || task.time.isBlank()) {
-            throw TaskException("Preencha todos os campos!")
-        }
+        validateInputsUseCase(task.title, task.description, task.date, task.time)
 
-        val delayTaskWorkInMillis = task.getScheduleDelayInMillis()
+        validateScheduleTimeUseCase(task.time, task.date, task.status).also { delayInMillisTaskWork ->
 
-        if (task.status == Status.TODO) {
-            if (delayTaskWorkInMillis < 0) {
-                throw TaskException("Insira uma data válida!")
+            repository.saveTask(task).also { idTask ->
+                val taskSchedule = task.copy(id = idTask.toInt())
+
+                cancelScheduleTaskUseCase(task = taskSchedule)
+                scheduleTaskUseCase(task = taskSchedule, delayInMillis = delayInMillisTaskWork)
             }
         }
-
-        val idTask = repository.saveTask(task)
-        val taskSchedule = task.copy(id = idTask.toInt())
-
-        cancelScheduleTaskUseCase(task = taskSchedule)
-        scheduleTaskUseCase(task = taskSchedule, delayInMillis = delayTaskWorkInMillis)
     }
 }
