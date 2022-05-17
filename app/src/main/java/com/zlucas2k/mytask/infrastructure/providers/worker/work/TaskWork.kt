@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.infrastructure.worker.work
+package com.zlucas2k.mytask.infrastructure.providers.worker.work
 
 import android.content.Context
 import androidx.work.Worker
