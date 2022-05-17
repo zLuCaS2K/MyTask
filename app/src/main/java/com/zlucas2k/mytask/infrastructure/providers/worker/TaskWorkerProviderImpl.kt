@@ -1,4 +1,4 @@
-package com.zlucas2k.mytask.infrastructure.worker.work
+package com.zlucas2k.mytask.infrastructure.providers.worker
 
 import android.content.Context
 import androidx.work.Constraints
@@ -7,7 +7,8 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.zlucas2k.mytask.common.utils.Constants
 import com.zlucas2k.mytask.domain.model.Task
-import com.zlucas2k.mytask.infrastructure.worker.provider.WorkerProvider
+import com.zlucas2k.mytask.domain.providers.WorkerProvider
+import com.zlucas2k.mytask.infrastructure.providers.worker.work.TaskWork
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
