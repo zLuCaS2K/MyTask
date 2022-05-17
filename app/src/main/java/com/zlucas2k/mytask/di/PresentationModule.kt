@@ -1,6 +1,7 @@
 package com.zlucas2k.mytask.di
 
 import com.zlucas2k.mytask.domain.model.Task
+import com.zlucas2k.mytask.domain.providers.StringResourceProvider
 import com.zlucas2k.mytask.domain.providers.WorkerProvider
 import com.zlucas2k.mytask.domain.repository.TaskRepository
 import com.zlucas2k.mytask.domain.usecases.format.date.FormatDateUseCase
@@ -77,14 +78,14 @@ object PresentationModule {
 
     @Provides
     @Singleton
-    fun ValidateInputsUseCase(): ValidateInputsUseCase {
-        return ValidateInputsUseCaseImpl()
+    fun ValidateInputsUseCase(stringResourceProvider: StringResourceProvider): ValidateInputsUseCase {
+        return ValidateInputsUseCaseImpl(stringResourceProvider)
     }
 
     @Provides
     @Singleton
-    fun ValidateScheduleTimeUseCase(): ValidateScheduleTimeUseCase {
-        return ValidateScheduleTimeUseCaseImpl()
+    fun ValidateScheduleTimeUseCase(stringResourceProvider: StringResourceProvider): ValidateScheduleTimeUseCase {
+        return ValidateScheduleTimeUseCaseImpl(stringResourceProvider)
     }
 
     @Provides

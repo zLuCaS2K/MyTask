@@ -1,11 +1,16 @@
 package com.zlucas2k.mytask.domain.usecases.validate.shedule
 
+import com.zlucas2k.mytask.R
 import java.util.Calendar
 import com.zlucas2k.mytask.common.utils.Utils
 import com.zlucas2k.mytask.common.exceptions.TaskException
 import com.zlucas2k.mytask.domain.model.Status
+import com.zlucas2k.mytask.domain.providers.StringResourceProvider
+import javax.inject.Inject
 
-class ValidateScheduleTimeUseCaseImpl : ValidateScheduleTimeUseCase {
+class ValidateScheduleTimeUseCaseImpl @Inject constructor(
+    private val stringResourceProvider: StringResourceProvider
+) : ValidateScheduleTimeUseCase {
 
     override fun invoke(time: String, date: String, status: Status): Long {
         val nowTime = Calendar.getInstance().apply {
@@ -17,7 +22,7 @@ class ValidateScheduleTimeUseCaseImpl : ValidateScheduleTimeUseCase {
 
         if (status == Status.TODO) {
             if (timeInMillisTask <= 0) {
-                throw TaskException("")
+                throw TaskException(stringResourceProvider.getString(R.string.enter_time_and_date_valid))
             }
         }
 
