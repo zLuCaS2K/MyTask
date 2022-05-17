@@ -96,7 +96,6 @@ private fun HomeTaskListItems(tasks: List<TaskView>, onClickTask: (TaskView) -> 
                 task = task,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight()
                     .padding(10.dp)
                     .clickable { onClickTask(task) }
             )

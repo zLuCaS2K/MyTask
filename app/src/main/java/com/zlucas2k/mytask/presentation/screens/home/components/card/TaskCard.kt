@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Alarm
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -36,16 +37,13 @@ fun TaskCard(task: TaskView, modifier: Modifier = Modifier) {
         task.priority.colorLight
     }
 
-    MyTaskCard(modifier = modifier) {
-        Row(modifier = Modifier.height(IntrinsicSize.Min)) {
+    MyTaskCard(modifier = modifier.wrapContentHeight(CenterVertically)) {
+        Row {
             IndicatorTaskPriorityColor(
-                color = colorPriority,
-                modifier = Modifier
-                    .width(2.dp)
-                    .fillMaxHeight()
+                color = colorPriority
             )
 
-            Column(modifier = Modifier.padding(8.dp)) {
+            Column(modifier = Modifier.wrapContentHeight()) {
                 Text(
                     text = task.title,
                     style = MaterialTheme.typography.h1,
@@ -59,9 +57,7 @@ fun TaskCard(task: TaskView, modifier: Modifier = Modifier) {
                     color = MaterialTheme.colors.onBackground.copy(alpha = 0.5f),
                     maxLines = 5,
                     textAlign = TextAlign.Justify,
-                    modifier = Modifier
-                        .wrapContentHeight()
-                        .padding(start = 8.dp, top = 8.dp, end = 8.dp)
+                    modifier = Modifier.padding(start = 8.dp, top = 8.dp, end = 8.dp)
                 )
 
                 TaskCardFooter(
@@ -71,18 +67,17 @@ fun TaskCard(task: TaskView, modifier: Modifier = Modifier) {
                 )
             }
         }
+
     }
 }
 
 @Composable
-private fun IndicatorTaskPriorityColor(
-    color: Color,
-    modifier: Modifier = Modifier
-) {
+private fun IndicatorTaskPriorityColor(color: Color) {
     Divider(
         color = color,
-        thickness = 1.dp,
-        modifier = modifier
+        modifier = Modifier
+            .fillMaxHeight()
+            .width(2.dp)
     )
 }
 
@@ -192,7 +187,6 @@ private fun Preview() {
             task = task,
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight()
                 .padding(10.dp)
         )
     }

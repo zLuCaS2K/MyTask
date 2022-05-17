@@ -2,6 +2,7 @@ package com.zlucas2k.mytask.presentation.components.card
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Card
@@ -18,7 +19,7 @@ fun MyTaskCard(
     content: @Composable () -> Unit
 ) {
     Card(
-        modifier = modifier,
+        modifier = modifier.height(IntrinsicSize.Min),
         elevation = 8.dp,
         content = content
     )
