@@ -1,35 +1,34 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">MyTask</string>
-    <string name="app_description">Um simples projeto de código aberto</string>
-    <string name="about">Sobre</string>
-    <string name="show_options">Mostrar Opções</string>
-    <string name="add_task">Adicionar Tarefa</string>
-    <string name="save_task">Salvar Tarefa</string>
-    <string name="save_sucess_task">Salvo com Sucesso</string>
-    <string name="save_task_title_dialog">Salvar tarefa?</string>
-    <string name="save_task_description_dialog">Deseja realmente salvar essa tarefa?</string>
-    <string name="edit_sucess_task" tools:ignore="ExtraTranslation">Editado com Sucesso</string>
-    <string name="edit_task_title_dialog" tools:ignore="ExtraTranslation">Editar tarefa?</string>
-    <string name="edit_task_description_dialog" tools:ignore="ExtraTranslation">Deseja salvar as alterações nessa tarefa?</string>
-    <string name="delete_task">Deletar Tarefa</string>
-    <string name="delete_sucess_task">Deletado com Sucesso</string>
-    <string name="delete_task_title_dialog">Excluir tarefa?</string>
-    <string name="delete_task_description_dialog">Deseja realmente excluir essa tarefa?</string>
-    <string name="yes">Sim</string>
-    <string name="no">Não</string>
-    <string name="title_task">Título da Tarefa</string>
-    <string name="time">Hora</string>
-    <string name="date">Data</string>
-    <string name="description">Descrição</string>
-    <string name="back">Voltar</string>
-    <string name="source_code">Código Fonte</string>
-    <string name="version">Versão</string>
-    <string name="todo">Agendado</string>
-    <string name="progress">Em andamento</string>
-    <string name="done">Concluida</string>
-    <string name="none">Sem</string>
-    <string name="low">Baixa</string>
-    <string name="medium">Média</string>
-    <string name="high">Alta</string>
-    <string name="search">Pesquisar</string>
+<resources>
+    <string name="app_name" translatable="false">MyTask</string>
+    <string name="search">Search</string>
+    <string name="back">Back</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <!-- Task Events -->
+    <string name="add_task">Add Task</string>
+    <string name="save_task">Save Task</string>
+    <string name="delete_task">Delete Task</string>
+    <!-- Task Events Sucess -->
+    <string name="save_sucess_task">Saved successfully</string>
+    <string name="edit_sucess_task">Edited successfully</string>
+    <string name="delete_sucess_task">Deleted successfully</string>
+    <!-- Form Fields -->
+    <string name="title">Task Title</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
+    <string name="priority">Priority</string>
+    <string name="status">Task Status</string>
+    <string name="description">Description</string>
+    <!-- Task Priority -->
+    <string name="none">None</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <!-- Task Status -->
+    <string name="todo">Scheduled</string>
+    <string name="progress">In progress</string>
+    <string name="done">Completed</string>
+    <!-- Validate Messages -->
+    <string name="enter_all_fields">Fill in all fields!</string>
+    <string name="enter_time_and_date_valid">Cannot schedule to the past!</string>
 </resources>

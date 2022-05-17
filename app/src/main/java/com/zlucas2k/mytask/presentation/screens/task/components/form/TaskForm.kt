@@ -30,7 +30,7 @@ fun TaskForm(
             value = taskFormState.task.title,
             onValueChange = { taskFormState.onTitleChange(it) },
             textStyle = MaterialTheme.typography.h1,
-            placeholderText = stringResource(id = R.string.title_task),
+            placeholderText = stringResource(id = R.string.title),
             singleLine = true,
             maxLines = 1,
             modifier = modifierComponents

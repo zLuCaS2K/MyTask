@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyTask</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="title">Título da Tarefa</string>
+    <string name="time">Hora</string>
+    <string name="date">Data</string>
+    <string name="priority">Prioridade</string>
+    <string name="status">Estado da Tarefa</string>
+    <string name="description">Descrição</string>
+    <string name="todo">Agendado</string>
+    <string name="progress">Em andamento</string>
+    <string name="done">Concluida</string>
+    <string name="enter_all_fields">Preencha todos os campos!</string>
+    <string name="enter_time_and_date_valid">Não é possível agendar para o passado!</string>
+    <string name="none">Sem</string>
+    <string name="low">Baixa</string>
+    <string name="medium">Média</string>
+    <string name="high">Alta</string>
+    <string name="search">Pesquisar</string>
+    <string name="back">Voltar</string>
+    <string name="delete_task">Deletar Tarefa</string>
+    <string name="edit_sucess_task">Editado com Sucesso</string>
+    <string name="save_sucess_task">Salvo com Sucesso</string>
+    <string name="delete_sucess_task">Deletado com Sucesso</string>
+    <string name="save_task">Salvar Tarefa</string>
+    <string name="add_task">Adicionar Tarefa</string>
+</resources>
