@@ -1,7 +1,7 @@
 package com.zlucas2k.mytask.domain.usecases.shedule.cancel
 
 import com.zlucas2k.mytask.domain.model.Task
-import com.zlucas2k.mytask.infrastructure.worker.provider.WorkerProvider
+import com.zlucas2k.mytask.domain.providers.WorkerProvider
 import javax.inject.Inject
 
 class CancelScheduleTaskUseCaseImpl @Inject constructor(

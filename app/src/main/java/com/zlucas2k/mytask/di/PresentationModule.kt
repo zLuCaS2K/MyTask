@@ -1,6 +1,7 @@
 package com.zlucas2k.mytask.di
 
 import com.zlucas2k.mytask.domain.model.Task
+import com.zlucas2k.mytask.domain.providers.WorkerProvider
 import com.zlucas2k.mytask.domain.repository.TaskRepository
 import com.zlucas2k.mytask.domain.usecases.format.date.FormatDateUseCase
 import com.zlucas2k.mytask.domain.usecases.format.date.FormatDateUseCaseImpl
@@ -28,7 +29,6 @@ import com.zlucas2k.mytask.domain.usecases.validate.input.ValidateInputsUseCase
 import com.zlucas2k.mytask.domain.usecases.validate.input.ValidateInputsUseCaseImpl
 import com.zlucas2k.mytask.domain.usecases.validate.shedule.ValidateScheduleTimeUseCase
 import com.zlucas2k.mytask.domain.usecases.validate.shedule.ValidateScheduleTimeUseCaseImpl
-import com.zlucas2k.mytask.infrastructure.worker.provider.WorkerProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

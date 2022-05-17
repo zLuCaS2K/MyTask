@@ -2,8 +2,8 @@ package com.zlucas2k.mytask.di
 
 import android.app.Application
 import com.zlucas2k.mytask.domain.model.Task
-import com.zlucas2k.mytask.infrastructure.worker.provider.WorkerProvider
-import com.zlucas2k.mytask.infrastructure.worker.work.TaskWorkerProviderImpl
+import com.zlucas2k.mytask.domain.providers.WorkerProvider
+import com.zlucas2k.mytask.infrastructure.providers.worker.TaskWorkerProviderImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
