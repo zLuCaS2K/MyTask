@@ -1,12 +1,17 @@
 package com.zlucas2k.mytask.presentation.common.navigation
 
+import androidx.compose.animation.*
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
+import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.composable
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.zlucas2k.mytask.presentation.common.navigation.model.Screen
 import com.zlucas2k.mytask.presentation.screens.home.HomeScreen
 import com.zlucas2k.mytask.presentation.screens.task.add_task.AddTaskScreen
@@ -14,14 +19,26 @@ import com.zlucas2k.mytask.presentation.screens.task.edit_task.EditTaskScreen
 
 @Composable
 @ExperimentalMaterialApi
-fun NavigationComponent(navHostController: NavHostController) {
-    NavHost(navController = navHostController, startDestination = Screen.HomeScreen.route) {
+@ExperimentalAnimationApi
+fun NavigationComponent() {
+    val navController = rememberAnimatedNavController()
+    val springSpec = spring<IntOffset>(dampingRatio = Spring.DampingRatioMediumBouncy)
+
+    AnimatedNavHost(navController = navController, startDestination = Screen.HomeScreen.route) {
         composable(route = Screen.HomeScreen.route) {
-            HomeScreen(navHostController = navHostController)
+            HomeScreen(navHostController = navController)
         }
 
-        composable(route = Screen.AddTaskScreen.route) {
-            AddTaskScreen(navController = navHostController)
+        composable(
+            route = Screen.AddTaskScreen.route,
+            enterTransition = {
+                slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = springSpec)
+            },
+            exitTransition = {
+                slideOutHorizontally(targetOffsetX = { -1000 }, animationSpec = springSpec)
+            },
+        ) {
+            AddTaskScreen(navController = navController)
         }
 
         composable(
@@ -31,9 +48,15 @@ fun NavigationComponent(navHostController: NavHostController) {
                     type = NavType.IntType
                     defaultValue = 0
                 }
-            )
+            ),
+            enterTransition = {
+                fadeIn(animationSpec = tween(1000))
+            },
+            exitTransition = {
+                fadeOut(animationSpec = tween(1000))
+            },
         ) {
-            EditTaskScreen(navController = navHostController)
+            EditTaskScreen(navController = navController)
         }
     }
 }
