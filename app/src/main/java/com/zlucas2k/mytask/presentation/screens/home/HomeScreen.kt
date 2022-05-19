@@ -1,7 +1,10 @@
 package com.zlucas2k.mytask.presentation.screens.home
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
@@ -78,9 +81,18 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
                             modifier = Modifier.fillMaxWidth()
                         )
 
-                        HomeTaskListItems(tasks = uiState.tasks) { taskClicked ->
-                            taskDetailBottomSheetState.onShowTaskDetailBottomSheet(taskClicked)
-                        }
+                        TaskListItems(
+                            tasks = uiState.tasks,
+                            onClickTask = { taskClicked ->
+                                taskDetailBottomSheetState.onShowTaskDetailBottomSheet(taskClicked)
+                            },
+                            onClickEdit = { id ->
+                                navHostController.navigate(Screen.EditTaskScreen.route + "?id=$id")
+                            },
+                            onClickDelete = { task ->
+                                viewModel.onDeleteTask(task)
+                            },
+                        )
                     }
                 }
             )
@@ -89,15 +101,26 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
 }
 
 @Composable
-private fun HomeTaskListItems(tasks: List<TaskView>, onClickTask: (TaskView) -> Unit) {
+private fun TaskListItems(
+    tasks: List<TaskView>,
+    onClickTask: (TaskView) -> Unit,
+    onClickEdit: (Int) -> Unit,
+    onClickDelete: (TaskView) -> Unit
+) {
     LazyColumn {
         items(tasks) { task ->
             TaskCard(
                 task = task,
+                onEditClicked = {
+                    onClickEdit(task.id)
+                },
+                onDeleteClicked = {
+                    onClickDelete(task)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
-                    .clickable { onClickTask(task) }
+                    .clickable { onClickTask(task) },
             )
         }
     }

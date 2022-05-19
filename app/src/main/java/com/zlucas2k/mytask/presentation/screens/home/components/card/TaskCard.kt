@@ -6,16 +6,16 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Alarm
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -27,9 +27,19 @@ import com.zlucas2k.mytask.presentation.common.model.StatusView
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 import com.zlucas2k.mytask.presentation.components.card.MyTaskCard
+import com.zlucas2k.mytask.presentation.components.drop_down.MyTaskDropDownMenu
+import com.zlucas2k.mytask.presentation.components.icon.MyTaskIcon
+import com.zlucas2k.mytask.presentation.components.icon.MyTaskIconButton
+import com.zlucas2k.mytask.presentation.screens.home.utils.TaskCardAction
 
 @Composable
-fun TaskCard(task: TaskView, modifier: Modifier = Modifier) {
+fun TaskCard(
+    modifier: Modifier = Modifier,
+    task: TaskView,
+    onEditClicked: () -> Unit,
+    onDeleteClicked: () -> Unit,
+) {
+    var menuExpandedState by remember { mutableStateOf(false) }
 
     val colorPriority = if (isSystemInDarkTheme()) {
         task.priority.colorDark
@@ -37,19 +47,48 @@ fun TaskCard(task: TaskView, modifier: Modifier = Modifier) {
         task.priority.colorLight
     }
 
-    MyTaskCard(modifier = modifier.wrapContentHeight(CenterVertically)) {
+    MyTaskCard(modifier = modifier.wrapContentHeight(Alignment.CenterVertically)) {
         Row {
-            IndicatorTaskPriorityColor(
+            PriorityIndicator(
                 color = colorPriority
             )
 
             Column(modifier = Modifier.wrapContentHeight()) {
-                Text(
-                    text = task.title,
-                    style = MaterialTheme.typography.h1,
-                    color = MaterialTheme.colors.onBackground,
-                    modifier = Modifier.padding(start = 8.dp, top = 8.dp)
-                )
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                ) {
+                    Text(
+                        text = task.title,
+                        style = MaterialTheme.typography.h1,
+                        color = MaterialTheme.colors.onBackground,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
+
+                    Box(modifier = Modifier.wrapContentSize()) {
+                        MyTaskIconButton(
+                            imageVector = Icons.Filled.MoreVert,
+                            onClick = {
+                                menuExpandedState = true
+                            },
+                            modifier = Modifier.wrapContentSize()
+                        )
+
+                        TaskCardDropDownMenu(
+                            onActionClicked = { actionSelected ->
+                                when (actionSelected) {
+                                    TaskCardAction.Edit -> onEditClicked()
+                                    TaskCardAction.Delete -> onDeleteClicked()
+                                }
+                            },
+                            menuExpandedState = menuExpandedState,
+                            menuExpandedStateChange = { menuExpandedState = false }
+                        )
+                    }
+                }
 
                 Text(
                     text = task.description,
@@ -57,7 +96,7 @@ fun TaskCard(task: TaskView, modifier: Modifier = Modifier) {
                     color = MaterialTheme.colors.onBackground.copy(alpha = 0.5f),
                     maxLines = 5,
                     textAlign = TextAlign.Justify,
-                    modifier = Modifier.padding(start = 8.dp, top = 8.dp, end = 8.dp)
+                    modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
                 )
 
                 TaskCardFooter(
@@ -72,12 +111,38 @@ fun TaskCard(task: TaskView, modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun IndicatorTaskPriorityColor(color: Color) {
+private fun PriorityIndicator(color: Color) {
     Divider(
         color = color,
         modifier = Modifier
             .fillMaxHeight()
             .width(2.dp)
+    )
+}
+
+@Composable
+private fun TaskCardDropDownMenu(
+    onActionClicked: (TaskCardAction) -> Unit,
+    menuExpandedState: Boolean,
+    menuExpandedStateChange: () -> Unit,
+) {
+    val actionOptionsLabels = listOf(
+        stringResource(id = R.string.edit),
+        stringResource(id = R.string.delete)
+    )
+
+    val actionOptions = listOf(
+        TaskCardAction.Edit,
+        TaskCardAction.Delete
+    )
+
+    MyTaskDropDownMenu(
+        items = actionOptionsLabels,
+        onItemIndexChange = { indexOptionSelected ->
+            onActionClicked(actionOptions[indexOptionSelected])
+        },
+        expandedState = menuExpandedState,
+        onExpandedStateChange = menuExpandedStateChange
     )
 }
 
@@ -92,13 +157,13 @@ private fun TaskCardFooter(
             .fillMaxWidth()
             .padding(8.dp)
     ) {
-        TaskSheduleTimeIndicator(
+        ScheduleIndicator(
             date = date,
             time = time,
             modifier = Modifier.align(Alignment.CenterStart)
         )
 
-        TaskStatusIndicator(
+        StatusIndicator(
             status = status,
             modifier = Modifier.align(Alignment.CenterEnd)
         )
@@ -106,16 +171,15 @@ private fun TaskCardFooter(
 }
 
 @Composable
-private fun TaskSheduleTimeIndicator(
+private fun ScheduleIndicator(
     date: String,
     time: String,
     modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier) {
-        Icon(
+        MyTaskIcon(
             imageVector = Icons.Filled.DateRange,
-            contentDescription = null,
-            tint = MaterialTheme.colors.onPrimary.copy(0.5f)
+            modifier = Modifier.alpha(0.8f)
         )
 
         Text(
@@ -125,10 +189,9 @@ private fun TaskSheduleTimeIndicator(
 
         Spacer(modifier = Modifier.width(8.dp))
 
-        Icon(
+        MyTaskIcon(
             imageVector = Icons.Filled.Alarm,
-            contentDescription = null,
-            tint = MaterialTheme.colors.onPrimary.copy(0.5f)
+            modifier = Modifier.alpha(0.8f)
         )
 
         Text(
@@ -139,7 +202,7 @@ private fun TaskSheduleTimeIndicator(
 }
 
 @Composable
-private fun TaskStatusIndicator(
+private fun StatusIndicator(
     status: StatusView,
     modifier: Modifier = Modifier
 ) {
@@ -187,7 +250,13 @@ private fun Preview() {
             task = task,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
+                .padding(10.dp),
+            onEditClicked = {
+
+            },
+            onDeleteClicked = {
+
+            }
         )
     }
 }

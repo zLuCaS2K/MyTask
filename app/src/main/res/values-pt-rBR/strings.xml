@@ -26,4 +26,6 @@
     <string name="delete_sucess_task">Deletado com Sucesso</string>
     <string name="save_task">Salvar Tarefa</string>
     <string name="add_task">Adicionar Tarefa</string>
+    <string name="delete">Deletar</string>
+    <string name="edit">Editar</string>
 </resources>

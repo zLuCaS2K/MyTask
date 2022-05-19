@@ -6,11 +6,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zlucas2k.mytask.domain.mappers.mapToView
+import com.zlucas2k.mytask.domain.usecases.task.delete.DeleteTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.filter.FilterTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.get_all.GetAllTaskUseCase
 import com.zlucas2k.mytask.domain.usecases.task.search.SearchTaskUseCase
 import com.zlucas2k.mytask.domain.util.TaskFilter
 import com.zlucas2k.mytask.presentation.common.model.TaskView
+import com.zlucas2k.mytask.presentation.common.model.mapper.mapToModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -21,8 +23,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getAllTaskUseCase: GetAllTaskUseCase,
+    private val deleteTaskUseCase: DeleteTaskUseCase,
     private val searchTaskUseCase: SearchTaskUseCase,
-    private val filterTaskUseCase: FilterTaskUseCase
+    private val filterTaskUseCase: FilterTaskUseCase,
 ) : ViewModel() {
 
     private val _uiState: MutableState<HomeScreenState> = mutableStateOf(HomeScreenState())
@@ -41,6 +44,12 @@ class HomeViewModel @Inject constructor(
                 _tasksCache.value = tasks
                 _uiState.value = _uiState.value.copy(tasks = tasks)
             }
+        }
+    }
+
+    fun onDeleteTask(task: TaskView) {
+        viewModelScope.launch {
+            deleteTaskUseCase(task.mapToModel())
         }
     }
 
