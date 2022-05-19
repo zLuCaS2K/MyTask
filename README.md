@@ -39,8 +39,8 @@ $ git clone https://github.com/zLuCaS2K/MyTask.git
 
 ---
 
-## 🚀 Architecture
+## 🏗️ Architecture
 
-This project uses MVVM and Clean Architecture - see the link file for details.
+This project uses MVVM and Clean Architecture - see the [Architecture](https://github.com/zLuCaS2K/MyTask/blob/master/docs/architecture/architecture.png) file for details.
 
 ---
