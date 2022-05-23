@@ -34,4 +34,6 @@
     <!-- Validate Messages -->
     <string name="enter_all_fields">Fill in all fields!</string>
     <string name="enter_time_and_date_valid">Cannot schedule to the past!</string>
+    <string name="title_delete_task_dialog">Delete Task?</string>
+    <string name="description_delete_task_dialog">Do you really want to delete this task?</string>
 </resources>

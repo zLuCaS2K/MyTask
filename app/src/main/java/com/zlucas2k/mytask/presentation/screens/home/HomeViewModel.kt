@@ -47,10 +47,15 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun onDeleteTask(task: TaskView) {
+    fun onDeleteTask() {
         viewModelScope.launch {
+            val task = _uiState.value.taskClickedDelete
             deleteTaskUseCase(task.mapToModel())
         }
+    }
+
+    fun onSetTaskDeleted(task: TaskView) {
+        _uiState.value = _uiState.value.copy(taskClickedDelete = task)
     }
 
     fun onSearchQueryChange(searchQuery: String) {

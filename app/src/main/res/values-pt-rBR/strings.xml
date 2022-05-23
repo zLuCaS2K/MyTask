@@ -29,4 +29,6 @@
     <string name="edit_task">Editar Tarefa</string>
     <string name="delete">Deletar</string>
     <string name="edit">Editar</string>
+    <string name="title_delete_task_dialog">Deletar Tarefa?</string>
+    <string name="description_delete_task_dialog">Você realmente deseja excluir essa tarefa?</string>
 </resources>

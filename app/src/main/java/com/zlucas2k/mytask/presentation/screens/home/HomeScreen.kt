@@ -11,8 +11,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -21,6 +20,7 @@ import androidx.navigation.NavHostController
 import com.zlucas2k.mytask.R
 import com.zlucas2k.mytask.presentation.common.model.TaskView
 import com.zlucas2k.mytask.presentation.common.navigation.model.Screen
+import com.zlucas2k.mytask.presentation.components.dialog.MyTaskAlertDialog
 import com.zlucas2k.mytask.presentation.components.fab.MyTaskFloatingActionButton
 import com.zlucas2k.mytask.presentation.screens.home.components.card.TaskCard
 import com.zlucas2k.mytask.presentation.screens.home.components.filter.TaskFilterWidget
@@ -39,6 +39,8 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
     val searchWidgetState = rememberSearchWidgetState()
     val filterWidgetState = rememberFilterWidgetState()
     val taskDetailBottomSheetState = rememberTaskDetailBottomSheetState()
+
+    var dialogDeleteState by remember { mutableStateOf(false) }
 
     TaskDetailBottomSheet(
         taskDetailBottomSheetState = taskDetailBottomSheetState,
@@ -90,8 +92,23 @@ fun HomeScreen(navHostController: NavHostController, viewModel: HomeViewModel = 
                                 navHostController.navigate(Screen.EditTaskScreen.route + "?id=$id")
                             },
                             onClickDelete = { task ->
-                                viewModel.onDeleteTask(task)
+                                dialogDeleteState = true
+                                viewModel.onSetTaskDeleted(task)
                             },
+                        )
+                    }
+
+                    if (dialogDeleteState) {
+                        MyTaskAlertDialog(
+                            title = stringResource(id = R.string.title_delete_task_dialog),
+                            textDescription = stringResource(id = R.string.description_delete_task_dialog),
+                            onConfirmClick = {
+                                viewModel.onDeleteTask()
+                                dialogDeleteState = false
+                            },
+                            onDismissClick = {
+                                dialogDeleteState = false
+                            }
                         )
                     }
                 }
