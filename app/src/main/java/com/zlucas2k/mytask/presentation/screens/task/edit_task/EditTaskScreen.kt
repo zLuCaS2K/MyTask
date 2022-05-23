@@ -14,7 +14,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.zlucas2k.mytask.R
-import com.zlucas2k.mytask.common.utils.emptyString
 import com.zlucas2k.mytask.presentation.components.icon.MyTaskIconButton
 import com.zlucas2k.mytask.presentation.components.top_bar.MyTaskTopAppBar
 import com.zlucas2k.mytask.presentation.screens.task.edit_task.components.EditTaskForm
@@ -52,7 +51,7 @@ fun EditTaskScreen(navController: NavController, viewModel: EditTaskViewModel = 
         scaffoldState = uiState.scaffoldState,
         topBar = {
             MyTaskTopAppBar(
-                title = emptyString(),
+                title = stringResource(id = R.string.edit_task),
                 navigationIcon = {
                     MyTaskIconButton(
                         imageVector = Icons.Filled.ArrowBack,

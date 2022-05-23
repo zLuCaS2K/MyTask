@@ -9,6 +9,7 @@
     <!-- Task Events -->
     <string name="add_task">Add Task</string>
     <string name="save_task">Save Task</string>
+    <string name="edit_task">Edit Task</string>
     <string name="delete_task">Delete Task</string>
     <!-- Task Events Sucess -->
     <string name="save_sucess_task">Saved successfully</string>
