@@ -1,6 +1,7 @@
 package com.zlucas2k.mytask.presentation.screens.task.components
 
 import android.content.res.Configuration
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -11,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.zlucas2k.mytask.presentation.common.theme.MyTaskTheme
 
@@ -25,6 +25,8 @@ fun TaskTextField(
     placeholderText: String,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
+    keyboardOptions: KeyboardOptions,
+    keyboardActions: KeyboardActions,
     singleLine: Boolean,
     maxLines: Int
 ) {
@@ -43,10 +45,8 @@ fun TaskTextField(
         },
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text,
-            imeAction = ImeAction.Next
-        ),
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
         singleLine = singleLine,
         maxLines = maxLines,
         colors = TextFieldDefaults.textFieldColors(
@@ -68,6 +68,12 @@ private fun Preview() {
             onValueChange = {},
             textStyle = MaterialTheme.typography.h1,
             placeholderText = "Título",
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = {}
+            ),
             singleLine = true,
             maxLines = 1
         )
