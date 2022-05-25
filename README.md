@@ -75,13 +75,13 @@ This project uses MVVM and Clean Architecture - see the [Architecture](https://g
 - Architecture
   - MVVM + Clean Architecture
 - Libraries
-  - Jetpack
-		- Hilt
-		- Room
-		- Splash Screen
-		- WorkManager
-  - Coroutines
+  - Material Design
   - Accompanist
+  - Coroutines
+  - Hilt
+  - Room
+  - WorkManager
+  - Splash Screen
 
 ---
 
