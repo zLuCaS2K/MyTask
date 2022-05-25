@@ -6,6 +6,7 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
@@ -17,6 +18,7 @@ import com.zlucas2k.mytask.presentation.screens.home.HomeScreen
 import com.zlucas2k.mytask.presentation.screens.task.add_task.AddTaskScreen
 import com.zlucas2k.mytask.presentation.screens.task.edit_task.EditTaskScreen
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 @ExperimentalMaterialApi
 @ExperimentalAnimationApi
