@@ -41,17 +41,21 @@ $ git clone https://github.com/zLuCaS2K/MyTask.git
 ---
 
 ## 📸 Screenshots 
-### Light Mode 
-![Splash](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/light/Screenshot_20220525_012002.png "Splash Screen")
-![Home](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/light/Screenshot_20220525_012741.png "Home Screen")
-![Home](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/light/Screenshot_20220525_012807.png "Home Screen Search and Filter")
-![Home](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/light/Screenshot_20220525_012937.png "Task View")
+### Light Mode
+<p align="center">
+  <img src="https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/light/Screenshot_20220525_012002.png" width="200" height="400" />
+  <img src="https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/light/Screenshot_20220525_012741.png" width="200" height="400" />
+  <img src="https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/light/Screenshot_20220525_012807.png" width="200" height="400" />
+  <img src="https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/light/Screenshot_20220525_012937.png" width="200" height="400" />
+</p>
 
 ### Dark Mode
-![Splash](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/dark/Screenshot_20220525_012850.png "Splash Screen")
-![Home](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/dark/Screenshot_20220525_012858.png "Home Screen")
-![Home](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/dark/Screenshot_20220525_012911.png "Home Screen Search and Filter")
-![Home](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/dark/Screenshot_20220525_013017.png "Task View")
+<p align="center">
+  <img src="https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/dark/Screenshot_20220525_012850.png" width="200" height="400" />
+  <img src="https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/dark/Screenshot_20220525_012858.png" width="200" height="400" />
+  <img src="https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/dark/Screenshot_20220525_012911.png" width="200" height="400" />
+  <img src="https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/dark/Screenshot_20220525_013017.png" width="200" height="400" />
+</p>
 
 ---
 
