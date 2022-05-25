@@ -24,8 +24,10 @@
 
 <ul>
   <li><a href="#-getting-started">Getting Started</a></li>
-  <li><a href="#-screenshots">Screenshots</a></li>
   <li><a href="#-architecture">Architecture</a></li>
+  <li><a href="#-screenshots">Screenshots</a></li>
+  <li><a href="#-built-with">Built With</a></li>
+  <li><a href="#-license">License</a></li>
 </ul>
 
 ---
@@ -37,6 +39,12 @@
 ```
 $ git clone https://github.com/zLuCaS2K/MyTask.git
 ```
+
+---
+
+## 🏗️ Architecture
+
+This project uses MVVM and Clean Architecture - see the [Architecture](https://github.com/zLuCaS2K/MyTask/blob/master/docs/architecture/architecture.png) file for details.
 
 ---
 
@@ -59,8 +67,31 @@ $ git clone https://github.com/zLuCaS2K/MyTask.git
 
 ---
 
-## 🏗️ Architecture
-
-This project uses MVVM and Clean Architecture - see the [Architecture](https://github.com/zLuCaS2K/MyTask/blob/master/docs/architecture/architecture.png) file for details.
+## 🍴 Built With
+- Core
+  - Kotlin
+- UI Toolkit
+  - Jetpack Compose
+- Architecture
+  - MVVM + Clean Architecture
+- Libraries
+  - Jetpack
+		- Hilt
+		- Room
+		- Splash Screen
+		- WorkManager
+  - Coroutines
+  - Accompanist
 
 ---
+
+## 📝 License
+
+<img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361">
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Feito com ♥
+
