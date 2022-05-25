@@ -8,8 +8,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -22,9 +24,12 @@ import com.zlucas2k.mytask.presentation.screens.task.edit_task.utils.EditTaskScr
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
+@ExperimentalComposeUiApi
 fun EditTaskScreen(navController: NavController, viewModel: EditTaskViewModel = hiltViewModel()) {
 
     val context = LocalContext.current
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     val uiState = rememberEditTaskScreenState(editTaskViewModel = viewModel)
     val formState = rememberEditTaskFormState(editTaskViewModel = viewModel)
 
@@ -63,7 +68,10 @@ fun EditTaskScreen(navController: NavController, viewModel: EditTaskViewModel = 
                     MyTaskIconButton(
                         imageVector = Icons.Filled.Save,
                         contentDescription = stringResource(id = R.string.save_task),
-                        onClick = { formState.onEditTask() }
+                        onClick = {
+                            keyboardController?.hide()
+                            formState.onEditTask()
+                        }
                     )
                 }
             )
@@ -71,6 +79,7 @@ fun EditTaskScreen(navController: NavController, viewModel: EditTaskViewModel = 
         content = {
             EditTaskForm(
                 editTaskFormState = formState,
+                keyboardController = keyboardController,
                 modifier = Modifier.fillMaxSize()
             )
         }

@@ -8,8 +8,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -22,9 +24,12 @@ import com.zlucas2k.mytask.presentation.screens.task.add_task.utils.AddTaskScree
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
+@ExperimentalComposeUiApi
 fun AddTaskScreen(navController: NavController, viewModel: AddTaskViewModel = hiltViewModel()) {
 
     val context = LocalContext.current
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     val uiState = rememberAddTaskScreenState(addTaskViewModel = viewModel)
     val formState = rememberAddTaskFormState(addTaskViewModel = viewModel)
 
@@ -62,7 +67,10 @@ fun AddTaskScreen(navController: NavController, viewModel: AddTaskViewModel = hi
                     MyTaskIconButton(
                         imageVector = Icons.Filled.Save,
                         contentDescription = stringResource(id = R.string.add_task),
-                        onClick = { formState.onSaveTask() }
+                        onClick = {
+                            keyboardController?.hide()
+                            formState.onSaveTask()
+                        }
                     )
                 }
             )
@@ -70,6 +78,7 @@ fun AddTaskScreen(navController: NavController, viewModel: AddTaskViewModel = hi
         content = {
             AddTaskForm(
                 addTaskFormState = formState,
+                keyboardController = keyboardController,
                 modifier = Modifier.fillMaxSize()
             )
         }
