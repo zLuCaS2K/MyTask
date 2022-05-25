@@ -24,18 +24,34 @@
 
 <ul>
   <li><a href="#-getting-started">Getting Started</a></li>
+  <li><a href="#-screenshots">Screenshots</a></li>
   <li><a href="#-architecture">Architecture</a></li>
 </ul>
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Getting Started 📸
 ### Clone
 - Clone:
 
 ```
 $ git clone https://github.com/zLuCaS2K/MyTask.git
 ```
+
+---
+
+## 📸 Screenshots 
+### Light Mode 
+![Splash](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/light/Screenshot_20220525_012002.png "Splash Screen")
+![Home](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/light/Screenshot_20220525_012741.png "Home Screen")
+![Home](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/light/Screenshot_20220525_012807.png "Home Screen Search and Filter")
+![Home](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/light/Screenshot_20220525_012937.png "Task View")
+
+### Dark Mode
+![Splash](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/dark/Screenshot_20220525_012850.png "Splash Screen")
+![Home](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/dark/Screenshot_20220525_012858.png "Home Screen")
+![Home](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/dark/Screenshot_20220525_012911.png "Home Screen Search and Filter")
+![Home](https://github.com/zLuCaS2K/MyTask/blob/master/docs/screenshots/dark/Screenshot_20220525_013017.png "Task View")
 
 ---
 
